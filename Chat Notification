@@ -5,11 +5,11 @@ local function sendChatNotification(message)
         Text = message,
         Color = Color3.new(1, 1, 1), -- Set the color of the message
         Font = Enum.Font.SourceSans, -- Set the font for the message
-        TextSize = 24, -- Increase the text size for the message
+        TextSize = 20, -- Increase the text size for the message
         WhisperTo = player, -- Send the message only to the script owner
         TextBold = true -- Set the text to bold
     })
 end
 
 -- Example usage:
-sendChatNotification("Hitbox Command - Prefix '.hitbox <size>'")
+sendChatNotification("Hitbox Command - Prefix 'hitbox / h <size>'")
