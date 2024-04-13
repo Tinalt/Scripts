@@ -12,4 +12,4 @@ local function sendChatNotification(message)
 end
 
 -- Example usage:
-sendChatNotification("Ability Wars Admin Commands - Type "cmds" in chat to see Commands List!")
+sendChatNotification("Ability Wars Admin Commands - Type 'cmds' in chat to see Commands List!")
