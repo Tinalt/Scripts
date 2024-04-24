@@ -1,0 +1,59 @@
+local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/Tinalt/Scripts/main/Ui%20Lib"))()
+local Window = Library.Window('KR4K Library')
+
+--Tab
+
+local Test1 = Window.CreateTab('Main')
+local Test2 = Window.CreateTab('Main 2')
+local Test3 = Window.CreateTab('Settings')
+local Test4 = Window.CreateTab('Coming Soon')
+
+--Button
+
+Test1.CreateDivider("Main")
+
+Test1.CreateDivider("Counter Roast")
+
+Test1.CreateLabel("-You're trash at this game!\n-You're the whole bin")
+
+Test1.CreateLabel("-You're what the teacher would call a failiure\n-You're what the hospital would call a mistake")
+
+Test1.CreateLabel("-Stop talking about nonsense\n-Ok, I'll stop talking about you")
+
+Test1.CreateLabel("-How can i play video games when i have a life?\n-You're right, a life on TikTok [OR WHATEVER]")
+
+Test1.CreateLabel("-Hahaha\n-Stop laughing about how you look")
+
+Test1.CreateLabel("-Stop crying you cry baby\n-At least i don't go to a daycare like you")
+
+Test1.CreateLabel("-No one asked\n-If no one ask why'd you listen?")
+
+Test1.CreateLabel("-Nobody asked\n-If nobody asked why are you still listening?")
+
+Test1.CreateLabel("-Who asked/Who cares\n- Bro's stuck in 2022, lives in the past cant get out")
+
+Test1.CreateLabel("-Who cares\n-Who cares? Well, clearly not you, but luckily\nsomeone has to keep an eye on things")
+
+Test1.CreateLabel("-I wish you weren't born\n-Your parents actually said that")
+
+Test2.CreateLabel("-HAH are you blind?/Bro is blind lol\n-You know how? Because i looked at you")
+
+Test2.CreateLabel("-What a failure\n-I didn't ask for your report card")
+
+Test2.CreateLabel("-I wanna go out\n-Sure, ill take you out on tuesdays like the trash")
+
+Test2.CreateLabel("-Why don't you run back to your mom?\n-At least i have someone to run back to")
+
+Test2.CreateLabel("-Zombies would not come to eat your brain\n-Why?\n-Because you dont have one")
+
+Test2.CreateLabel("-I have no enemies\n-Ofc who would waste their time being your enemy when simply being in your presence is punishment enough?")
+
+Test3.CreateKeybind("Toggle UI", Enum.KeyCode.P, function()
+	Library:ToggleUI()
+end)
+
+Test3.CreateDivider("To Hide/Show Ui click 'P'")
+Test3.CreateDivider("Keybind: P")
+
+Test2.CreateDivider("Coming Soon")
+Test4.CreateDivider("Coming Soon")
