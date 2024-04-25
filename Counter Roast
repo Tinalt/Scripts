@@ -5,8 +5,9 @@ local Window = Library.Window('KR4K Library')
 
 local Test1 = Window.CreateTab('Main')
 local Test2 = Window.CreateTab('Main 2')
-local Test3 = Window.CreateTab('Settings')
-local Test4 = Window.CreateTab('Coming Soon')
+local Test3 = Window.CreateTab('Scripts')
+local Test4 = Window.CreateTab('Settings')
+local Test5 = Window.CreateTab('Coming Soon')
 
 --Button
 
@@ -50,17 +51,35 @@ Test2.CreateLabel("-I have no enemies\n-Ofc who would waste their time being you
 
 Test2.CreateLabel("-*Yapping*\n-Quit yapping your mouth is so big that you need to use a soup spoon to eat your foods")
 
-Test3.CreateKeybind("Toggle UI", Enum.KeyCode.P, function()
+Test3.CreateDivider("Scripts")
+
+Test3.CreateButton("Infinite Yield", function()
+    loadstring(game:HttpGet('https://raw.githubusercontent.com/EdgeIY/infiniteyield/master/source'))()
+end)
+
+Test3.CreateButton("Freeze Player", function()
+    loadstring(game:HttpGet('https://raw.githubusercontent.com/creepstu/fuzzy-octo-giggle/main/Source'))()
+end)
+
+Test3.CreateButton("Ability Wars Admin", function()
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/Tinalt/Ability-Wars/main/Admin%20Commands",true))()
+end)
+
+Test3.CreateButton("Anti Lag AW", function()
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/Tinalt/Ability-Wars/main/Anti%20Lag%20ABW"))()
+end)
+
+Test4.CreateKeybind("Toggle UI", Enum.KeyCode.P, function()
 Library:ToggleUI()
 end)
 
-Test3.CreateDivider("To Hide/Show Ui click 'P'")
-Test3.CreateDivider("Keybind: P")
-Test3.CreateLabel("If you're on mobile execute this script")
+Test4.CreateDivider("To Hide/Show Ui click 'P'")
+Test4.CreateDivider("Keybind: P")
+Test4.CreateLabel("If you're on mobile execute this script")
 
-Test3.CreateButton("Custom Keyboard", function()
+Test4.CreateButton("Custom Keyboard", function()
     loadstring(game:HttpGet("https://gist.githubusercontent.com/RedZenXYZ/4d80bfd70ee27000660e4bfa7509c667/raw/da903c570249ab3c0c1a74f3467260972c3d87e6/KeyBoard%2520From%2520Ohio%2520Fr%2520Fr"))()
 end)
 
 Test2.CreateDivider("Coming Soon")
-Test4.CreateDivider("Coming Soon")
+Test5.CreateDivider("Coming Soon")
