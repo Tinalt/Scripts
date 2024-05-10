@@ -1,0 +1,39 @@
+---Funky Friday AutoFarm
+
+local kavoUi = loadstring(game:HttpGet("https://raw.githubusercontent.com/Toilatin/Insane-elevator/main/Insane2", true))()
+local window = kavoUi.CreateLib("Funky Friday AutoFarm","BloodTheme")
+
+---Hi
+
+local Tab1 = window:NewTab("AutoFarm")
+local Tab1Section = Tab1:NewSection("AutoFarm")
+
+--Buttons
+
+Tab1Section:NewButton("AutoFarm Points [Poopers]","INFOHERE",function()
+
+loadstring(game:HttpGet("https://raw.githubusercontent.com/Tinalt/Scripts/main/Poopers"))()
+
+end)
+
+Tab1Section:NewButton("AutoFarm Score [Fallen Symphony]","INFOHERE",function()
+
+loadstring(game:HttpGet(("https://raw.githubusercontent.com/Tinalt/Scripts/main/Fallen")))() 
+
+end)
+
+local Tab1Section = Tab1:NewSection("-Requires 2 accounts-")
+
+Tab1Section:NewButton("AutoFarm WinStreaks (Main)","INFOHERE",function()
+
+loadstring(game:HttpGet(("https://raw.githubusercontent.com/Tinalt/Scripts/main/WinStreaks%20Main")))() 
+
+end)
+
+Tab1Section:NewButton("AutoFarm WinStreaks (ALT)","INFOHERE",function()
+
+loadstring(game:HttpGet(("https://raw.githubusercontent.com/Tinalt/Scripts/main/WinStreaks%20ALT")))() 
+
+end)
+
+local Tab1Section = Tab1:NewSection("WARNING! YOU CAN'T TURN OFF AUTOFARM! ")
