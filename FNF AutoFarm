@@ -10,15 +10,21 @@ local Tab1Section = Tab1:NewSection("AutoFarm")
 
 --Buttons
 
-Tab1Section:NewButton("AutoFarm Points [Poopers]","INFOHERE",function()
+Tab1Section:NewButton("AutoFarm Points [Poopers]","AutoFarm",function()
 
 loadstring(game:HttpGet("https://raw.githubusercontent.com/Tinalt/Scripts/main/Poopers"))()
 
 end)
 
-Tab1Section:NewButton("AutoFarm Score [Fallen Symphony]","INFOHERE",function()
+Tab1Section:NewButton("AutoFarm Score [Fallen Symphony]","AutoFarm",function()
 
 loadstring(game:HttpGet(("https://raw.githubusercontent.com/Tinalt/Scripts/main/Fallen")))() 
+
+end)
+
+Tab1Section:NewButton("AutoFarm Score [Freedom Dive]","AutoFarm",function()
+
+loadstring(game:HttpGet(("https://raw.githubusercontent.com/Tinalt/Scripts/main/Freedom%20Dive")))() 
 
 end)
 
