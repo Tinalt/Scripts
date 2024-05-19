@@ -35,6 +35,6 @@ game:GetService("ReplicatedStorage"):WaitForChild("RF"):InvokeServer(unpack(args
 
  wait(20)
 
-wait(16.3)
+wait(17.3)
  
 end
