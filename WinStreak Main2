@@ -1,0 +1,56 @@
+while true do
+    wait()
+ game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-142, 582, -117)
+wait(1)
+ for i, v in pairs(game:GetService("Workspace"):GetDescendants()) do
+           if v:IsA("Attachment") then
+               if game:GetService("Players").LocalPlayer:DistanceFromCharacter(v.Parent.Position) <= 10 then
+                   
+                   if v:FindFirstChild("Prompt") then
+                       print("hezlo")
+ 
+                       fireproximityprompt(v.Prompt)
+                   end
+               end
+           end
+       end
+ 
+wait(2)
+local args = {
+    [1] = {
+        [1] = "Server",
+        [2] = "StageManager",
+        [3] = "Select"
+    },
+    [2] = {
+        [1] = "VSMattVoiidSides_Averagevoiidsong",
+        [2] = "Hard"
+    }
+}
+
+game:GetService("ReplicatedStorage"):WaitForChild("RF"):InvokeServer(unpack(args))
+
+
+wait(0.3)
+  
+local args = {
+    [1] = {
+        [1] = "Server",
+        [2] = "StageManager",
+        [3] = "SetOption"
+    },
+    [2] = {
+        [1] = "SongRate",
+        [2] = 2
+    }
+}
+
+game:GetService("ReplicatedStorage"):WaitForChild("RE"):FireServer(unpack(args))
+ 
+ 
+
+ wait(20)
+
+wait(8)
+ 
+end
