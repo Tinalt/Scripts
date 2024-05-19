@@ -51,6 +51,6 @@ game:GetService("ReplicatedStorage"):WaitForChild("RE"):FireServer(unpack(args))
 
  wait(20)
 
-wait(8)
+wait(10.5)
  
 end
