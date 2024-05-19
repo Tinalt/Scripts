@@ -22,24 +22,43 @@ loadstring(game:HttpGet(("https://raw.githubusercontent.com/Tinalt/Scripts/main/
 
 end)
 
-Tab1Section:NewButton("AutoFarm Score [Freedom Dive]","AutoFarm",function()
+Tab1Section:NewButton("AutoFarm Score & Points [Freedom Dive]","AutoFarm",function()
 
 loadstring(game:HttpGet(("https://raw.githubusercontent.com/Tinalt/Scripts/main/Freedom%20Dive")))() 
 
 end)
 
-local Tab1Section = Tab1:NewSection("-Requires 2 accounts-")
+local Tab1Section = Tab1:NewSection("-Requires 2 accounts-         (Click at the same time)")
 
-Tab1Section:NewButton("AutoFarm WinStreaks (Main)","INFOHERE",function()
+Tab1Section:NewButton("AutoFarm WinStreaks (Main) [Beatbox]","INFOHERE",function()
 
 loadstring(game:HttpGet(("https://raw.githubusercontent.com/Tinalt/Scripts/main/WinStreaks%20Main")))() 
 
 end)
 
-Tab1Section:NewButton("AutoFarm WinStreaks (ALT)","INFOHERE",function()
+Tab1Section:NewButton("AutoFarm WinStreaks (ALT) [Beatbox]","INFOHERE",function()
 
 loadstring(game:HttpGet(("https://raw.githubusercontent.com/Tinalt/Scripts/main/WinStreaks%20ALT")))() 
 
 end)
+
+local Tab1Section = Tab1:NewSection("---")
+
+
+Tab1Section:NewButton("AutoFarm WinStreaks (Main) [Average Voiid]","INFOHERE",function()
+
+loadstring(game:HttpGet(("https://raw.githubusercontent.com/Tinalt/Scripts/main/WinStreak%20Main2")))() 
+
+end)
+
+Tab1Section:NewButton("AutoFarm WinStreaks (ALT) (Average Voiid]","INFOHERE",function()
+
+loadstring(game:HttpGet(("https://raw.githubusercontent.com/Tinalt/Scripts/main/WinStreak%20Alt2")))() 
+
+end)
+
+
+
+
 
 local Tab1Section = Tab1:NewSection("WARNING! YOU CAN'T TURN OFF AUTOFARM! ")
