@@ -31,26 +31,10 @@ local args = {
 game:GetService("ReplicatedStorage"):WaitForChild("RF"):InvokeServer(unpack(args))
 
 
-wait(0.3)
-  
-local args = {
-    [1] = {
-        [1] = "Server",
-        [2] = "StageManager",
-        [3] = "SetOption"
-    },
-    [2] = {
-        [1] = "SongRate",
-        [2] = 2
-    }
-}
-
-game:GetService("ReplicatedStorage"):WaitForChild("RE"):FireServer(unpack(args))
- 
  
 
  wait(20)
 
-wait(10.5)
+wait(16.3)
  
 end
