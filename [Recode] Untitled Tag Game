@@ -1,0 +1,93 @@
+---Untitled Tag Game
+
+local kavoUi = loadstring(game:HttpGet("https://raw.githubusercontent.com/Toilatin/Insane-elevator/main/Insane2", true))()
+local window = kavoUi.CreateLib("[Recode] Untitled Tag Game","BloodTheme")
+
+--SafePlace
+
+local SafeSpot = Instance.new("Part", workspace)
+
+SafeSpot.Position = Vector3.new(0,100000,0)
+
+SafeSpot.Name = "SafePlace"
+
+SafeSpot.Size = Vector3.new(1000,1,1000)
+
+SafeSpot.Anchored = true
+
+SafeSpot.Transparency = .7
+
+---Hi
+
+local Tab1 = window:NewTab("Main")
+local Tab1Section = Tab1:NewSection("Main")
+
+local Tab2 = window:NewTab("Info")
+local Tab2Section = Tab2:NewSection("Info")
+
+--Buttons
+
+Tab1Section:NewButton("Infinite Yield","Admin Commands",function()
+
+loadstring(game:HttpGet('https://raw.githubusercontent.com/EdgeIY/infiniteyield/master/source'))()
+end)
+
+Tab1Section:NewButton("Safe Place","Teleport you to secret place",function()
+
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = workspace.SafePlace.CFrame * CFrame.new(0,20,0)
+end)
+
+local Tab1Section = Tab1:NewSection("Hitbox")
+
+Tab1Section:NewButton("Hitbox 12","Hitbox",function()
+
+_G.HeadSize = 12
+_G.Disabled = true
+
+game:GetService('RunService').RenderStepped:connect(function()
+if _G.Disabled then
+for i,v in next, game:GetService('Players'):GetPlayers() do
+if v.Name ~= game:GetService('Players').LocalPlayer.Name then
+pcall(function()
+v.Character.HumanoidRootPart.Size = Vector3.new(_G.HeadSize,_G.HeadSize,_G.HeadSize)
+v.Character.HumanoidRootPart.Transparency = 0.9
+v.Character.HumanoidRootPart.BrickColor = BrickColor.new("White")
+v.Character.HumanoidRootPart.Material = "Neon"
+v.Character.HumanoidRootPart.CanCollide = false
+end)
+end
+end
+end
+end)
+
+end)
+
+Tab1Section:NewButton("Hitbox 8","Hitbox",function()
+
+_G.HeadSize = 8
+_G.Disabled = true
+
+game:GetService('RunService').RenderStepped:connect(function()
+if _G.Disabled then
+for i,v in next, game:GetService('Players'):GetPlayers() do
+if v.Name ~= game:GetService('Players').LocalPlayer.Name then
+pcall(function()
+v.Character.HumanoidRootPart.Size = Vector3.new(_G.HeadSize,_G.HeadSize,_G.HeadSize)
+v.Character.HumanoidRootPart.Transparency = 0.9
+v.Character.HumanoidRootPart.BrickColor = BrickColor.new("White")
+v.Character.HumanoidRootPart.Material = "Neon"
+v.Character.HumanoidRootPart.CanCollide = false
+end)
+end
+end
+end
+end)
+
+end)
+
+--Tab 2
+
+local Tab2Section = Tab2:NewSection("Speed Boost:")
+local Tab2Section = Tab2:NewSection("Use Infinite Yield")
+local Tab2Section = Tab2:NewSection("Use command 'Tpwalk <speed>' & 'Infjump'")
+local Tab2Section = Tab2:NewSection("Recommend speed: 0.1 - 0.3")
