@@ -37,6 +37,19 @@ Tab1Section:NewButton("Safe Place","Teleport you to secret place",function()
 game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = workspace.SafePlace.CFrame * CFrame.new(0,20,0)
 end)
 
+Tab1Section:NewButton("Anti Lag","Anti Lag",function()
+
+while true do
+    local partToDelete = game.Workspace:FindFirstChild("Splatter")
+    if partToDelete then
+        partToDelete:Destroy()
+    else
+        print("Part not found.")
+    end
+
+    wait(0.05)
+end
+
 local Tab1Section = Tab1:NewSection("Hitbox")
 
 Tab1Section:NewButton("Hitbox 12","Hitbox",function()
