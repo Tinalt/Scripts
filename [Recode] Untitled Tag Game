@@ -56,6 +56,29 @@ while true do
 end
 end)
 
+local teleporting = false
+
+Tab1Section:NewToggle("Auto Win", "Auto Win", function(state)
+    if state then
+        -- Toggle is on, start teleporting the player continuously
+        print("Toggle On")
+        teleporting = true
+        spawn(function()
+            while teleporting do
+                local player = game.Players.LocalPlayer
+                if player and player.Character and player.Character:FindFirstChild("HumanoidRootPart") then
+                    player.Character.HumanoidRootPart.CFrame = CFrame.new(0, 100003.4765625, 0)
+                end
+                wait(0.05)  -- Adjust the delay as needed
+            end
+        end)
+    else
+        -- Toggle is off, stop teleporting the player
+        print("Toggle Off")
+        teleporting = false
+    end
+end)
+
 local Tab1Section = Tab1:NewSection("Hitbox")
 
 Tab1Section:NewButton("Hitbox 12","Hitbox",function()
