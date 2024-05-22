@@ -1,7 +1,7 @@
 ---Untitled Tag Game
 
 local kavoUi = loadstring(game:HttpGet("https://raw.githubusercontent.com/Toilatin/Insane-elevator/main/Insane2", true))()
-local window = kavoUi.CreateLib("[Recode] Untitled Tag Game","BloodTheme")
+local window = kavoUi.CreateLib("Untitled Tag Game","BloodTheme")
 
 --SafePlace
 
@@ -46,9 +46,15 @@ while true do
     else
         print("Part not found.")
     end
-
+   local partToDelete = game.Workspace:FindFirstChild("Splatter")
+    if partToDelete then
+        partToDelete:Destroy()
+    else
+        print("Part not found.")
+    end
     wait(0.05)
 end
+end)
 
 local Tab1Section = Tab1:NewSection("Hitbox")
 
