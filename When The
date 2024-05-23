@@ -1,0 +1,239 @@
+---When The
+
+local kavoUi = loadstring(game:HttpGet("https://raw.githubusercontent.com/Toilatin/Insane-elevator/main/Insane2", true))()
+local window = kavoUi.CreateLib("When The","BloodTheme")
+
+--SafePlace
+
+local SafeSpot = Instance.new("Part", workspace)
+
+SafeSpot.Position = Vector3.new(0,100000,0)
+
+SafeSpot.Name = "SafePlace"
+
+SafeSpot.Size = Vector3.new(1000,1,1000)
+
+SafeSpot.Anchored = true
+
+SafeSpot.Transparency = .7
+
+---Hi
+
+local Tab1 = window:NewTab("Main")
+local Tab1Section = Tab1:NewSection("Main")
+
+local Tab2 = window:NewTab("Teleport")
+local Tab2Section = Tab2:NewSection("Teleport")
+
+local Tab3 = window:NewTab("Troll")
+local Tab3Section = Tab3:NewSection("Troll")
+
+local Tab4 = window:NewTab("Player")
+local Tab4Section = Tab4:NewSection("Player")
+
+--Buttons
+
+Tab1Section:NewButton("Infinite Yield","Admin Commands",function()
+
+loadstring(game:HttpGet('https://raw.githubusercontent.com/EdgeIY/infiniteyield/master/source'))()
+end)
+
+Tab1Section:NewButton("Nameless Admin","OP Admin Commands [FE]",function()
+
+-- Thanks to 0866 for making the whole ui work, this admin script was actually made in 2019 lol but was modified by qipu
+-- For the commands thanks to IY, Fates Admin, HomeBrew, CMD-X for some of the code and command ideas!
+-- For the people thanks to Digitality, i_db, rouxhaver, spec and the v3rmillion community, if you see your script in the source and want credits please dm qipu#9312
+-- ! Make sure to have an executor that supports firetouchinterest for the tool commands !
+loadstring(game:HttpGet("https://raw.githubusercontent.com/FilteringEnabled/NamelessAdmin/main/Source"))();
+
+end)
+
+Tab2Section:NewButton("Safe Place","Teleport you to secret place",function()
+
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = workspace.SafePlace.CFrame * CFrame.new(0,20,0)
+end)
+
+local teleporting = false
+
+Tab1Section:NewToggle("Auto Win", "Auto Win", function(state)
+    if state then
+        -- Toggle is on, start teleporting the player continuously
+        print("Toggle On")
+        teleporting = true
+        spawn(function()
+            while teleporting do
+                local player = game.Players.LocalPlayer
+                if player and player.Character and player.Character:FindFirstChild("HumanoidRootPart") then
+                    player.Character.HumanoidRootPart.CFrame = CFrame.new(0, 100003.4765625, 0)
+                end
+                wait(0.05)  -- Adjust the delay as needed
+            end
+        end)
+    else
+        -- Toggle is off, stop teleporting the player
+        print("Toggle Off")
+        teleporting = false
+    end
+end)
+
+local spawnedPart -- Variable to store the reference to the created part
+
+Tab1Section:NewToggle("Anti Fall", "ToggleInfo", function(state)
+    if state then
+        print("Toggle On")
+
+        -- Create a new part when the toggle is turned on
+        spawnedPart = Instance.new("Part")
+        spawnedPart.Size = Vector3.new(2048, 1, 2048)
+        spawnedPart.Position = Vector3.new(-113.74, 28.79, 89)
+        spawnedPart.Anchored = true  -- Anchoring the part so it doesn't fall due to gravity
+        spawnedPart.Transparency = 0.7  -- Set the transparency of the part
+        spawnedPart.Parent = game.Workspace  -- Setting the parent to Workspace so it appears in the game world
+
+    else
+        print("Toggle Off")
+
+        -- Remove the part when the toggle is turned off
+        if spawnedPart then
+            spawnedPart:Destroy()
+            spawnedPart = nil -- Clear the reference to the destroyed part
+        end
+    end
+end)
+
+Tab2Section:NewButton("Lobby","Teleport to Lobby",function()
+
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-281, 179.4999542236328, 343)
+end)
+
+Tab2Section:NewButton("Island","Teleport to Island",function()
+
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-77, 47.39999008178711, -2.999999761581421)
+end)
+
+local Tab2Section = Tab2:NewSection("Auto Teleport")
+
+local teleporting = false
+
+Tab2Section:NewToggle("Auto teleport to Lobby", "Auto Teleport", function(state)
+    if state then
+        -- Toggle is on, start teleporting the player continuously
+        print("Toggle On")
+        teleporting = true
+        spawn(function()
+            while teleporting do
+                local player = game.Players.LocalPlayer
+                if player and player.Character and player.Character:FindFirstChild("HumanoidRootPart") then
+                    player.Character.HumanoidRootPart.CFrame = CFrame.new(-281, 179.4999542236328, 343)
+                end
+                wait(0.05)  -- Adjust the delay as needed
+            end
+        end)
+    else
+        -- Toggle is off, stop teleporting the player
+        print("Toggle Off")
+        teleporting = false
+    end
+end)
+
+local teleporting = false
+
+Tab2Section:NewToggle("Auto teleport to Island", "Auto Teleport", function(state)
+    if state then
+        -- Toggle is on, start teleporting the player continuously
+        print("Toggle On")
+        teleporting = true
+        spawn(function()
+            while teleporting do
+                local player = game.Players.LocalPlayer
+                if player and player.Character and player.Character:FindFirstChild("HumanoidRootPart") then
+                    player.Character.HumanoidRootPart.CFrame = CFrame.new(-77, 47.39999008178711, -2.999999761581421)
+                end
+                wait(0.05)  -- Adjust the delay as needed
+            end
+        end)
+    else
+        -- Toggle is off, stop teleporting the player
+        print("Toggle Off")
+        teleporting = false
+    end
+end)
+
+Tab3Section:NewButton("Fling Gui","Fling Fling",function()
+
+loadstring(game:HttpGet("https://raw.githubusercontent.com/0Ben1/fe./main/Fling%20GUI"))()
+end)
+
+Tab3Section:NewButton("Fling Gui [Extra teleporter gui]","Fling People and teleport to them",function()
+
+loadstring(game:HttpGet("https://raw.githubusercontent.com/Tinalt/Scripts/main/Fling%20Gui%20V2", true))()
+
+end)
+
+Tab3Section:NewButton("Custom Fling","Fling gui",function()
+
+loadstring(game:HttpGet("https://raw.githubusercontent.com/Tinalt/Scripts/main/Fling%20Select%20Player", true))()
+
+end)
+
+Tab3Section:NewButton("Chat Bypass V1","Bypass the chat!",function()
+
+loadstring(game:HttpGet('https://pastes.io/raw/lstrrfipqq'))();
+
+end)
+
+Tab3Section:NewButton("Chat Bypass V2","Bypass the chat!",function()
+
+loadstring(game:HttpGet("https://raw.githubusercontent.com/Clickgameplay/no-tag-script/main/.NoTagScript"))()
+
+end)
+
+Tab3Section:NewButton("Chat Spy","Chat Spy [Not work with new chat ui]",function()
+
+loadstring(game:HttpGet("https://raw.githubusercontent.com/Tinalt/Scripts/main/Chat%20Spy", true))()
+
+end)
+
+---
+
+Tab4Section:NewButton("WalkSpeed 200","WalkSpeed 200",function()
+
+game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = 200
+
+end)
+
+Tab4Section:NewButton("WalkSpeed 100","WalkSpeed 100",function()
+
+game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = 100
+
+end) 
+
+Tab4Section:NewButton("WalkSpeed 50","WalkSpeed 50",function()
+
+game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = 50
+
+end) 
+
+Tab4Section:NewButton("Normal Speed","Normal Speed",function()
+
+game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = 16
+
+end)
+
+Tab4Section:NewButton("Super Jump","JumpPower 150",function()
+
+game.Players.LocalPlayer.Character.Humanoid.JumpPower = 150
+
+end) 
+
+Tab4Section:NewButton("Mega Jump","JumpPower 100",function()
+
+game.Players.LocalPlayer.Character.Humanoid.JumpPower = 100
+
+end) 
+
+Tab4Section:NewButton("Normal Jump","JumpPower 50",function()
+
+game.Players.LocalPlayer.Character.Humanoid.JumpPower = 50
+
+end)
