@@ -1,0 +1,179 @@
+---Dingus
+
+local kavoUi = loadstring(game:HttpGet("https://raw.githubusercontent.com/Toilatin/Insane-elevator/main/Insane2", true))()
+local window = kavoUi.CreateLib("Dingus","BloodTheme")
+
+--SafePlace
+
+local SafeSpot = Instance.new("Part", workspace)
+
+SafeSpot.Position = Vector3.new(0,100000,0)
+
+SafeSpot.Name = "SafePlace"
+
+SafeSpot.Size = Vector3.new(1000,1,1000)
+
+SafeSpot.Anchored = true
+
+SafeSpot.Transparency = .7
+
+---Hi
+
+local Tab1 = window:NewTab("Main")
+local Tab1Section = Tab1:NewSection("Main")
+
+local Tab2 = window:NewTab("Credits")
+local Tab2Section = Tab2:NewSection("Credits")
+
+--Buttons
+
+Tab1Section:NewButton("Infinite Yield","Admin Commands",function()
+
+loadstring(game:HttpGet('https://raw.githubusercontent.com/EdgeIY/infiniteyield/master/source'))()
+end)
+
+Tab1Section:NewButton("Safe Place","Teleport you to secret place",function()
+
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = workspace.SafePlace.CFrame * CFrame.new(0,20,0)
+end)
+
+Tab1Section:NewButton("Anti Lag","Anti Lag",function()
+
+while true do
+    local partToDelete = game.Workspace:FindFirstChild("Splatter")
+    if partToDelete then
+        partToDelete:Destroy()
+    else
+        print("Part not found.")
+    end
+   local partToDelete = game.Workspace:FindFirstChild("Splatter")
+    if partToDelete then
+        partToDelete:Destroy()
+    else
+        print("Part not found.")
+    end
+    wait(0.05)
+end
+end)
+
+Tab1Section:NewButton("Esp Players","Esp",function()
+
+local Players = game:GetService("Players"):GetChildren()
+
+local RunService = game:GetService("RunService")
+
+local highlight = Instance.new("Highlight")
+
+highlight.Name = "Highlight"
+
+
+
+for i, v in pairs(Players) do
+
+    repeat wait() until v.Character
+
+    if not v.Character:FindFirstChild("HumanoidRootPart"):FindFirstChild("Highlight") then
+
+        local highlightClone = highlight:Clone()
+
+        highlightClone.Adornee = v.Character
+
+        highlightClone.Parent = v.Character:FindFirstChild("HumanoidRootPart")
+
+        highlightClone.DepthMode = Enum.HighlightDepthMode.AlwaysOnTop
+
+        highlightClone.Name = "Highlight"
+
+    end
+
+end
+
+
+
+game.Players.PlayerAdded:Connect(function(player)
+
+    repeat wait() until player.Character
+
+    if not player.Character:FindFirstChild("HumanoidRootPart"):FindFirstChild("Highlight") then
+
+        local highlightClone = highlight:Clone()
+
+        highlightClone.Adornee = player.Character
+
+        highlightClone.Parent = player.Character:FindFirstChild("HumanoidRootPart")
+
+        highlightClone.Name = "Highlight"
+
+    end
+
+end)
+
+
+
+game.Players.PlayerRemoving:Connect(function(playerRemoved)
+
+    playerRemoved.Character:FindFirstChild("HumanoidRootPart").Highlight:Destroy()
+
+end)
+
+
+
+RunService.Heartbeat:Connect(function()
+
+    for i, v in pairs(Players) do
+
+        repeat wait() until v.Character
+
+        if not v.Character:FindFirstChild("HumanoidRootPart"):FindFirstChild("Highlight") then
+
+            local highlightClone = highlight:Clone()
+
+            highlightClone.Adornee = v.Character
+
+            highlightClone.Parent = v.Character:FindFirstChild("HumanoidRootPart")
+
+            highlightClone.DepthMode = Enum.HighlightDepthMode.AlwaysOnTop
+
+            highlightClone.Name = "Highlight"
+
+            task.wait()
+
+        end
+
+end
+
+end)
+end)
+
+local teleporting = false
+
+Tab1Section:NewToggle("Auto Win", "Auto Win", function(state)
+    if state then
+        -- Toggle is on, start teleporting the player continuously
+        print("Toggle On")
+        teleporting = true
+        spawn(function()
+            while teleporting do
+                local player = game.Players.LocalPlayer
+                if player and player.Character and player.Character:FindFirstChild("HumanoidRootPart") then
+                    player.Character.HumanoidRootPart.CFrame = CFrame.new(0, 100003.4765625, 0)
+                end
+                wait(0.05)  -- Adjust the delay as needed
+            end
+        end)
+    else
+        -- Toggle is off, stop teleporting the player
+        print("Toggle Off")
+        teleporting = false
+    end
+end)
+
+local Tab1Section = Tab1:NewSection("Hub")
+
+Tab1Section:NewButton("SyinX Hub (Keyless)","SyinX Hub (Keyless :D)",function()
+
+loadstring(game:HttpGet("https://raw.githubusercontent.com/RayzMd/SyniX-Team/main/SyniXScripts"))()
+end)
+
+local Tab2Section = Tab2:NewSection("--Owner--")
+local Tab2Section = Tab2:NewSection("-Tin (Owner of Kanzy Hub)-")
