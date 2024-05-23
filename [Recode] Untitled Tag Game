@@ -79,6 +79,13 @@ Tab1Section:NewToggle("Auto Win", "Auto Win", function(state)
     end
 end)
 
+local Tab1Section = Tab1:NewSection("Hub")
+
+Tab1Section:NewButton("Reaper Hub (3 checkpoint lootdest)","Reaper Hub",function()
+
+loadstring(game:HttpGet('https://raw.githubusercontent.com/AyoReaper/Reaper-Hub/main/loader.lua'))()
+end)
+
 local Tab1Section = Tab1:NewSection("Hitbox")
 
 Tab1Section:NewButton("Hitbox 12","Hitbox",function()
