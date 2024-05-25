@@ -1,0 +1,181 @@
+local kavoUi = loadstring(game:HttpGet("https://raw.githubusercontent.com/Toilatin/Insane-elevator/main/Insane2"))()
+local window = kavoUi.CreateLib(" Color Block Tower","BloodTheme")
+
+---Hi
+
+local Tab1 = window:NewTab("Main")
+local Tab1Section = Tab1:NewSection("Main")
+
+---SafeSpot---
+
+local SafeSpot = Instance.new("Part", workspace)
+
+SafeSpot.Position = Vector3.new(-3.38,750,-2.62)
+
+SafeSpot.Name = "Spot"
+
+SafeSpot.Size = Vector3.new(100,1,100)
+
+SafeSpot.Anchored = true
+
+SafeSpot.Transparency = .8
+
+---SafeSpot---
+
+local SafeSpot = Instance.new("Part", workspace)
+
+SafeSpot.Position = Vector3.new(-3.38,235,-2.62)
+
+SafeSpot.Name = "Spot2"
+
+SafeSpot.Size = Vector3.new(0.009,0.09,0.009)
+
+SafeSpot.Anchored = true
+
+SafeSpot.Transparency = 1.0
+
+------
+
+local teleporting = false
+
+Tab1Section:NewToggle("Auto Win", "Auto Win", function(state)
+    if state then
+        -- Toggle is on, start teleporting the player continuously
+        print("Toggle On")
+        teleporting = true
+        spawn(function()
+            while teleporting do
+                local player = game.Players.LocalPlayer
+                if player and player.Character and player.Character:FindFirstChild("HumanoidRootPart") then
+                    player.Character.HumanoidRootPart.CFrame = CFrame.new(-6.760000228881836, 753.4998168945312, -5.239999771118164)
+                end
+                wait(0.05)  -- Adjust the delay as needed
+            end
+        end)
+    else
+        -- Toggle is off, stop teleporting the player
+        print("Toggle Off")
+        teleporting = false
+    end
+end)
+
+local teleporting = false
+
+Tab1Section:NewToggle("Auto Tp to Lobby", "Auto Teleport", function(state)
+    if state then
+        -- Toggle is on, start teleporting the player continuously
+        print("Toggle On")
+        teleporting = true
+        spawn(function()
+            while teleporting do
+                local player = game.Players.LocalPlayer
+                if player and player.Character and player.Character:FindFirstChild("HumanoidRootPart") then
+                    player.Character.HumanoidRootPart.CFrame = CFrame.new(-6.760000228881836, 231.5941925048828, 66.06999969482422)
+                end
+                wait(0.05)  -- Adjust the delay as needed
+            end
+        end)
+    else
+        -- Toggle is off, stop teleporting the player
+        print("Toggle Off")
+        teleporting = false
+    end
+end)
+
+
+Tab1Section:NewButton("Safe Place","Infinity Wins, Infinity Coins, Auto Win, Anti Die",function()
+
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = workspace.Spot.CFrame * CFrame.new(-3.38,20,-2.62)
+
+end) 
+
+Tab1Section:NewButton("Lobby","Teleport You To Lobby",function()
+
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = workspace.Spot2.CFrame * CFrame.new(-3.38,15,68.69)
+
+end) 
+
+local Tab1Section = Tab1:NewSection("Free Exclusive Room")
+
+local Tab1Section = Tab1:NewSection("NOTE: Turn on Noclip before teleport!")
+
+Tab1Section:NewButton("Tp inside Exclusive Room","Free",function()
+
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(0.11464028805494308, 231.5606689453125, -105.63490295410156)
+end)
+
+Tab1Section:NewButton("Tp outside Exclusive Room","Free",function()
+
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-2.3454673290252686, 231.5947265625, -67.94456481933594)
+
+end)
+
+local Tab1Section = Tab1:NewSection("Character")
+
+Tab1Section:NewButton("WalkSpeed 25","WalkSpeed 25",function()
+
+game.Players.LocalPlayer.Character.Humanoid.WalkSpeed= 25
+
+end) 
+
+Tab1Section:NewButton("WalkSpeed 20","WalkSpeed 20",function()
+
+game.Players.LocalPlayer.Character.Humanoid.WalkSpeed= 20
+
+end) 
+
+Tab1Section:NewButton("WalkSpeed 18","WalkSpeed 18",function()
+
+game.Players.LocalPlayer.Character.Humanoid.WalkSpeed= 18
+
+end) 
+
+Tab1Section:NewButton("Reset","Rip Your Character",function()
+
+game.Players.LocalPlayer.Character.Humanoid.Health = 0
+
+end) 
+
+local Tab2 = window:NewTab("Misc")
+local Tab2Section = Tab2:NewSection("Server System")
+
+Tab2Section:NewButton("Rejoin Server","Rejoin In Same Server!",function()
+
+local ts = game:GetService("TeleportService")
+
+local p = game:GetService("Players").LocalPlayer
+
+ts:Teleport(game.PlaceId, p)
+
+end) 
+
+Tab2Section:NewButton("ServerHop","This Script Allowed You To Join Low Server",function()
+
+loadstring(game:HttpGet("https://pastebin.com/raw/QLQrxzNG"))()
+
+end) 
+
+
+local Tab1Section = Tab1:NewSection("Admin Command")
+
+Tab1Section:NewButton("Infinite Yield","OP FE Admin Commands",function()
+
+loadstring(game:HttpGet('https://raw.githubusercontent.com/EdgeIY/infiniteyield/master/source'))()
+
+end) 
+
+local Tab3 = window:NewTab("Credits")
+local Tab3Section = Tab3:NewSection("Credits")
+
+local Tab3Section = Tab3:NewSection("---Owner Of Script---")
+
+Tab3Section:NewButton("Tin","Best Owner",function()
+
+end) 
+
+
+local Tab3Section = Tab3:NewSection("---Devolopers---")
+
+Tab3Section:NewButton("GasMask_Soldier","Devoloper Of Scripts",function()
+
+end) 
