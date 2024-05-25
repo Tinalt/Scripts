@@ -1,0 +1,332 @@
+local kavoUi = loadstring(game:HttpGet("https://raw.githubusercontent.com/Toilatin/Insane-elevator/main/Insane2"))()
+local window = kavoUi.CreateLib("The Obby Elevator","BloodTheme")
+
+--GlitchSpot
+
+local SafeSpot = Instance.new("Part", workspace)
+
+SafeSpot.Position = Vector3.new(10.19,470,-9.2)
+
+SafeSpot.Name = "Glitch1"
+
+SafeSpot.Size = Vector3.new(1,0.5,2)
+
+SafeSpot.Anchored = true
+
+SafeSpot.Transparency = .7
+
+--
+
+local SafeSpot = Instance.new("Part", workspace)
+
+SafeSpot.Position = Vector3.new(10.19,471,-9.2)
+
+SafeSpot.Name = "Glitch2"
+
+SafeSpot.Size = Vector3.new(1,0.5,2)
+
+SafeSpot.Anchored = true
+
+SafeSpot.Transparency = .7
+
+--
+
+local SafeSpot = Instance.new("Part", workspace)
+
+SafeSpot.Position = Vector3.new(10.19,472,-9.2)
+
+SafeSpot.Name = "Glitch3"
+
+SafeSpot.Size = Vector3.new(1,0.5,2)
+
+SafeSpot.Anchored = true
+
+SafeSpot.Transparency = .7
+
+--TeleportSpot
+
+local SafeSpot = Instance.new("Part", workspace)
+
+SafeSpot.Position = Vector3.new(-8050.8,470.32,1.76)
+
+SafeSpot.Name = "Loaby"
+
+SafeSpot.Size = Vector3.new(0,0.1,0)
+
+SafeSpot.Anchored = true
+
+SafeSpot.Transparency = 1
+
+---
+
+local SafeSpot = Instance.new("Part", workspace)
+
+SafeSpot.Position = Vector3.new(-8055.45,469.9,79.96)
+
+SafeSpot.Name = "Obbyy"
+
+SafeSpot.Size = Vector3.new(0,0.1,0)
+
+SafeSpot.Anchored = true
+
+SafeSpot.Transparency = 1
+
+---
+
+local SafeSpot = Instance.new("Part", workspace)
+
+SafeSpot.Position = Vector3.new(-8060.45,488.9,79.96)
+
+SafeSpot.Name = "WinOb"
+
+SafeSpot.Size = Vector3.new(0,0.1,0)
+
+SafeSpot.Anchored = true
+
+SafeSpot.Transparency = 1
+
+--
+
+local SafeSpot = Instance.new("Part", workspace)
+
+SafeSpot.Position = Vector3.new(-4.49,464.71,0.02)
+
+SafeSpot.Name = "Elevator"
+
+SafeSpot.Size = Vector3.new(0,0.1,0)
+
+SafeSpot.Anchored = true
+
+SafeSpot.Transparency = 1
+
+--Tabs
+
+local Tab1 = window:NewTab("Main")
+local Tab1Section = Tab1:NewSection("Main")
+
+local Tab2 = window:NewTab("Auto")
+local Tab2Section = Tab2:NewSection("Auto")
+
+local Tab3 = window:NewTab("Instant Win")
+local Tab3Section = Tab3:NewSection("Instant Win")
+
+local Tab4 = window:NewTab("Credits")
+local Tab4Section = Tab4:NewSection("Credits")
+
+--Buttons
+
+Tab1Section:NewButton("Infinity Coins (OP)","Inf coins (25+ coins per click)",function()
+
+game:GetService("ReplicatedStorage"):WaitForChild("EXP"):WaitForChild("CoinX25"):FireServer()
+end)
+
+Tab1Section:NewButton("Enter Elevator","Enter Elevator",function()
+
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = workspace.Elevator.CFrame * CFrame.new(0,5,0)
+end)
+
+Tab1Section:NewButton("Lobby","Teleport to Lobby",function()
+
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = workspace.Loaby.CFrame * CFrame.new(0,5,0)
+end)
+
+Tab1Section:NewButton("Practice Obby","Teleport to Practice Obby",function()
+
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = workspace.Obbyy.CFrame * CFrame.new(0,5,0)
+end)
+
+local Tab1Section = Tab1:NewSection("Instant Win Practice Obby")
+
+Tab1Section:NewButton("Instant Win Easy Obby","Instant Win",function()
+
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = workspace.WinOb.CFrame * CFrame.new(0,5,-23)
+end)
+
+Tab1Section:NewButton("Instant Win Medium Obby","Instant Win",function()
+
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = workspace.WinOb.CFrame * CFrame.new(0,5,0)
+end)
+
+Tab1Section:NewButton("Instant Win Hard Obby","Instant Win",function()
+
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = workspace.WinOb.CFrame * CFrame.new(0,5,23)
+end)
+
+local Tab1Section = Tab1:NewSection("Misc")
+
+Tab1Section:NewButton("Infinite Yield","Infinite Yield Admin Commands",function()
+
+loadstring(game:HttpGet('https://raw.githubusercontent.com/EdgeIY/infiniteyield/master/source'))()
+end)
+
+Tab1Section:NewButton("Nameless Admin","Nameless Admin",function()
+
+-- Thanks to 0866 for making the whole ui work, this admin script was actually made in 2019 lol but was modified by qipu
+-- For the commands thanks to IY, Fates Admin, HomeBrew, CMD-X for some of the code and command ideas!
+-- For the people thanks to Digitality, i_db, rouxhaver, spec and the v3rmillion community, if you see your script in the source and want credits please dm qipu#9312
+-- ! Make sure to have an executor that supports firetouchinterest for the tool commands !
+loadstring(game:HttpGet("https://raw.githubusercontent.com/FilteringEnabled/NamelessAdmin/main/Source"))();
+end)
+
+Tab1Section:NewButton("Mobile Tab Glitch","Tab glitch on Mobile",function()
+
+loadstring(game:HttpGet('https://raw.githubusercontent.com/creepstu/fuzzy-octo-giggle/main/Source'))()
+end)
+
+Tab1Section:NewButton("Fe Fly Gui V3","Fly gui v3",function()
+
+loadstring(game:HttpGet("https://raw.githubusercontent.com/XNEOFF/FlyGuiV3/main/FlyGuiV3.txt"))()
+end)
+
+local Tab4Section = Tab4:NewSection("---Owner Of Script---")
+
+local Tab4Section = Tab4:NewSection("---Tin---")
+
+Tab3:NewSection("⬇️Sorry i cant make Instant Win to these map⬇️")
+
+Tab3:NewSection("Grass Valley")
+
+Tab3:NewSection("Rainbow Fun")
+
+Tab3:NewSection("Icey Island")
+
+Tab3Section:NewButton("Journey To Space","n",function()
+
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(577.815125, 424.381836, -9.05029106, -1, 0, 0, 0, 1, 0, 0, 0, -1)
+end)
+
+Tab3Section:NewButton("Death Run","n",function()
+
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(412.015747, 465.803955, 15.2360153, -1, 0, 0, 0, 1, 0, 0, 0, -1)
+end)
+
+Tab3Section:NewButton("Roblox 2008","n",function()
+
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(360.847076, 511.796631, 142.608322, -1, 0, 0, 0, 1, 0, 0, 0, -1)
+end)
+
+Tab3Section:NewButton("Glass Bridge","n",function()
+
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(160.433014, 465.657715, -0.623921514, 1, 0, 0, 0, 1, 0, 0, 0, 1)
+end)
+
+Tab3Section:NewButton("Speedy GrassLands","n",function()
+
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-122.055794, 467.631927, -277.926544, 0.836573422, -0, -0.547854841, 0, 1, -0, 0.547854841, 0, 0.836573422)
+end)
+
+Tab3Section:NewButton("Black And White","n",function()
+
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(488.997833, 429.234497, -1.49374628, -1, 0, 0, 0, 1, 0, 0, 0, -1)
+end)
+
+Tab3Section:NewButton("John's Difficulty Chart Obby","n",function()
+
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(629.238464, 599.691528, 33.9759407, -1, 0, 0, 0, 1, 0, 0, 0, -1)
+end)
+
+Tab3Section:NewButton("Soda Factory","n",function()
+
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(158.181396, 474.304413, -21.5000095, -0.814329982, 0.0132545177, 0.580250978, 0.0166725535, 0.999860823, 0.000558869448, -0.580162883, 0.0101293698, -0.814437628)
+end)
+
+Tab3Section:NewButton("Error Map","n",function()
+
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(30.2303619, 661.288269, -0.566467583, 1, 0, 0, 0, 1, 0, 0, 0, 1)
+end)
+
+Tab3Section:NewButton("Pirate Island","n",function()
+
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(245.215332, 464.45285, 30.5406265, -0.999989033, 0, 0.00474769808, 0, 1, 0, -0.00474769808, 0, -0.999989033)
+end)
+
+Tab3Section:NewButton("Factory","n",function()
+
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(93.1928329, 499.808929, 55.1889725, -0.864814878, -0.177909762, 0.469514042, -0.209788144, 0.97761637, -0.0159747936, -0.456162542, -0.112313718, -0.882780552)
+end)
+
+Tab3Section:NewButton("Nature","n",function()
+
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(151.522675, 575.728882, -6.72723722, 0.96272552, -0, -0.270480245, 0, 1, -0, 0.270480245, 0, 0.96272552)
+end)
+
+local Tab3Section = Tab3:NewSection("---Coming Soon---")
+
+local runService = game:GetService("RunService")
+local toggleCoroutine
+
+
+local runService = game:GetService("RunService")
+local toggleState = false
+local toggleCoroutine
+
+Tab2Section:NewToggle("Infinite Coins (OP)", "Auto get coins", function(state)
+    toggleState = state
+    if state then
+        -- Start the coroutine to fire the server event continuously
+        toggleCoroutine = coroutine.create(function()
+            while toggleState do
+                game:GetService("ReplicatedStorage"):WaitForChild("EXP"):WaitForChild("CoinX25"):FireServer()
+                print("Event Fired")
+                wait(0.00001) -- Adjust the wait time as needed
+            end
+        end)
+        coroutine.resume(toggleCoroutine)
+        print("Toggle On")
+    else
+        -- Stop the coroutine to stop firing the server event
+        if toggleCoroutine then
+            toggleState = false
+            coroutine.yield(toggleCoroutine)
+            toggleCoroutine = nil
+        end
+        print("Toggle Off")
+    end
+end)
+
+
+local teleporting = false
+
+Tab2Section:NewToggle("Auto teleport to Lobby", "Auto Win", function(state)
+    if state then
+        -- Toggle is on, start teleporting the player continuously
+        print("Toggle On")
+        teleporting = true
+        spawn(function()
+            while teleporting do
+                local player = game.Players.LocalPlayer
+                if player and player.Character and player.Character:FindFirstChild("HumanoidRootPart") then
+                    player.Character.HumanoidRootPart.CFrame = CFrame.new(-8050.7998046875, 473.3310546875, 1.7599999904632568)
+                end
+                wait(0.05)  -- Adjust the delay as needed
+            end
+        end)
+    else
+        -- Toggle is off, stop teleporting the player
+        print("Toggle Off")
+        teleporting = false
+    end
+end)
+
+local teleporting = false
+
+Tab2Section:NewToggle("Auto teleport to Elevator", "Auto tp", function(state)
+    if state then
+        -- Toggle is on, start teleporting the player continuously
+        print("Toggle On")
+        teleporting = true
+        spawn(function()
+            while teleporting do
+                local player = game.Players.LocalPlayer
+                if player and player.Character and player.Character:FindFirstChild("HumanoidRootPart") then
+                    player.Character.HumanoidRootPart.CFrame = CFrame.new(-4.489999771118164, 467.92901611328125, 0.020000126212835312)
+                end
+                wait(0.05)  -- Adjust the delay as needed
+            end
+        end)
+    else
+        -- Toggle is off, stop teleporting the player
+        print("Toggle Off")
+        teleporting = false
+    end
+end)
