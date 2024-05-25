@@ -1,0 +1,199 @@
+---Slap Battles Guis
+
+local kavoUi = loadstring(game:HttpGet("https://raw.githubusercontent.com/Toilatin/Insane-elevator/main/Insane2", true))()
+local window = kavoUi.CreateLib("Slap Battles Guis","BloodTheme")
+
+---Hi
+
+local Tab1 = window:NewTab("Main")
+local Tab1Section = Tab1:NewSection("Main")
+
+---Buttons
+
+Tab1Section:NewButton("Customize hitbox","Hitbox",function()
+
+-- Function to send a chat notification to the script owner only
+local function sendChatNotification(message)
+    local player = game.Players.LocalPlayer
+    game:GetService("StarterGui"):SetCore("ChatMakeSystemMessage", {
+        Text = message,
+        Color = Color3.new(1, 1, 1), -- Set the color of the message
+        Font = Enum.Font.SourceSans, -- Set the font for the message
+        TextSize = 20, -- Increase the text size for the message
+        WhisperTo = player, -- Send the message only to the script owner
+        TextBold = true -- Set the text to bold
+    })
+end
+
+-- Example usage:
+sendChatNotification("Customize Hitbox Enabled")
+
+wait(0.5)
+
+local prefix = "h "
+
+local function onChatted(message)
+    if message:sub(1, #prefix) == prefix then
+        local args = message:sub(#prefix + 1)
+        local size = tonumber(args)
+        if size then
+            _G.Disabled = true
+            _G.HeadSize = size
+        else
+            print("Invalid size. Please enter a number.")
+        end
+    end
+end
+
+game:GetService("Players").LocalPlayer.Chatted:Connect(onChatted)
+
+game:GetService('RunService').RenderStepped:Connect(function()
+    if _G.Disabled then
+        for _, v in ipairs(game:GetService('Players'):GetPlayers()) do
+            if v ~= game:GetService('Players').LocalPlayer then
+                pcall(function()
+                    v.Character.HumanoidRootPart.Size = Vector3.new(_G.HeadSize, _G.HeadSize, _G.HeadSize)
+                    v.Character.HumanoidRootPart.Transparency = 0.9
+                    v.Character.HumanoidRootPart.BrickColor = BrickColor.new("White")
+                    v.Character.HumanoidRootPart.Material = "Neon"
+                    v.Character.HumanoidRootPart.CanCollide = false
+                end)
+            end
+        end
+    end
+end)
+end)
+
+Tab1Section:NewButton("Hitbox 25","Hitbox",function()
+
+_G.HeadSize = 25
+_G.Disabled = true
+
+game:GetService('RunService').RenderStepped:connect(function()
+if _G.Disabled then
+for i,v in next, game:GetService('Players'):GetPlayers() do
+if v.Name ~= game:GetService('Players').LocalPlayer.Name then
+pcall(function()
+v.Character.HumanoidRootPart.Size = Vector3.new(_G.HeadSize,_G.HeadSize,_G.HeadSize)
+v.Character.HumanoidRootPart.Transparency = 0.9
+v.Character.HumanoidRootPart.BrickColor = BrickColor.new("White")
+v.Character.HumanoidRootPart.Material = "Neon"
+v.Character.HumanoidRootPart.CanCollide = false
+end)
+end
+end
+end
+end)
+end)
+
+
+Tab1Section:NewButton("Hitbox 20","Hitbox",function()
+
+_G.HeadSize = 20
+_G.Disabled = true
+
+game:GetService('RunService').RenderStepped:connect(function()
+if _G.Disabled then
+for i,v in next, game:GetService('Players'):GetPlayers() do
+if v.Name ~= game:GetService('Players').LocalPlayer.Name then
+pcall(function()
+v.Character.HumanoidRootPart.Size = Vector3.new(_G.HeadSize,_G.HeadSize,_G.HeadSize)
+v.Character.HumanoidRootPart.Transparency = 0.9
+v.Character.HumanoidRootPart.BrickColor = BrickColor.new("White")
+v.Character.HumanoidRootPart.Material = "Neon"
+v.Character.HumanoidRootPart.CanCollide = false
+end)
+end
+end
+end
+end)
+end)
+
+
+Tab1Section:NewButton("Hitbox 12","Hitbox",function()
+
+_G.HeadSize = 12
+_G.Disabled = true
+
+game:GetService('RunService').RenderStepped:connect(function()
+if _G.Disabled then
+for i,v in next, game:GetService('Players'):GetPlayers() do
+if v.Name ~= game:GetService('Players').LocalPlayer.Name then
+pcall(function()
+v.Character.HumanoidRootPart.Size = Vector3.new(_G.HeadSize,_G.HeadSize,_G.HeadSize)
+v.Character.HumanoidRootPart.Transparency = 0.9
+v.Character.HumanoidRootPart.BrickColor = BrickColor.new("White")
+v.Character.HumanoidRootPart.Material = "Neon"
+v.Character.HumanoidRootPart.CanCollide = false
+end)
+end
+end
+end
+end)
+end)
+
+Tab1Section:NewButton("Hitbox 8","Hitbox",function()
+
+_G.HeadSize = 8
+_G.Disabled = true
+
+game:GetService('RunService').RenderStepped:connect(function()
+if _G.Disabled then
+for i,v in next, game:GetService('Players'):GetPlayers() do
+if v.Name ~= game:GetService('Players').LocalPlayer.Name then
+pcall(function()
+v.Character.HumanoidRootPart.Size = Vector3.new(_G.HeadSize,_G.HeadSize,_G.HeadSize)
+v.Character.HumanoidRootPart.Transparency = 0.9
+v.Character.HumanoidRootPart.BrickColor = BrickColor.new("White")
+v.Character.HumanoidRootPart.Material = "Neon"
+v.Character.HumanoidRootPart.CanCollide = false
+end)
+end
+end
+end
+end)
+end)
+
+Tab1Section:NewButton("Hitbox 5","Hitbox",function()
+
+_G.HeadSize = 5
+_G.Disabled = true
+
+game:GetService('RunService').RenderStepped:connect(function()
+if _G.Disabled then
+for i,v in next, game:GetService('Players'):GetPlayers() do
+if v.Name ~= game:GetService('Players').LocalPlayer.Name then
+pcall(function()
+v.Character.HumanoidRootPart.Size = Vector3.new(_G.HeadSize,_G.HeadSize,_G.HeadSize)
+v.Character.HumanoidRootPart.Transparency = 0.9
+v.Character.HumanoidRootPart.BrickColor = BrickColor.new("White")
+v.Character.HumanoidRootPart.Material = "Neon"
+v.Character.HumanoidRootPart.CanCollide = false
+end)
+end
+end
+end
+end)
+end)
+
+Tab1Section:NewButton("Hitbox 2","Hitbox",function()
+
+_G.HeadSize = 2
+_G.Disabled = true
+
+game:GetService('RunService').RenderStepped:connect(function()
+if _G.Disabled then
+for i,v in next, game:GetService('Players'):GetPlayers() do
+if v.Name ~= game:GetService('Players').LocalPlayer.Name then
+pcall(function()
+v.Character.HumanoidRootPart.Size = Vector3.new(_G.HeadSize,_G.HeadSize,_G.HeadSize)
+v.Character.HumanoidRootPart.Transparency = 0.9
+v.Character.HumanoidRootPart.BrickColor = BrickColor.new("White")
+v.Character.HumanoidRootPart.Material = "Neon"
+v.Character.HumanoidRootPart.CanCollide = false
+end)
+end
+end
+end
+end)
+end)
