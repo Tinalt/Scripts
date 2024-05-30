@@ -1,7 +1,7 @@
----Slap Battles Guis
+---Hitbox Gui
 
 local kavoUi = loadstring(game:HttpGet("https://raw.githubusercontent.com/Toilatin/Insane-elevator/main/Insane2", true))()
-local window = kavoUi.CreateLib("Slap Battles Guis","BloodTheme")
+local window = kavoUi.CreateLib("Universe Hitbox Gui","BloodTheme")
 
 ---Hi
 
