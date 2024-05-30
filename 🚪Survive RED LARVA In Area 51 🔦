@@ -1,0 +1,166 @@
+---🚪Survive RED LARVA In Area 51 🔦
+
+local kavoUi = loadstring(game:HttpGet("https://raw.githubusercontent.com/Toilatin/Insane-elevator/main/Insane2", true))()
+local window = kavoUi.CreateLib("Survive RED LARVA In Area 51","BloodTheme")
+
+--SafePlace
+
+local SafeSpot = Instance.new("Part", workspace)
+
+SafeSpot.Position = Vector3.new(0,100000,0)
+
+SafeSpot.Name = "SafePlace"
+
+SafeSpot.Size = Vector3.new(1000,1,1000)
+
+SafeSpot.Anchored = true
+
+SafeSpot.Transparency = .7
+
+---Hi
+
+local Tab1 = window:NewTab("Main")
+local Tab1Section = Tab1:NewSection("Main")
+
+local Tab2 = window:NewTab("Troll")
+local Tab2Section = Tab2:NewSection("Troll")
+
+--Buttons
+
+Tab1Section:NewButton("Free VIP","Free VIP",function()
+
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-489, 92.10008239746094, -367)
+end)
+
+Tab1Section:NewButton("Become A Killer (FREE)","Free Become a killer",function()
+
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-489.2398681640625, 93.2211685180664, -447.1120300292969)
+end)
+
+Tab1Section:NewButton("Lobby","Lobby",function()
+
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-491.38372802734375, 93.10000610351562, -418.2233581542969)
+end)
+
+Tab1Section:NewButton("The Backrooms","Backrooms",function()
+
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-817.2634887695312, 111.33901977539062, -549.2681274414062)
+end)
+
+local Tab1Section = Tab1:NewSection("Misc")
+
+Tab1Section:NewButton("Infinite Yield","Infinite Yield",function()
+
+loadstring(game:HttpGet('https://raw.githubusercontent.com/EdgeIY/infiniteyield/master/source'))()
+end)
+
+Tab1Section:NewButton("Nameless Admin","OP Admin Commands [FE]",function()
+
+-- Thanks to 0866 for making the whole ui work, this admin script was actually made in 2019 lol but was modified by qipu
+-- For the commands thanks to IY, Fates Admin, HomeBrew, CMD-X for some of the code and command ideas!
+-- For the people thanks to Digitality, i_db, rouxhaver, spec and the v3rmillion community, if you see your script in the source and want credits please dm qipu#9312
+-- ! Make sure to have an executor that supports firetouchinterest for the tool commands !
+loadstring(game:HttpGet("https://raw.githubusercontent.com/FilteringEnabled/NamelessAdmin/main/Source"))();
+
+end)
+
+Tab1Section:NewButton("Fling Gui","Fling",function()
+
+loadstring(game:HttpGet("https://raw.githubusercontent.com/0Ben1/fe./main/Fling%20GUI"))()
+end)
+
+Tab1Section:NewButton("Esp Players", "Nothing", function()
+
+local Players = game:GetService("Players"):GetChildren()
+
+local RunService = game:GetService("RunService")
+
+local highlight = Instance.new("Highlight")
+
+highlight.Name = "Highlight"
+
+
+
+for i, v in pairs(Players) do
+
+    repeat wait() until v.Character
+
+    if not v.Character:FindFirstChild("HumanoidRootPart"):FindFirstChild("Highlight") then
+
+        local highlightClone = highlight:Clone()
+
+        highlightClone.Adornee = v.Character
+
+        highlightClone.Parent = v.Character:FindFirstChild("HumanoidRootPart")
+
+        highlightClone.DepthMode = Enum.HighlightDepthMode.AlwaysOnTop
+
+        highlightClone.Name = "Highlight"
+
+    end
+
+end
+
+
+
+game.Players.PlayerAdded:Connect(function(player)
+
+    repeat wait() until player.Character
+
+    if not player.Character:FindFirstChild("HumanoidRootPart"):FindFirstChild("Highlight") then
+
+        local highlightClone = highlight:Clone()
+
+        highlightClone.Adornee = player.Character
+
+        highlightClone.Parent = player.Character:FindFirstChild("HumanoidRootPart")
+
+        highlightClone.Name = "Highlight"
+
+    end
+
+end)
+
+
+
+game.Players.PlayerRemoving:Connect(function(playerRemoved)
+
+    playerRemoved.Character:FindFirstChild("HumanoidRootPart").Highlight:Destroy()
+
+end)
+
+
+
+RunService.Heartbeat:Connect(function()
+
+    for i, v in pairs(Players) do
+
+        repeat wait() until v.Character
+
+        if not v.Character:FindFirstChild("HumanoidRootPart"):FindFirstChild("Highlight") then
+
+            local highlightClone = highlight:Clone()
+
+            highlightClone.Adornee = v.Character
+
+            highlightClone.Parent = v.Character:FindFirstChild("HumanoidRootPart")
+
+            highlightClone.DepthMode = Enum.HighlightDepthMode.AlwaysOnTop
+
+            highlightClone.Name = "Highlight"
+
+            task.wait()
+
+        end
+
+end
+
+end)
+end)
+
+Tab2Section:NewButton("Auto Reset (CAN'T TURN OFF)","Just a little trolling",function()
+while true do
+wait(0.5)
+game.Players.LocalPlayer.Character.Humanoid.Health = 0
+end
+end)
