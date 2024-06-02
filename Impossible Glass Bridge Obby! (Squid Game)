@@ -1,0 +1,168 @@
+local kavoUi = loadstring(game:HttpGet("https://raw.githubusercontent.com/Toilatin/Insane-elevator/main/Insane2"))()
+local window = kavoUi.CreateLib("Impossible Glass Bridge Obby (Squid Game)","BloodTheme")
+
+---TeleportSpot
+
+local SafeSpot = Instance.new("Part", workspace)
+
+SafeSpot.Position = Vector3.new(1089.59,57.94,115.04)
+
+SafeSpot.Name = "Winner"
+
+SafeSpot.Size = Vector3.new(0,0.1,0)
+
+SafeSpot.Anchored = true
+
+SafeSpot.Transparency = .1
+
+--
+
+local SafeSpot = Instance.new("Part", workspace)
+
+SafeSpot.Position = Vector3.new(20.86,57.94,115.36)
+
+SafeSpot.Name = "Lobby2"
+
+SafeSpot.Size = Vector3.new(0,0.1,0)
+
+SafeSpot.Anchored = true
+
+SafeSpot.Transparency = 1
+
+--
+
+local SafeSpot = Instance.new("Part", workspace)
+
+SafeSpot.Position = Vector3.new(-26.47,97.63,116.9)
+
+SafeSpot.Name = "FreeVip"
+
+SafeSpot.Size = Vector3.new(0,0.1,0)
+
+SafeSpot.Anchored = true
+
+SafeSpot.Transparency = 1
+
+--
+
+local SafeSpot = Instance.new("Part", workspace)
+
+SafeSpot.Position = Vector3.new(1105.51,73.49,115.18)
+
+SafeSpot.Name = "Instant"
+
+SafeSpot.Size = Vector3.new(0,0.1,0)
+
+SafeSpot.Anchored = true
+
+SafeSpot.Transparency = 1
+
+---Tabs
+
+local Tab1 = window:NewTab("Main")
+local Tab1Section = Tab1:NewSection("Main")
+
+local Tab2 = window:NewTab("Credits")
+local Tab2Section = Tab2:NewSection("Credits")
+
+--Button
+
+Tab1Section:NewButton("Instant Win","Instant win, inf wins",function()
+
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = workspace.Winner.CFrame * CFrame.new(0,10,0)
+end)
+
+Tab1Section:NewButton("Lobby","Teleport you to Lobby",function()
+
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = workspace.Lobby2.CFrame * CFrame.new(0,10,0)
+end)
+
+Tab1Section:NewButton("Vip Room","Free Vip Room (no need 20k money)",function()
+
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = workspace.FreeVip.CFrame * CFrame.new(0,10,0)
+end)
+
+Tab1Section:NewButton("Fake Glass ESP","Become Leader when you can see fake glass!",function()
+
+for i,v in pairs(game:GetService("Workspace")["Glass Bridge"].GlassPane:GetDescendants()) do
+   if v:IsA("BasePart") and v.CanCollide == false then
+       v.CanCollide = true
+       v.Color = Color3.fromRGB(255, 0, 0)
+
+   end
+end
+end)
+
+local teleporting = false
+
+Tab1Section:NewToggle("Auto Win", "Auto Win", function(state)
+    if state then
+        -- Toggle is on, start teleporting the player continuously
+        print("Toggle On")
+        teleporting = true
+        spawn(function()
+            while teleporting do
+                local player = game.Players.LocalPlayer
+                if player and player.Character and player.Character:FindFirstChild("HumanoidRootPart") then
+                    player.Character.HumanoidRootPart.CFrame = CFrame.new(1105.209716796875, 65.0064697265625, 117.05828094482422)
+                end
+                wait(0.05)  -- Adjust the delay as needed
+            end
+        end)
+    else
+        -- Toggle is off, stop teleporting the player
+        print("Toggle Off")
+        teleporting = false
+    end
+end)
+
+Tab1Section:NewToggle("God Mode [Troll]", "Anti die, GodMode troll everyone", function(state)
+    if state then
+        print("Toggle On")
+
+        -- Create a new part when the toggle is turned on
+        spawnedPart = Instance.new("Part")
+        spawnedPart.Size = Vector3.new(2048,1,23)
+        spawnedPart.Position = Vector3.new(421.13,57,114.97)
+        spawnedPart.Anchored = true  -- Anchoring the part so it doesn't fall due to gravity
+        spawnedPart.Transparency = 1  -- Set the transparency of the part
+        spawnedPart.Parent = game.Workspace  -- Setting the parent to Workspace so it appears in the game world
+
+    else
+        print("Toggle Off")
+
+        -- Remove the part when the toggle is turned off
+        if spawnedPart then
+            spawnedPart:Destroy()
+            spawnedPart = nil -- Clear the reference to the destroyed part
+        end
+    end
+end)
+
+-- Define a variable to control the loop
+local isToggled = false
+
+-- Function to handle the loop
+local function loopFunction()
+    while isToggled do
+        game:GetService("ReplicatedStorage"):WaitForChild("SpinEvent"):WaitForChild("Request"):InvokeServer()
+        wait(0.5) -- Adjust the wait time as needed to control the frequency of the loop
+    end
+end
+
+-- Add the toggle button to the section
+Tab1Section:NewToggle("Auto Spin The Wheel (Need 1k Money)", "Auto Spin", function(state)
+    if state then
+        isToggled = true
+        -- Start the loop in a separate thread
+        spawn(loopFunction)
+        print("Toggle On")
+    else
+        isToggled = false
+        print("Toggle Off")
+    end
+end)
+
+local Tab2Section = Tab2:NewSection("---Owner Of Script---")
+
+local Tab2Section = Tab2:NewSection("---Tin---")
