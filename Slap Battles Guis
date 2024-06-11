@@ -15,6 +15,11 @@ Tab1Section:NewButton("Slap Battles GiangPlay Hub (OP)","Slap Battles",function(
 loadstring(game:HttpGet("https://raw.githubusercontent.com/Giangplay/Slap_Battles/main/Slap_Battles.lua"))()
 end)
 
+Tab1Section:NewButton("Destroyer X Hub (OP)","Slap Battles",function()
+
+loadstring(game:HttpGet("https://raw.githubusercontent.com/Aquoupi/DestroyerX/main/DestroyerX"))()
+end)
+
 Tab1Section:NewButton("Kick Player Gui","Slap Battles",function()
 
 loadstring(game:HttpGet("https://raw.githubusercontent.com/Toilatin/Insane-elevator/main/Kick%20gui%20Slap%20battles", true))()
