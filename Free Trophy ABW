@@ -1,0 +1,31 @@
+local player = game.Players.LocalPlayer
+local backpack = player:WaitForChild("Backpack")
+
+-- Create the tool
+local tool = Instance.new("Tool")
+tool.Name = "Free Trophy ABW"
+tool.RequiresHandle = false
+tool.Parent = backpack
+
+-- Gravity values
+local newGravity = 40
+local defaultGravity = 196.2
+
+-- Function to set gravity
+local function setGravity(gravity)
+    workspace.Gravity = gravity
+end
+
+-- Function to handle tool equipped
+local function onEquipped()
+    setGravity(newGravity)
+end
+
+-- Function to handle tool unequipped
+local function onUnequipped()
+    setGravity(defaultGravity)
+end
+
+-- Connect the events to the functions
+tool.Equipped:Connect(onEquipped)
+tool.Unequipped:Connect(onUnequipped)
