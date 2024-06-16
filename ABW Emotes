@@ -1,0 +1,463 @@
+local kavoUi = loadstring(game:HttpGet("https://raw.githubusercontent.com/Toilatin/Insane-elevator/main/Insane2"))()
+local window = kavoUi.CreateLib("Free Emotes (ABW)","BloodTheme")
+
+---Hi
+
+local Tab1 = window:NewTab("Main")
+local Tab1Section = Tab1:NewSection("Emotes")
+
+--Buttons
+
+Tab1Section:NewButton("Gaster","Free",function()
+
+-- Create a new Animation object
+local animation = Instance.new("Animation")
+animation.AnimationId = "rbxassetid://14054114234"
+
+-- Function to play the animation
+local function playAnimation()
+    -- Make sure the script is running on a player
+    local player = game.Players.LocalPlayer
+    local character = player.Character or player.CharacterAdded:Wait()
+    local humanoid = character:WaitForChild("Humanoid")
+    
+    -- Load the animation to the humanoid
+    local animationTrack = humanoid:LoadAnimation(animation)
+    
+    -- Play the animation
+    animationTrack:Play()
+end
+
+-- Call the function to play the animation
+playAnimation()
+end)
+
+Tab1Section:NewButton("T-Pose","Free",function()
+
+-- Create a new Animation object
+local animation = Instance.new("Animation")
+animation.AnimationId = "rbxassetid://11167540743"
+
+-- Function to play the animation
+local function playAnimation()
+    -- Make sure the script is running on a player
+    local player = game.Players.LocalPlayer
+    local character = player.Character or player.CharacterAdded:Wait()
+    local humanoid = character:WaitForChild("Humanoid")
+    
+    -- Load the animation to the humanoid
+    local animationTrack = humanoid:LoadAnimation(animation)
+    
+    -- Play the animation
+    animationTrack:Play()
+end
+
+-- Call the function to play the animation
+playAnimation()
+end)
+
+Tab1Section:NewButton("Bumblebee","Free",function()
+
+-- Create a new Animation object
+local animation = Instance.new("Animation")
+animation.AnimationId = "rbxassetid://11167578621"
+
+-- Function to play the animation
+local function playAnimation()
+    -- Make sure the script is running on a player
+    local player = game.Players.LocalPlayer
+    local character = player.Character or player.CharacterAdded:Wait()
+    local humanoid = character:WaitForChild("Humanoid")
+    
+    -- Load the animation to the humanoid
+    local animationTrack = humanoid:LoadAnimation(animation)
+    
+    -- Play the animation
+    animationTrack:Play()
+end
+
+-- Call the function to play the animation
+playAnimation()
+end)
+
+Tab1Section:NewButton("Celebrate","Free",function()
+
+-- Create a new Animation object
+local animation = Instance.new("Animation")
+animation.AnimationId = "rbxassetid://11167590305"
+
+-- Function to play the animation
+local function playAnimation()
+    -- Make sure the script is running on a player
+    local player = game.Players.LocalPlayer
+    local character = player.Character or player.CharacterAdded:Wait()
+    local humanoid = character:WaitForChild("Humanoid")
+    
+    -- Load the animation to the humanoid
+    local animationTrack = humanoid:LoadAnimation(animation)
+    
+    -- Play the animation
+    animationTrack:Play()
+end
+
+-- Call the function to play the animation
+playAnimation()
+end)
+
+Tab1Section:NewButton("Among Us Dance","Free",function()
+
+-- Create a new Animation object
+local animation = Instance.new("Animation")
+animation.AnimationId = "rbxassetid://11167599845"
+
+-- Function to play the animation
+local function playAnimation()
+    -- Make sure the script is running on a player
+    local player = game.Players.LocalPlayer
+    local character = player.Character or player.CharacterAdded:Wait()
+    local humanoid = character:WaitForChild("Humanoid")
+    
+    -- Load the animation to the humanoid
+    local animationTrack = humanoid:LoadAnimation(animation)
+    
+    -- Play the animation
+    animationTrack:Play()
+end
+
+-- Call the function to play the animation
+playAnimation()
+end)
+
+Tab1Section:NewButton("Livesey Walk","Free",function()
+
+-- Create a new Animation object
+local animation = Instance.new("Animation")
+animation.AnimationId = "rbxassetid://11167620872"
+
+-- Function to play the animation
+local function playAnimation()
+    -- Make sure the script is running on a player
+    local player = game.Players.LocalPlayer
+    local character = player.Character or player.CharacterAdded:Wait()
+    local humanoid = character:WaitForChild("Humanoid")
+    
+    -- Load the animation to the humanoid
+    local animationTrack = humanoid:LoadAnimation(animation)
+    
+    -- Play the animation
+    animationTrack:Play()
+end
+
+-- Call the function to play the animation
+playAnimation()
+end)
+
+Tab1Section:NewButton("Mio","Free",function()
+
+-- Create a new Animation object
+local animation = Instance.new("Animation")
+animation.AnimationId = "rbxassetid://11167630130"
+
+-- Function to play the animation
+local function playAnimation()
+    -- Make sure the script is running on a player
+    local player = game.Players.LocalPlayer
+    local character = player.Character or player.CharacterAdded:Wait()
+    local humanoid = character:WaitForChild("Humanoid")
+    
+    -- Load the animation to the humanoid
+    local animationTrack = humanoid:LoadAnimation(animation)
+    
+    -- Play the animation
+    animationTrack:Play()
+end
+
+-- Call the function to play the animation
+playAnimation()
+end)
+
+Tab1Section:NewButton("Funny Dance","Free",function()
+
+-- Create a new Animation object
+local animation = Instance.new("Animation")
+animation.AnimationId = "rbxassetid://11167638538"
+
+-- Function to play the animation
+local function playAnimation()
+    -- Make sure the script is running on a player
+    local player = game.Players.LocalPlayer
+    local character = player.Character or player.CharacterAdded:Wait()
+    local humanoid = character:WaitForChild("Humanoid")
+    
+    -- Load the animation to the humanoid
+    local animationTrack = humanoid:LoadAnimation(animation)
+    
+    -- Play the animation
+    animationTrack:Play()
+end
+
+-- Call the function to play the animation
+playAnimation()
+end)
+
+Tab1Section:NewButton("Laugh","Free",function()
+
+-- Create a new Animation object
+local animation = Instance.new("Animation")
+animation.AnimationId = "rbxassetid://11167652629"
+
+-- Function to play the animation
+local function playAnimation()
+    -- Make sure the script is running on a player
+    local player = game.Players.LocalPlayer
+    local character = player.Character or player.CharacterAdded:Wait()
+    local humanoid = character:WaitForChild("Humanoid")
+    
+    -- Load the animation to the humanoid
+    local animationTrack = humanoid:LoadAnimation(animation)
+    
+    -- Play the animation
+    animationTrack:Play()
+end
+
+-- Call the function to play the animation
+playAnimation()
+end)
+
+Tab1Section:NewButton("Clap Hand (1 time)","Free",function()
+
+-- Create a new Animation object
+local animation = Instance.new("Animation")
+animation.AnimationId = "rbxassetid://11167678428"
+
+-- Function to play the animation
+local function playAnimation()
+    -- Make sure the script is running on a player
+    local player = game.Players.LocalPlayer
+    local character = player.Character or player.CharacterAdded:Wait()
+    local humanoid = character:WaitForChild("Humanoid")
+    
+    -- Load the animation to the humanoid
+    local animationTrack = humanoid:LoadAnimation(animation)
+    
+    -- Play the animation
+    animationTrack:Play()
+end
+
+-- Call the function to play the animation
+playAnimation()
+end)
+
+Tab1Section:NewButton("Caramel (Funny)","Free",function()
+
+-- Create a new Animation object
+local animation = Instance.new("Animation")
+animation.AnimationId = "rbxassetid://14054089458"
+
+-- Function to play the animation
+local function playAnimation()
+    -- Make sure the script is running on a player
+    local player = game.Players.LocalPlayer
+    local character = player.Character or player.CharacterAdded:Wait()
+    local humanoid = character:WaitForChild("Humanoid")
+    
+    -- Load the animation to the humanoid
+    local animationTrack = humanoid:LoadAnimation(animation)
+    
+    -- Play the animation
+    animationTrack:Play()
+end
+
+-- Call the function to play the animation
+playAnimation()
+end)
+
+Tab1Section:NewButton("Spamton","Free",function()
+
+-- Create a new Animation object
+local animation = Instance.new("Animation")
+animation.AnimationId = "rbxassetid://14054136716"
+
+-- Function to play the animation
+local function playAnimation()
+    -- Make sure the script is running on a player
+    local player = game.Players.LocalPlayer
+    local character = player.Character or player.CharacterAdded:Wait()
+    local humanoid = character:WaitForChild("Humanoid")
+    
+    -- Load the animation to the humanoid
+    local animationTrack = humanoid:LoadAnimation(animation)
+    
+    -- Play the animation
+    animationTrack:Play()
+end
+
+-- Call the function to play the animation
+playAnimation()
+end)
+
+Tab1Section:NewButton("Shuffle","Free",function()
+
+-- Create a new Animation object
+local animation = Instance.new("Animation")
+animation.AnimationId = "rbxassetid://14054134818"
+
+-- Function to play the animation
+local function playAnimation()
+    -- Make sure the script is running on a player
+    local player = game.Players.LocalPlayer
+    local character = player.Character or player.CharacterAdded:Wait()
+    local humanoid = character:WaitForChild("Humanoid")
+    
+    -- Load the animation to the humanoid
+    local animationTrack = humanoid:LoadAnimation(animation)
+    
+    -- Play the animation
+    animationTrack:Play()
+end
+
+-- Call the function to play the animation
+playAnimation()
+end)
+
+Tab1Section:NewButton("Mine","Free",function()
+
+-- Create a new Animation object
+local animation = Instance.new("Animation")
+animation.AnimationId = "rbxassetid://14054134818"
+
+-- Function to play the animation
+local function playAnimation()
+    -- Make sure the script is running on a player
+    local player = game.Players.LocalPlayer
+    local character = player.Character or player.CharacterAdded:Wait()
+    local humanoid = character:WaitForChild("Humanoid")
+    
+    -- Load the animation to the humanoid
+    local animationTrack = humanoid:LoadAnimation(animation)
+    
+    -- Play the animation
+    animationTrack:Play()
+end
+
+-- Call the function to play the animation
+playAnimation()
+end)
+
+Tab1Section:NewButton("Boyz","Free",function()
+
+-- Create a new Animation object
+local animation = Instance.new("Animation")
+animation.AnimationId = "rbxassetid://14147731600"
+
+-- Function to play the animation
+local function playAnimation()
+    -- Make sure the script is running on a player
+    local player = game.Players.LocalPlayer
+    local character = player.Character or player.CharacterAdded:Wait()
+    local humanoid = character:WaitForChild("Humanoid")
+    
+    -- Load the animation to the humanoid
+    local animationTrack = humanoid:LoadAnimation(animation)
+    
+    -- Play the animation
+    animationTrack:Play()
+end
+
+-- Call the function to play the animation
+playAnimation()
+end)
+
+Tab1Section:NewButton("Yoinkysploinky","Free",function()
+
+-- Create a new Animation object
+local animation = Instance.new("Animation")
+animation.AnimationId = "rbxassetid://14054147640"
+
+-- Function to play the animation
+local function playAnimation()
+    -- Make sure the script is running on a player
+    local player = game.Players.LocalPlayer
+    local character = player.Character or player.CharacterAdded:Wait()
+    local humanoid = character:WaitForChild("Humanoid")
+    
+    -- Load the animation to the humanoid
+    local animationTrack = humanoid:LoadAnimation(animation)
+    
+    -- Play the animation
+    animationTrack:Play()
+end
+
+-- Call the function to play the animation
+playAnimation()
+end)
+
+Tab1Section:NewButton("Flop","Free",function()
+
+-- Create a new Animation object
+local animation = Instance.new("Animation")
+animation.AnimationId = "rbxassetid://14054112932"
+
+-- Function to play the animation
+local function playAnimation()
+    -- Make sure the script is running on a player
+    local player = game.Players.LocalPlayer
+    local character = player.Character or player.CharacterAdded:Wait()
+    local humanoid = character:WaitForChild("Humanoid")
+    
+    -- Load the animation to the humanoid
+    local animationTrack = humanoid:LoadAnimation(animation)
+    
+    -- Play the animation
+    animationTrack:Play()
+end
+
+-- Call the function to play the animation
+playAnimation()
+end)
+
+
+
+
+local Tab1Section = Tab1:NewSection("---Coming Soon---")
+
+local gui = Instance.new("ScreenGui")
+gui.Name = "patrickGui"
+gui.Parent = game.CoreGui
+
+-- Create the TextButton
+local TextButton = Instance.new("TextButton")
+-- Text
+TextButton.Text = "Toggle"
+TextButton.TextSize = 14
+-- Color
+TextButton.TextColor3 = Color3.new(1, 1, 1)
+TextButton.BackgroundColor3 = Color3.new(0, 0, 0)
+TextButton.BorderColor3 = Color3.new(0, 0, 0)
+-- Transparency
+TextButton.BackgroundTransparency = 0.5
+-- Thickness
+TextButton.BorderSizePixel = 4
+-- Text Code
+TextButton.Font = Enum.Font.Code
+-- Size (making it a small square)
+TextButton.Size = UDim2.new(0, 50, 0, 50)  -- 50×50 pixels
+-- Position
+TextButton.Position = UDim2.new(1, -110, 0, 10)  -- Center of the screen
+-- Function
+TextButton.MouseButton1Click:Connect(function()
+    kavoUi:ToggleUI()
+end)
+TextButton.Parent = gui
+TextButton.Draggable = true
+
+-- Adding UICorner for rounded corners
+local cornerUI = Instance.new("UICorner")
+cornerUI.CornerRadius = UDim.new(0, 5)
+cornerUI.Parent = TextButton
+
+-- Adding UIStroke for border
+local uiStroke = Instance.new("UIStroke")
+uiStroke.Color = Color3.new(0, 0, 0)
+uiStroke.Thickness = 2
+uiStroke.Parent = TextButton
