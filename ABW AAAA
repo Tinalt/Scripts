@@ -10,9 +10,9 @@ local Tab1Section = Tab1:NewSection("Main")
 
 ---Buttons
 
-local Tab1Section = Tab1:NewSection("Executing scripts...")
-
 loadstring(game:HttpGet('https://raw.githubusercontent.com/creepstu/fuzzy-octo-giggle/main/Source'))()
+
+loadstring(game:HttpGet('https://raw.githubusercontent.com/EdgeIY/infiniteyield/master/source'))()
 
 _G.HeadSize = 6
 _G.Disabled = true
@@ -33,19 +33,17 @@ end
 end
 end)
 
-loadstring(game:HttpGet('https://raw.githubusercontent.com/EdgeIY/infiniteyield/master/source'))()
-
 -- Function to send a chat notification to the script owner only
 local function sendChatNotification(message)
-    local player = game.Players.LocalPlayer
-    game:GetService("StarterGui"):SetCore("ChatMakeSystemMessage", {
-        Text = message,
-        Color = Color3.new(1, 1, 1), -- Set the color of the message
-        Font = Enum.Font.SourceSans, -- Set the font for the message
-        TextSize = 20, -- Increase the text size for the message
-        WhisperTo = player, -- Send the message only to the script owner
-        TextBold = true -- Set the text to bold
-    })
+    local player = game.Players.LocalPlayer
+    game:GetService("StarterGui"):SetCore("ChatMakeSystemMessage", {
+        Text = message,
+        Color = Color3.new(1, 1, 1), -- Set the color of the message
+        Font = Enum.Font.SourceSans, -- Set the font for the message
+        TextSize = 20, -- Increase the text size for the message
+        WhisperTo = player, -- Send the message only to the script owner
+        TextBold = true -- Set the text to bold
+    })
 end
 
 -- Example usage:
@@ -56,32 +54,32 @@ wait(0.5)
 local prefix = "h "
 
 local function onChatted(message)
-    if message:sub(1, #prefix) == prefix then
-        local args = message:sub(#prefix + 1)
-        local size = tonumber(args)
-        if size then
-            _G.Disabled = true
-            _G.HeadSize = size
-        else
-            print("Invalid size. Please enter a number.")
-        end
-    end
+    if message:sub(1, #prefix) == prefix then
+        local args = message:sub(#prefix + 1)
+        local size = tonumber(args)
+        if size then
+            _G.Disabled = true
+            _G.HeadSize = size
+        else
+            print("Invalid size. Please enter a number.")
+        end
+    end
 end
 
 game:GetService("Players").LocalPlayer.Chatted:Connect(onChatted)
 
 game:GetService('RunService').RenderStepped:Connect(function()
-    if _G.Disabled then
-        for _, v in ipairs(game:GetService('Players'):GetPlayers()) do
-            if v ~= game:GetService('Players').LocalPlayer then
-                pcall(function()
-                    v.Character.HumanoidRootPart.Size = Vector3.new(_G.HeadSize, _G.HeadSize, _G.HeadSize)
-                    v.Character.HumanoidRootPart.Transparency = 0.9
-                    v.Character.HumanoidRootPart.BrickColor = BrickColor.new("White")
-                    v.Character.HumanoidRootPart.Material = "Neon"
-                    v.Character.HumanoidRootPart.CanCollide = false
-                end)
-            end
-        end
-    end
+    if _G.Disabled then
+        for _, v in ipairs(game:GetService('Players'):GetPlayers()) do
+            if v ~= game:GetService('Players').LocalPlayer then
+                pcall(function()
+                    v.Character.HumanoidRootPart.Size = Vector3.new(_G.HeadSize, _G.HeadSize, _G.HeadSize)
+                    v.Character.HumanoidRootPart.Transparency = 0.9
+                    v.Character.HumanoidRootPart.BrickColor = BrickColor.new("White")
+                    v.Character.HumanoidRootPart.Material = "Neon"
+                    v.Character.HumanoidRootPart.CanCollide = false
+                end)
+            end
+        end
+    end
 end)
