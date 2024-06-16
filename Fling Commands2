@@ -1,0 +1,20 @@
+---FLING PLAYER COMMAND
+
+
+-- Function to send a chat notification to the script owner only
+local function sendChatNotification(message)
+    local player = game.Players.LocalPlayer
+    game:GetService("StarterGui"):SetCore("ChatMakeSystemMessage", {
+        Text = message,
+        Color = Color3.new(1, 1, 1), -- Set the color of the message
+        Font = Enum.Font.SourceSans, -- Set the font for the message
+        TextSize = 20, -- Increase the text size for the message
+        WhisperTo = player, -- Send the message only to the script owner
+        TextBold = true -- Set the text to bold
+    })
+end
+
+-- Example usage:
+sendChatNotification("Fling Player Command Enabled\nCommands List:\nf <player>\nloopf <player>\nunloopf <player>")
+
+loadstring(game:HttpGet('https://raw.githubusercontent.com/Tinalt/Scripts/main/Fling%20Command'))()
