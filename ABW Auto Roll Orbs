@@ -1,0 +1,219 @@
+local kavoUi = loadstring(game:HttpGet("https://raw.githubusercontent.com/Toilatin/Insane-elevator/main/Insane2"))()
+local window = kavoUi.CreateLib("ABW Auto Roll Orbs","BloodTheme")
+
+---Toggle Button
+
+local gui = Instance.new("ScreenGui")
+gui.Name = "patrickGui"
+gui.Parent = game.CoreGui
+
+-- Create the TextButton
+local TextButton = Instance.new("TextButton")
+-- Text
+TextButton.Text = "Toggle"
+TextButton.TextSize = 14
+-- Color
+TextButton.TextColor3 = Color3.new(1, 1, 1)
+TextButton.BackgroundColor3 = Color3.new(0, 0, 0)
+TextButton.BorderColor3 = Color3.new(0, 0, 0)
+-- Transparency
+TextButton.BackgroundTransparency = 0.5
+-- Thickness
+TextButton.BorderSizePixel = 4
+-- Text Code
+TextButton.Font = Enum.Font.Code
+-- Size (making it a small square)
+TextButton.Size = UDim2.new(0, 50, 0, 50)  -- 50×50 pixels
+-- Position
+TextButton.Position = UDim2.new(1, -110, 0, 10)  -- Center of the screen
+-- Function
+TextButton.MouseButton1Click:Connect(function()
+    kavoUi:ToggleUI()
+end)
+TextButton.Parent = gui
+TextButton.Draggable = true
+
+-- Adding UICorner for rounded corners
+local cornerUI = Instance.new("UICorner")
+cornerUI.CornerRadius = UDim.new(0, 5)
+cornerUI.Parent = TextButton
+
+-- Adding UIStroke for border
+local uiStroke = Instance.new("UIStroke")
+uiStroke.Color = Color3.new(0, 0, 0)
+uiStroke.Thickness = 2
+uiStroke.Parent = TextButton
+
+
+---Hi
+
+local Tab1 = window:NewTab("Main")
+local Tab1Section = Tab1:NewSection("Auto Roll Orbs")
+
+local Tab2 = window:NewTab("Settings")
+local Tab2Section = Tab2:NewSection("Settings")
+
+--Buttons
+
+local ReplicatedStorage = game:GetService("ReplicatedStorage")
+local Workspace = game:GetService("Workspace")
+
+local toggleState = false
+local orbHandle = Workspace:FindFirstChild("Regeneration Orb") and Workspace["Regeneration Orb"].Handle
+
+local function invokePAPFunction()
+    ReplicatedStorage:FindFirstChild("Remote Events").PAPFunction:InvokeServer()
+end
+
+local function checkOrbHandle()
+    orbHandle = Workspace:FindFirstChild("Regeneration Orb") and Workspace["Regeneration Orb"].Handle
+end
+
+local function toggleOffActions()
+    print("Toggle Off")
+    -- Optionally, you can add code here to stop any ongoing actions related to the toggle off scenario.
+end
+
+Tab1Section:NewToggle("Regeneration Orb", "Auto Roll", function(state)
+    toggleState = state  -- Update toggleState based on current state
+    
+    if toggleState then
+        print("Toggle On")
+        invokePAPFunction()  -- Initial invoke when toggled on
+        
+        -- Continuously check if orb handle exists
+        while not orbHandle do
+            wait(2)  -- Wait for 1 second before checking again
+            if toggleState then
+                invokePAPFunction()  -- Invoke again if still toggled on
+                checkOrbHandle()  -- Check orb handle status
+            else
+                break  -- Break out of loop if toggle is off
+            end
+        end
+        
+        if orbHandle then
+            print("Got the Regeneration Orb!")  -- Print message when orb is obtained
+        end
+        
+    else
+        toggleOffActions()
+    end
+end)
+
+local ReplicatedStorage = game:GetService("ReplicatedStorage")
+local Workspace = game:GetService("Workspace")
+
+local toggleState = false
+local orbHandle = Workspace:FindFirstChild("Speed Orb") and Workspace["Speed Orb"].Handle
+
+local function invokePAPFunction()
+    ReplicatedStorage:FindFirstChild("Remote Events").PAPFunction:InvokeServer()
+end
+
+local function checkOrbHandle()
+    orbHandle = Workspace:FindFirstChild("Speed Orb") and Workspace["Speed Orb"].Handle
+end
+
+local function toggleOffActions()
+    print("Toggle Off")
+    -- Optionally, you can add code here to stop any ongoing actions related to the toggle off scenario.
+end
+
+Tab1Section:NewToggle("Speed Orb", "Auto Roll", function(state)
+    toggleState = state  -- Update toggleState based on current state
+    
+    if toggleState then
+        print("Toggle On")
+        invokePAPFunction()  -- Initial invoke when toggled on
+        
+        -- Continuously check if orb handle exists
+        while not orbHandle do
+            wait(2)  -- Wait for 1 second before checking again
+            if toggleState then
+                invokePAPFunction()  -- Invoke again if still toggled on
+                checkOrbHandle()  -- Check orb handle status
+            else
+                break  -- Break out of loop if toggle is off
+            end
+        end
+        
+        if orbHandle then
+            print("Got the Speed Orb!")  -- Print message when orb is obtained
+        end
+        
+    else
+        toggleOffActions()
+    end
+end)
+
+local ReplicatedStorage = game:GetService("ReplicatedStorage")
+local Workspace = game:GetService("Workspace")
+
+local toggleState = false
+local orbHandle = Workspace:FindFirstChild("Damage Orb") and Workspace["Damage Orb"].Handle
+
+local function invokePAPFunction()
+    ReplicatedStorage:FindFirstChild("Remote Events").PAPFunction:InvokeServer()
+end
+
+local function checkOrbHandle()
+    orbHandle = Workspace:FindFirstChild("Damage Orb") and Workspace["Damage Orb"].Handle
+end
+
+local function toggleOffActions()
+    print("Toggle Off")
+    -- Optionally, you can add code here to stop any ongoing actions related to the toggle off scenario.
+end
+
+Tab1Section:NewToggle("Damage Orb", "Auto Roll", function(state)
+    toggleState = state  -- Update toggleState based on current state
+    
+    if toggleState then
+        print("Toggle On")
+        invokePAPFunction()  -- Initial invoke when toggled on
+        
+        -- Continuously check if orb handle exists
+        while not orbHandle do
+            wait(2)  -- Wait for 1 second before checking again
+            if toggleState then
+                invokePAPFunction()  -- Invoke again if still toggled on
+                checkOrbHandle()  -- Check orb handle status
+            else
+                break  -- Break out of loop if toggle is off
+            end
+        end
+        
+        if orbHandle then
+            print("Got the Damage Orb!")  -- Print message when orb is obtained
+        end
+        
+    else
+        toggleOffActions()
+    end
+end)
+
+
+Tab2Section:NewButton("Destroy Toggle Button","Destroy ToggleUi button",function()
+
+-- Function to delete all instances of "patrickGui" from CoreGui
+local function deleteAllPatrickGui()
+    local coreGui = game.CoreGui
+    
+    -- Iterate through each child in CoreGui
+    for _, child in ipairs(coreGui:GetChildren()) do
+        -- Check if the child is named "patrickGui"
+        if child.Name == "patrickGui" then
+            -- Delete the patrickGui instance
+            child:Destroy()
+            print("Deleted patrickGui:", child.Name)
+        end
+    end
+    
+    print("All instances of patrickGui deleted.")
+end
+
+-- Call the function to delete all instances of "patrickGui"
+deleteAllPatrickGui()
+
+end)
