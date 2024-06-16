@@ -6,6 +6,9 @@ local window = kavoUi.CreateLib("Free Emotes (ABW)","BloodTheme")
 local Tab1 = window:NewTab("Main")
 local Tab1Section = Tab1:NewSection("Emotes")
 
+local Tab2 = window:NewTab("Settings")
+local Tab2Section = Tab2:NewSection("Settings")
+
 --Buttons
 
 Tab1Section:NewButton("Gaster","Free",function()
@@ -461,3 +464,27 @@ local uiStroke = Instance.new("UIStroke")
 uiStroke.Color = Color3.new(0, 0, 0)
 uiStroke.Thickness = 2
 uiStroke.Parent = TextButton
+
+Tab2Section:NewButton("Destroy Toggle Button","LOL",function()
+
+-- Function to delete all instances of "patrickGui" from CoreGui
+local function deleteAllPatrickGui()
+    local coreGui = game.CoreGui
+    
+    -- Iterate through each child in CoreGui
+    for _, child in ipairs(coreGui:GetChildren()) do
+        -- Check if the child is named "patrickGui"
+        if child.Name == "patrickGui" then
+            -- Delete the patrickGui instance
+            child:Destroy()
+            print("Deleted patrickGui:", child.Name)
+        end
+    end
+    
+    print("All instances of patrickGui deleted.")
+end
+
+-- Call the function to delete all instances of "patrickGui"
+deleteAllPatrickGui()
+
+end)
