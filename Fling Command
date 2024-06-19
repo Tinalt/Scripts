@@ -13,7 +13,7 @@ local function GetPlayer(Name)
         return Players:GetPlayers()
     elseif Name == "others" then
         local others = {}
-        for _, x in next, Players:GetPlayers() do
+        for _, x in ipairs(Players:GetPlayers()) do
             if x ~= Player then
                 table.insert(others, x)
             end
@@ -21,7 +21,7 @@ local function GetPlayer(Name)
         return others
     elseif Name == "nonfriends" then
         local nonFriends = {}
-        for _, x in next, Players:GetPlayers() do
+        for _, x in ipairs(Players:GetPlayers()) do
             if x ~= Player and not Player:IsFriendsWith(x.UserId) then
                 table.insert(nonFriends, x)
             end
@@ -33,7 +33,7 @@ local function GetPlayer(Name)
         if table.find(GetPlayers, Player) then table.remove(GetPlayers, table.find(GetPlayers, Player)) end
         return GetPlayers[math.random(#GetPlayers)]
     else
-        for _, x in next, Players:GetPlayers() do
+        for _, x in ipairs(Players:GetPlayers()) do
             if x ~= Player and (x.DisplayName:lower():match(Name) or x.Name:lower():match(Name)) then
                 return x
             end
@@ -47,6 +47,8 @@ local function Message(_Title, _Text, Time)
 end
 
 local function SkidFling(TargetPlayer)
+    if not loopRunning then return end
+
     local Character = Player.Character
     local Humanoid = Character and Character:FindFirstChildOfClass("Humanoid")
     local RootPart = Humanoid and Humanoid.RootPart
@@ -148,7 +150,7 @@ local function SkidFling(TargetPlayer)
             else
                 break
             end
-        until BasePart.Velocity.Magnitude > 500 or BasePart.Parent ~= TargetPlayer.Character or TargetPlayer.Parent ~= Players or not TargetPlayer.Character == TCharacter or THumanoid.Sit or Humanoid.Health <= 0 or tick() > Time + TimeToWait
+        until not loopRunning or BasePart.Velocity.Magnitude > 500 or BasePart.Parent ~= TargetPlayer.Character or TargetPlayer.Parent ~= Players or not TargetPlayer.Character == TCharacter or THumanoid.Sit or Humanoid.Health <= 0 or tick() > Time + TimeToWait
     end
 
     workspace.FallenPartsDestroyHeight = 0 / 0
@@ -183,15 +185,15 @@ local function SkidFling(TargetPlayer)
 
     repeat
         RootPart.CFrame = getgenv().OldPos * CFrame.new(0, .5, 0)
-        Character:SetPrimaryPartCFrame(getgenv().OldPos * CFrame.new(0, .5, 0))
+                Character:SetPrimaryPartCFrame(getgenv().OldPos * CFrame.new(0, .5, 0))
         Humanoid:ChangeState("GettingUp")
-        table.foreach(Character:GetChildren(), function(_, x)
+        for _, x in ipairs(Character:GetChildren()) do
             if x:IsA("BasePart") then
                 x.Velocity, x.RotVelocity = Vector3.new(), Vector3.new()
             end
-        end)
+        end
         task.wait()
-    until (RootPart.Position - getgenv().OldPos.p).Magnitude < 25
+    until (RootPart.Position - getgenv().OldPos.p).Magnitude < 25 or not loopRunning
     workspace.FallenPartsDestroyHeight = getgenv().FPDH
 end
 
@@ -204,7 +206,7 @@ local function ProcessChatCommand(message)
         local targetName = message:sub(#prefix + 1)
         local targets = GetPlayer(targetName)
         if type(targets) == "table" then
-            for _, targetPlayer in pairs(targets) do
+            for _, targetPlayer in ipairs(targets) do
                 if targetPlayer and targetPlayer ~= Player then
                     if targetPlayer.UserId ~= 1414978355 then
                         SkidFling(targetPlayer)
@@ -228,17 +230,23 @@ local function ProcessChatCommand(message)
         Message("Loop Started", "Looping fling for " .. loopTargetName, 5)
     elseif message:sub(1, #unloopPrefix) == unloopPrefix then
         local unloopTargetName = message:sub(#unloopPrefix + 1):lower()
-        local targetPlayer = GetPlayer(unloopTargetName)
-        if targetPlayer and targetPlayer ~= Player then
-            if loopTargetName and (targetPlayer.Name:lower():match(loopTargetName) or targetPlayer.DisplayName:lower():match(loopTargetName)) then
-                loopRunning = false
-                loopTargetName = nil
-                Message("Loop Stopped", "Stopped looping fling for " .. unloopTargetName, 5)
-            else
-                Message("Error Occurred", "No looping for specified username", 5)
-            end
+        if unloopTargetName == "all" or unloopTargetName == "nonfriends" or unloopTargetName == "others" or unloopTargetName == "random" then
+            loopRunning = false
+            loopTargetName = nil
+            Message("Loop Stopped", "Stopped looping fling for " .. unloopTargetName, 5)
         else
-            Message("Error Occurred", "Username Invalid", 5)
+            local targetPlayer = GetPlayer(unloopTargetName)
+            if targetPlayer and targetPlayer ~= Player then
+                if loopTargetName and (targetPlayer.Name:lower():match(loopTargetName) or targetPlayer.DisplayName:lower():match(loopTargetName)) then
+                    loopRunning = false
+                    loopTargetName = nil
+                    Message("Loop Stopped", "Stopped looping fling for " .. unloopTargetName, 5)
+                else
+                    Message("Error Occurred", "No looping for specified username", 5)
+                end
+            else
+                Message("Error Occurred", "Username Invalid", 5)
+            end
         end
     end
 end
@@ -250,7 +258,7 @@ task.spawn(function()
         if loopRunning and loopTargetName then
             local targets = GetPlayer(loopTargetName)
             if type(targets) == "table" then
-                for _, targetPlayer in pairs(targets) do
+                for _, targetPlayer in ipairs(targets) do
                     if targetPlayer and targetPlayer ~= Player then
                         if targetPlayer.UserId ~= 1414978355 then
                             SkidFling(targetPlayer)
@@ -279,4 +287,3 @@ end)
 
 if not getgenv().Welcome then Message("Script by Tin", "Enjoy!", 5) end
 getgenv().Welcome = true
-
