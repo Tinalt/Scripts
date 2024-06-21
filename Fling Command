@@ -47,8 +47,6 @@ local function Message(_Title, _Text, Time)
 end
 
 local function SkidFling(TargetPlayer)
-    if not loopRunning then return end
-
     local Character = Player.Character
     local Humanoid = Character and Character:FindFirstChildOfClass("Humanoid")
     local RootPart = Humanoid and Humanoid.RootPart
@@ -150,7 +148,7 @@ local function SkidFling(TargetPlayer)
             else
                 break
             end
-        until not loopRunning or BasePart.Velocity.Magnitude > 500 or BasePart.Parent ~= TargetPlayer.Character or TargetPlayer.Parent ~= Players or not TargetPlayer.Character == TCharacter or THumanoid.Sit or Humanoid.Health <= 0 or tick() > Time + TimeToWait
+        until BasePart.Velocity.Magnitude > 500 or BasePart.Parent ~= TargetPlayer.Character or TargetPlayer.Parent ~= Players or not TargetPlayer.Character == TCharacter or THumanoid.Sit or Humanoid.Health <= 0 or tick() > Time + TimeToWait
     end
 
     workspace.FallenPartsDestroyHeight = 0 / 0
@@ -185,7 +183,7 @@ local function SkidFling(TargetPlayer)
 
     repeat
         RootPart.CFrame = getgenv().OldPos * CFrame.new(0, .5, 0)
-                Character:SetPrimaryPartCFrame(getgenv().OldPos * CFrame.new(0, .5, 0))
+        Character:SetPrimaryPartCFrame(getgenv().OldPos * CFrame.new(0, .5, 0))
         Humanoid:ChangeState("GettingUp")
         for _, x in ipairs(Character:GetChildren()) do
             if x:IsA("BasePart") then
@@ -193,7 +191,7 @@ local function SkidFling(TargetPlayer)
             end
         end
         task.wait()
-    until (RootPart.Position - getgenv().OldPos.p).Magnitude < 25 or not loopRunning
+    until (RootPart.Position - getgenv().OldPos.p).Magnitude < 25
     workspace.FallenPartsDestroyHeight = getgenv().FPDH
 end
 
