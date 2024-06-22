@@ -3444,7 +3444,7 @@ end
 
 Tab14:AddDropdown({
 	Name = "Will Teleport Farm",
-	Default = "SafeSpotBox 1.0",
+	Default = "SafeSpotBox 2.0",
 	Options = {"Up To You","SafeSpotBox 1.0","SafeSpotBox 2.0"},
 	Callback = function(Value)
 _G.GetTeleport = Value
