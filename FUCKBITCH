@@ -3475,7 +3475,7 @@ Tab14:AddSlider({
 
 ReplicaAndReverse = Tab14:AddToggle({
 	Name = "Reverse + Replica Slap Farm",
-	Default = true,
+	Default = false,
 	Callback = function(Value)
 		ReplicaAndReverseGet = Value 
 if _G.GetSlapGot == "Normal" then
@@ -3581,7 +3581,7 @@ end
 
 ReplicaBlinkReverseBaller = Tab14:AddToggle({
 	Name = "Reverse + Replica & Blink | Baller Slap Farm",
-	Default = false,
+	Default = true,
 	Callback = function(Value)
 		_G.ReplicaBlinkReverseBaller = Value 
 if _G.GetSlapGot == "Normal" then
