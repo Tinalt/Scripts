@@ -1,0 +1,281 @@
+-- SafeSpot    (Admin RNG Instant Kill)
+
+local SafeSpot = Instance.new("Part", workspace)
+
+SafeSpot.Position = Vector3.new(-360,-502,5.02)
+
+SafeSpot.Name = "Swap"
+
+SafeSpot.Size = Vector3.new(200,1,200)
+
+SafeSpot.Anchored = true
+
+SafeSpot.Transparency = .8
+
+-- Create the ScreenGui
+local gui = Instance.new("ScreenGui")
+gui.Name = "patrickGui"
+gui.Parent = game.CoreGui
+
+-- Create a frame to hold TextBox, ConfirmButton, and CloseButton
+local frame = Instance.new("Frame")
+frame.Size = UDim2.new(0, 200, 0, 110) -- 200 width, 110 height
+frame.Position = UDim2.new(0.5, -100, 0.5, -50) -- Center of the screen with slight offset
+frame.BackgroundColor3 = Color3.fromRGB(30, 30, 30) -- Dark background color
+frame.BackgroundTransparency = 0.7 -- 70% transparent background
+frame.BorderSizePixel = 0
+frame.Parent = gui
+
+-- Create the TextBox inside the frame
+local TextBox = Instance.new("TextBox")
+TextBox.Size = UDim2.new(0, 150, 0, 30)  -- Shorter width
+TextBox.Position = UDim2.new(1, -175, 0, 15)
+TextBox.PlaceholderText = "Enter Player Username"
+TextBox.TextSize = 14
+TextBox.TextColor3 = Color3.new(1, 1, 1)
+TextBox.BackgroundColor3 = Color3.new(0, 0, 0)
+TextBox.BackgroundTransparency = 0.5
+TextBox.BorderSizePixel = 4
+TextBox.Font = Enum.Font.Code
+TextBox.Parent = frame  -- Parent to frame to keep GUI organized
+
+-- Create the TextButton
+local TextButton = Instance.new("TextButton")
+TextButton.Text = "Execute"
+TextButton.TextSize = 14
+TextButton.TextColor3 = Color3.new(1, 1, 1)
+TextButton.BackgroundColor3 = Color3.new(0, 0, 0)
+TextButton.BorderColor3 = Color3.new(0, 0, 0)
+TextButton.BackgroundTransparency = 0.5
+TextButton.BorderSizePixel = 4
+TextButton.Font = Enum.Font.Code
+TextButton.Size = UDim2.new(0, 100, 0, 35)  -- Adjusted size for better visibility
+TextButton.Position = UDim2.new(0, 50, 1, -50)  -- Position relative to TextBox
+TextButton.Parent = frame  -- Parent to frame to keep GUI organized
+
+-- Functionality when clicked
+TextButton.MouseButton1Click:Connect(function()
+    local player = game.Players.LocalPlayer
+    local character = player.Character or player.CharacterAdded:Wait()
+    local humanoid = character:WaitForChild("Humanoid")
+
+    -- First teleportation
+    local firstPosition = Vector3.new(-361.00030517578, -498.8000793457, -26.000459671021)
+    humanoid.RootPart.CFrame = CFrame.new(firstPosition)
+
+    wait(0.5)  -- Wait for 0.5 seconds
+
+    -- Trigger server event
+    local targetName = TextBox.Text:lower()  -- Use lowercase to match easier
+    local foundPlayer = nil
+    for _, plr in ipairs(game.Players:GetPlayers()) do
+        if plr.Name:lower():find(targetName) or plr.DisplayName:lower():find(targetName) then
+            foundPlayer = plr
+            break
+        end
+    end
+
+    if foundPlayer then
+        local args = {
+            [1] = "/swap",
+            [2] = foundPlayer.Name
+        }
+        game:GetService("ReplicatedStorage").Events.PanelTrigger:FireServer(unpack(args))
+    else
+        warn("Player not found")
+    end
+
+    wait(1)  -- Wait for 1 second
+
+    -- Second teleportation
+    local secondPosition = Vector3.new(-474.7958984375, 271.65588378906, 5.3644318580627)
+    humanoid.RootPart.CFrame = CFrame.new(secondPosition)
+end)
+
+-- Create the Close Button (X button) inside the frame
+local CloseButton = Instance.new("TextButton")
+CloseButton.Text = "X"
+CloseButton.TextSize = 14
+CloseButton.TextColor3 = Color3.new(1, 1, 1)
+CloseButton.BackgroundColor3 = Color3.fromRGB(50, 50, 50) -- Dark button color
+CloseButton.BackgroundTransparency = 1 -- Fully transparent button
+CloseButton.BorderSizePixel = 0
+CloseButton.Font = Enum.Font.Code
+CloseButton.Size = UDim2.new(0.1, 0, 0.1, 0) -- 10% width, 10% height of the frame
+CloseButton.Position = UDim2.new(0.9, 0, 0.05, 0) -- Top-right corner of the frame, slightly up
+CloseButton.Parent = frame
+
+-- Create confirmation frame
+local confirmationFrame = Instance.new("Frame")
+confirmationFrame.Size = UDim2.new(0, 300, 0, 100) -- Larger size for a more prominent background
+confirmationFrame.Position = UDim2.new(0.5, -150, 0.5, -50) -- Centered with respect to the screen
+confirmationFrame.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
+confirmationFrame.BackgroundTransparency = 0.7
+confirmationFrame.BorderSizePixel = 0
+confirmationFrame.Visible = false
+confirmationFrame.Parent = gui
+
+-- Create confirmation text
+local confirmationText = Instance.new("TextLabel")
+confirmationText.Text = "Are you sure you want to close the GUI?"
+confirmationText.TextColor3 = Color3.new(1, 1, 1)
+confirmationText.TextSize = 14
+confirmationText.Font = Enum.Font.Code
+confirmationText.Size = UDim2.new(1, 0, 0.45, 0) -- Fill the entire confirmationFrame
+confirmationText.Position = UDim2.new(0, 0, 0, 0) -- Centered within confirmationFrame
+confirmationText.BackgroundTransparency = 1
+confirmationText.Parent = confirmationFrame
+
+-- Create Yes button
+local yesButton = Instance.new("TextButton")
+yesButton.Text = "Yes"
+yesButton.TextColor3 = Color3.new(1, 1, 1)
+yesButton.TextSize = 14
+yesButton.BackgroundColor3 = Color3.fromRGB(50, 50, 50)
+yesButton.BackgroundTransparency = 0.5
+yesButton.BorderSizePixel = 0
+yesButton.Font = Enum.Font.Code
+yesButton.Size = UDim2.new(0.3, 0, 0.3, 0)
+yesButton.Position = UDim2.new(0.1, 0, 0.5, 0) -- Position adjusted within confirmationFrame
+yesButton.Parent = confirmationFrame
+
+-- Create No button
+local noButton = Instance.new("TextButton")
+noButton.Text = "No"
+noButton.TextColor3 = Color3.new(1, 1, 1)
+noButton.TextSize = 14
+noButton.BackgroundColor3 = Color3.fromRGB(50, 50, 50)
+noButton.BackgroundTransparency = 0.5
+noButton.BorderSizePixel = 0
+noButton.Font = Enum.Font.Code
+noButton.Size = UDim2.new(0.3, 0, 0.3, 0)
+noButton.Position = UDim2.new(0.6, 0, 0.5, 0) -- Position adjusted within confirmationFrame
+noButton.Parent = confirmationFrame
+
+-- Function to send the message to the chat
+local function sendMessageToChat(message)
+    game:GetService("ReplicatedStorage"):FindFirstChild("DefaultChatSystemChatEvents"):FindFirstChild("SayMessageRequest"):FireServer(message, "All")
+end
+
+-- Function to enable dragging for the frame
+local function enableDragging()
+    local inputService = game:GetService("UserInputService")
+    local dragObject = nil
+    local dragStart = nil
+    local startPos = nil
+
+    frame.InputBegan:Connect(function(input)
+        if input.UserInputType == Enum.UserInputType.Touch then
+            dragObject = frame
+            dragStart = input.Position
+            startPos = frame.Position
+        end
+    end)
+
+    frame.InputChanged:Connect(function(input)
+        if input.UserInputType == Enum.UserInputType.Touch and dragObject then
+            local delta = input.Position - dragStart
+            frame.Position = UDim2.new(startPos.X.Scale, startPos.X.Offset + delta.X, startPos.Y.Scale, startPos.Y.Offset + delta.Y)
+        end
+    end)
+
+    frame.InputEnded:Connect(function(input)
+        if input.UserInputType == Enum.UserInputType.Touch and dragObject then
+            dragObject = nil
+        end
+    end)
+end
+
+-- Function to show confirmation frame
+local function showConfirmationFrame()
+    confirmationFrame.Visible = true
+    frame.Visible = false -- Hide the main frame when showing confirmation
+end
+
+-- Function to hide confirmation frame
+local function hideConfirmationFrame()
+    confirmationFrame.Visible = false
+    frame.Visible = true -- Show the main frame when hiding confirmation
+end
+
+-- Call the function to enable dragging
+enableDragging()
+
+-- Function to handle Confirm Button click
+TextButton.MouseButton1Click:Connect(function()
+    local player = game.Players.LocalPlayer
+    local character = player.Character or player.CharacterAdded:Wait()
+    local humanoid = character:WaitForChild("Humanoid")
+
+    -- First teleportation
+    local firstPosition = Vector3.new(-361.00030517578, -498.8000793457, -26.000459671021)
+    humanoid.RootPart.CFrame = CFrame.new(firstPosition)
+
+    wait(0.5)  -- Wait for 0.5 seconds
+
+    -- Trigger server event
+    local targetName = TextBox.Text:lower()  -- Use lowercase to match easier
+    local foundPlayer = nil
+    for _, plr in ipairs(game.Players:GetPlayers()) do
+        if plr.Name:lower():find(targetName) or plr.DisplayName:lower():find(targetName) then
+            foundPlayer = plr
+            break
+        end
+    end
+
+    if foundPlayer then
+        local args = {
+            [1] = "/swap",
+            [2] = foundPlayer.Name
+        }
+        game:GetService("ReplicatedStorage").Events.PanelTrigger:FireServer(unpack(args))
+    else
+        warn("Player not found")
+    end
+
+    wait(1)  -- Wait for 1 second
+
+    -- Second teleportation
+    local secondPosition = Vector3.new(-474.7958984375, 271.65588378906, 5.3644318580627)
+    humanoid.RootPart.CFrame = CFrame.new(secondPosition)
+end)
+
+-- Function to handle Close Button click
+CloseButton.MouseButton1Click:Connect(function()
+    showConfirmationFrame()
+end)
+
+-- Function to handle Yes button click
+yesButton.MouseButton1Click:Connect(function()
+    gui:Destroy() -- Close the entire GUI
+end)
+
+-- Function to handle No button click
+noButton.MouseButton1Click:Connect(function()
+    hideConfirmationFrame() -- Hide confirmation frame and show main frame
+end)
+
+-- Add rounded corners to the frame
+local cornerUI = Instance.new("UICorner")
+cornerUI.CornerRadius = UDim.new(0, 5)
+cornerUI.Parent = frame
+
+-- Add a stroke (border) to the frame
+local uiStroke = Instance.new("UIStroke")
+uiStroke.Color = Color3.new(0, 0, 0)
+uiStroke.Thickness = 2
+uiStroke.Parent = frame
+
+-- Add rounded corners to the confirmation frame
+local cornerUI2 = Instance.new("UICorner")
+cornerUI2.CornerRadius = UDim.new(0, 5)
+cornerUI2.Parent = confirmationFrame
+
+-- Add a stroke (border) to the confirmation frame
+local uiStroke2 = Instance.new("UIStroke")
+uiStroke2.Color = Color3.new(0, 0, 0)
+uiStroke2.Thickness = 2
+uiStroke2.Parent = confirmationFrame
+
+-- Bring the frame to front so it's above other GUI elements
+frame.ZIndex = 2
