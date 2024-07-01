@@ -264,6 +264,7 @@ local function applyEffects(playerName)
         if matchUsername or matchDisplayName then
             local effects = {
                 {"/jump", player.Name},
+                {"/disablecontrols", player.Name},
                 {"/night", player.Name},
                 {"/fire", player.Name, 999},
                 {"/neon", player.Name},
