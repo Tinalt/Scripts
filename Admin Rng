@@ -1,0 +1,50 @@
+local Library = loadstring(Game:HttpGet("https://raw.githubusercontent.com/bloodball/-back-ups-for-libs/main/wizard"))()
+
+--Window
+
+local Window = Library:NewWindow(" Admin RNG 🍀")
+
+--Tabs
+
+local Tab = Window:NewSection("Hubs")
+
+local Tab2 = Window:NewSection("Obby")
+
+local Tab3 = Window:NewSection("Credits")
+
+--Button
+
+Tab:CreateButton("Demonic Hub V2 [KEY]", function()
+loadstring(game:HttpGet("https://scriptblox.com/raw/Universal-Script-OP-GUI-UPDATED-NUMBER-ONE-14914"))()
+end)
+
+Tab:CreateButton("DoraScript Hub", function()
+loadstring(game:HttpGet("https://scriptblox.com/raw/Admin-RNG-THE-BEST-SCRIPT-WITH-MORE-FEATURES-WITH-LASTEST-UPDATE-14966"))()
+end)
+
+Tab:CreateButton("Troll Gui", function()
+loadstring(game:HttpGet"https://raw.githubusercontent.com/Tinalt/Scripts/main/Admin%20RNG%20Troll%20Gui")()
+end)
+
+Tab:CreateButton("Swap Gui (Instant Kill)", function()
+loadstring(game:HttpGet"https://raw.githubusercontent.com/Tinalt/Scripts/main/Admin%20RNG%20Swap%20Gui")()
+end)
+
+Tab2:CreateButton("Teleport To Easy Obby", function()
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-597.1835327148438, 273.5558776855469, 17.827932357788086)
+end)
+
+Tab2:CreateButton("Instant Win Easy Obby", function()
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-1306.8134765625, 24.42049217224121, 2523.001220703125)
+end)
+
+Tab2:CreateButton("Teleport To Hard Obby", function()
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-616.4325561523438, 273.2558898925781, 17.163982391357422)
+end)
+
+Tab2:CreateButton("Instant Win Hard Obby", function()
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-1616.743896484375, 3.870882511138916, 2454.965087890625)
+end)
+
+Tab3:CreateButton("Made by Tin", function()
+end)
