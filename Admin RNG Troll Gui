@@ -14,7 +14,7 @@ frame.Parent = gui
 
 -- Create the TextBox inside the frame
 local TextBox = Instance.new("TextBox")
-TextBox.Text = "/troll "  -- Initial text with the command prefix
+TextBox.Text = "/troll,/effect <player>"  -- Initial text with the command prefix
 TextBox.TextSize = 14
 TextBox.TextColor3 = Color3.new(1, 1, 1)
 TextBox.BackgroundTransparency = 0.5 -- 50% transparent text box
