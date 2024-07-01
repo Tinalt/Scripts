@@ -8,9 +8,11 @@ local Window = Library:NewWindow(" Admin RNG 🍀")
 
 local Tab = Window:NewSection("Hubs")
 
-local Tab2 = Window:NewSection("Obby")
+local Tab2 = Window:NewSection("Scripts")
 
-local Tab3 = Window:NewSection("Credits")
+local Tab3 = Window:NewSection("Obby")
+
+local Tab4 = Window:NewSection("Credits")
 
 --Button
 
@@ -30,21 +32,38 @@ Tab:CreateButton("Swap Gui (Instant Kill)", function()
 loadstring(game:HttpGet"https://raw.githubusercontent.com/Tinalt/Scripts/main/Admin%20RNG%20Swap%20Gui")()
 end)
 
-Tab2:CreateButton("Teleport To Easy Obby", function()
+Tab2:CreateButton("Infinite Yield", function()
+loadstring(game:HttpGet('https://raw.githubusercontent.com/EdgeIY/infiniteyield/master/source'))()
+end)
+
+Tab2:CreateButton("Nameless Admin", function()
+-- Thanks to 0866 for making the whole ui work, this admin script was actually made in 2019 lol but was modified by qipu
+-- For the commands thanks to IY, Fates Admin, HomeBrew, CMD-X for some of the code and command ideas!
+-- For the people thanks to Digitality, i_db, rouxhaver, spec and the v3rmillion community, if you see your script in the source and want credits please dm qipu#9312
+-- ! Make sure to have an executor that supports firetouchinterest for the tool commands !
+loadstring(game:HttpGet("https://raw.githubusercontent.com/FilteringEnabled/NamelessAdmin/main/Source"))();
+
+end)
+
+Tab2:CreateButton("Anti Afk", function()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/Tinalt/Scripts/main/Anti%20Afk"))()
+end)
+
+Tab3:CreateButton("Teleport To Easy Obby", function()
 game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-597.1835327148438, 273.5558776855469, 17.827932357788086)
 end)
 
-Tab2:CreateButton("Instant Win Easy Obby", function()
+Tab3:CreateButton("Instant Win Easy Obby", function()
 game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-1306.8134765625, 24.42049217224121, 2523.001220703125)
 end)
 
-Tab2:CreateButton("Teleport To Hard Obby", function()
+Tab3:CreateButton("Teleport To Hard Obby", function()
 game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-616.4325561523438, 273.2558898925781, 17.163982391357422)
 end)
 
-Tab2:CreateButton("Instant Win Hard Obby", function()
+Tab3:CreateButton("Instant Win Hard Obby", function()
 game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-1616.743896484375, 3.870882511138916, 2454.965087890625)
 end)
 
-Tab3:CreateButton("Made by Tin", function()
+Tab4:CreateButton("Made by Tin", function()
 end)
