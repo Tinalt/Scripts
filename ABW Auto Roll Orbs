@@ -50,8 +50,11 @@ uiStroke.Parent = TextButton
 local Tab1 = window:NewTab("Main")
 local Tab1Section = Tab1:NewSection("Auto Roll Orbs")
 
-local Tab2 = window:NewTab("Settings")
-local Tab2Section = Tab2:NewSection("Settings")
+local Tab2 = window:NewTab("Info")
+local Tab2Section = Tab2:NewSection("Info")
+
+local Tab3 = window:NewTab("Settings")
+local Tab3Section = Tab3:NewSection("Settings")
 
 --Buttons
 
@@ -207,6 +210,58 @@ local ReplicatedStorage = game:GetService("ReplicatedStorage")
 local Workspace = game:GetService("Workspace")
 
 local toggleState = false
+local orbHandle = Workspace:FindFirstChild("Divine Orb") and Workspace["Divine Orb"]:FindFirstChild("Handle")
+
+local function invokePAPFunction()
+    local remoteEvents = ReplicatedStorage:FindFirstChild("Remote Events")
+    if remoteEvents and remoteEvents:FindFirstChild("PAPFunction") then
+        remoteEvents.PAPFunction:InvokeServer()
+    end
+end
+
+local function checkOrbHandle()
+    local divineOrb = Workspace:FindFirstChild("Divine Orb")
+    orbHandle = divineOrb and divineOrb:FindFirstChild("Handle")
+end
+
+local function toggleOffActions()
+    print("Toggle Off")
+    -- Optionally, you can add code here to stop any ongoing actions related to the toggle off scenario.
+end
+
+Tab1Section:NewToggle("Divine Orb", "Auto Roll", function(state)
+    toggleState = state
+    
+    if toggleState then
+        print("Toggle On")
+        invokePAPFunction()  -- Initial invoke when toggled on
+        
+        -- Continuously check if orb handle exists
+        spawn(function()
+            while toggleState do
+                wait(0.5)
+                
+                checkOrbHandle()
+                
+                if orbHandle then
+                    print("Got the Divine Orb!")
+                    toggleState = false  -- Optionally, set toggleState to false if orb is found
+                    break
+                else
+                    invokePAPFunction()
+                end
+            end
+        end)
+    else
+        toggleOffActions()
+    end
+end)
+
+
+local ReplicatedStorage = game:GetService("ReplicatedStorage")
+local Workspace = game:GetService("Workspace")
+
+local toggleState = false
 local connector = Workspace:FindFirstChild("Propeller") and Workspace.Propeller:FindFirstChild("Connector")
 
 local function invokePAPFunction()
@@ -308,7 +363,7 @@ end)
 
 
 
-Tab2Section:NewButton("Destroy Toggle Button","Destroy ToggleUi button",function()
+Tab3Section:NewButton("Destroy Toggle Button","Destroy ToggleUi button",function()
 
 -- Function to delete all instances of "patrickGui" from CoreGui
 local function deleteAllPatrickGui()
@@ -331,3 +386,7 @@ end
 deleteAllPatrickGui()
 
 end)
+
+local Tab2Section = Tab2:NewSection("You don't need 1.5k punches to use PAP")
+
+local Tab2Section = Tab2:NewSection("This script bypass the punches requirement")
