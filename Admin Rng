@@ -24,12 +24,8 @@ Tab:CreateButton("DoraScript Hub", function()
 loadstring(game:HttpGet("https://scriptblox.com/raw/Admin-RNG-THE-BEST-SCRIPT-WITH-MORE-FEATURES-WITH-LASTEST-UPDATE-14966"))()
 end)
 
-Tab:CreateButton("Troll Gui", function()
-loadstring(game:HttpGet"https://raw.githubusercontent.com/Tinalt/Scripts/main/Admin%20RNG%20Troll%20Gui")()
-end)
-
-Tab:CreateButton("Swap Gui (Instant Kill)", function()
-loadstring(game:HttpGet"https://raw.githubusercontent.com/Tinalt/Scripts/main/Admin%20RNG%20Swap%20Gui")()
+Tab:CreateButton("Tora IsMe Gui", function()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/thanhdat4461/Script/main/Admin%20RNG", true))()
 end)
 
 Tab2:CreateButton("Infinite Yield", function()
@@ -43,6 +39,14 @@ Tab2:CreateButton("Nameless Admin", function()
 -- ! Make sure to have an executor that supports firetouchinterest for the tool commands !
 loadstring(game:HttpGet("https://raw.githubusercontent.com/FilteringEnabled/NamelessAdmin/main/Source"))();
 
+end)
+
+Tab2:CreateButton("Troll Gui", function()
+loadstring(game:HttpGet"https://raw.githubusercontent.com/Tinalt/Scripts/main/Admin%20RNG%20Troll%20Gui")()
+end)
+
+Tab2:CreateButton("Swap Gui (Instant Kill)", function()
+loadstring(game:HttpGet"https://raw.githubusercontent.com/Tinalt/Scripts/main/Admin%20RNG%20Swap%20Gui")()
 end)
 
 Tab2:CreateButton("Anti Afk", function()
