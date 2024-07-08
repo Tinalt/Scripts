@@ -689,6 +689,23 @@ Tab2:CreateToggle("Auto Anonymous", function(value)
     end
 end)
 
+-- Create the Toggle
+local toggleActive = false
+
+Tab2:CreateToggle("Ultra Fast Anonymous", function(value)
+    toggleActive = value
+
+    if toggleActive then
+        -- Start a coroutine to handle the loop
+        coroutine.wrap(function()
+            while toggleActive do
+                activateCommandForPlayers("/anonymous")
+                wait(0.01)
+            end
+        end)()
+    end
+end)
+
 -- Create the Button for /anonymous Command
 Tab2:CreateButton("Anonymous <player>", function()
     activateCommandForPlayers("/anonymous")
