@@ -1,3 +1,59 @@
+---Notification gui
+
+-- Create a ScreenGui
+local screenGui = Instance.new("ScreenGui")
+screenGui.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
+
+-- Create a TextLabel for the notification
+local notification = Instance.new("TextLabel")
+notification.Size = UDim2.new(0.3, 0, 0.1, 0)  -- Width and height of the notification
+notification.Position = UDim2.new(0.35, 0, 1, 0)  -- Start at the bottom of the screen
+notification.BackgroundColor3 = Color3.new(0.2, 0.2, 0.2)  -- Dark grey background
+notification.BackgroundTransparency = 0.3  -- 50% transparent
+notification.BorderSizePixel = 3.5  -- Outline thickness
+notification.BorderColor3 = Color3.new(0, 0, 0)  -- Black outline
+notification.TextColor3 = Color3.new(1, 1, 1)  -- White text
+notification.TextScaled = true
+notification.TextWrapped = true
+notification.Text = "Admin RNG 🍀"  -- Change this to your desired message
+notification.Parent = screenGui
+
+-- Add padding to the TextLabel
+local padding = Instance.new("UIPadding")
+padding.PaddingTop = UDim.new(0.1, 0)
+padding.PaddingBottom = UDim.new(0.1, 0)
+padding.PaddingLeft = UDim.new(0.1, 0)
+padding.PaddingRight = UDim.new(0.1, 0)
+padding.Parent = notification
+
+-- Use TweenService to create the slide animation
+local TweenService = game:GetService("TweenService")
+
+local tweenInfo = TweenInfo.new(1, Enum.EasingStyle.Quad, Enum.EasingDirection.Out)
+local targetPosition1 = UDim2.new(0.35, 0, 0.8, 0)  -- Middle of the screen
+local targetPosition2 = UDim2.new(0.35, 0, 1, 0)  -- Bottom of the screen
+
+local slideUpTween = TweenService:Create(notification, tweenInfo, {Position = targetPosition1})
+local slideDownTween = TweenService:Create(notification, tweenInfo, {Position = targetPosition2})
+
+-- Play the slide up tween
+slideUpTween:Play()
+
+-- After the slide up tween completes, wait for 2 seconds and then play the slide down tween
+slideUpTween.Completed:Connect(function()
+    wait(3)
+    slideDownTween:Play()
+end)
+
+-- Destroy the screenGui after the slide down tween completes
+slideDownTween.Completed:Connect(function()
+    screenGui:Destroy()
+end)
+
+wait(0.3)
+
+---Admin RNG Gui
+
 local Library = loadstring(Game:HttpGet("https://raw.githubusercontent.com/bloodball/-back-ups-for-libs/main/wizard"))()
 
 --Window
