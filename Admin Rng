@@ -66,9 +66,11 @@ local Tab = Window:NewSection("Hubs")
 
 local Tab2 = Window:NewSection("Scripts")
 
-local Tab3 = Window:NewSection("Obby")
+local Tab3 = Window:NewSection("Boombox")
 
-local Tab4 = Window:NewSection("Credits")
+local Tab4 = Window:NewSection("Obby")
+
+local Tab5 = Window:NewSection("Credits")
 
 --Button
 
@@ -109,21 +111,85 @@ Tab2:CreateButton("Anti Afk", function()
 loadstring(game:HttpGet("https://raw.githubusercontent.com/Tinalt/Scripts/main/Anti%20Afk"))()
 end)
 
-Tab3:CreateButton("Teleport To Easy Obby", function()
+Tab4:CreateButton("Teleport To Easy Obby", function()
 game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-597.1835327148438, 273.5558776855469, 17.827932357788086)
 end)
 
-Tab3:CreateButton("Instant Win Easy Obby", function()
+Tab4:CreateButton("Instant Win Easy Obby", function()
 game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-1306.8134765625, 24.42049217224121, 2523.001220703125)
 end)
 
-Tab3:CreateButton("Teleport To Hard Obby", function()
+Tab4:CreateButton("Teleport To Hard Obby", function()
 game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-616.4325561523438, 273.2558898925781, 17.163982391357422)
 end)
 
-Tab3:CreateButton("Instant Win Hard Obby", function()
+Tab4:CreateButton("Instant Win Hard Obby", function()
 game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-1616.743896484375, 3.870882511138916, 2454.965087890625)
 end)
 
-Tab4:CreateButton("Made by Tin", function()
+Tab3:CreateButton("You need Boombox cmd!", function()
+
+end)
+
+Tab3:CreateButton("Give Boombox", function()
+local args = {
+    [1] = "/boombox",
+    [2] = "tin782u"
+}
+
+game:GetService("ReplicatedStorage").Events.PanelTrigger:FireServer(unpack(args))
+
+end)
+
+Tab3:CreateButton("The Will To Fight A", function()
+
+local args = {
+    [1] = "PlaySong",
+    [2] = 1845793864
+}
+
+game:GetService("Players").LocalPlayer.Character.Boombox.Remote:FireServer(unpack(args))
+end)
+
+Tab3:CreateButton("It's Been So Long FNAF", function()
+
+local args = {
+    [1] = "PlaySong",
+    [2] = 6913550990
+}
+
+game:GetService("Players").LocalPlayer.Character.Boombox.Remote:FireServer(unpack(args))
+end)
+
+Tab3:CreateButton("Beast Unleashed", function()
+
+local args = {
+    [1] = "PlaySong",
+    [2] = 1835333669
+}
+
+game:GetService("Players").LocalPlayer.Character.Boombox.Remote:FireServer(unpack(args))
+end)
+
+Tab3:CreateButton("Trash Man", function()
+
+local args = {
+    [1] = "PlaySong",
+    [2] = 636922227
+}
+
+game:GetService("Players").LocalPlayer.Character.Boombox.Remote:FireServer(unpack(args))
+end)
+
+Tab3:CreateButton("You've been RickRoll", function()
+
+local args = {
+    [1] = "PlaySong",
+    [2] = 7363412529
+}
+
+game:GetService("Players").LocalPlayer.Character.Boombox.Remote:FireServer(unpack(args))
+end)
+
+Tab5:CreateButton("Made by Tin", function()
 end)
