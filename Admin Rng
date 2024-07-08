@@ -88,6 +88,29 @@ Tab:CreateButton("Tora IsMe Gui", function()
 loadstring(game:HttpGet("https://raw.githubusercontent.com/thanhdat4461/Script/main/Admin%20RNG", true))()
 end)
 
+-- Create the Toggle
+local toggleActive = false
+
+Tab2:CreateToggle("Auto Roll (×2 Roll)", function(value)
+    toggleActive = value
+    print(value)
+
+    if toggleActive then
+        -- Start a coroutine to handle the loop
+        coroutine.wrap(function()
+            while toggleActive do
+                local args = {
+                    [1] = true,
+                    [2] = true
+                }
+
+                game:GetService("ReplicatedStorage").Events.Spin:InvokeServer(unpack(args))
+                wait(0.5)
+            end
+        end)()
+    end
+end)
+
 Tab2:CreateButton("Infinite Yield", function()
 loadstring(game:HttpGet('https://raw.githubusercontent.com/EdgeIY/infiniteyield/master/source'))()
 end)
@@ -604,11 +627,51 @@ Tab2:CreateButton("Anonymous <player>", function()
     activateCommandForPlayers("/anonymous")
 end)
 
+-- Function to find players by name or display name
+local function findPlayersByNameOrDisplayName(name)
+    if name:lower() == "all" then
+        return game:GetService("Players"):GetPlayers()  -- Return all players if "all" is typed
+    elseif name:lower() == "others" then
+        local players = game:GetService("Players"):GetPlayers()
+        local filteredPlayers = {}
+        for _, player in ipairs(players) do
+            if player ~= game.Players.LocalPlayer then
+                table.insert(filteredPlayers, player)
+            end
+        end
+        return filteredPlayers  -- Return all players except local player if "others" is typed
+    end
 
---Create the Toggle
+    local foundPlayers = {}
+    for _, player in ipairs(game:GetService("Players"):GetPlayers()) do
+        if string.find(player.Name:lower(), name:lower()) or string.find(player.DisplayName:lower(), name:lower()) then
+            table.insert(foundPlayers, player)
+        end
+    end
+    return foundPlayers
+end
+
+-- Function to activate a command for players
+local function activateCommandForPlayers(command)
+    local players = findPlayersByNameOrDisplayName("all")  -- Get all players
+    if #players > 0 then
+        for _, player in ipairs(players) do
+            local args = {
+                [1] = command,
+                [2] = player.Name  -- Use the player's username
+            }
+
+            game:GetService("ReplicatedStorage").Events.PanelTrigger:FireServer(unpack(args))
+        end
+    else
+        print("No players found.")
+    end
+end
+
+-- Create the Toggle
 local toggleActive = false
 
-Tab2:CreateToggle("Super Fast Respawn All", function(value)
+Tab2:CreateToggle("Fast Respawn All", function(value)
     toggleActive = value
 
     if toggleActive then
@@ -621,6 +684,191 @@ Tab2:CreateToggle("Super Fast Respawn All", function(value)
         end)()
     end
 end)
+
+-- Function to find players by name or display name
+local function findPlayersByNameOrDisplayName(name)
+    if name:lower() == "all" then
+        return game:GetService("Players"):GetPlayers()  -- Return all players if "all" is typed
+    elseif name:lower() == "others" then
+        local players = game:GetService("Players"):GetPlayers()
+        local filteredPlayers = {}
+        for _, player in ipairs(players) do
+            if player ~= game.Players.LocalPlayer then
+                table.insert(filteredPlayers, player)
+            end
+        end
+        return filteredPlayers  -- Return all players except local player if "others" is typed
+    end
+
+    local foundPlayers = {}
+    for _, player in ipairs(game:GetService("Players"):GetPlayers()) do
+        if string.find(player.Name:lower(), name:lower()) or string.find(player.DisplayName:lower(), name:lower()) then
+            table.insert(foundPlayers, player)
+        end
+    end
+    return foundPlayers
+end
+
+-- Function to activate a command for players
+local function activateCommandForPlayers(command)
+    local players = findPlayersByNameOrDisplayName("others")  -- Get others players only
+    if #players > 0 then
+        for _, player in ipairs(players) do
+            local args = {
+                [1] = command,
+                [2] = player.Name  -- Use the player's username
+            }
+
+            game:GetService("ReplicatedStorage").Events.PanelTrigger:FireServer(unpack(args))
+        end
+    else
+        print("No other players found.")
+    end
+end
+
+-- Create the Toggle
+local toggleActive = false
+
+Tab2:CreateToggle("Fast Respawn Others", function(value)
+    toggleActive = value
+
+    if toggleActive then
+        -- Start a coroutine to handle the loop
+        coroutine.wrap(function()
+            while toggleActive do
+                activateCommandForPlayers("/anonymous")
+                wait(0.1)
+            end
+        end)()
+    end
+end)
+
+
+-- Function to find players by name or display name
+local function findPlayersByNameOrDisplayName(name)
+    if name:lower() == "all" then
+        return game:GetService("Players"):GetPlayers()  -- Return all players if "all" is typed
+    elseif name:lower() == "others" then
+        local players = game:GetService("Players"):GetPlayers()
+        local filteredPlayers = {}
+        for _, player in ipairs(players) do
+            if player ~= game.Players.LocalPlayer then
+                table.insert(filteredPlayers, player)
+            end
+        end
+        return filteredPlayers  -- Return all players except local player if "others" is typed
+    end
+
+    local foundPlayers = {}
+    for _, player in ipairs(game:GetService("Players"):GetPlayers()) do
+        if string.find(player.Name:lower(), name:lower()) or string.find(player.DisplayName:lower(), name:lower()) then
+            table.insert(foundPlayers, player)
+        end
+    end
+    return foundPlayers
+end
+
+-- Function to activate a command for players
+local function activateCommandForPlayers(command)
+    local players = findPlayersByNameOrDisplayName("all")  -- Get all players
+    if #players > 0 then
+        for _, player in ipairs(players) do
+            local args = {
+                [1] = command,
+                [2] = player.Name  -- Use the player's username
+            }
+
+            game:GetService("ReplicatedStorage").Events.PanelTrigger:FireServer(unpack(args))
+        end
+    else
+        print("No players found.")
+    end
+end
+
+-- Create the Toggle
+local toggleActive = false
+
+Tab2:CreateToggle("Ultra Fast Respawn All", function(value)
+    toggleActive = value
+
+    if toggleActive then
+        -- Start a coroutine to handle the loop
+        coroutine.wrap(function()
+            while toggleActive do
+                activateCommandForPlayers("/anonymous")
+                wait(0.01)
+            end
+        end)()
+    end
+end)
+
+-- Function to find players by name or display name
+local function findPlayersByNameOrDisplayName(name)
+    if name:lower() == "all" then
+        return game:GetService("Players"):GetPlayers()  -- Return all players if "all" is typed
+    elseif name:lower() == "others" then
+        local players = game:GetService("Players"):GetPlayers()
+        local filteredPlayers = {}
+        for _, player in ipairs(players) do
+            if player ~= game.Players.LocalPlayer then
+                table.insert(filteredPlayers, player)
+            end
+        end
+        return filteredPlayers  -- Return all players except local player if "others" is typed
+    end
+
+    local foundPlayers = {}
+    for _, player in ipairs(game:GetService("Players"):GetPlayers()) do
+        if string.find(player.Name:lower(), name:lower()) or string.find(player.DisplayName:lower(), name:lower()) then
+            table.insert(foundPlayers, player)
+        end
+    end
+    return foundPlayers
+end
+
+-- Function to activate a command for players
+local function activateCommandForPlayers(command)
+    local players = findPlayersByNameOrDisplayName("others")  -- Get others players only
+    if #players > 0 then
+        for _, player in ipairs(players) do
+            local args = {
+                [1] = command,
+                [2] = player.Name  -- Use the player's username
+            }
+
+            game:GetService("ReplicatedStorage").Events.PanelTrigger:FireServer(unpack(args))
+        end
+    else
+        print("No other players found.")
+    end
+end
+
+-- Create the Toggle
+local toggleActive = false
+
+Tab2:CreateToggle("Ultra Fast Respawn Others", function(value)
+    toggleActive = value
+
+    if toggleActive then
+        -- Start a coroutine to handle the loop
+        coroutine.wrap(function()
+            while toggleActive do
+                activateCommandForPlayers("/anonymous")
+                wait(0.01)
+            end
+        end)()
+    end
+end)
+
+
+
+
+
+
+
+
+
+
 
 --Anti Kick
 
