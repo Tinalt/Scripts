@@ -505,21 +505,23 @@ Tab2:CreateToggle("Auto Nuke", function(value)
     end
 end)
 
+-- Cooldown time and tracking variables
+local cooldownTime = 60
+local lastExecutionTime = 0
+
 -- Function to activate a command for the local player
 local function activateCommandForLocalPlayer(command, args)
-    local args = args or {}
-
-    local event = game:GetService("ReplicatedStorage").Events.PanelTrigger
-    if event then
-        local args = {
-            [1] = command,
-            [2] = game.Players.LocalPlayer.Name,
-            [3] = unpack(args)  -- Unpack additional arguments if provided
-        }
-
-        event:FireServer(unpack(args))
+    local player = game.Players.LocalPlayer
+    if player then
+        local fullArgs = { [1] = command }
+        if args then
+            for _, v in ipairs(args) do
+                table.insert(fullArgs, v)
+            end
+        end
+        game:GetService("ReplicatedStorage").Events.PanelTrigger:FireServer(unpack(fullArgs))
     else
-        print("Remote event 'PanelTrigger' not found!")
+        print("Local player not found.")
     end
 end
 
@@ -528,11 +530,76 @@ local function teleportToPosition(position)
     game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(position)
 end
 
+-- Function to create and display a notification
+local function showNotification(message)
+    -- Create a ScreenGui
+    local screenGui = Instance.new("ScreenGui")
+    screenGui.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
+
+    -- Create a TextLabel for the notification
+    local notification = Instance.new("TextLabel")
+    notification.Size = UDim2.new(0.3, 0, 0.1, 0)  -- Width and height of the notification
+    notification.Position = UDim2.new(0.35, 0, 1, 0)  -- Start at the bottom of the screen
+    notification.BackgroundColor3 = Color3.new(0.2, 0.2, 0.2)  -- Dark grey background
+    notification.BackgroundTransparency = 0.3  -- 50% transparent
+    notification.BorderSizePixel = 3.5  -- Outline thickness
+    notification.BorderColor3 = Color3.new(0, 0, 0)  -- Black outline
+    notification.TextColor3 = Color3.new(1, 1, 1)  -- White text
+    notification.TextScaled = true
+    notification.TextWrapped = true
+    notification.Text = message  -- Set the notification message
+    notification.Font = Enum.Font.ArialBold  -- Set the font to ArialBold
+    notification.TextSize = 24  -- Set the custom text size
+    notification.Parent = screenGui
+
+    -- Add padding to the TextLabel
+    local padding = Instance.new("UIPadding")
+    padding.PaddingTop = UDim.new(0.1, 0)
+    padding.PaddingBottom = UDim.new(0.1, 0)
+    padding.PaddingLeft = UDim.new(0.1, 0)
+    padding.PaddingRight = UDim.new(0.1, 0)
+    padding.Parent = notification
+
+    -- Use TweenService to create the slide animation
+    local TweenService = game:GetService("TweenService")
+
+    local tweenInfo = TweenInfo.new(1, Enum.EasingStyle.Quad, Enum.EasingDirection.Out)
+    local targetPosition1 = UDim2.new(0.35, 0, 0.9, 0)  -- Middle of the screen
+    local targetPosition2 = UDim2.new(0.35, 0, 1, 0)  -- Bottom of the screen
+
+    local slideUpTween = TweenService:Create(notification, tweenInfo, {Position = targetPosition1})
+    local slideDownTween = TweenService:Create(notification, tweenInfo, {Position = targetPosition2})
+
+    -- Play the slide up tween
+    slideUpTween:Play()
+
+    -- After the slide up tween completes, wait for 2 seconds and then play the slide down tween
+    slideUpTween.Completed:Connect(function()
+        wait(2)
+        slideDownTween:Play()
+    end)
+
+    -- Destroy the screenGui after the slide down tween completes
+    slideDownTween.Completed:Connect(function()
+        screenGui:Destroy()
+    end)
+end
+
 -- Store the original position of the player
 local originalPosition = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame
 
 -- Activate the sequence of commands
 Tab2:CreateButton("Nuke Lobby", function()
+    local currentTime = tick()
+    if currentTime - lastExecutionTime < cooldownTime then
+        local remainingTime = math.ceil(cooldownTime - (currentTime - lastExecutionTime))
+        showNotification("You need to wait " .. remainingTime .. "s to use Nuke")
+        return
+    end
+
+    -- Update the last execution time
+    lastExecutionTime = currentTime
+
     -- Execute /speed command with speed 0
     activateCommandForLocalPlayer("/speed", {0})
     wait(0.1)
