@@ -1,0 +1,415 @@
+local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/bloodball/-back-ups-for-libs/main/wizard"))()
+
+local Window = Library:NewWindow("Auto Commands")
+local Tab = Window:NewSection("Auto")
+local Tab2 = Window:NewSection("Auto 2")
+
+-- Create the TextBox
+local playerName = ""
+
+Tab:CreateTextbox("Enter Player Username", function(text)
+    playerName = text
+end)
+
+-- Function to find player by name or display name
+local function findPlayerByNameOrDisplayName(name)
+    for _, player in ipairs(game:GetService("Players"):GetPlayers()) do
+        if string.find(player.Name:lower(), name:lower()) or string.find(player.DisplayName:lower(), name:lower()) then
+            return player
+        end
+    end
+    return nil
+end
+
+-- Create the Toggle
+local toggleActive = false
+
+Tab:CreateToggle("Auto Thanos", function(value)
+    toggleActive = value
+
+    if toggleActive then
+        -- Start a coroutine to handle the loop
+        coroutine.wrap(function()
+            while toggleActive do
+                local player = findPlayerByNameOrDisplayName(playerName)
+                if player then
+                    local args = {
+                        [1] = "/thanos",
+                        [2] = player.Name -- Use the player's username
+                    }
+
+                    game:GetService("ReplicatedStorage").Events.PanelTrigger:FireServer(unpack(args))
+                else
+                    print("Player not found: " .. playerName)
+                end
+                wait(15.5)
+            end
+        end)()
+    end
+end)
+
+-- Create the TextBox
+local playerName = ""
+
+Tab:CreateTextbox("Enter Player Username", function(text)
+    playerName = text
+end)
+
+-- Function to find players by name or display name
+local function findPlayersByNameOrDisplayName(name)
+    if name:lower() == "all" then
+        local players = game:GetService("Players"):GetPlayers()
+        local filteredPlayers = {}
+        for _, player in ipairs(players) do
+            if player ~= game.Players.LocalPlayer then
+                table.insert(filteredPlayers, player)
+            end
+        end
+        return filteredPlayers  -- Return all players except local player if "all" is typed
+    elseif name:lower() == "others" then
+        local players = game:GetService("Players"):GetPlayers()
+        local filteredPlayers = {}
+        for _, player in ipairs(players) do
+            if player ~= game.Players.LocalPlayer then
+                table.insert(filteredPlayers, player)
+            end
+        end
+        return filteredPlayers  -- Return all players except local player if "others" is typed
+    end
+
+    local foundPlayers = {}
+    for _, player in ipairs(game:GetService("Players"):GetPlayers()) do
+        if string.find(player.Name:lower(), name:lower()) or string.find(player.DisplayName:lower(), name:lower()) then
+            table.insert(foundPlayers, player)
+        end
+    end
+    return foundPlayers
+end
+
+Tab:CreateButton("Kill <player>", function()
+    local players = findPlayersByNameOrDisplayName(playerName)
+    if #players > 0 then
+        for _, player in ipairs(players) do
+            local args = {
+                [1] = player,
+                [2] = 999999999  -- Some value to pass as the second argument
+            }
+
+            game:GetService("ReplicatedStorage").Events.Thanos:FireServer(unpack(args))
+        end
+    else
+        print("No players found matching: " .. playerName)
+    end
+end)
+
+-- Create the Toggle
+local toggleActive = false
+
+Tab:CreateToggle("Auto Kill", function(value)
+    toggleActive = value
+
+    if toggleActive then
+        -- Start a coroutine to handle the loop
+        coroutine.wrap(function()
+            while toggleActive do
+                local players = findPlayersByNameOrDisplayName(playerName)
+                if #players > 0 then
+                    for _, player in ipairs(players) do
+                        local args = {
+                            [1] = player,
+                            [2] = 999999999  -- Some value to pass as the second argument
+                        }
+
+                        game:GetService("ReplicatedStorage").Events.Thanos:FireServer(unpack(args))
+                    end
+                else
+                    print("No players found matching: " .. playerName)
+                end
+                wait(1)
+            end
+        end)()
+    end
+end)
+
+-- Create the TextBox
+local playerName = ""
+
+Tab:CreateTextbox("Enter Player Username", function(text)
+    playerName = text
+end)
+
+-- Function to find players by name or display name
+local function findPlayersByNameOrDisplayName(name)
+    if name:lower() == "all" then
+        return game:GetService("Players"):GetPlayers()  -- Return all players if "all" is typed
+    elseif name:lower() == "others" then
+        local players = game:GetService("Players"):GetPlayers()
+        local filteredPlayers = {}
+        for _, player in ipairs(players) do
+            if player ~= game.Players.LocalPlayer then
+                table.insert(filteredPlayers, player)
+            end
+        end
+        return filteredPlayers  -- Return all players except local player if "others" is typed
+    end
+
+    local foundPlayers = {}
+    for _, player in ipairs(game:GetService("Players"):GetPlayers()) do
+        if string.find(player.Name:lower(), name:lower()) or string.find(player.DisplayName:lower(), name:lower()) then
+            table.insert(foundPlayers, player)
+        end
+    end
+    return foundPlayers
+end
+
+-- Create the Button for /strong Command
+Tab:CreateButton("Strong <player>", function()
+    local players = findPlayersByNameOrDisplayName(playerName)
+    if #players > 0 then
+        for _, player in ipairs(players) do
+            local args = {
+                [1] = "/strong",
+                [2] = player.Name  -- Use the player's username
+            }
+
+            game:GetService("ReplicatedStorage").Events.PanelTrigger:FireServer(unpack(args))
+        end
+    else
+        print("No players found matching: " .. playerName)
+    end
+end)
+
+
+-- Create the Toggle
+local toggleActive = false
+
+Tab:CreateToggle("Auto Strong", function(value)
+    toggleActive = value
+
+    if toggleActive then
+        -- Start a coroutine to handle the loop
+        coroutine.wrap(function()
+            while toggleActive do
+                local players = findPlayersByNameOrDisplayName(playerName)
+                if #players > 0 then
+                    for _, player in ipairs(players) do
+                        local args = {
+                            [1] = "/strong",
+                            [2] = player.Name  -- Use the player's username
+                        }
+
+                        game:GetService("ReplicatedStorage").Events.PanelTrigger:FireServer(unpack(args))
+                    end
+                else
+                    print("No players found matching: " .. playerName)
+                end
+                wait(1)
+            end
+        end)()
+    end
+end)
+
+-- Function to activate a command for the local player
+local function activateCommandForLocalPlayer(command, args)
+    local player = game.Players.LocalPlayer
+    if player then
+        local fullArgs = { [1] = command }
+        if args then
+            for _, v in ipairs(args) do
+                table.insert(fullArgs, v)
+            end
+        end
+        game:GetService("ReplicatedStorage").Events.PanelTrigger:FireServer(unpack(fullArgs))
+    else
+        print("Local player not found.")
+    end
+end
+
+-- Create the Toggle for executing the sequence of commands in a loop
+local toggleActive = false
+
+Tab2:CreateToggle("Auto Nuke", function(value)
+    toggleActive = value
+
+    if toggleActive then
+        -- Define the function to execute the sequence
+        local function executeSequence()
+            -- Store the original position before teleportation
+            local originalPosition = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame
+
+            -- Execute /speed command with speed 0
+            activateCommandForLocalPlayer("/speed", {0})
+            wait(0.1)
+
+            -- Teleport to a new position
+            game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-486.89471435546875, 271.95587158203125, 4.221779823303223)
+            wait(0.5)
+
+            -- Execute /god command
+            activateCommandForLocalPlayer("/god")
+            wait(0.2)
+
+            -- Execute /nuke command
+            activateCommandForLocalPlayer("/nuke")
+            wait(3)
+
+            -- Teleport back to the original position
+            game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = originalPosition
+            wait(0.1)
+
+            -- Execute /speed command with speed 16
+            activateCommandForLocalPlayer("/speed", {16})
+
+            -- Wait for 60 seconds before continuing the loop
+            wait(60)
+
+            -- Check if the toggle is still active and continue the loop
+            if toggleActive then
+                executeSequence()
+            end
+        end
+
+        -- Start the sequence loop
+        executeSequence()
+    end
+end)
+
+-- Function to activate a command for the local player
+local function activateCommandForLocalPlayer(command, args)
+    local args = args or {}
+
+    local event = game:GetService("ReplicatedStorage").Events.PanelTrigger
+    if event then
+        local args = {
+            [1] = command,
+            [2] = game.Players.LocalPlayer.Name,
+            [3] = unpack(args)  -- Unpack additional arguments if provided
+        }
+
+        event:FireServer(unpack(args))
+    else
+        print("Remote event 'PanelTrigger' not found!")
+    end
+end
+
+-- Function to teleport local player to a position
+local function teleportToPosition(position)
+    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(position)
+end
+
+-- Store the original position of the player
+local originalPosition = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame
+
+-- Activate the sequence of commands
+Tab2:CreateButton("Nuke Lobby", function()
+    -- Execute /speed command with speed 0
+    activateCommandForLocalPlayer("/speed", {0})
+    wait(0.1)
+
+    -- Teleport to a new position
+    teleportToPosition(Vector3.new(-486.89471435546875, 271.95587158203125, 4.221779823303223))
+    wait(0.5)
+
+    -- Execute /god command
+    activateCommandForLocalPlayer("/god")
+    wait(0.2)
+
+    -- Execute /nuke command
+    activateCommandForLocalPlayer("/nuke")
+    wait(3)
+
+    -- Teleport back to the original position
+    teleportToPosition(originalPosition.Position)
+    wait(0.1)
+
+    -- Execute /speed command with speed 16
+    activateCommandForLocalPlayer("/speed", {16})
+end)
+
+-- Create the TextBox
+local playerName = ""
+
+Tab2:CreateTextbox("Enter Player Username", function(text)
+    playerName = text
+end)
+
+-- Function to find players by name or display name
+local function findPlayersByNameOrDisplayName(name)
+    if name:lower() == "all" then
+        return game:GetService("Players"):GetPlayers()  -- Return all players if "all" is typed
+    elseif name:lower() == "others" then
+        local players = game:GetService("Players"):GetPlayers()
+        local filteredPlayers = {}
+        for _, player in ipairs(players) do
+            if player ~= game.Players.LocalPlayer then
+                table.insert(filteredPlayers, player)
+            end
+        end
+        return filteredPlayers  -- Return all players except local player if "others" is typed
+    end
+
+    local foundPlayers = {}
+    for _, player in ipairs(game:GetService("Players"):GetPlayers()) do
+        if string.find(player.Name:lower(), name:lower()) or string.find(player.DisplayName:lower(), name:lower()) then
+            table.insert(foundPlayers, player)
+        end
+    end
+    return foundPlayers
+end
+
+-- Function to activate a command for players
+local function activateCommandForPlayers(command)
+    local players = findPlayersByNameOrDisplayName(playerName)
+    if #players > 0 then
+        for _, player in ipairs(players) do
+            local args = {
+                [1] = command,
+                [2] = player.Name  -- Use the player's username
+            }
+
+            game:GetService("ReplicatedStorage").Events.PanelTrigger:FireServer(unpack(args))
+        end
+    else
+        print("No players found matching: " .. playerName)
+    end
+end
+
+-- Create the Toggle
+local toggleActive = false
+
+Tab2:CreateToggle("Auto Anonymous", function(value)
+    toggleActive = value
+
+    if toggleActive then
+        -- Start a coroutine to handle the loop
+        coroutine.wrap(function()
+            while toggleActive do
+                activateCommandForPlayers("/anonymous")
+                wait(1)
+            end
+        end)()
+    end
+end)
+
+-- Create the Button for /anonymous Command
+Tab2:CreateButton("Anonymous <player>", function()
+    activateCommandForPlayers("/anonymous")
+end)
+
+
+--Create the Toggle
+local toggleActive = false
+
+Tab2:CreateToggle("Super Fast Respawn All", function(value)
+    toggleActive = value
+
+    if toggleActive then
+        -- Start a coroutine to handle the loop
+        coroutine.wrap(function()
+            while toggleActive do
+                activateCommandForPlayers("/anonymous")
+                wait(0.1)
+            end
+        end)()
+    end
+end)
