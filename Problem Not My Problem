@@ -1,0 +1,141 @@
+local gui = Instance.new("ScreenGui")
+gui.Name = "patrickGui"
+gui.Parent = game.CoreGui
+
+-- Create Main Frame
+local MainFrame = Instance.new("Frame")
+MainFrame.Size = UDim2.new(0, 250, 0, 158)
+MainFrame.Position = UDim2.new(0.5, -125, 0.5, -75)
+MainFrame.BackgroundColor3 = Color3.new(0.3, 0.3, 0.3)
+MainFrame.BorderColor3 = Color3.new(0, 0, 0)
+MainFrame.BackgroundTransparency = 0.5
+MainFrame.Parent = gui
+
+-- Create Close Button (X)
+local CloseButton = Instance.new("TextButton")
+CloseButton.Text = "X"
+CloseButton.TextSize = 14
+CloseButton.TextColor3 = Color3.new(1, 1, 1)
+CloseButton.BackgroundColor3 = Color3.new(0.5, 0, 0)
+CloseButton.BorderColor3 = Color3.new(0, 0, 0)
+CloseButton.Size = UDim2.new(0, 30, 0, 30)
+CloseButton.Position = UDim2.new(1, -35, 0, 5)
+CloseButton.Font = Enum.Font.ArialBold
+CloseButton.Parent = MainFrame
+
+CloseButton.MouseButton1Click:Connect(function()
+    MainFrame:Destroy()
+end)
+
+-- Create Label
+local Label = Instance.new("TextLabel")
+Label.Text = "Choose one"
+Label.TextSize = 20
+Label.Font = Enum.Font.ArialBold
+Label.TextColor3 = Color3.new(1, 1, 1)
+Label.BackgroundTransparency = 1
+Label.Size = UDim2.new(1, 0, 0, 40)
+Label.Position = UDim2.new(0, 0, 0, 0)
+Label.Parent = MainFrame
+
+-- Create Option 1 Button
+local Option1Button = Instance.new("TextButton")
+Option1Button.Text = "Sing 1 Time"
+Option1Button.TextSize = 14
+Option1Button.TextColor3 = Color3.new(1, 1, 1)
+Option1Button.BackgroundColor3 = Color3.new(0, 0, 0)
+Option1Button.BorderColor3 = Color3.new(0, 0, 0)
+Option1Button.BackgroundTransparency = 0.5
+Option1Button.BorderSizePixel = 4
+Option1Button.Font = Enum.Font.ArialBold
+Option1Button.Size = UDim2.new(1, -35, 0, 50)
+Option1Button.Position = UDim2.new(0, 17, 0, 40)
+Option1Button.Parent = MainFrame
+
+-- Create Option 2 Button
+local Option2Button = Instance.new("TextButton")
+Option2Button.Text = "Sing 2 Times"
+Option2Button.TextSize = 14
+Option2Button.TextColor3 = Color3.new(1, 1, 1)
+Option2Button.BackgroundColor3 = Color3.new(0, 0, 0)
+Option2Button.BorderColor3 = Color3.new(0, 0, 0)
+Option2Button.BackgroundTransparency = 0.5
+Option2Button.BorderSizePixel = 4
+Option2Button.Font = Enum.Font.ArialBold
+Option2Button.Size = UDim2.new(1, -35, 0, 50)
+Option2Button.Position = UDim2.new(0, 17, 0, 100)
+Option2Button.Parent = MainFrame
+
+local function createSingGui(times)
+    -- Check if any "Sing" buttons already exist and remove them
+    for _, child in pairs(game.CoreGui:GetChildren()) do
+        if child.Name == "singGui" then
+            child:Destroy()
+        end
+    end
+
+    local singGui = Instance.new("ScreenGui")
+    singGui.Name = "singGui"
+    singGui.Parent = game.CoreGui
+
+    local TextButton = Instance.new("TextButton")
+    TextButton.Text = "Sing"
+    TextButton.TextSize = 14
+    TextButton.TextColor3 = Color3.new(1, 1, 1)
+    TextButton.BackgroundColor3 = Color3.new(0, 0, 0)
+    TextButton.BorderColor3 = Color3.new(0, 0, 0)
+    TextButton.BackgroundTransparency = 0.5
+    TextButton.BorderSizePixel = 4
+    TextButton.Font = Enum.Font.ArialBold
+    TextButton.Size = UDim2.new(0, 50, 0, 50)
+    TextButton.Position = UDim2.new(1, -110, 0, 10)
+    TextButton.Parent = singGui
+    TextButton.Draggable = true
+
+    TextButton.MouseButton1Click:Connect(function()
+        local player = game.Players.LocalPlayer
+        local chatEvent = game:GetService("ReplicatedStorage").DefaultChatSystemChatEvents.SayMessageRequest
+        
+        chatEvent:FireServer(" Problem not my problem   🎶", "All")
+        wait(1.8)
+        chatEvent:FireServer(" That's just not my problem", "All")
+        
+        if times == 2 then
+            wait(1.8)
+            chatEvent:FireServer(" Problem not my problem", "All")
+            wait(1.8)
+            chatEvent:FireServer(" That's just not my problem    🎶", "All")
+        end
+    end)
+
+    local cornerUI = Instance.new("UICorner")
+    cornerUI.CornerRadius = UDim.new(0, 5)
+    cornerUI.Parent = TextButton
+
+    local uiStroke = Instance.new("UIStroke")
+    uiStroke.Color = Color3.new(0, 0, 0)
+    uiStroke.Thickness = 2
+    uiStroke.Parent = TextButton
+end
+
+Option1Button.MouseButton1Click:Connect(function()
+    createSingGui(1)
+    MainFrame:Destroy()
+end)
+
+Option2Button.MouseButton1Click:Connect(function()
+    createSingGui(2)
+    MainFrame:Destroy()
+end)
+
+-- Adding UICorner for rounded corners and UIStroke for borders
+for _, element in pairs({Option1Button, Option2Button, MainFrame, CloseButton}) do
+    local cornerUI = Instance.new("UICorner")
+    cornerUI.CornerRadius = UDim.new(0, 5)
+    cornerUI.Parent = element
+    
+    local uiStroke = Instance.new("UIStroke")
+    uiStroke.Color = Color3.new(0, 0, 0)
+    uiStroke.Thickness = 2
+    uiStroke.Parent = element
+end
