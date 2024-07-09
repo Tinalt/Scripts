@@ -235,48 +235,106 @@ end)
 local Window2 = Library:NewWindow("Auto Commands")
 local Tab = Window2:NewSection("Auto")
 local Tab2 = Window2:NewSection("Auto 2")
+local Tab3 = Window2:NewSection("Auto 3")
 
--- Create the TextBox
+-- Function to find players by partial name or display name
+local function findPlayersByNameOrDisplayName(partialName)
+    partialName = partialName:lower()
+
+    local foundPlayers = {}
+    for _, player in ipairs(game:GetService("Players"):GetPlayers()) do
+        local playerName = player.Name:lower()
+        local displayName = player.DisplayName:lower()
+
+        if string.find(playerName, partialName, 1, true) or string.find(displayName, partialName, 1, true) then
+            table.insert(foundPlayers, player)
+        end
+    end
+
+    return foundPlayers
+end
+
+-- Function to activate a command for players
+local function activateCommandForPlayers(command, players)
+    for _, player in ipairs(players) do
+        local args = {
+            [1] = command,
+            [2] = player.Name  -- Use the player's username
+        }
+
+        game:GetService("ReplicatedStorage").Events.PanelTrigger:FireServer(unpack(args))
+    end
+end
+
+-- Function to activate /thanos for a random player
+local function activateThanosForRandomPlayer()
+    local players = game:GetService("Players"):GetPlayers()
+    local randomPlayer = players[math.random(1, #players)]
+
+    local args = {
+        [1] = "/thanos",
+        [2] = randomPlayer.Name
+    }
+
+    game:GetService("ReplicatedStorage").Events.PanelTrigger:FireServer(unpack(args))
+end
+
+-- Variable to store the player name from the textbox
 local playerName = ""
 
+-- Create the TextBox for entering player username
 Tab:CreateTextbox("Enter Player Username", function(text)
     playerName = text
 end)
 
--- Function to find player by name or display name
-local function findPlayerByNameOrDisplayName(name)
-    for _, player in ipairs(game:GetService("Players"):GetPlayers()) do
-        if string.find(player.Name:lower(), name:lower()) or string.find(player.DisplayName:lower(), name:lower()) then
-            return player
-        end
-    end
-    return nil
-end
-
--- Create the Toggle
+-- Variable to store toggle state
 local toggleActive = false
 
-Tab:CreateToggle("Auto Thanos", function(value)
+-- Create the Toggle for activating /thanos
+Tab:CreateToggle("Auto /thanos", function(value)
     toggleActive = value
 
     if toggleActive then
-        -- Start a coroutine to handle the loop
+        -- Start a coroutine to handle the loop with a 1-second delay
         coroutine.wrap(function()
             while toggleActive do
-                local player = findPlayerByNameOrDisplayName(playerName)
-                if player then
-                    local args = {
-                        [1] = "/thanos",
-                        [2] = player.Name -- Use the player's username
-                    }
-
-                    game:GetService("ReplicatedStorage").Events.PanelTrigger:FireServer(unpack(args))
+                -- Check if "random" is typed in the textbox
+                if playerName:lower() == "random" then
+                    activateThanosForRandomPlayer()
                 else
-                    print("Player not found: " .. playerName)
+                    -- Find players based on the partial name entered in the textbox
+                    local players = findPlayersByNameOrDisplayName(playerName)
+
+                    if #players > 0 then
+                        activateCommandForPlayers("/thanos", players)
+                    else
+                        print("No players found matching: " .. playerName)
+                    end
                 end
-                wait(15.5)
+
+                wait(9.5)
             end
         end)()
+    else
+        print("Toggle deactivated")
+        -- You can add logic here for when the toggle is deactivated, if needed
+    end
+end)
+
+-- Create the Button for activating /thanos
+Tab:CreateButton("Activate /thanos", function()
+    -- Check if "random" is typed in the textbox
+    if playerName:lower() == "random" then
+        activateThanosForRandomPlayer()
+    else
+        -- Find players based on the partial name entered in the textbox
+        local players = findPlayersByNameOrDisplayName(playerName)
+
+        if #players > 0 then
+            activateCommandForPlayers("/thanos", players)
+        else
+            print("No players found matching: " .. playerName)
+        end
     end
 end)
 
@@ -395,7 +453,7 @@ local function findPlayersByNameOrDisplayName(name)
 end
 
 -- Create the Button for /strong Command
-Tab:CreateButton("Strong <player>", function()
+Tab:CreateButton("Activate /strong <player>", function()
     local players = findPlayersByNameOrDisplayName(playerName)
     if #players > 0 then
         for _, player in ipairs(players) do
@@ -415,7 +473,7 @@ end)
 -- Create the Toggle
 local toggleActive = false
 
-Tab:CreateToggle("Auto Strong", function(value)
+Tab:CreateToggle("Auto /strong", function(value)
     toggleActive = value
 
     if toggleActive then
@@ -625,10 +683,118 @@ Tab2:CreateButton("Nuke Lobby", function()
     activateCommandForLocalPlayer("/speed", {16})
 end)
 
+-- Function to find players by partial name or display name
+local function findPlayersByNameOrDisplayName(partialName)
+    partialName = partialName:lower()
+
+    local foundPlayers = {}
+    for _, player in ipairs(game:GetService("Players"):GetPlayers()) do
+        local playerName = player.Name:lower()
+        local displayName = player.DisplayName:lower()
+
+        if string.find(playerName, partialName, 1, true) or string.find(displayName, partialName, 1, true) then
+            table.insert(foundPlayers, player)
+        end
+    end
+
+    return foundPlayers
+end
+
+-- Function to activate a command for players
+local function activateCommandForPlayers(command, players)
+    for _, player in ipairs(players) do
+        local args = {
+            [1] = command,
+            [2] = player.Name  -- Use the player's username
+        }
+
+        game:GetService("ReplicatedStorage").Events.PanelTrigger:FireServer(unpack(args))
+    end
+end
+
+-- Variable to store the player name from the textbox
+local playerName = ""
+
+-- Create the TextBox for entering player username
+Tab2:CreateTextbox("Enter Player Username", function(text)
+    playerName = text
+end)
+
+-- Variable to store toggle state
+local toggleActive = false
+
+-- Create the Toggle for activating /saber
+Tab2:CreateToggle("Auto /saber", function(value)
+    toggleActive = value
+
+    if toggleActive then
+        -- Start a coroutine to handle the loop with a 1-second delay
+        coroutine.wrap(function()
+            while toggleActive do
+                -- Check if "all" or "others" is typed in the textbox
+                if playerName:lower() == "all" then
+                    local players = game:GetService("Players"):GetPlayers()
+                    activateCommandForPlayers("/saber", players)
+                elseif playerName:lower() == "others" then
+                    local players = {}
+                    for _, player in ipairs(game:GetService("Players"):GetPlayers()) do
+                        if player ~= game.Players.LocalPlayer then
+                            table.insert(players, player)
+                        end
+                    end
+                    activateCommandForPlayers("/saber", players)
+                else
+                    -- Find players based on the partial name entered in the textbox
+                    local players = findPlayersByNameOrDisplayName(playerName)
+
+                    if #players > 0 then
+                        activateCommandForPlayers("/saber", players)
+                    else
+                        print("No players found matching: " .. playerName)
+                    end
+                end
+
+                wait(2)  
+            end
+        end)()
+    else
+        print("Toggle deactivated")
+        -- You can add logic here for when the toggle is deactivated, if needed
+    end
+end)
+
+-- Create the Button for activating /saber
+Tab2:CreateButton("Activate /saber <player>", function()
+    -- Check if "all" or "others" is typed in the textbox
+    if playerName:lower() == "all" then
+        local players = game:GetService("Players"):GetPlayers()
+        activateCommandForPlayers("/saber", players)
+    elseif playerName:lower() == "others" then
+        local players = {}
+        for _, player in ipairs(game:GetService("Players"):GetPlayers()) do
+            if player ~= game.Players.LocalPlayer then
+                table.insert(players, player)
+            end
+        end
+        activateCommandForPlayers("/saber", players)
+    else
+        -- Find players based on the partial name entered in the textbox
+        local players = findPlayersByNameOrDisplayName(playerName)
+
+        if #players > 0 then
+            activateCommandForPlayers("/saber", players)
+        else
+            print("No players found matching: " .. playerName)
+        end
+    end
+end)
+
+
+
 -- Create the TextBox
 local playerName = ""
 
-Tab2:CreateTextbox("Enter Player Username", function(text)
+Tab3:CreateTextbox("Enter Player Username", function(text)
     playerName = text
 end)
 
@@ -676,7 +842,7 @@ end
 -- Create the Toggle
 local toggleActive = false
 
-Tab2:CreateToggle("Auto Anonymous", function(value)
+Tab3:CreateToggle("Auto Anonymous", function(value)
     toggleActive = value
 
     if toggleActive then
@@ -693,7 +859,7 @@ end)
 -- Create the Toggle
 local toggleActive = false
 
-Tab2:CreateToggle("Ultra Fast Anonymous", function(value)
+Tab3:CreateToggle("Ultra Fast Anonymous", function(value)
     toggleActive = value
 
     if toggleActive then
@@ -708,7 +874,7 @@ Tab2:CreateToggle("Ultra Fast Anonymous", function(value)
 end)
 
 -- Create the Button for /anonymous Command
-Tab2:CreateButton("Anonymous <player>", function()
+Tab3:CreateButton("Anonymous <player>", function()
     activateCommandForPlayers("/anonymous")
 end)
 
@@ -756,7 +922,7 @@ end
 -- Create the Toggle
 local toggleActive = false
 
-Tab2:CreateToggle("Fast Respawn All", function(value)
+Tab3:CreateToggle("Fast Respawn All", function(value)
     toggleActive = value
 
     if toggleActive then
@@ -814,7 +980,7 @@ end
 -- Create the Toggle
 local toggleActive = false
 
-Tab2:CreateToggle("Fast Respawn Others", function(value)
+Tab3:CreateToggle("Fast Respawn Others", function(value)
     toggleActive = value
 
     if toggleActive then
@@ -873,7 +1039,7 @@ end
 -- Create the Toggle
 local toggleActive = false
 
-Tab2:CreateToggle("Ultra Fast Respawn All", function(value)
+Tab3:CreateToggle("Ultra Fast Respawn All", function(value)
     toggleActive = value
 
     if toggleActive then
@@ -931,7 +1097,7 @@ end
 -- Create the Toggle
 local toggleActive = false
 
-Tab2:CreateToggle("Ultra Fast Respawn Others", function(value)
+Tab3:CreateToggle("Ultra Fast Respawn Others", function(value)
     toggleActive = value
 
     if toggleActive then
