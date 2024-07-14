@@ -1,0 +1,376 @@
+-- Create ScreenGui
+local screenGui = Instance.new("ScreenGui")
+screenGui.Name = "RNGGame"
+screenGui.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
+
+-- Function to create squircle frame
+local function createSquircleFrame(size, position, parent)
+    local frame = Instance.new("Frame")
+    frame.Size = size
+    frame.Position = position
+    frame.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+    frame.Parent = parent
+    local corner = Instance.new("UICorner")
+    corner.CornerRadius = UDim.new(0, 15)
+    corner.Parent = frame
+    return frame
+end
+
+-- Create RNG Frame
+local rngFrame = createSquircleFrame(UDim2.new(0, 300, 0, 300), UDim2.new(0.5, -150, 0.5, -150), screenGui)
+
+-- Create Title
+local title = Instance.new("TextLabel")
+title.Size = UDim2.new(1, 0, 0, 50)
+title.Position = UDim2.new(0, 0, 0, 0)
+title.BackgroundTransparency = 1
+title.Text = "RNG Game"
+title.TextScaled = true
+title.Font = Enum.Font.SourceSansBold
+title.Parent = rngFrame
+
+-- Create Result Label
+local resultLabel = Instance.new("TextLabel")
+resultLabel.Size = UDim2.new(1, 0, 0, 50)
+resultLabel.Position = UDim2.new(0, 0, 0.3, 0)
+resultLabel.BackgroundTransparency = 1
+resultLabel.Text = "Result"
+resultLabel.TextScaled = true
+resultLabel.Font = Enum.Font.SourceSans
+resultLabel.Parent = rngFrame
+
+-- Create Duplicate Label
+local duplicateLabel = Instance.new("TextLabel")
+duplicateLabel.Size = UDim2.new(1, 0, 0, 30)
+duplicateLabel.Position = UDim2.new(0, 0, 0.5, 0)
+duplicateLabel.BackgroundTransparency = 1
+duplicateLabel.Text = ""
+duplicateLabel.TextScaled = true
+duplicateLabel.Font = Enum.Font.SourceSans
+duplicateLabel.Parent = rngFrame
+
+-- Create Generate Button
+local generateButton = Instance.new("TextButton")
+generateButton.Size = UDim2.new(0.5, 0, 0, 50)
+generateButton.Position = UDim2.new(0.25, 0, 0.7, 0)
+generateButton.BackgroundColor3 = Color3.fromRGB(0, 170, 255)
+generateButton.Text = "Roll"
+generateButton.TextScaled = true
+generateButton.Font = Enum.Font.SourceSansBold
+generateButton.Parent = rngFrame
+
+-- Create Block Button (Cooldown)
+local blockButton = Instance.new("TextButton")
+blockButton.Size = UDim2.new(0.5, 0, 0, 50)
+blockButton.Position = UDim2.new(0.25, 0, 0.7, 0)
+blockButton.BackgroundColor3 = Color3.fromRGB(128, 128, 128)
+blockButton.Text = ""
+blockButton.TextScaled = true
+blockButton.Font = Enum.Font.SourceSansBold
+blockButton.BackgroundTransparency = 0.4
+blockButton.Visible = false
+blockButton.Parent = rngFrame
+
+-- Create Close Button
+local closeButton = Instance.new("TextButton")
+closeButton.Size = UDim2.new(0, 30, 0, 30)
+closeButton.Position = UDim2.new(1, -35, 0, 5)
+closeButton.BackgroundColor3 = Color3.fromRGB(255, 0, 0)
+closeButton.Text = "X"
+closeButton.TextScaled = true
+closeButton.Font = Enum.Font.SourceSansBold
+closeButton.Parent = rngFrame
+
+-- Create Menu Button
+local menuButton = Instance.new("TextButton")
+menuButton.Size = UDim2.new(0.2, 0, 0, 50)
+menuButton.Position = UDim2.new(0, 5, 0.5, -25)
+menuButton.BackgroundColor3 = Color3.fromRGB(100, 255, 100)
+menuButton.Text = "Menu"
+menuButton.TextScaled = true
+menuButton.Font = Enum.Font.SourceSansBold
+menuButton.Parent = screenGui
+
+-- Create Menu Frame
+local menuFrame = createSquircleFrame(UDim2.new(0, 300, 0, 150), UDim2.new(0.5, -150, 0.5, -75), screenGui)
+
+-- Create Menu Title
+local menuTitle = Instance.new("TextLabel")
+menuTitle.Size = UDim2.new(1, 0, 0, 50)
+menuTitle.Position = UDim2.new(0, 0, 0, 0)
+menuTitle.BackgroundTransparency = 1
+menuTitle.Text = "Menu"
+menuTitle.TextScaled = true
+menuTitle.Font = Enum.Font.SourceSansBold
+menuTitle.Parent = menuFrame
+
+-- Create Main Button in Menu
+local menuMainButton = Instance.new("TextButton")
+menuMainButton.Size = UDim2.new(0.4, 0, 0, 50)
+menuMainButton.Position = UDim2.new(0.1, 0, 0.4, 0)
+menuMainButton.BackgroundColor3 = Color3.fromRGB(100, 170, 255)
+menuMainButton.Text = "Main"
+menuMainButton.TextScaled = true
+menuMainButton.Font = Enum.Font.SourceSansBold
+menuMainButton.Parent = menuFrame
+
+-- Create Rarity List Button in Menu
+local menuRarityButton = Instance.new("TextButton")
+menuRarityButton.Size = UDim2.new(0.4, 0, 0, 50)
+menuRarityButton.Position = UDim2.new(0.5, 0, 0.4, 0)
+menuRarityButton.BackgroundColor3 = Color3.fromRGB(100, 170, 255)
+menuRarityButton.Text = "Rarity List"
+menuRarityButton.TextScaled = true
+menuRarityButton.Font = Enum.Font.SourceSansBold
+menuRarityButton.Parent = menuFrame
+
+-- Create Exit Button in Menu
+local menuExitButton = Instance.new("TextButton")
+menuExitButton.Size = UDim2.new(0.4, 0, 0, 50)
+menuExitButton.Position = UDim2.new(0.1, 0, 0.8, 0)
+menuExitButton.BackgroundColor3 = Color3.fromRGB(255, 100, 100)
+menuExitButton.Text = "Exit"
+menuExitButton.TextScaled = true
+menuExitButton.Font = Enum.Font.SourceSansBold
+menuExitButton.Parent = menuFrame
+
+-- Create Rarity List Frame
+local rarityListFrame = createSquircleFrame(UDim2.new(0, 300, 0, 300), UDim2.new(0.5, -150, 0.5, -150), screenGui)
+
+-- Create Rarity List Title
+local rarityTitle = Instance.new("TextLabel")
+rarityTitle.Size = UDim2.new(1, 0, 0, 50)
+rarityTitle.Position = UDim2.new(0, 0, 0, 0)
+rarityTitle.BackgroundTransparency = 1
+rarityTitle.Text = "Rarity List"
+rarityTitle.TextScaled = true
+rarityTitle.Font = Enum.Font.SourceSansBold
+rarityTitle.Parent = rarityListFrame
+
+-- Create Scrolling Frame
+local scrollingFrame = Instance.new("ScrollingFrame")
+scrollingFrame.Size = UDim2.new(1, 0, 0, 200)
+scrollingFrame.Position = UDim2.new(0, 0, 0.15, 0)
+scrollingFrame.BackgroundColor3 = Color3.fromRGB(240, 240, 240)
+scrollingFrame.ScrollBarThickness = 10
+scrollingFrame.Parent = rarityListFrame
+
+-- Create Rarity List Text
+local rarityText = Instance.new("TextLabel")
+rarityText.Size = UDim2.new(1, 0, 0, 200)
+rarityText.Position = UDim2.new(0, 0, 0, 0)
+rarityText.BackgroundTransparency = 1
+rarityText.Text = ""
+rarityText.TextScaled = true
+rarityText.TextWrapped = true
+rarityText.Font = Enum.Font.SourceSans
+rarityText.Parent = scrollingFrame
+
+-- Create Page Buttons
+local pageButton1 = Instance.new("TextButton")
+pageButton1.Size = UDim2.new(0.40, 0, 0, 35)
+pageButton1.Position = UDim2.new(0.05, 0, 0.854, 0)
+pageButton1.BackgroundColor3 = Color3.fromRGB(200, 200, 200)
+pageButton1.Text = "Chance"
+pageButton1.TextScaled = true
+pageButton1.Font = Enum.Font.SourceSansBold
+pageButton1.Parent = rarityListFrame
+
+local pageButton2 = Instance.new("TextButton")
+pageButton2.Size = UDim2.new(0.40, 0, 0, 35)
+pageButton2.Position = UDim2.new(0.55, 0, 0.854, 0)
+pageButton2.BackgroundColor3 = Color3.fromRGB(200, 200, 200)
+pageButton2.Text = "Index"
+pageButton2.TextScaled = true
+pageButton2.Font = Enum.Font.SourceSansBold
+pageButton2.Parent = rarityListFrame
+
+-- Define Categories
+local categories = {
+    {"Common", Color3.fromRGB(128, 128, 128), 50},   -- 50%
+    {"Uncommon", Color3.fromRGB(0, 255, 0), 30},  -- 30%
+    {"Rare", Color3.fromRGB(0, 255, 255), 15},    -- 15%
+    {"Epic", Color3.fromRGB(255, 0, 255), 4},     -- 4%
+    {"Legendary", Color3.fromRGB(0, 255, 0), 1}, -- 1%
+    {"Exotic", Color3.fromRGB(255, 165, 0), 1}, -- 1%
+    {"Mythical", Color3.fromRGB(255, 0, 0), 1}, -- 1%
+}
+
+local lastResult = {}
+local previousResults = {}
+
+-- Random Category Generation
+local function generateRandomCategory()
+    local totalChance = 0
+    for _, category in ipairs(categories) do
+        totalChance = totalChance + category[3]
+    end
+    
+    local randomValue = math.random(1, totalChance)
+    local currentResult = {}
+    local cumulativeChance = 0
+
+    for _, category in ipairs(categories) do
+        cumulativeChance = cumulativeChance + category[3]
+        if randomValue <= cumulativeChance then
+            currentResult = category
+            break
+        end
+    end
+
+    resultLabel.Text = currentResult[1]  -- Update the result label
+    resultLabel.TextColor3 = currentResult[2]  -- Update the color based on category
+
+    -- Check for duplicates
+    if table.find(previousResults, currentResult[1]) then
+        duplicateLabel.Text = "Duplicate :( "
+        duplicateLabel.TextColor3 = currentResult[2]  -- Set the color of duplicate text
+        duplicateLabel.Visible = true
+    else
+        duplicateLabel.Text = ""
+        duplicateLabel.Visible = false
+    end
+
+    -- Store the current result in previous results
+    table.insert(previousResults, currentResult[1])
+    lastResult = currentResult
+end
+
+-- Rolling text logic
+local function onGenerateButtonClicked()
+    blockButton.Visible = true
+    generateButton.Active = false
+    duplicateLabel.Text = ""  -- Clear previous duplicate message
+    resultLabel.Text = "Rolling..."  -- Show rolling text
+    resultLabel.TextColor3 = Color3.fromRGB(0, 0, 0)  -- Reset color
+    duplicateLabel.Visible = false  -- Hide duplicate message
+    wait(1)  -- Wait for 1 second
+    generateRandomCategory()  -- Generate after rolling
+    wait(0.5)  -- Cooldown
+    blockButton.Visible = false
+    generateButton.Active = true
+end
+
+-- Create Confirmation Frame
+local confirmationFrame = createSquircleFrame(UDim2.new(0, 300, 0, 100), UDim2.new(0.5, -150, 0.5, -50), screenGui)
+confirmationFrame.Visible = false
+
+-- Create Confirmation Text
+local confirmationText = Instance.new("TextLabel")
+confirmationText.Size = UDim2.new(1, 0, 0.6, 0)
+confirmationText.Position = UDim2.new(0, 0, 0, 0)
+confirmationText.BackgroundTransparency = 1
+confirmationText.Text = "Are you sure you want to exit?"
+confirmationText.TextScaled = true
+confirmationText.Font = Enum.Font.SourceSansBold
+confirmationText.Parent = confirmationFrame
+
+-- Yes Button
+local yesButton = Instance.new("TextButton")
+yesButton.Size = UDim2.new(0.4, 0, 0.4, 0)
+yesButton.Position = UDim2.new(0.1, 0, 0.6, 0)
+yesButton.BackgroundColor3 = Color3.fromRGB(0, 255, 0)
+yesButton.Text = "Yes"
+yesButton.TextScaled = true
+yesButton.Font = Enum.Font.SourceSansBold
+yesButton.Parent = confirmationFrame
+
+-- No Button
+local noButton = Instance.new("TextButton")
+noButton.Size = UDim2.new(0.4, 0, 0.4, 0)
+noButton.Position = UDim2.new(0.55, 0, 0.6, 0)
+noButton.BackgroundColor3 = Color3.fromRGB(255, 0, 0)
+noButton.Text = "No"
+noButton.TextScaled = true
+noButton.Font = Enum.Font.SourceSansBold
+noButton.Parent = confirmationFrame
+
+-- Close GUI Function
+local function closeGUI()
+    screenGui:Destroy()
+end
+
+-- Hide Confirmation Function
+local function hideConfirmation()
+    confirmationFrame.Visible = false
+    rngFrame.Visible = true
+end
+
+-- Connect Button Clicks to Functions
+generateButton.MouseButton1Click:Connect(onGenerateButtonClicked)
+closeButton.MouseButton1Click:Connect(function()
+    confirmationFrame.Visible = true
+    rngFrame.Visible = false
+end)
+yesButton.MouseButton1Click:Connect(closeGUI)
+noButton.MouseButton1Click:Connect(hideConfirmation)
+
+-- Rarity List Button Clicked Function
+local function toggleRarityList()
+    rarityListFrame.Visible = not rarityListFrame.Visible
+    rngFrame.Visible = not rngFrame.Visible
+
+    if rarityListFrame.Visible then
+        rarityText.Text = ""  -- Reset text
+        for _, category in ipairs(categories) do
+            rarityText.Text = rarityText.Text .. category[1] .. " - Chance: " .. category[3] .. "%\n"
+        end
+        switchToPage1()  -- Show page 1 on toggle
+    end
+end
+
+-- Switch Pages
+local function switchToPage1()
+    rarityText.Text = ""  -- Reset text for Page 1
+    for _, category in ipairs(categories) do
+        rarityText.Text = rarityText.Text .. category[1] .. " - Chance: " .. category[3] .. "%\n"
+    end
+end
+
+local function switchToPage2()
+    rarityText.Text = "Rarity Index\n\nCommon\nUncommon\nRare\nEpic\nLegendary\nExotic\nMythical"
+end
+
+-- Close Rarity List with X Button
+local xButton = Instance.new("TextButton")
+xButton.Size = UDim2.new(0, 30, 0, 30)
+xButton.Position = UDim2.new(1, -35, 0, 5)
+xButton.BackgroundColor3 = Color3.fromRGB(255, 0, 0)
+xButton.Text = "X"
+xButton.TextScaled = true
+xButton.Font = Enum.Font.SourceSansBold
+xButton.Parent = rarityListFrame
+
+xButton.MouseButton1Click:Connect(function()
+    rarityListFrame.Visible = false
+end)
+
+-- Connect Rarity List Button
+menuRarityButton.MouseButton1Click:Connect(toggleRarityList)
+
+-- Page Button Clicks
+pageButton1.MouseButton1Click:Connect(switchToPage1)
+pageButton2.MouseButton1Click:Connect(switchToPage2)
+
+-- Main Button Functionality
+menuMainButton.MouseButton1Click:Connect(function()
+    rngFrame.Visible = not rngFrame.Visible
+    rarityListFrame.Visible = false  -- Hide Rarity List when Main is clicked
+    menuFrame.Visible = false  -- Hide Menu when Main is clicked
+end)
+
+-- Menu Button Functionality
+menuButton.MouseButton1Click:Connect(function()
+    menuFrame.Visible = not menuFrame.Visible
+    rngFrame.Visible = false  -- Hide RNG Frame when Menu is clicked
+    rarityListFrame.Visible = false  -- Hide Rarity List when Menu is clicked
+end)
+
+-- Exit Button Functionality
+menuExitButton.MouseButton1Click:Connect(function()
+    confirmationFrame.Visible = true
+    menuFrame.Visible = false  -- Hide Menu when Exit is clicked
+end)
+
+-- Initialize the first page
+switchToPage1()
