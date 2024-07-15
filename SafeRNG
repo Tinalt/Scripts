@@ -1,0 +1,503 @@
+local SafeSpot = Instance.new("TrussPart", workspace)
+
+SafeSpot.Position = Vector3.new(392.39,104.57,18.26)
+
+SafeSpot.Name = "Spot"
+
+SafeSpot.Size = Vector3.new(2, 10, 4)
+
+SafeSpot.Anchored = true
+
+SafeSpot.Transparency = 0.5
+
+SafeSpot.CFrame = SafeSpot.CFrame * CFrame.Angles(0, math.rad(15), 0) -- Rotate 15 degrees around the Y axis
+
+
+local SafeSpot = Instance.new("TrussPart", workspace)
+
+SafeSpot.Position = Vector3.new(392.91,104.57,20.2)
+
+SafeSpot.Name = "Spot"
+
+SafeSpot.Size = Vector3.new(2, 10, 4)
+
+SafeSpot.Anchored = true
+
+SafeSpot.Transparency = 0.5
+
+SafeSpot.CFrame = SafeSpot.CFrame * CFrame.Angles(0, math.rad(15), 0) -- Rotate 15 degrees around the Y axis
+
+local SafeSpot = Instance.new("Part", workspace)
+
+SafeSpot.Position = Vector3.new(405.25,123.3,10.02)
+
+SafeSpot.Name = "Spot"
+
+SafeSpot.Size = Vector3.new(7,1,10)
+
+SafeSpot.Anchored = true
+
+SafeSpot.Transparency = 0.5
+
+local function setRotation(part, rotation)
+    part.CFrame = part.CFrame * CFrame.Angles(math.rad(rotation.x), math.rad(rotation.y), math.rad(rotation.z))
+end
+
+-- Set the rotation using the function
+setRotation(SafeSpot, Vector3.new(-28.19, -56.77, -24.15))
+
+local SafeSpot = Instance.new("Part", workspace)
+
+SafeSpot.Position = Vector3.new(420.6,123.29,-4.89)
+
+SafeSpot.Name = "Spot"
+
+SafeSpot.Size = Vector3.new(12,1,11)
+
+SafeSpot.Anchored = true
+
+SafeSpot.Transparency = 0.5
+
+local function setRotation(part, rotation)
+    part.CFrame = part.CFrame * CFrame.Angles(math.rad(rotation.x), math.rad(rotation.y), math.rad(rotation.z))
+end
+
+-- Set the rotation using the function
+setRotation(SafeSpot, Vector3.new(0,0,15))
+
+local SafeSpot = Instance.new("Part", workspace)
+
+SafeSpot.Position = Vector3.new(434.05,128.59,-8.11)
+
+SafeSpot.Name = "Spot"
+
+SafeSpot.Size = Vector3.new(10,1,7)
+
+SafeSpot.Anchored = true
+
+SafeSpot.Transparency = 0.5
+
+local function setRotation(part, rotation)
+    part.CFrame = part.CFrame * CFrame.Angles(math.rad(rotation.x), math.rad(rotation.y), math.rad(rotation.z))
+end
+
+-- Set the rotation using the function
+setRotation(SafeSpot, Vector3.new(0,0,15))
+
+local SafeSpot = Instance.new("Part", workspace)
+
+SafeSpot.Position = Vector3.new(453.35,127.17,10.6)
+
+SafeSpot.Name = "Spot"
+
+SafeSpot.Size = Vector3.new(7,1,15)
+
+SafeSpot.Anchored = true
+
+SafeSpot.Transparency = 0.5
+
+local function setRotation(part, rotation)
+    part.CFrame = part.CFrame * CFrame.Angles(math.rad(rotation.x), math.rad(rotation.y), math.rad(rotation.z))
+end
+
+-- Set the rotation using the function
+setRotation(SafeSpot, Vector3.new(30,0,0))
+
+local SafeSpot = Instance.new("Part", workspace)
+
+SafeSpot.Position = Vector3.new(468.32,124.79,26)
+
+SafeSpot.Name = "Spot"
+
+SafeSpot.Size = Vector3.new(17,1,6)
+
+SafeSpot.Anchored = true
+
+SafeSpot.Transparency = 0.5
+
+local function setRotation(part, rotation)
+    part.CFrame = part.CFrame * CFrame.Angles(math.rad(rotation.x), math.rad(rotation.y), math.rad(rotation.z))
+end
+
+-- Set the rotation using the function
+setRotation(SafeSpot, Vector3.new(0,0,0))
+
+local SafeSpot = Instance.new("TrussPart", workspace)
+
+SafeSpot.Position = Vector3.new(488.83,138.16,33)
+
+SafeSpot.Name = "Spot"
+
+SafeSpot.Size = Vector3.new(2,10,2)
+
+SafeSpot.Anchored = true
+
+SafeSpot.Transparency = 0.5
+
+local function setRotation(part, rotation)
+    part.CFrame = part.CFrame * CFrame.Angles(math.rad(rotation.x), math.rad(rotation.y), math.rad(rotation.z))
+end
+
+-- Set the rotation using the function
+setRotation(SafeSpot, Vector3.new(0,0,0))
+
+local SafeSpot = Instance.new("TrussPart", workspace)
+
+SafeSpot.Position = Vector3.new(491.15,139.8,33)
+
+SafeSpot.Name = "Spot"
+
+SafeSpot.Size = Vector3.new(2,13,2)
+
+SafeSpot.Anchored = true
+
+SafeSpot.Transparency = 0.5
+
+local function setRotation(part, rotation)
+    part.CFrame = part.CFrame * CFrame.Angles(math.rad(rotation.x), math.rad(rotation.y), math.rad(rotation.z))
+end
+
+-- Set the rotation using the function
+setRotation(SafeSpot, Vector3.new(0,0,0))
+
+local SafeSpot = Instance.new("Part", workspace)
+
+SafeSpot.Position = Vector3.new(467.51,153.85,28.5)
+
+SafeSpot.Name = "Spot"
+
+SafeSpot.Size = Vector3.new(35,1,5)
+
+SafeSpot.Anchored = true
+
+SafeSpot.Transparency = 0.5
+
+local function setRotation(part, rotation)
+    part.CFrame = part.CFrame * CFrame.Angles(math.rad(rotation.x), math.rad(rotation.y), math.rad(rotation.z))
+end
+
+-- Set the rotation using the function
+setRotation(SafeSpot, Vector3.new(0,0,0))
+
+local SafeSpot = Instance.new("Part", workspace)
+
+SafeSpot.Position = Vector3.new(454.26,158.57,23)
+
+SafeSpot.Name = "Spot"
+
+SafeSpot.Size = Vector3.new(11,1,4)
+
+SafeSpot.Anchored = true
+
+SafeSpot.Transparency = 0.5
+
+local function setRotation(part, rotation)
+    part.CFrame = part.CFrame * CFrame.Angles(math.rad(rotation.x), math.rad(rotation.y), math.rad(rotation.z))
+end
+
+-- Set the rotation using the function
+setRotation(SafeSpot, Vector3.new(0,0,0))
+
+local SafeSpot = Instance.new("Part", workspace)
+
+SafeSpot.Position = Vector3.new(447.16,162.42,25.3)
+
+SafeSpot.Name = "Spot"
+
+SafeSpot.Size = Vector3.new(7,1,15)
+
+SafeSpot.Anchored = true
+
+SafeSpot.Transparency = 0.5
+
+local function setRotation(part, rotation)
+    part.CFrame = part.CFrame * CFrame.Angles(math.rad(rotation.x), math.rad(rotation.y), math.rad(rotation.z))
+end
+
+-- Set the rotation using the function
+setRotation(SafeSpot, Vector3.new(-40.89,-48.59,-49.11))
+
+local SafeSpot = Instance.new("Part", workspace)
+
+SafeSpot.Position = Vector3.new(343.07,135.52,84.67)
+
+SafeSpot.Name = "Spot"
+
+SafeSpot.Size = Vector3.new(56.18,75.25,3.64)
+
+SafeSpot.Anchored = true
+
+SafeSpot.Transparency = 0.5
+
+local function setRotation(part, rotation)
+    part.CFrame = part.CFrame * CFrame.Angles(math.rad(rotation.x), math.rad(rotation.y), math.rad(rotation.z))
+end
+
+-- Set the rotation using the function
+setRotation(SafeSpot, Vector3.new(0,0,0))
+
+local SafeSpot = Instance.new("Part", workspace)
+
+SafeSpot.Position = Vector3.new(362.35,135.52,99.03)
+
+SafeSpot.Name = "Spot"
+
+SafeSpot.Size = Vector3.new(27.11,75.24,3.64)
+
+SafeSpot.Anchored = true
+
+SafeSpot.Transparency = 0.5
+
+local function setRotation(part, rotation)
+    part.CFrame = part.CFrame * CFrame.Angles(math.rad(rotation.x), math.rad(rotation.y), math.rad(rotation.z))
+end
+
+-- Set the rotation using the function
+setRotation(SafeSpot, Vector3.new(-180,89.48,-180))
+
+local SafeSpot = Instance.new("Part", workspace)
+
+SafeSpot.Position = Vector3.new(396.14,114.49,112.52)
+
+SafeSpot.Name = "Spot"
+
+SafeSpot.Size = Vector3.new(11.47,5.71,22.8)
+
+SafeSpot.Anchored = true
+
+SafeSpot.Transparency = 0.5
+
+local function setRotation(part, rotation)
+    part.CFrame = part.CFrame * CFrame.Angles(math.rad(rotation.x), math.rad(rotation.y), math.rad(rotation.z))
+end
+
+-- Set the rotation using the function
+setRotation(SafeSpot, Vector3.new(-135.03,21.53,152.93))
+
+local SafeSpot = Instance.new("Part", workspace)
+
+SafeSpot.Position = Vector3.new(403.13,116.76,94.03)
+
+SafeSpot.Name = "Spot"
+
+SafeSpot.Size = Vector3.new(17.85,21.43,5.47)
+
+SafeSpot.Anchored = true
+
+SafeSpot.Transparency = 0.5
+
+local function setRotation(part, rotation)
+    part.CFrame = part.CFrame * CFrame.Angles(math.rad(rotation.x), math.rad(rotation.y), math.rad(rotation.z))
+end
+
+-- Set the rotation using the function
+setRotation(SafeSpot, Vector3.new(-90.34,33.19,90.63))
+
+local SafeSpot = Instance.new("Part", workspace)
+
+SafeSpot.Position = Vector3.new(219.73,103.13,111.51)
+
+SafeSpot.Name = "Spot"
+
+SafeSpot.Size = Vector3.new(32.82,3.61,37.18)
+
+SafeSpot.Anchored = true
+
+SafeSpot.Transparency = 0.5
+
+local function setRotation(part, rotation)
+    part.CFrame = part.CFrame * CFrame.Angles(math.rad(rotation.x), math.rad(rotation.y), math.rad(rotation.z))
+end
+
+-- Set the rotation using the function
+setRotation(SafeSpot, Vector3.new(0,0,0))
+
+local SafeSpot = Instance.new("Part", workspace)
+
+SafeSpot.Position = Vector3.new(205.93,109.25,105.2)
+
+SafeSpot.Name = "Spot"
+
+SafeSpot.Size = Vector3.new(33.13,3.61,50.49)
+
+SafeSpot.Anchored = true
+
+SafeSpot.Transparency = 0.5
+
+local function setRotation(part, rotation)
+    part.CFrame = part.CFrame * CFrame.Angles(math.rad(rotation.x), math.rad(rotation.y), math.rad(rotation.z))
+end
+
+-- Set the rotation using the function
+setRotation(SafeSpot, Vector3.new(0,0,0))
+
+local SafeSpot = Instance.new("Part", workspace)
+
+SafeSpot.Position = Vector3.new(191.97,114.69,112.81)
+
+SafeSpot.Name = "Spot"
+
+SafeSpot.Size = Vector3.new(29.81,3.61,60.56)
+
+SafeSpot.Anchored = true
+
+SafeSpot.Transparency = 0.5
+
+local function setRotation(part, rotation)
+    part.CFrame = part.CFrame * CFrame.Angles(math.rad(rotation.x), math.rad(rotation.y), math.rad(rotation.z))
+end
+
+-- Set the rotation using the function
+setRotation(SafeSpot, Vector3.new(0,0,0))
+
+local SafeSpot = Instance.new("Part", workspace)
+
+SafeSpot.Position = Vector3.new(173.39,106.6,166.2)
+
+SafeSpot.Name = "Spot"
+
+SafeSpot.Size = Vector3.new(108.19,43.17,9.48)
+
+SafeSpot.Anchored = true
+
+SafeSpot.Transparency = 0.5
+
+local function setRotation(part, rotation)
+    part.CFrame = part.CFrame * CFrame.Angles(math.rad(rotation.x), math.rad(rotation.y), math.rad(rotation.z))
+end
+
+-- Set the rotation using the function
+setRotation(SafeSpot, Vector3.new(0,0,0))
+
+local SafeSpot = Instance.new("Part", workspace)
+
+SafeSpot.Position = Vector3.new(260.82,115.29,143.02)
+
+SafeSpot.Name = "Spot"
+
+SafeSpot.Size = Vector3.new(17.35,43.17,5.95)
+
+SafeSpot.Anchored = true
+
+SafeSpot.Transparency = 0.5
+
+local function setRotation(part, rotation)
+    part.CFrame = part.CFrame * CFrame.Angles(math.rad(rotation.x), math.rad(rotation.y), math.rad(rotation.z))
+end
+
+-- Set the rotation using the function
+setRotation(SafeSpot, Vector3.new(0,0,0))
+
+local SafeSpot = Instance.new("Part", workspace)
+
+SafeSpot.Position = Vector3.new(268.39,115.29,227.13)
+
+SafeSpot.Name = "Spot"
+
+SafeSpot.Size = Vector3.new(7.46,43.17,174.17)
+
+SafeSpot.Anchored = true
+
+SafeSpot.Transparency = 0.5
+
+local function setRotation(part, rotation)
+    part.CFrame = part.CFrame * CFrame.Angles(math.rad(rotation.x), math.rad(rotation.y), math.rad(rotation.z))
+end
+
+-- Set the rotation using the function
+setRotation(SafeSpot, Vector3.new(0,0,0))
+
+local SafeSpot = Instance.new("Part", workspace)
+
+SafeSpot.Position = Vector3.new(226.5,82.84,189.85)
+
+SafeSpot.Name = "Spot"
+
+SafeSpot.Size = Vector3.new(5.12,9.06,21.44)
+
+SafeSpot.Anchored = true
+
+SafeSpot.Transparency = 0.5
+
+local function setRotation(part, rotation)
+    part.CFrame = part.CFrame * CFrame.Angles(math.rad(rotation.x), math.rad(rotation.y), math.rad(rotation.z))
+end
+
+-- Set the rotation using the function
+setRotation(SafeSpot, Vector3.new(13.73,-43.83,16.54))
+
+local SafeSpot = Instance.new("Part", workspace)
+
+SafeSpot.Position = Vector3.new(217.87,81.68,205.9)
+
+SafeSpot.Name = "Spot"
+
+SafeSpot.Size = Vector3.new(5.73,8.77,22.82)
+
+SafeSpot.Anchored = true
+
+SafeSpot.Transparency = 0.5
+
+local function setRotation(part, rotation)
+    part.CFrame = part.CFrame * CFrame.Angles(math.rad(rotation.x), math.rad(rotation.y), math.rad(rotation.z))
+end
+
+-- Set the rotation using the function
+setRotation(SafeSpot, Vector3.new(4.23,-11.66,-1.87))
+
+local SafeSpot = Instance.new("Part", workspace)
+
+SafeSpot.Position = Vector3.new(202.34,85.23,239.27)
+
+SafeSpot.Name = "Spot"
+
+SafeSpot.Size = Vector3.new(5.7,10.76,20.15)
+
+SafeSpot.Anchored = true
+
+SafeSpot.Transparency = 0.5
+
+local function setRotation(part, rotation)
+    part.CFrame = part.CFrame * CFrame.Angles(math.rad(rotation.x), math.rad(rotation.y), math.rad(rotation.z))
+end
+
+-- Set the rotation using the function
+setRotation(SafeSpot, Vector3.new(-19.36,-51.77,-18.24))
+
+local SafeSpot = Instance.new("Part", workspace)
+
+SafeSpot.Position = Vector3.new(193.08,86.7,254.37)
+
+SafeSpot.Name = "Spot"
+
+SafeSpot.Size = Vector3.new(4.54,10.65,22.94)
+
+SafeSpot.Anchored = true
+
+SafeSpot.Transparency = 0.5
+
+local function setRotation(part, rotation)
+    part.CFrame = part.CFrame * CFrame.Angles(math.rad(rotation.x), math.rad(rotation.y), math.rad(rotation.z))
+end
+
+-- Set the rotation using the function
+setRotation(SafeSpot, Vector3.new(17.85,-24.42,1.71))
+
+local SafeSpot = Instance.new("Part", workspace)
+
+SafeSpot.Position = Vector3.new(178,107.31,61.51)
+
+SafeSpot.Name = "Spot"
+
+SafeSpot.Size = Vector3.new(5.68,4.66,15.92)
+
+SafeSpot.Anchored = true
+
+SafeSpot.Transparency = 0.5
+
+local function setRotation(part, rotation)
+    part.CFrame = part.CFrame * CFrame.Angles(math.rad(rotation.x), math.rad(rotation.y), math.rad(rotation.z))
+end
+
+-- Set the rotation using the function
+setRotation(SafeSpot, Vector3.new(-56.76,-8.53,-12.75))
