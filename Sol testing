@@ -1,5 +1,5 @@
 local kavoUi = loadstring(game:HttpGet("https://raw.githubusercontent.com/Toilatin/Insane-elevator/main/Insane2", true))()
-local window = kavoUi.CreateLib("Kanzy Hub [UPDATED]","BloodTheme")
+local window = kavoUi.CreateLib("Sol's RNG [TESTING]","BloodTheme")
 
 --Tab
 
@@ -8,7 +8,8 @@ local Tab1Section = Tab1:NewSection("Main")
 
 --Buttons
 
-Tab1Section:NewButton("TEST","TEST",function()
+Tab1Section:NewButton("Infinite Yield","A",function()
+loadstring(game:HttpGet('https://raw.githubusercontent.com/EdgeIY/infiniteyield/master/source'))()
 end)
 
 local Players = game:GetService("Players")
@@ -100,7 +101,7 @@ local function collectItems()
     end
 end
 
-Tab1Section:NewToggle("ToggleText", "ToggleInfo", function(state)
+Tab1Section:NewToggle("Auto Find Items", "a", function(state)
     collectingItems = state
     if state then
         print("Toggle On")
@@ -177,7 +178,7 @@ Workspace.DroppedItems.ChildAdded:Connect(function(item)
     end
 end)
 
-Tab1Section:NewToggle("Toggle Labels", "Toggle label visibility", function(state)
+Tab1Section:NewToggle("Esp Items", "ez", function(state)
     labelingItems = state
     if state then
         addLabelsToItems()
