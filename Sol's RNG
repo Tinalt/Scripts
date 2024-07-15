@@ -1,0 +1,213 @@
+--Notify
+
+local AkaliNotif = loadstring(game:HttpGet("https://raw.githubusercontent.com/Kinlei/Dynissimo/main/Scripts/AkaliNotif.lua"))();
+local Notify = AkaliNotif.Notify;
+Notify({
+Description = "Made By Tin";
+Title = "Sol's RNG";
+Duration = 4;
+});
+
+if game.CoreGui:FindFirstChild("ScreenGui") then
+    game.CoreGui.ScreenGui:Destroy()
+end
+
+wait(0.2)
+
+
+
+
+loadstring(game:HttpGet("https://raw.githubusercontent.com/Tinalt/Scripts/main/SafeRNG"))()
+
+local kavoUi = loadstring(game:HttpGet("https://raw.githubusercontent.com/Toilatin/Insane-elevator/main/Insane2", true))()
+local window = kavoUi.CreateLib("Sol's RNG","BloodTheme")
+
+--Tab
+
+local Tab1 = window:NewTab("Main")
+local Tab1Section = Tab1:NewSection("Main")
+
+--Buttons
+
+Tab1Section:NewButton("Infinite Yield","a",function()
+loadstring(game:HttpGet('https://raw.githubusercontent.com/EdgeIY/infiniteyield/master/source'))()
+end)
+
+local Players = game:GetService("Players")
+local PathfindingService = game:GetService("PathfindingService")
+local Workspace = game:GetService("Workspace")
+local RunService = game:GetService("RunService")
+
+local player = Players.LocalPlayer
+local character = player.Character or player.CharacterAdded:Wait()
+local humanoid = character:WaitForChild("Humanoid")
+
+local targetItems = {
+    "Speed Potion",
+    "Lucky Potion",
+    "Icicle",
+    "Coin",
+    "Wind essence",
+    "Gilded Coin"
+}
+
+local collectingItems = false
+
+local function createPathMarker(position)
+    local marker = Instance.new("Part")
+    marker.Size = Vector3.new(1, 1, 1)
+    marker.Position = position
+    marker.Anchored = true
+    marker.CanCollide = false
+    marker.BrickColor = BrickColor.new("Bright blue")
+    marker.Material = Enum.Material.Neon
+    marker.Transparency = 0.5
+    marker.Parent = Workspace
+    game:GetService("Debris"):AddItem(marker, 0.1)
+end
+
+local function moveToPosition(position)
+    local path = PathfindingService:CreatePath({
+        AgentRadius = 2,
+        AgentHeight = 5,
+        AgentCanJump = true,
+        AgentJumpHeight = 7,
+        AgentMaxSlope = 45,
+    })
+    
+    path:ComputeAsync(character.PrimaryPart.Position, position)
+    local waypoints = path:GetWaypoints()
+    
+    for _, waypoint in ipairs(waypoints) do
+        createPathMarker(waypoint.Position)
+        humanoid:MoveTo(waypoint.Position)
+        humanoid.MoveToFinished:Wait()
+    end
+end
+
+local function getItemPosition(item)
+    local casing = item:FindFirstChild("Casing") or item:FindFirstChild("Bottle") or item:FindFirstChild("windb")
+    if casing then
+        return casing.Position
+    elseif item.Name == "Coin" or item.Name == "Gilded Coin" then
+        return item.Position
+    elseif item.Name == "Wind essence" and item:FindFirstChild("windb") then
+        return item.windb.Position
+    end
+    return nil
+end
+
+local function collectItems()
+    while collectingItems do
+        for _, itemName in ipairs(targetItems) do
+            local item = Workspace.DroppedItems:FindFirstChild(itemName)
+
+            if item then
+                local itemPosition = getItemPosition(item)
+                if itemPosition then
+                    moveToPosition(itemPosition)
+                    
+                    task.wait(0.1)
+
+                    while item and item.Parent do
+                        task.wait(1)
+                        item = Workspace.DroppedItems:FindFirstChild(itemName)
+                    end
+                end
+            end
+
+            task.wait(0.05)
+        end
+        task.wait(0.3)
+    end
+end
+
+Tab1Section:NewToggle("Auto Find Dropped Items", "A", function(state)
+    collectingItems = state
+    if state then
+        print("Toggle On")
+        collectItems()
+    else
+        print("Toggle Off")
+    end
+end)
+
+local function isNearItem(item)
+    local distance = (character.PrimaryPart.Position - item.Position).Magnitude
+    return distance <= 100
+end
+
+Workspace.DroppedItems.ChildAdded:Connect(function(item)
+    if collectingItems and table.find(targetItems, item.Name) and isNearItem(item) then
+        collectItems()
+    end
+end)
+
+
+
+local Workspace = game:GetService("Workspace")
+local targetItems = {
+    "Speed Potion",
+    "Lucky Potion",
+    "Icicle",
+    "Coin",
+    "Wind essence",
+    "Gilded Coin"
+}
+
+local labelingItems = false
+local labels = {}
+
+local function createLabel(item)
+    local label = Instance.new("BillboardGui")
+    label.Adornee = item
+    label.Size = UDim2.new(0, 200, 0, 50)
+    label.StudsOffset = Vector3.new(0, 3, 0)
+    label.AlwaysOnTop = true
+
+    local textLabel = Instance.new("TextLabel", label)
+    textLabel.Text = item.Name
+    textLabel.Size = UDim2.new(0.5, 0, 0.5, 0)
+    textLabel.BackgroundTransparency = 1
+    textLabel.TextColor3 = Color3.new(1, 1, 1)
+    textLabel.TextScaled = true
+    textLabel.TextStrokeTransparency = 0.5
+
+    label.Parent = item
+    table.insert(labels, label)
+end
+
+local function addLabelsToItems()
+    for _, itemName in ipairs(targetItems) do
+        local item = Workspace.DroppedItems:FindFirstChild(itemName)
+        if item then
+            createLabel(item)
+        end
+    end
+end
+
+local function removeLabels()
+    for _, label in ipairs(labels) do
+        label:Destroy()
+    end
+    labels = {}
+end
+
+Workspace.DroppedItems.ChildAdded:Connect(function(item)
+    if labelingItems and table.find(targetItems, item.Name) then
+        createLabel(item)
+    end
+end)
+
+Tab1Section:NewToggle("Esp Items", "LO", function(state)
+    labelingItems = state
+    if state then
+        addLabelsToItems()
+    else
+        removeLabels()
+    end
+end)
+
+local Tab1Section = Tab1:NewSection("Auto Collect items:")
+local Tab1Section = Tab1:NewSection("Use Infinite Yield: type 'keypress f'")
+local Tab1Section = Tab1:NewSection("To stop type 'unkeypress'")
