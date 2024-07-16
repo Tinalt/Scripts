@@ -22,10 +22,53 @@ loadstring(game:HttpGet("https://raw.githubusercontent.com/Tinalt/Scripts/main/S
 local kavoUi = loadstring(game:HttpGet("https://raw.githubusercontent.com/Toilatin/Insane-elevator/main/Insane2", true))()
 local window = kavoUi.CreateLib("Sol's RNG","BloodTheme")
 
+--Toggle Button
+
+local gui = Instance.new("ScreenGui")
+gui.Name = "patrickGui"
+gui.Parent = game.CoreGui
+
+local TextButton = Instance.new("TextButton")
+TextButton.Text = "Show\nui"
+TextButton.TextSize = 14
+TextButton.TextColor3 = Color3.new(1, 1, 1)
+TextButton.BackgroundColor3 = Color3.new(0, 0, 0)
+TextButton.BorderColor3 = Color3.new(0, 0, 0)
+TextButton.BackgroundTransparency = 0.5
+TextButton.BorderSizePixel = 4
+TextButton.Font = Enum.Font.Code
+TextButton.Size = UDim2.new(0, 50, 0, 50)
+TextButton.Position = UDim2.new(1, -110, 0, 10)
+
+local isVisible = false
+TextButton.MouseButton1Click:Connect(function()
+    isVisible = not isVisible
+    if isVisible then
+        TextButton.Text = "Hide\nui"
+    else
+        TextButton.Text = "Show\nui"
+    end
+    kavoUi:ToggleUI()
+end)
+TextButton.Parent = gui
+TextButton.Draggable = true
+
+local cornerUI = Instance.new("UICorner")
+cornerUI.CornerRadius = UDim.new(0, 5)
+cornerUI.Parent = TextButton
+
+local uiStroke = Instance.new("UIStroke")
+uiStroke.Color = Color3.new(0, 0, 0)
+uiStroke.Thickness = 2
+uiStroke.Parent = TextButton
+
 --Tab
 
 local Tab1 = window:NewTab("Main")
 local Tab1Section = Tab1:NewSection("Main")
+
+local Tab2 = window:NewTab("Updates Log")
+local Tab2Section = Tab2:NewSection("Updates Log")
 
 --Buttons
 
@@ -211,3 +254,12 @@ end)
 local Tab1Section = Tab1:NewSection("Auto Collect items:")
 local Tab1Section = Tab1:NewSection("Use Infinite Yield: type 'keypress f'")
 local Tab1Section = Tab1:NewSection("To stop type 'unkeypress'")
+
+
+
+
+
+
+---Updates Log
+
+local Tab2Section = Tab2:NewSection("Added Toggle Ui Button")
