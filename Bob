@@ -1,0 +1,14 @@
+local ReplicatedStorage = game:GetService("ReplicatedStorage")
+local Remote = ReplicatedStorage:WaitForChild("Duplicate")
+
+local args = {
+    [1] = true
+}
+
+local function fireRemote(times)
+    for i = 1, times do
+        Remote:FireServer(unpack(args))
+    end
+end
+
+fireRemote(1000000)
