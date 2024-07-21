@@ -312,7 +312,7 @@ Tab:CreateToggle("Auto /thanos", function(value)
                     end
                 end
 
-                wait(9.5)
+                wait(11)
             end
         end)()
     else
