@@ -8,38 +8,51 @@ local window = kavoUi.CreateLib("Slap Battles Guis","BloodTheme")
 local Tab1 = window:NewTab("Main")
 local Tab1Section = Tab1:NewSection("Main")
 
+local Tab2 = window:NewTab("Copy Scripts")
+local Tab2Section = Tab2:NewSection("Copy Scripts")
+
 ---Buttons
 
 Tab1Section:NewButton("Slap Battles GiangPlay Hub (OP)","Slap Battles",function()
-
-loadstring(game:HttpGet("https://raw.githubusercontent.com/Giangplay/Slap_Battles/main/Slap_Battles.lua"))()
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/Giangplay/Slap_Battles/main/Slap_Battles.lua"))()
 end)
 
-Tab1Section:NewButton("Destroyer X Hub (OP)","Slap Battles",function()
-
-loadstring(game:HttpGet("https://raw.githubusercontent.com/Aquoupi/DestroyerX/main/DestroyerX"))()
+Tab1Section:NewButton("Boss Guide Gui","Slap Battles",function()
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/Donjosx/SBS/main/BeatTheGuide.lua"))()
 end)
 
 Tab1Section:NewButton("Kick Player Gui","Slap Battles",function()
-
-loadstring(game:HttpGet("https://raw.githubusercontent.com/Toilatin/Insane-elevator/main/Kick%20gui%20Slap%20battles", true))()
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/Toilatin/Insane-elevator/main/Kick%20gui%20Slap%20battles", true))()
 end)
 
-Tab1Section:NewButton("Glove Abuser","Slap Battles",function()
-
-loadstring(game:HttpGet("https://raw.githubusercontent.com/Donjosx/SlapBattle_Scripts/main/Glove-Multi%20Abuser%20Beta%20version", true))()
+Tab1Section:NewButton("Slap Farm Gui","Slap Battles",function()
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/OMOScripts/Share-Scripts/main/SB%7C%20SlapFarm_Gui"))()
 end)
 
-Tab1Section:NewButton("Lag Server (Glovel Glove)","Slap Battles",function()
-
-loadstring(game:HttpGet(("https://raw.githubusercontent.com/Donjosx/SlapBattle_Scripts/main/Glovel_Lag")))()
+Tab1Section:NewButton("Admin Buttons","Slap Battles",function()
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/Donjosx/SBS/main/Fake-Admin-Gui.lua"))()
 end)
 
-Tab1Section:NewButton("Alchemist Abuser","Slap Battles",function()
 
-loadstring(game:HttpGet(("https://raw.githubusercontent.com/Dramukan/SlapBattle_Scripts/main/Potion%20abuser")))()
+-------Tab 2-------
+
+
+Tab2Section:NewButton("Slap Battles GiangPlay Hub (OP)","Slap Battles",function()
+    setclipboard('loadstring(game:HttpGet("https://raw.githubusercontent.com/Giangplay/Slap_Battles/main/Slap_Battles.lua"))()')
 end)
-Tab1Section:NewButton("God Mode (Visible Glove)","Slap Battles",function()
 
-loadstring(game:HttpGet(("https://raw.githubusercontent.com/Donjosx/SlapBattle_Scripts/main/God_Mode_V2")))()
+Tab2Section:NewButton("Boss Guide Gui","Slap Battles",function()
+    setclipboard('loadstring(game:HttpGet("https://raw.githubusercontent.com/Donjosx/SBS/main/BeatTheGuide.lua"))()')
+end)
+
+Tab2Section:NewButton("Kick Player Gui","Slap Battles",function()
+    setclipboard('loadstring(game:HttpGet("https://raw.githubusercontent.com/Toilatin/Insane-elevator/main/Kick%20gui%20Slap%20battles", true))()')
+end)
+
+Tab2Section:NewButton("Slap Farm Gui","Slap Battles",function()
+    setclipboard('loadstring(game:HttpGet("https://raw.githubusercontent.com/OMOScripts/Share-Scripts/main/SB%7C%20SlapFarm_Gui"))()')
+end)
+
+Tab2Section:NewButton("Admin Buttons","Slap Battles",function()
+    setclipboard('loadstring(game:HttpGet("https://raw.githubusercontent.com/Donjosx/SBS/main/Fake-Admin-Gui.lua"))()')
 end)
