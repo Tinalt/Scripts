@@ -1,0 +1,70 @@
+local gui = Instance.new("ScreenGui")
+gui.Name = "patrickGui"
+gui.Parent = game.CoreGui
+
+-- Create the TextButton
+local TextButton = Instance.new("TextButton")
+-- Text
+TextButton.Text = "Disabled"
+TextButton.TextSize = 14
+-- Color
+TextButton.TextColor3 = Color3.new(1, 1, 1)
+TextButton.BackgroundColor3 = Color3.new(0, 0, 0)
+TextButton.BorderColor3 = Color3.new(0, 0, 0)
+-- Transparency
+TextButton.BackgroundTransparency = 0.5
+-- Thickness
+TextButton.BorderSizePixel = 4
+-- Text Code
+TextButton.Font = Enum.Font.Code
+-- Size (making it a small square)
+TextButton.Size = UDim2.new(0, 50, 0, 50)  -- 50×50 pixels
+-- Position
+TextButton.Position = UDim2.new(1, -110, 0, 10)  -- Center of the screen
+TextButton.Parent = gui
+TextButton.Draggable = true
+
+local airWalkPart
+
+local function AirWalk()
+    airWalkPart = Instance.new("Part", workspace)
+    airWalkPart.Size = Vector3.new(7, 2, 3)
+    airWalkPart.CFrame = game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame + Vector3.new(0, -4, 0)
+    airWalkPart.Transparency = 1
+    airWalkPart.Anchored = true
+    airWalkPart.Name = "Airwalk"
+    
+    while airWalkPart do
+        airWalkPart.CFrame = game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame + Vector3.new(0, -4, 0)
+        wait(0.1)
+    end
+end
+
+local function StopAirWalk()
+    if airWalkPart then
+        airWalkPart:Destroy()
+        airWalkPart = nil
+    end
+end
+
+-- Function
+TextButton.MouseButton1Click:Connect(function()
+    if TextButton.Text == "Disabled" then
+        TextButton.Text = "Enabled"
+        AirWalk()
+    else
+        TextButton.Text = "Disabled"
+        StopAirWalk()
+    end
+end)
+
+-- Adding UICorner for rounded corners
+local cornerUI = Instance.new("UICorner")
+cornerUI.CornerRadius = UDim.new(0, 5)
+cornerUI.Parent = TextButton
+
+-- Adding UIStroke for border
+local uiStroke = Instance.new("UIStroke")
+uiStroke.Color = Color3.new(0, 0, 0)
+uiStroke.Thickness = 2
+uiStroke.Parent = TextButton
