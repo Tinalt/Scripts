@@ -188,11 +188,33 @@ coroutine.wrap(function()
             end
 
             if game.Players.LocalPlayer and game.Players.LocalPlayer.Character and game.Players.LocalPlayer.Character:FindFirstChild("HumanoidRootPart") then
-                game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(0.0010241562267765403, 100003.4765625, -0.0002340637583984062)
+                game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(0.04910659044981003, 100003.5, -0.12970729172229767)
             end
         end
     end
 end)()
+
+local Tab2Section = Tab2:NewSection("Safe Place")
+
+Tab2Section:NewButton("Create SafePlace", "Creates a part named 'Spot' at the specified location", function()
+    local SafeSpot = Instance.new("Part", workspace)
+    SafeSpot.Position = Vector3.new(0, 100000, 0)
+    SafeSpot.Name = "Spot"
+    SafeSpot.Size = Vector3.new(10000, 1, 10000)
+    SafeSpot.Anchored = true
+    SafeSpot.Transparency = 0.7
+    showNotification("SafePlace created")
+end)
+
+-- Button to delete all parts named "Spot"
+Tab2Section:NewButton("Delete SafePlace", "Deletes all parts named 'Spot'", function()
+    for _, part in pairs(workspace:GetChildren()) do
+        if part:IsA("Part") and part.Name == "Spot" then
+            part:Destroy()
+        end
+    end
+    showNotification("Deleted all SafePlace")
+end)
 
 local Tab2Section = Tab2:NewSection("You can farm Null Shards")
 
