@@ -43,6 +43,20 @@ uiStroke.Color = Color3.new(0, 0, 0)
 uiStroke.Thickness = 2
 uiStroke.Parent = TextButton
 
+---SafeSpot
+
+local SafeSpot = Instance.new("Part", workspace)
+
+SafeSpot.Position = Vector3.new(0,100000,0)
+
+SafeSpot.Name = "Spot"
+
+SafeSpot.Size = Vector3.new(100000,1,100000)
+
+SafeSpot.Anchored = true
+
+SafeSpot.Transparency = .7
+
 ---Hi
 
 local Tab1 = window:NewTab("Main")
@@ -196,24 +210,24 @@ end)()
 
 local Tab2Section = Tab2:NewSection("Safe Place")
 
-Tab2Section:NewButton("Create SafePlace", "Creates a part named 'Spot' at the specified location", function()
+Tab2Section:NewButton("Create SafeSpot", "Creates a part named 'Spot' at the specified location", function()
     local SafeSpot = Instance.new("Part", workspace)
     SafeSpot.Position = Vector3.new(0, 100000, 0)
     SafeSpot.Name = "Spot"
     SafeSpot.Size = Vector3.new(10000, 1, 10000)
     SafeSpot.Anchored = true
     SafeSpot.Transparency = 0.7
-    showNotification("SafePlace created")
+    showNotification("SafeSpot created")
 end)
 
 -- Button to delete all parts named "Spot"
-Tab2Section:NewButton("Delete SafePlace", "Deletes all parts named 'Spot'", function()
+Tab2Section:NewButton("Delete SafeSpot", "Deletes all parts named 'Spot'", function()
     for _, part in pairs(workspace:GetChildren()) do
         if part:IsA("Part") and part.Name == "Spot" then
             part:Destroy()
         end
     end
-    showNotification("Deleted all SafePlace")
+    showNotification("Deleted all SafeSpot")
 end)
 
 local Tab2Section = Tab2:NewSection("You can farm Null Shards")
