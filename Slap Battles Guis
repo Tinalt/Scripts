@@ -3,13 +3,59 @@
 local kavoUi = loadstring(game:HttpGet("https://raw.githubusercontent.com/Toilatin/Insane-elevator/main/Insane2", true))()
 local window = kavoUi.CreateLib("Slap Battles Guis","BloodTheme")
 
+---Toggle Button
+
+local gui = Instance.new("ScreenGui")
+gui.Name = "tinGui"
+gui.Parent = game.CoreGui
+
+local TextButton = Instance.new("TextButton")
+TextButton.Text = "Show\nui"
+TextButton.TextSize = 14
+TextButton.TextColor3 = Color3.new(1, 1, 1)
+TextButton.BackgroundColor3 = Color3.new(0, 0, 0)
+TextButton.BorderColor3 = Color3.new(0, 0, 0)
+TextButton.BackgroundTransparency = 0.5
+TextButton.BorderSizePixel = 4
+TextButton.Font = Enum.Font.Code
+TextButton.Size = UDim2.new(0, 50, 0, 50)
+TextButton.Position = UDim2.new(1, -110, 0, 10)
+
+local isVisible = false
+TextButton.MouseButton1Click:Connect(function()
+    isVisible = not isVisible
+    if isVisible then
+        TextButton.Text = "Hide\nui"
+    else
+        TextButton.Text = "Show\nui"
+    end
+    kavoUi:ToggleUI()
+end)
+TextButton.Parent = gui
+TextButton.Draggable = true
+
+local cornerUI = Instance.new("UICorner")
+cornerUI.CornerRadius = UDim.new(0, 5)
+cornerUI.Parent = TextButton
+
+local uiStroke = Instance.new("UIStroke")
+uiStroke.Color = Color3.new(0, 0, 0)
+uiStroke.Thickness = 2
+uiStroke.Parent = TextButton
+
 ---Hi
 
 local Tab1 = window:NewTab("Main")
 local Tab1Section = Tab1:NewSection("Main")
 
-local Tab2 = window:NewTab("Copy Scripts")
-local Tab2Section = Tab2:NewSection("Copy Scripts")
+local Tab2 = window:NewTab("Tournament")
+local Tab2Section = Tab2:NewSection("Tournament")
+
+local Tab3 = window:NewTab("Copy Scripts")
+local Tab3Section = Tab3:NewSection("Copy Scripts")
+
+local Tab4 = window:NewTab("Settings")
+local Tab4Section = Tab4:NewSection("Settings")
 
 ---Buttons
 
@@ -33,26 +79,176 @@ Tab1Section:NewButton("Admin Buttons","Slap Battles",function()
     loadstring(game:HttpGet("https://raw.githubusercontent.com/Donjosx/SBS/main/Fake-Admin-Gui.lua"))()
 end)
 
-
 -------Tab 2-------
 
+local autoJoin = false
+local autoJoinWin = false
+local remoteCounter = 0
+local winCounter = 0
+local currentNotification = nil  -- Keeps track of the current notification
 
-Tab2Section:NewButton("Slap Battles GiangPlay Hub (OP)","Slap Battles",function()
+-- Function to show and manage notifications
+local function showNotification(message)
+    -- Remove the existing notification if it exists
+    if currentNotification then
+        currentNotification:Destroy()
+    end
+
+    -- Create a ScreenGui
+    local screenGui = Instance.new("ScreenGui")
+    screenGui.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
+
+    -- Create a TextLabel for the notification
+    local notification = Instance.new("TextLabel")
+    notification.Size = UDim2.new(0.25, 0, 0.13, 0)  -- Width and height of the notification
+    notification.Position = UDim2.new(1, 0, 0.4, 0)  -- Start at the bottom of the screen
+    notification.BackgroundColor3 = Color3.new(0.2, 0.2, 0.2)  -- Dark grey background
+    notification.BackgroundTransparency = 0.3  -- 30% transparent
+    notification.BorderSizePixel = 3.5  -- Outline thickness
+    notification.BorderColor3 = Color3.new(0, 0, 0)  -- Black outline
+    notification.TextColor3 = Color3.new(1, 1, 1)  -- White text
+    notification.TextScaled = true
+    notification.TextWrapped = true
+    notification.Text = message  -- Notification message
+    notification.Font = Enum.Font.ArialBold
+    notification.Parent = screenGui
+
+    -- Add padding to the TextLabel
+    local padding = Instance.new("UIPadding")
+    padding.PaddingTop = UDim.new(0.1, 0)
+    padding.PaddingBottom = UDim.new(0.1, 0)
+    padding.PaddingLeft = UDim.new(0.1, 0)
+    padding.PaddingRight = UDim.new(0.1, 0)
+    padding.Parent = notification
+
+    -- Use TweenService to create the slide animation
+    local TweenService = game:GetService("TweenService")
+
+    -- Shorten the duration for a faster animation
+    local tweenInfo = TweenInfo.new(0.5, Enum.EasingStyle.Quad, Enum.EasingDirection.Out)
+    local targetPosition1 = UDim2.new(0.74, 0, 0.4, 0)  -- Middle of the screen
+    local targetPosition2 = UDim2.new(1, 0, 0.4, 0)  -- Bottom of the screen
+
+    local slideUpTween = TweenService:Create(notification, tweenInfo, {Position = targetPosition1})
+    local slideDownTween = TweenService:Create(notification, tweenInfo, {Position = targetPosition2})
+
+    -- Play the slide up tween
+    slideUpTween:Play()
+
+    -- After the slide up tween completes, wait for 3 seconds and then play the slide down tween
+    slideUpTween.Completed:Connect(function()
+        wait(1.5)
+        slideDownTween:Play()
+    end)
+
+    -- Destroy the screenGui after the slide down tween completes
+    slideDownTween.Completed:Connect(function()
+        screenGui:Destroy()
+    end)
+
+    -- Update the reference to the current notification
+    currentNotification = notification
+end
+
+Tab2Section:NewToggle("Auto Join", "Automatically joins the tournament every 3 seconds", function(state)
+    autoJoin = state
+    showNotification(state and "Auto Join: On" or "Auto Join: Off")
+end)
+
+Tab2Section:NewToggle("Auto Join & Win", "Automatically joins the tournament every 3 seconds and teleports every 0.5 seconds", function(state)
+    autoJoinWin = state
+    showNotification(state and "Auto Join & Win: On" or "Auto Join & Win: Off")
+end)
+
+-- Auto Join loop
+coroutine.wrap(function()
+    while true do
+        wait(0.5)
+        if autoJoin then
+            remoteCounter = remoteCounter + 0.5
+            if remoteCounter >= 3 then
+                local args = { [1] = true }
+                game:GetService("ReplicatedStorage").Events.Tournament.TournamentResponse:FireServer(unpack(args))
+                remoteCounter = 0
+            end
+        end
+    end
+end)()
+
+-- Auto Join & Win loop
+coroutine.wrap(function()
+    while true do
+        wait(0.5)
+        if autoJoinWin then
+            winCounter = winCounter + 0.5
+            if winCounter >= 3 then
+                local args = { [1] = true }
+                game:GetService("ReplicatedStorage").Events.Tournament.TournamentResponse:FireServer(unpack(args))
+                winCounter = 0
+            end
+
+            if game.Players.LocalPlayer and game.Players.LocalPlayer.Character and game.Players.LocalPlayer.Character:FindFirstChild("HumanoidRootPart") then
+                game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(0.0010241562267765403, 100003.4765625, -0.0002340637583984062)
+            end
+        end
+    end
+end)()
+
+local Tab2Section = Tab2:NewSection("You can farm Null Shards")
+
+-------Tab 3-------
+
+
+Tab3Section:NewButton("Slap Battles GiangPlay Hub (OP)","Slap Battles",function()
     setclipboard('loadstring(game:HttpGet("https://raw.githubusercontent.com/Giangplay/Slap_Battles/main/Slap_Battles.lua"))()')
 end)
 
-Tab2Section:NewButton("Boss Guide Gui","Slap Battles",function()
+Tab3Section:NewButton("Boss Guide Gui","Slap Battles",function()
     setclipboard('loadstring(game:HttpGet("https://raw.githubusercontent.com/Donjosx/SBS/main/BeatTheGuide.lua"))()')
 end)
 
-Tab2Section:NewButton("Kick Player Gui","Slap Battles",function()
+Tab3Section:NewButton("Kick Player Gui","Slap Battles",function()
     setclipboard('loadstring(game:HttpGet("https://raw.githubusercontent.com/Toilatin/Insane-elevator/main/Kick%20gui%20Slap%20battles", true))()')
 end)
 
-Tab2Section:NewButton("Slap Farm Gui","Slap Battles",function()
+Tab3Section:NewButton("Slap Farm Gui","Slap Battles",function()
     setclipboard('loadstring(game:HttpGet("https://raw.githubusercontent.com/OMOScripts/Share-Scripts/main/SB%7C%20SlapFarm_Gui"))()')
 end)
 
-Tab2Section:NewButton("Admin Buttons","Slap Battles",function()
+Tab3Section:NewButton("Admin Buttons","Slap Battles",function()
     setclipboard('loadstring(game:HttpGet("https://raw.githubusercontent.com/Donjosx/SBS/main/Fake-Admin-Gui.lua"))()')
+end)
+
+
+
+
+
+
+
+-----
+
+
+
+Tab4Section:NewButton("Destroy Toggle Button","Destroy ToggleUi button",function()
+
+-- Function to delete all instances of "patrickGui" from CoreGui
+local function deleteAllPatrickGui()
+    local coreGui = game.CoreGui
+    
+    -- Iterate through each child in CoreGui
+    for _, child in ipairs(coreGui:GetChildren()) do
+        -- Check if the child is named "patrickGui"
+        if child.Name == "tinGui" then
+            -- Delete the patrickGui instance
+            child:Destroy()
+            print("Deleted patrickGui:", child.Name)
+        end
+    end
+    
+    print("All instances of patrickGui deleted.")
+end
+
+-- Call the function to delete all instances of "patrickGui"
+deleteAllPatrickGui()
+
 end)
