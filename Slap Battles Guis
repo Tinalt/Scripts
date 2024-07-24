@@ -85,7 +85,7 @@ Tab1Section:NewButton("Kick Player Gui","Slap Battles",function()
     loadstring(game:HttpGet("https://raw.githubusercontent.com/Toilatin/Insane-elevator/main/Kick%20gui%20Slap%20battles", true))()
 end)
 
-Tab1Section:NewButton("Crash Server Gui (Need Scythe glove)","Slap Battles",function()
+Tab1Section:NewButton("Crash Server Gui","Slap Battles",function()
     loadstring(game:HttpGet("https://raw.githubusercontent.com/Tinalt/Scripts/main/Sb%20Crash%20Server", true))()
 end)
 
