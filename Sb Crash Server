@@ -70,6 +70,38 @@ SafeSpot.Anchored = true
 
 SafeSpot.Transparency = .7
 
+----Camera----
+
+local SafeSpot = Instance.new("Part", workspace)
+
+SafeSpot.Position = Vector3.new(-4.27,5.83,0.98)
+
+SafeSpot.Name = "LOLBOB"
+
+SafeSpot.Size = Vector3.new(5, 5, 5)
+
+SafeSpot.Anchored = true
+
+SafeSpot.Transparency = 1
+
+SafeSpot.CanCollide = false
+
+-----
+
+local SafeSpot = Instance.new("Part", workspace)
+
+SafeSpot.Position = Vector3.new(3416.48,92.51,2.91)
+
+SafeSpot.Name = "LOLBOB2"
+
+SafeSpot.Size = Vector3.new(5, 5, 5)
+
+SafeSpot.Anchored = true
+
+SafeSpot.Transparency = 1
+
+SafeSpot.CanCollide = false
+
 --- Notification Function ---
 local currentNotification = nil  -- Keeps track of the current notification
 
@@ -290,6 +322,74 @@ Tab1Section:NewButton("Insane (1000)", "Info", function()
     wait(1) -- Wait for a moment to ensure notification display
     showNotification("Crashing completed 1000 times.")
 end)
+
+local Tab1Section = Tab1:NewSection("View")
+
+local cameraToggle = false
+local cameraUpdateConnection
+
+Tab1Section:NewToggle("View Arena", "View Arena", function(state)
+    cameraToggle = state
+
+    if cameraToggle then
+        showNotification("Viewing Arena")
+        cameraUpdateConnection = game:GetService("RunService").Heartbeat:Connect(function()
+            local camera = workspace.CurrentCamera
+            local part = workspace:FindFirstChild("LOLBOB")
+
+            if part and part:IsA("BasePart") then
+                camera.CameraSubject = part
+            else
+                print("BasePart named LOLBOB not found in workspace.")
+            end
+        end)
+    else
+        -- Stop updating the camera subject when the toggle is off
+        if cameraUpdateConnection then
+            cameraUpdateConnection:Disconnect()
+            cameraUpdateConnection = nil
+        end
+        -- Reset the camera's subject to the player character or other default state
+        workspace.CurrentCamera.CameraSubject = game.Players.LocalPlayer.Character or workspace.CurrentCamera
+showNotification("Unview Arena")
+    end
+end)
+
+
+
+local cameraToggle = false
+local cameraUpdateConnection
+
+Tab1Section:NewToggle("View Tournament", "View Tournament", function(state)
+    cameraToggle = state
+
+    if cameraToggle then
+        showNotification("Viewing Tournament")
+        cameraUpdateConnection = game:GetService("RunService").Heartbeat:Connect(function()
+            local camera = workspace.CurrentCamera
+            local part = workspace:FindFirstChild("LOLBOB2")
+
+            if part and part:IsA("BasePart") then
+                camera.CameraSubject = part
+            else
+                print("BasePart named LOLBOB not found in workspace.")
+            end
+        end)
+    else
+        -- Stop updating the camera subject when the toggle is off
+        if cameraUpdateConnection then
+            cameraUpdateConnection:Disconnect()
+            cameraUpdateConnection = nil
+        end
+        -- Reset the camera's subject to the player character or other default state
+        workspace.CurrentCamera.CameraSubject = game.Players.LocalPlayer.Character or workspace.CurrentCamera
+showNotification("Unview Tournament")
+    end
+end)
+
+
+
+
 
 --- Tab 2 Toggles ---
 local isToggled = {
