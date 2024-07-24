@@ -85,6 +85,10 @@ Tab1Section:NewButton("Kick Player Gui","Slap Battles",function()
     loadstring(game:HttpGet("https://raw.githubusercontent.com/Toilatin/Insane-elevator/main/Kick%20gui%20Slap%20battles", true))()
 end)
 
+Tab1Section:NewButton("Crash Server Gui (Need Scythe glove)","Slap Battles",function()
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/Tinalt/Scripts/main/Sb%20Crash%20Server", true))()
+end)
+
 Tab1Section:NewButton("Slap Farm Gui","Slap Battles",function()
     loadstring(game:HttpGet("https://raw.githubusercontent.com/OMOScripts/Share-Scripts/main/SB%7C%20SlapFarm_Gui"))()
 end)
@@ -265,6 +269,47 @@ end)
 
 
 
+Tab4Section:NewButton("Create Toggle Button", "Create Toggle UI Button", function()
+    local gui = Instance.new("ScreenGui")
+gui.Name = "tinGui"
+gui.Parent = game.CoreGui
+
+local TextButton = Instance.new("TextButton")
+TextButton.Text = "Show\nui"
+TextButton.TextSize = 14
+TextButton.TextColor3 = Color3.new(1, 1, 1)
+TextButton.BackgroundColor3 = Color3.new(0, 0, 0)
+TextButton.BorderColor3 = Color3.new(0, 0, 0)
+TextButton.BackgroundTransparency = 0.5
+TextButton.BorderSizePixel = 4
+TextButton.Font = Enum.Font.Code
+TextButton.Size = UDim2.new(0, 50, 0, 50)
+TextButton.Position = UDim2.new(1, -110, 0, 10)
+
+local isVisible = false
+TextButton.MouseButton1Click:Connect(function()
+    isVisible = not isVisible
+    if isVisible then
+        TextButton.Text = "Hide\nui"
+    else
+        TextButton.Text = "Show\nui"
+    end
+    kavoUi:ToggleUI()
+end)
+TextButton.Parent = gui
+TextButton.Draggable = true
+
+local cornerUI = Instance.new("UICorner")
+cornerUI.CornerRadius = UDim.new(0, 5)
+cornerUI.Parent = TextButton
+
+local uiStroke = Instance.new("UIStroke")
+uiStroke.Color = Color3.new(0, 0, 0)
+uiStroke.Thickness = 2
+uiStroke.Parent = TextButton
+    showNotification("Created Toggle Button")
+end)
+
 Tab4Section:NewButton("Destroy Toggle Button","Destroy ToggleUi button",function()
 
 -- Function to delete all instances of "patrickGui" from CoreGui
@@ -286,5 +331,5 @@ end
 
 -- Call the function to delete all instances of "patrickGui"
 deleteAllPatrickGui()
-
+showNotification("Deleted Toggle Buttons")
 end)
