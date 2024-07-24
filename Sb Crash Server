@@ -1,5 +1,5 @@
 local kavoUi = loadstring(game:HttpGet("https://raw.githubusercontent.com/Toilatin/Insane-elevator/main/Insane2", true))()
-local window = kavoUi.CreateLib("Crash Server Gui (Require Scythe glove)", "BloodTheme")
+local window = kavoUi.CreateLib("Crash Server Gui", "BloodTheme")
 
 local Tab1 = window:NewTab("Main")
 local Tab1Section = Tab1:NewSection("Main")
@@ -207,7 +207,7 @@ Tab1Section:NewButton("Invisible (Glove still Visible)", "Info", function()
         fireclickdetector(workspace.Lobby.Ghost.ClickDetector)
         game.ReplicatedStorage.Ghostinvisibilityactivated:FireServer()
         fireclickdetector(workspace.Lobby[OGlove].ClickDetector)
-        showNotification("Teleport and script executed successfully.")
+        showNotification("Successfully Invisible")
     else
         OrionLib:MakeNotification({
             Name = "Error",
