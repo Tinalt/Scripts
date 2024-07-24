@@ -1,0 +1,458 @@
+local kavoUi = loadstring(game:HttpGet("https://raw.githubusercontent.com/Toilatin/Insane-elevator/main/Insane2", true))()
+local window = kavoUi.CreateLib("Crash Server Gui (Require Scythe glove)", "BloodTheme")
+
+local Tab1 = window:NewTab("Main")
+local Tab1Section = Tab1:NewSection("Main")
+
+local Tab2 = window:NewTab("Auto")
+local Tab2Section = Tab2:NewSection("Auto Crash")
+
+local Tab3 = window:NewTab("Custom")
+local Tab3Section = Tab3:NewSection("Custom")
+
+local Tab4 = window:NewTab("Safe Spot")
+local Tab4Section = Tab4:NewSection("Safe Spot")
+
+local Tab5 = window:NewTab("Settings")
+local Tab5Section = Tab5:NewSection("Settings")
+
+---Toggle Button
+
+local gui = Instance.new("ScreenGui")
+gui.Name = "tinGui"
+gui.Parent = game.CoreGui
+
+local TextButton = Instance.new("TextButton")
+TextButton.Text = "Show\nui"
+TextButton.TextSize = 14
+TextButton.TextColor3 = Color3.new(1, 1, 1)
+TextButton.BackgroundColor3 = Color3.new(0, 0, 0)
+TextButton.BorderColor3 = Color3.new(0, 0, 0)
+TextButton.BackgroundTransparency = 0.5
+TextButton.BorderSizePixel = 4
+TextButton.Font = Enum.Font.Code
+TextButton.Size = UDim2.new(0, 50, 0, 50)
+TextButton.Position = UDim2.new(1, -110, 0, 10)
+
+local isVisible = false
+TextButton.MouseButton1Click:Connect(function()
+    isVisible = not isVisible
+    if isVisible then
+        TextButton.Text = "Hide\nui"
+    else
+        TextButton.Text = "Show\nui"
+    end
+    kavoUi:ToggleUI()
+end)
+TextButton.Parent = gui
+TextButton.Draggable = true
+
+local cornerUI = Instance.new("UICorner")
+cornerUI.CornerRadius = UDim.new(0, 5)
+cornerUI.Parent = TextButton
+
+local uiStroke = Instance.new("UIStroke")
+uiStroke.Color = Color3.new(0, 0, 0)
+uiStroke.Thickness = 2
+uiStroke.Parent = TextButton
+
+----Safe Spot----
+
+local SafeSpot = Instance.new("Part", workspace)
+
+SafeSpot.Position = Vector3.new(0,100000,0)
+
+SafeSpot.Name = "Spot"
+
+SafeSpot.Size = Vector3.new(100000,1,100000)
+
+SafeSpot.Anchored = true
+
+SafeSpot.Transparency = .7
+
+--- Notification Function ---
+local currentNotification = nil  -- Keeps track of the current notification
+
+local function showNotification(message)
+    -- Remove the existing notification if it exists
+    if currentNotification then
+        currentNotification:Destroy()
+    end
+
+    -- Create a ScreenGui
+    local screenGui = Instance.new("ScreenGui")
+    screenGui.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
+
+    -- Create a TextLabel for the notification
+    local notification = Instance.new("TextLabel")
+    notification.Size = UDim2.new(0.25, 0, 0.13, 0)  -- Width and height of the notification
+    notification.Position = UDim2.new(1, 0, 0.4, 0)  -- Start at the bottom of the screen
+    notification.BackgroundColor3 = Color3.new(0.2, 0.2, 0.2)  -- Dark grey background
+    notification.BackgroundTransparency = 0.3  -- 30% transparent
+    notification.BorderSizePixel = 3.5  -- Outline thickness
+    notification.BorderColor3 = Color3.new(0, 0, 0)  -- Black outline
+    notification.TextColor3 = Color3.new(1, 1, 1)  -- White text
+    notification.TextScaled = true
+    notification.TextWrapped = true
+    notification.Text = message  -- Notification message
+    notification.Font = Enum.Font.ArialBold
+    notification.Parent = screenGui
+
+    -- Add padding to the TextLabel
+    local padding = Instance.new("UIPadding")
+    padding.PaddingTop = UDim.new(0.1, 0)
+    padding.PaddingBottom = UDim.new(0.1, 0)
+    padding.PaddingLeft = UDim.new(0.1, 0)
+    padding.PaddingRight = UDim.new(0.1, 0)
+    padding.Parent = notification
+
+    -- Use TweenService to create the slide animation
+    local TweenService = game:GetService("TweenService")
+
+    -- Shorten the duration for a faster animation
+    local tweenInfo = TweenInfo.new(0.5, Enum.EasingStyle.Quad, Enum.EasingDirection.Out)
+    local targetPosition1 = UDim2.new(0.74, 0, 0.4, 0)  -- Middle of the screen
+    local targetPosition2 = UDim2.new(1, 0, 0.4, 0)  -- Bottom of the screen
+
+    local slideUpTween = TweenService:Create(notification, tweenInfo, {Position = targetPosition1})
+    local slideDownTween = TweenService:Create(notification, tweenInfo, {Position = targetPosition2})
+
+    -- Play the slide up tween
+    slideUpTween:Play()
+
+    -- After the slide up tween completes, wait for 3 seconds and then play the slide down tween
+    slideUpTween.Completed:Connect(function()
+        wait(1.5)
+        slideDownTween:Play()
+    end)
+
+    -- Destroy the screenGui after the slide down tween completes
+    slideDownTween.Completed:Connect(function()
+        screenGui:Destroy()
+    end)
+
+    -- Update the reference to the current notification
+    currentNotification = notification
+end
+
+--- Tab 1 Buttons ---
+Tab1Section:NewButton("Invisible (Glove still Visible)", "Info", function()
+    local player = game.Players.LocalPlayer
+    local character = player.Character or player.CharacterAdded:Wait()
+    local backpack = player.Backpack
+
+    -- Check if there are any items in the backpack
+    if #backpack:GetChildren() > 0 then
+        showNotification("You have to be in Lobby!")
+        return
+    end
+
+    -- Check if there are any items equipped in the character
+    local equippedItems = character:GetChildren()
+    local hasEquippedItem = false
+
+    for _, item in ipairs(equippedItems) do
+        if item:IsA("Tool") then
+            hasEquippedItem = true
+            break
+        end
+    end
+
+    if hasEquippedItem then
+        showNotification("You have to be in Lobby!")
+        return
+    end
+
+    -- Teleport to the specified position
+    character:MoveTo(Vector3.new(0.04910659044981003, 100003.5, -0.12970729172229767))
+
+    -- Wait 0.1 seconds
+    wait(0.1)
+
+    -- Run the script
+    if player.Character:FindFirstChild("entered") == nil and player.leaderstats.Slaps.Value >= 666 then
+        local OGlove = player.leaderstats.Glove.Value
+        fireclickdetector(workspace.Lobby.Ghost.ClickDetector)
+        game.ReplicatedStorage.Ghostinvisibilityactivated:FireServer()
+        fireclickdetector(workspace.Lobby[OGlove].ClickDetector)
+        showNotification("Teleport and script executed successfully.")
+    else
+        OrionLib:MakeNotification({
+            Name = "Error",
+            Content = "You need to be in lobby and have 666+ slaps.",
+            Image = "rbxassetid://7733658504",
+            Time = 5
+        })
+    end
+end)
+
+
+
+
+Tab1Section:NewButton("Common (10)", "Info", function()
+    local ReplicatedStorage = game:GetService("ReplicatedStorage")
+    local Remote = ReplicatedStorage:WaitForChild("Scythe")
+    local args = { [1] = "ScytheWeapon" }
+
+    local function fireRemote(times)
+        for i = 1, times do
+            Remote:FireServer(unpack(args))
+        end
+    end
+
+    showNotification("Crashing...")
+    fireRemote(10)
+    wait(1) -- Wait for a moment to ensure notification display
+    showNotification("Crashing completed 10 times.")
+end)
+
+Tab1Section:NewButton("Epic (50)", "Info", function()
+    local ReplicatedStorage = game:GetService("ReplicatedStorage")
+    local Remote = ReplicatedStorage:WaitForChild("Scythe")
+    local args = { [1] = "ScytheWeapon" }
+
+    local function fireRemote(times)
+        for i = 1, times do
+            Remote:FireServer(unpack(args))
+        end
+    end
+
+    showNotification("Crashing...")
+    fireRemote(50)
+    wait(1) -- Wait for a moment to ensure notification display
+    showNotification("Crashing completed 50 times.")
+end)
+
+Tab1Section:NewButton("Legendary (100)", "Info", function()
+    local ReplicatedStorage = game:GetService("ReplicatedStorage")
+    local Remote = ReplicatedStorage:WaitForChild("Scythe")
+    local args = { [1] = "ScytheWeapon" }
+
+    local function fireRemote(times)
+        for i = 1, times do
+            Remote:FireServer(unpack(args))
+        end
+    end
+
+    showNotification("Crashing...")
+    fireRemote(100)
+    wait(1) -- Wait for a moment to ensure notification display
+    showNotification("Crashing completed 100 times.")
+end)
+
+Tab1Section:NewButton("Exotic (200)", "Info", function()
+    local ReplicatedStorage = game:GetService("ReplicatedStorage")
+    local Remote = ReplicatedStorage:WaitForChild("Scythe")
+    local args = { [1] = "ScytheWeapon" }
+
+    local function fireRemote(times)
+        for i = 1, times do
+            Remote:FireServer(unpack(args))
+        end
+    end
+
+    showNotification("Crashing...")
+    fireRemote(200)
+    wait(1) -- Wait for a moment to ensure notification display
+    showNotification("Crashing completed 200 times.")
+end)
+
+Tab1Section:NewButton("Mythical (500)", "Info", function()
+    local ReplicatedStorage = game:GetService("ReplicatedStorage")
+    local Remote = ReplicatedStorage:WaitForChild("Scythe")
+    local args = { [1] = "ScytheWeapon" }
+
+    local function fireRemote(times)
+        for i = 1, times do
+            Remote:FireServer(unpack(args))
+        end
+    end
+
+    showNotification("Crashing...")
+    fireRemote(500)
+    wait(1) -- Wait for a moment to ensure notification display
+    showNotification("Crashing completed 500 times.")
+end)
+
+Tab1Section:NewButton("Insane (1000)", "Info", function()
+    local ReplicatedStorage = game:GetService("ReplicatedStorage")
+    local Remote = ReplicatedStorage:WaitForChild("Scythe")
+    local args = { [1] = "ScytheWeapon" }
+
+    local function fireRemote(times)
+        for i = 1, times do
+            Remote:FireServer(unpack(args))
+        end
+    end
+
+    showNotification("Crashing...")
+    fireRemote(1000)
+    wait(1) -- Wait for a moment to ensure notification display
+    showNotification("Crashing completed 1000 times.")
+end)
+
+--- Tab 2 Toggles ---
+local isToggled = {
+    ["10"] = false,
+    ["50"] = false,
+    ["100"] = false,
+    ["200"] = false,
+    ["500"] = false,
+    ["1000"] = false,
+}
+
+local ReplicatedStorage = game:GetService("ReplicatedStorage")
+local Remote = ReplicatedStorage:WaitForChild("Scythe")
+local args = { [1] = "ScytheWeapon" }
+
+local function fireRemote(times)
+    for i = 1, times do
+        Remote:FireServer(unpack(args))
+    end
+end
+
+local function createToggle(name, times, delay)
+    Tab2Section:NewToggle(name, "Toggle to fire the remote " .. times .. " times", function(state)
+        isToggled[tostring(times)] = state
+
+        if state then
+            showNotification("Auto Crash (" .. times .. "): On")
+        else
+            showNotification("Auto Crash (" .. times .. "): Off")
+        end
+
+        -- Start firing the remote if the toggle is on
+        spawn(function()
+            while isToggled[tostring(times)] do
+                fireRemote(times)
+                wait(delay) -- Use the specified delay for each toggle
+            end
+        end)
+    end)
+end
+
+createToggle("Auto Crash (10)", 10, 0.1)
+createToggle("Auto Crash (50)", 50, 1)
+createToggle("Auto Crash (100)", 100, 5)
+createToggle("Auto Crash (200)", 200, 10)
+createToggle("Auto Crash (500)", 500, 20)
+createToggle("Auto Crash (1000)", 1000, 40)
+
+--- Tab 3 TextBox ---
+Tab3Section:NewTextBox("Customize the quantity", "Enter number", function(input)
+    local times = tonumber(input)
+    if times and times > 0 then
+        local ReplicatedStorage = game:GetService("ReplicatedStorage")
+        local Remote = ReplicatedStorage:WaitForChild("Scythe")
+        local args = { [1] = "ScytheWeapon" }
+
+        local function fireRemote(times)
+            for i = 1, times do
+                Remote:FireServer(unpack(args))
+            end
+        end
+
+        -- Fire the remote with the user-defined number of times
+        fireRemote(times)
+
+        -- Show a notification
+        showNotification("Crashing " .. times .. " times.")
+    else
+        -- Show an error notification
+        showNotification("Invalid input. Please enter a positive number.")
+    end
+end)
+
+
+------Tab 4-------
+Tab4Section:NewButton("Teleport to SafeSpot", "Idk", function()
+
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(0.0497390441596508, 100003.4921875, -0.1297450065612793)
+end)
+
+Tab4Section:NewButton("Create SafeSpot", "Idk", function()
+    local SafeSpot = Instance.new("Part", workspace)
+    SafeSpot.Position = Vector3.new(0, 100000, 0)
+    SafeSpot.Name = "Spot"
+    SafeSpot.Size = Vector3.new(10000, 1, 10000)
+    SafeSpot.Anchored = true
+    SafeSpot.Transparency = 0.7
+    showNotification("SafeSpot created")
+end)
+
+-- Button to delete all parts named "Spot"
+Tab4Section:NewButton("Delete SafeSpot", "Deletes all parts named 'Spot'", function()
+    for _, part in pairs(workspace:GetChildren()) do
+        if part:IsA("Part") and part.Name == "Spot" then
+            part:Destroy()
+        end
+    end
+    showNotification("Deleted all SafeSpot")
+end)
+
+
+-- Tab 5 Buttons ---
+Tab5Section:NewButton("Create Toggle Button", "Create Toggle UI Button", function()
+    local gui = Instance.new("ScreenGui")
+gui.Name = "tinGui"
+gui.Parent = game.CoreGui
+
+local TextButton = Instance.new("TextButton")
+TextButton.Text = "Show\nui"
+TextButton.TextSize = 14
+TextButton.TextColor3 = Color3.new(1, 1, 1)
+TextButton.BackgroundColor3 = Color3.new(0, 0, 0)
+TextButton.BorderColor3 = Color3.new(0, 0, 0)
+TextButton.BackgroundTransparency = 0.5
+TextButton.BorderSizePixel = 4
+TextButton.Font = Enum.Font.Code
+TextButton.Size = UDim2.new(0, 50, 0, 50)
+TextButton.Position = UDim2.new(1, -110, 0, 10)
+
+local isVisible = false
+TextButton.MouseButton1Click:Connect(function()
+    isVisible = not isVisible
+    if isVisible then
+        TextButton.Text = "Hide\nui"
+    else
+        TextButton.Text = "Show\nui"
+    end
+    kavoUi:ToggleUI()
+end)
+TextButton.Parent = gui
+TextButton.Draggable = true
+
+local cornerUI = Instance.new("UICorner")
+cornerUI.CornerRadius = UDim.new(0, 5)
+cornerUI.Parent = TextButton
+
+local uiStroke = Instance.new("UIStroke")
+uiStroke.Color = Color3.new(0, 0, 0)
+uiStroke.Thickness = 2
+uiStroke.Parent = TextButton
+    showNotification("Created Toggle Button")
+end)
+
+Tab5Section:NewButton("Destroy Toggle Button","Destroy ToggleUi button",function()
+
+-- Function to delete all instances of "patrickGui" from CoreGui
+local function deleteAllPatrickGui()
+    local coreGui = game.CoreGui
+    
+    -- Iterate through each child in CoreGui
+    for _, child in ipairs(coreGui:GetChildren()) do
+        -- Check if the child is named "patrickGui"
+        if child.Name == "tinGui" then
+            -- Delete the patrickGui instance
+            child:Destroy()
+            print("Deleted patrickGui:", child.Name)
+        end
+    end
+    
+    print("All instances of patrickGui deleted.")
+end
+
+-- Call the function to delete all instances of "patrickGui"
+deleteAllPatrickGui()
+showNotification("Deleted Toggle Buttons")
+end)
