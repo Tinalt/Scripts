@@ -137,6 +137,82 @@ Tab2:CreateButton("Anti Afk", function()
 loadstring(game:HttpGet("https://raw.githubusercontent.com/Tinalt/Scripts/main/Anti%20Afk"))()
 end)
 
+Tab2:CreateButton("Redeem All Codes", function()
+
+local args = {
+    [1] = "6KLIKES"
+}
+
+game:GetService("ReplicatedStorage").Events.RedeemCode:InvokeServer(unpack(args))
+
+local args = {
+    [1] = "15KLIKES"
+}
+
+game:GetService("ReplicatedStorage").Events.RedeemCode:InvokeServer(unpack(args))
+
+local args = {
+    [1] = "25KLIKES"
+}
+
+game:GetService("ReplicatedStorage").Events.RedeemCode:InvokeServer(unpack(args))
+
+local args = {
+    [1] = "SORRY"
+}
+
+game:GetService("ReplicatedStorage").Events.RedeemCode:InvokeServer(unpack(args))
+
+local args = {
+    [1] = "QUESTS"
+}
+
+game:GetService("ReplicatedStorage").Events.RedeemCode:InvokeServer(unpack(args))
+
+local args = {
+    [1] = "TRADING"
+}
+
+game:GetService("ReplicatedStorage").Events.RedeemCode:InvokeServer(unpack(args))
+
+local args = {
+    [1] = "BACKROOMS"
+}
+
+game:GetService("ReplicatedStorage").Events.RedeemCode:InvokeServer(unpack(args))
+
+local args = {
+    [1] = "ADMIN2828"
+}
+
+game:GetService("ReplicatedStorage").Events.RedeemCode:InvokeServer(unpack(args))
+
+local args = {
+    [1] = "FIXEDTRADING"
+}
+
+game:GetService("ReplicatedStorage").Events.RedeemCode:InvokeServer(unpack(args))
+
+
+local args = {
+    [1] = "specialCode333"
+}
+
+game:GetService("ReplicatedStorage").Events.RedeemCode:InvokeServer(unpack(args))
+
+local args = {
+    [1] = "INVITE"
+}
+
+game:GetService("ReplicatedStorage").Events.RedeemCode:InvokeServer(unpack(args))
+
+local args = {
+    [1] = "UPDATE1111"
+}
+
+game:GetService("ReplicatedStorage").Events.RedeemCode:InvokeServer(unpack(args))
+end)
+
 Tab4:CreateButton("Teleport To Easy Obby", function()
 game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-597.1835327148438, 273.5558776855469, 17.827932357788086)
 end)
