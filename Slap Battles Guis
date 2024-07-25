@@ -251,6 +251,10 @@ Tab3Section:NewButton("Kick Player Gui","Slap Battles",function()
     setclipboard('loadstring(game:HttpGet("https://raw.githubusercontent.com/Toilatin/Insane-elevator/main/Kick%20gui%20Slap%20battles", true))()')
 end)
 
+Tab3Section:NewButton("Crash Server Gui","Slap Battles",function()
+    setclipboard('loadstring(game:HttpGet("https://raw.githubusercontent.com/Tinalt/Scripts/main/Sb%20Crash%20Server", true))()')
+end)
+
 Tab3Section:NewButton("Slap Farm Gui","Slap Battles",function()
     setclipboard('loadstring(game:HttpGet("https://raw.githubusercontent.com/OMOScripts/Share-Scripts/main/SB%7C%20SlapFarm_Gui"))()')
 end)
