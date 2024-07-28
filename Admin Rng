@@ -214,7 +214,7 @@ game:GetService("ReplicatedStorage").Events.RedeemCode:InvokeServer(unpack(args)
 end)
 
 Tab4:CreateButton("Teleport To Easy Obby", function()
-game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-597.1835327148438, 273.5558776855469, 17.827932357788086)
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-592.1251220703125, 273.7467041015625, 17.485225677490234)
 end)
 
 Tab4:CreateButton("Instant Win Easy Obby", function()
@@ -222,11 +222,19 @@ game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-1306.81
 end)
 
 Tab4:CreateButton("Teleport To Hard Obby", function()
-game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-616.4325561523438, 273.2558898925781, 17.163982391357422)
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-605.072265625, 273.8640441894531, 17.9103946685791)
 end)
 
 Tab4:CreateButton("Instant Win Hard Obby", function()
 game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-1616.743896484375, 3.870882511138916, 2454.965087890625)
+end)
+
+Tab4:CreateButton("Teleport To Insane Obby", function()
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-616.8583984375, 273.27740478515625, 15.268471717834473)
+end)
+
+Tab4:CreateButton("Instant Win Insane Obby", function()
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-1966.3590087890625, -4.051607131958008, 2378.5830078125)
 end)
 
 Tab3:CreateButton("You need Boombox cmd!", function()
