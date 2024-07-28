@@ -243,6 +243,10 @@ Tab3Section:NewButton("Slap Battles GiangPlay Hub (OP)","Slap Battles",function(
     setclipboard('loadstring(game:HttpGet("https://raw.githubusercontent.com/Giangplay/Slap_Battles/main/Slap_Battles.lua"))()')
 end)
 
+Tab3Section:NewButton("Slap Battles Guis (This script)","Slap Battles",function()
+    setclipboard('loadstring(game:HttpGet("https://raw.githubusercontent.com/Tinalt/Scripts/main/Slap%20Battles%20Guis"))()')
+end)
+
 Tab3Section:NewButton("Boss Guide Gui","Slap Battles",function()
     setclipboard('loadstring(game:HttpGet("https://raw.githubusercontent.com/Donjosx/SBS/main/BeatTheGuide.lua"))()')
 end)
