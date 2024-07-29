@@ -214,6 +214,12 @@ end)()
 
 local Tab2Section = Tab2:NewSection("Safe Place")
 
+Tab2Section:NewButton("Teleport to SafeSpot", "Tp", function()
+
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(0.049739040434360504, 100003.4921875, -0.1297449916601181)
+
+end)
+
 Tab2Section:NewButton("Create SafeSpot", "Creates a part named 'Spot' at the specified location", function()
     local SafeSpot = Instance.new("Part", workspace)
     SafeSpot.Position = Vector3.new(0, 100000, 0)
