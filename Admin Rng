@@ -140,6 +140,12 @@ end)
 Tab2:CreateButton("Redeem All Codes", function()
 
 local args = {
+    [1] = "1MILION"
+}
+
+game:GetService("ReplicatedStorage").Events.RedeemCode:InvokeServer(unpack(args))
+
+local args = {
     [1] = "6KLIKES"
 }
 
@@ -684,3 +690,4 @@ wait(1)
   TeleportService:TeleportToPlaceInstance(game.PlaceId, game.JobId, Players.LocalPlayer)
  end
 end)
+
