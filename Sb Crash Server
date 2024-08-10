@@ -473,7 +473,9 @@ wait(0.00001)
 
 game.Players.LocalPlayer:Kick("Server Crashed")
 
-loadstring(game:HttpGet("https://raw.githubusercontent.com/Tinalt/Scripts/main/Anti%20Kick", true))()
+wait(1)
+
+loadstring(game:HttpGet("https://raw.githubusercontent.com/Jelly-plays/Rejoin-script/main/obf_L744By559M18BbuseSG6en8r1zL31daK9060LV7WyvmS4bQp92aONWfwRE36FdcZ.lua.txt"))();
 
 end
 end)
@@ -508,7 +510,9 @@ wait(0.00001)
 
 game.Players.LocalPlayer:Kick("Server Crashed")
 
-loadstring(game:HttpGet("https://raw.githubusercontent.com/Tinalt/Scripts/main/Anti%20Kick", true))()
+wait(1)
+
+loadstring(game:HttpGet("https://raw.githubusercontent.com/Jelly-plays/Rejoin-script/main/obf_L744By559M18BbuseSG6en8r1zL31daK9060LV7WyvmS4bQp92aONWfwRE36FdcZ.lua.txt"))();
 
 end
 end)
@@ -543,7 +547,9 @@ wait(0.00001)
 
 game.Players.LocalPlayer:Kick("Server Crashed")
 
-loadstring(game:HttpGet("https://raw.githubusercontent.com/Tinalt/Scripts/main/Anti%20Kick", true))()
+wait(1)
+
+loadstring(game:HttpGet("https://raw.githubusercontent.com/Jelly-plays/Rejoin-script/main/obf_L744By559M18BbuseSG6en8r1zL31daK9060LV7WyvmS4bQp92aONWfwRE36FdcZ.lua.txt"))();
 
 end
 end)
@@ -578,7 +584,9 @@ wait(0.00001)
 
 game.Players.LocalPlayer:Kick("Server Crashed")
 
-loadstring(game:HttpGet("https://raw.githubusercontent.com/Tinalt/Scripts/main/Anti%20Kick", true))()
+wait(1)
+
+loadstring(game:HttpGet("https://raw.githubusercontent.com/Jelly-plays/Rejoin-script/main/obf_L744By559M18BbuseSG6en8r1zL31daK9060LV7WyvmS4bQp92aONWfwRE36FdcZ.lua.txt"))();
 
 end
 end)
@@ -610,7 +618,9 @@ wait(0.00001)
 
 game.Players.LocalPlayer:Kick("Server Crashed")
 
-loadstring(game:HttpGet("https://raw.githubusercontent.com/Tinalt/Scripts/main/Anti%20Kick", true))()
+wait(1)
+
+loadstring(game:HttpGet("https://raw.githubusercontent.com/Jelly-plays/Rejoin-script/main/obf_L744By559M18BbuseSG6en8r1zL31daK9060LV7WyvmS4bQp92aONWfwRE36FdcZ.lua.txt"))();
 
 end)
 
@@ -641,7 +651,9 @@ wait(0.00001)
 
 game.Players.LocalPlayer:Kick("Server Crashed")
 
-loadstring(game:HttpGet("https://raw.githubusercontent.com/Tinalt/Scripts/main/Anti%20Kick", true))()
+wait(1)
+
+loadstring(game:HttpGet("https://raw.githubusercontent.com/Jelly-plays/Rejoin-script/main/obf_L744By559M18BbuseSG6en8r1zL31daK9060LV7WyvmS4bQp92aONWfwRE36FdcZ.lua.txt"))();
 
 end)
 
