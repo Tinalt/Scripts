@@ -1,0 +1,242 @@
+local kavoUi = loadstring(game:HttpGet("https://raw.githubusercontent.com/Toilatin/Insane-elevator/main/Insane2", true))()
+local window = kavoUi.CreateLib("The Strongest Battlegrounds","BloodTheme")
+
+---Toggle Button
+
+local gui = Instance.new("ScreenGui")
+gui.Name = "tinGui"
+gui.Parent = game.CoreGui
+
+-- Create the TextButton
+local TextButton = Instance.new("TextButton")
+-- Text
+TextButton.Text = "Toggle"
+TextButton.TextSize = 14
+-- Color
+TextButton.TextColor3 = Color3.new(1, 1, 1)
+TextButton.BackgroundColor3 = Color3.new(0, 0, 0)
+TextButton.BorderColor3 = Color3.new(0, 0, 0)
+-- Transparency
+TextButton.BackgroundTransparency = 0.5
+-- Thickness
+TextButton.BorderSizePixel = 4
+-- Text Code
+TextButton.Font = Enum.Font.Code
+-- Size (making it a small square)
+TextButton.Size = UDim2.new(0, 50, 0, 50)  -- 50×50 pixels
+-- Position
+TextButton.Position = UDim2.new(1, -110, 0, 10)  -- Center of the screen
+-- Function
+TextButton.MouseButton1Click:Connect(function()
+    kavoUi:ToggleUI()
+end)
+TextButton.Parent = gui
+TextButton.Draggable = true
+
+-- Adding UICorner for rounded corners
+local cornerUI = Instance.new("UICorner")
+cornerUI.CornerRadius = UDim.new(0, 5)
+cornerUI.Parent = TextButton
+
+-- Adding UIStroke for border
+local uiStroke = Instance.new("UIStroke")
+uiStroke.Color = Color3.new(0, 0, 0)
+uiStroke.Thickness = 2
+uiStroke.Parent = TextButton
+
+---Hi
+
+local Tab1 = window:NewTab("Main")
+local Tab1Section = Tab1:NewSection("Main")
+
+local Tab2 = window:NewTab("Scripts")
+local Tab2Section = Tab2:NewSection("Scripts")
+
+local Tab3 = window:NewTab("Settings")
+local Tab3Section = Tab3:NewSection("Settings")
+
+--
+
+Tab1Section:NewButton("Invisible","Hello",function()
+
+_G.invis = true 
+local RunService = game:GetService("RunService")
+    RunService.Heartbeat:Connect(function()
+        if _G.invis == true then
+            local char = game.Players.LocalPlayer.Character
+            local root = char and char:WaitForChild("HumanoidRootPart", 1)
+            local humanoid = char and char:FindFirstChildWhichIsA("Humanoid")
+            -- char:SetAttribute("Character", "KJ")
+            if char and root and humanoid then
+                local rx, ry, rz = workspace.CurrentCamera.CFrame:ToOrientation()
+                root.CFrame = CFrame.new(root.CFrame.p) * CFrame.fromOrientation(0, ry, 0)
+                local old = { cframe = root.CFrame, cameraoffset = humanoid.CameraOffset }
+                root.CFrame *= CFrame.Angles(0, 0, math.rad(180))
+                humanoid.CameraOffset = Vector3.new(0, -3.23, 0)
+                local id = "rbxassetid://18182425133"
+                local anim = Instance.new("Animation")
+                anim.AnimationId = id
+                loaded = humanoid.Animator:LoadAnimation(anim)
+                loaded.Priority = Enum.AnimationPriority.Action4
+                loaded:Play()
+                loaded.TimePosition = 2
+                loaded:AdjustSpeed(0)
+                RunService.RenderStepped:Wait()
+                loaded:Stop()
+
+                -- RunService.RenderStepped:Wait()
+                humanoid.CameraOffset = old.cameraoffset
+                root.CFrame = old.cframe
+                for i, v in pairs(char:GetDescendants()) do
+                    if v:IsA("BasePart") and v.Transparency ~= 1 then
+                        v.Transparency = 0.5
+                    end
+                end
+            end
+        else
+            local char = game.Players.LocalPlayer.Character
+            for i, v in pairs(char:GetDescendants()) do
+                if v:IsA("BasePart") and v.Transparency == 0.5 then
+                    v.Transparency = 0
+                end
+            end
+        end
+    end)
+end)
+
+Tab1Section:NewButton("Uninvisible (Visible)","Hello",function()
+
+_G.invis = false 
+local RunService = game:GetService("RunService")
+    RunService.Heartbeat:Connect(function()
+        if _G.invis == true then
+            local char = game.Players.LocalPlayer.Character
+            local root = char and char:WaitForChild("HumanoidRootPart", 1)
+            local humanoid = char and char:FindFirstChildWhichIsA("Humanoid")
+            -- char:SetAttribute("Character", "KJ")
+            if char and root and humanoid then
+                local rx, ry, rz = workspace.CurrentCamera.CFrame:ToOrientation()
+                root.CFrame = CFrame.new(root.CFrame.p) * CFrame.fromOrientation(0, ry, 0)
+                local old = { cframe = root.CFrame, cameraoffset = humanoid.CameraOffset }
+                root.CFrame *= CFrame.Angles(0, 0, math.rad(180))
+                humanoid.CameraOffset = Vector3.new(0, -3.23, 0)
+                local id = "rbxassetid://18182425133"
+                local anim = Instance.new("Animation")
+                anim.AnimationId = id
+                loaded = humanoid.Animator:LoadAnimation(anim)
+                loaded.Priority = Enum.AnimationPriority.Action4
+                loaded:Play()
+                loaded.TimePosition = 2
+                loaded:AdjustSpeed(0)
+                RunService.RenderStepped:Wait()
+                loaded:Stop()
+
+                -- RunService.RenderStepped:Wait()
+                humanoid.CameraOffset = old.cameraoffset
+                root.CFrame = old.cframe
+                for i, v in pairs(char:GetDescendants()) do
+                    if v:IsA("BasePart") and v.Transparency ~= 1 then
+                        v.Transparency = 0.5
+                    end
+                end
+            end
+        else
+            local char = game.Players.LocalPlayer.Character
+            for i, v in pairs(char:GetDescendants()) do
+                if v:IsA("BasePart") and v.Transparency == 0.5 then
+                    v.Transparency = 0
+                end
+            end
+        end
+    end)
+end)
+
+--
+
+Tab2Section:NewButton("Infinite Yield","OP Admin Commands [FE]",function()
+
+loadstring(game:HttpGet('https://raw.githubusercontent.com/EdgeIY/infiniteyield/master/source'))()
+
+end)
+
+Tab2Section:NewButton("Nameless Admin","OP Admin Commands [FE]",function()
+
+-- Thanks to 0866 for making the whole ui work, this admin script was actually made in 2019 lol but was modified by qipu
+-- For the commands thanks to IY, Fates Admin, HomeBrew, CMD-X for some of the code and command ideas!
+-- For the people thanks to Digitality, i_db, rouxhaver, spec and the v3rmillion community, if you see your script in the source and want credits please dm qipu#9312
+-- ! Make sure to have an executor that supports firetouchinterest for the tool commands !
+loadstring(game:HttpGet("https://raw.githubusercontent.com/FilteringEnabled/NamelessAdmin/main/Source"))();
+
+end)
+
+local Tab2Section = Tab2:NewSection("Hubs")
+
+Tab2Section:NewButton("Lightux Hub (KEY)","Hello",function()
+
+loadstring(game:HttpGet(('https://raw.githubusercontent.com/cool83birdcarfly02six/Lightux/main/README.md'),true))()
+end)
+
+Tab3Section:NewButton("Create Toggle Button", "Create Toggle UI Button", function()
+    local gui = Instance.new("ScreenGui")
+gui.Name = "tinGui"
+gui.Parent = game.CoreGui
+
+local TextButton = Instance.new("TextButton")
+TextButton.Text = "Show\nui"
+TextButton.TextSize = 14
+TextButton.TextColor3 = Color3.new(1, 1, 1)
+TextButton.BackgroundColor3 = Color3.new(0, 0, 0)
+TextButton.BorderColor3 = Color3.new(0, 0, 0)
+TextButton.BackgroundTransparency = 0.5
+TextButton.BorderSizePixel = 4
+TextButton.Font = Enum.Font.Code
+TextButton.Size = UDim2.new(0, 50, 0, 50)
+TextButton.Position = UDim2.new(1, -110, 0, 10)
+
+local isVisible = false
+TextButton.MouseButton1Click:Connect(function()
+    isVisible = not isVisible
+    if isVisible then
+        TextButton.Text = "Hide\nui"
+    else
+        TextButton.Text = "Show\nui"
+    end
+    kavoUi:ToggleUI()
+end)
+TextButton.Parent = gui
+TextButton.Draggable = true
+
+local cornerUI = Instance.new("UICorner")
+cornerUI.CornerRadius = UDim.new(0, 5)
+cornerUI.Parent = TextButton
+
+local uiStroke = Instance.new("UIStroke")
+uiStroke.Color = Color3.new(0, 0, 0)
+uiStroke.Thickness = 2
+uiStroke.Parent = TextButton
+    showNotification("Created Toggle Button")
+end)
+
+Tab3Section:NewButton("Destroy Toggle Button","Destroy ToggleUi button",function()
+
+-- Function to delete all instances of "patrickGui" from CoreGui
+local function deleteAllPatrickGui()
+    local coreGui = game.CoreGui
+    
+    -- Iterate through each child in CoreGui
+    for _, child in ipairs(coreGui:GetChildren()) do
+        -- Check if the child is named "patrickGui"
+        if child.Name == "tinGui" then
+            -- Delete the patrickGui instance
+            child:Destroy()
+            print("Deleted patrickGui:", child.Name)
+        end
+    end
+    
+    print("All instances of patrickGui deleted.")
+end
+
+-- Call the function to delete all instances of "patrickGui"
+deleteAllPatrickGui()
+showNotification("Deleted Toggle Buttons")
+end)
