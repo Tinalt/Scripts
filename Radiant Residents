@@ -25,3 +25,9 @@ Tab1Section:NewButton("Fhub (OP) [Key]","Auto do everything!",function()
 loadstring(game:HttpGet("https://raw.githubusercontent.com/memejames/Hide/main/Loader.lua"))()
 
 end)
+
+Tab1Section:NewButton("Unknown Hub","Free lobby and god mode",function()
+
+loadstring(game:HttpGet('https://raw.githubusercontent.com/Wilmasua/Yes/main/Yes'))()
+
+end)
