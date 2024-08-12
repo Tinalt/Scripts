@@ -1,0 +1,27 @@
+local kavoUi = loadstring(game:HttpGet("https://raw.githubusercontent.com/Toilatin/Insane-elevator/main/Insane2", true))()
+local window = kavoUi.CreateLib("Radiant Residents","BloodTheme")
+
+---Hi
+
+local Tab1 = window:NewTab("Main")
+local Tab1Section = Tab1:NewSection("Main")
+
+--
+
+Tab1Section:NewButton("Epic.gg Hub (SUPER OP) [Key: EpicAdminKey]","Spawn items,  weapons + more",function()
+
+loadstring(game:HttpGet(('https://raw.githubusercontent.com/epicscriptor/sahhuhuhushahjjdajd/main/Protected_2649635198023932.txt'),true))()
+
+end)
+
+Tab1Section:NewButton("Max Hub (OP) [Key]","God Mode",function()
+
+loadstring(game:HttpGet("https://api.luarmor.net/files/v3/loaders/3f4c258405c294983a9b0e113dad3de7.lua"))()
+
+end)
+
+Tab1Section:NewButton("Fhub (OP) [Key]","Auto do everything!",function()
+
+loadstring(game:HttpGet("https://raw.githubusercontent.com/memejames/Hide/main/Loader.lua"))()
+
+end)
