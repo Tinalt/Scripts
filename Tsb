@@ -151,6 +151,14 @@ local RunService = game:GetService("RunService")
     end)
 end)
 
+local Tab1Section = Tab1:NewSection("---Other---")
+
+Tab1Section:NewButton("Anti Lag","Best The Strongest Battlegrounds Anti Lag",function()
+
+loadstring(game:HttpGet(('https://raw.githubusercontent.com/Tinalt/Scripts/main/Tsb%20Anti%20Lag'),true))()
+
+end)
+
 --
 
 Tab2Section:NewButton("Infinite Yield","OP Admin Commands [FE]",function()
