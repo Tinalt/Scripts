@@ -1,0 +1,200 @@
+local kavoUi = loadstring(game:HttpGet("https://raw.githubusercontent.com/Toilatin/Insane-elevator/main/Insane2", true))()
+local window = kavoUi.CreateLib("TSB Void Kill (Hero Hunter)", "BloodTheme")
+
+local gui = Instance.new("ScreenGui")
+gui.Name = "tinGui"
+gui.Parent = game.CoreGui
+
+local TextButton = Instance.new("TextButton")
+TextButton.Text = "Show\nui"
+TextButton.TextSize = 14
+TextButton.TextColor3 = Color3.new(1, 1, 1)
+TextButton.BackgroundColor3 = Color3.new(0, 0, 0)
+TextButton.BorderColor3 = Color3.new(0, 0, 0)
+TextButton.BackgroundTransparency = 0.5
+TextButton.BorderSizePixel = 4
+TextButton.Font = Enum.Font.Code
+TextButton.Size = UDim2.new(0, 50, 0, 50)
+TextButton.Position = UDim2.new(1, -110, 0, 10)
+
+local isVisible = false
+TextButton.MouseButton1Click:Connect(function()
+    isVisible = not isVisible
+    if isVisible then
+        TextButton.Text = "Hide\nui"
+    else
+        TextButton.Text = "Show\nui"
+    end
+    kavoUi:ToggleUI()
+end)
+TextButton.Parent = gui
+TextButton.Draggable = true
+
+local cornerUI = Instance.new("UICorner")
+cornerUI.CornerRadius = UDim.new(0, 5)
+cornerUI.Parent = TextButton
+
+local uiStroke = Instance.new("UIStroke")
+uiStroke.Color = Color3.new(0, 0, 0)
+uiStroke.Thickness = 2
+uiStroke.Parent = TextButton
+
+local SafeSpot = Instance.new("Part", workspace)
+SafeSpot.Position = Vector3.new(447.02,-100,280.21)
+SafeSpot.Name = "Spot"
+SafeSpot.Size = Vector3.new(100000, 1, 100000)
+SafeSpot.Anchored = true
+SafeSpot.Transparency = 0.7
+
+local Tab1 = window:NewTab("Main")
+local Tab1Section = Tab1:NewSection("Main")
+
+local Tab2 = window:NewTab("Settings")
+local Tab2Section = Tab2:NewSection("Settings")
+
+local selectedPlayerName
+
+Tab1Section:NewTextBox("Enter Player Name", "Enter Playerusername", function(playerName)
+    selectedPlayerName = playerName
+end)
+
+Tab1Section:NewButton("Execute", "Instant Kill Player (Hero Hunter)", function()
+    local playerFound = false
+
+    local function findPlayerByName(partialName)
+        local players = game.Players:GetPlayers()
+        for _, player in ipairs(players) do
+            if string.find(string.lower(player.Name), string.lower(partialName)) or string.find(string.lower(player.DisplayName), string.lower(partialName)) then
+                return player
+            end
+        end
+        return nil
+    end
+
+    local player = findPlayerByName(selectedPlayerName)
+    if player then
+        playerFound = true
+
+        local originalPosition = game.Players.LocalPlayer.Character.HumanoidRootPart.Position
+
+        coroutine.wrap(function()
+            local camera = workspace.CurrentCamera
+            local startCameraTime = tick()
+            while tick() < startCameraTime + 2 do
+                if player and player.Character and player.Character:FindFirstChild("HumanoidRootPart") then
+                    camera.CFrame = CFrame.new(camera.CFrame.Position, player.Character.HumanoidRootPart.Position)
+                end
+                wait(0.01)
+            end
+        end)()
+
+        local startTime = tick()
+        local endTime = startTime + 1
+        local specifiedPosition = CFrame.new(449.4176025390625, -96.50000762939453, 281.05706787109375)
+        while tick() < endTime do
+            if player and player.Character and player.Character:FindFirstChild("HumanoidRootPart") then
+                game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = player.Character.HumanoidRootPart.CFrame
+            end
+            
+            wait(0.2)
+            local args = {
+                [1] = {
+                    ["Tool"] = game:GetService("Players").LocalPlayer.Backpack:FindFirstChild("Flowing Water"),
+                    ["Goal"] = "Console Move"
+                }
+            }
+            game:GetService("Players").LocalPlayer.Character.Communicate:FireServer(unpack(args))
+
+            wait(0.01)
+        end
+
+        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = specifiedPosition
+        wait(2)
+
+        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(originalPosition)
+    else
+        print("Player not found")
+    end
+end)
+
+Tab1Section:NewButton("Reset", "Reset your character", function()
+    game.Players.LocalPlayer.Character.Humanoid.Health = 0
+end)
+
+local Tab1Section = Tab1:NewSection("Keep walking for the script to work")
+
+Tab2Section:NewButton("Teleport to SafeSpot", "Tp", function()
+    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(0.049739040434360504, 100003.4921875, -0.1297449916601181)
+end)
+
+Tab2Section:NewButton("Create SafeSpot", "Creates a part named 'Spot' at the specified location", function()
+    local SafeSpot = Instance.new("Part", workspace)
+    SafeSpot.Position = Vector3.new(447.02,-100,280.21)
+    SafeSpot.Name = "Spot"
+    SafeSpot.Size = Vector3.new(10000, 1, 10000)
+    SafeSpot.Anchored = true
+    SafeSpot.Transparency = 0.7
+end)
+
+Tab2Section:NewButton("Delete SafeSpot", "Deletes all parts named 'Spot'", function()
+    for _, part in pairs(workspace:GetChildren()) do
+        if part:IsA("Part") and part.Name == "Spot" then
+            part:Destroy()
+        end
+    end
+end)
+
+Tab2Section:NewButton("Create Toggle Button", "Create Toggle UI Button", function()
+    local gui = Instance.new("ScreenGui")
+    gui.Name = "tinGui"
+    gui.Parent = game.CoreGui
+
+    local TextButton = Instance.new("TextButton")
+    TextButton.Text = "Show\nui"
+    TextButton.TextSize = 14
+    TextButton.TextColor3 = Color3.new(1, 1, 1)
+    TextButton.BackgroundColor3 = Color3.new(0, 0, 0)
+    TextButton.BorderColor3 = Color3.new(0, 0, 0)
+    TextButton.BackgroundTransparency = 0.5
+    TextButton.BorderSizePixel = 4
+    TextButton.Font = Enum.Font.Code
+    TextButton.Size = UDim2.new(0, 50, 0, 50)
+    TextButton.Position = UDim2.new(1, -110, 0, 10)
+
+    local isVisible = false
+    TextButton.MouseButton1Click:Connect(function()
+        isVisible = not isVisible
+        if isVisible then
+            TextButton.Text = "Hide\nui"
+        else
+            TextButton.Text = "Show\nui"
+        end
+        kavoUi:ToggleUI()
+    end)
+    TextButton.Parent = gui
+    TextButton.Draggable = true
+
+    local cornerUI = Instance.new("UICorner")
+    cornerUI.CornerRadius = UDim.new(0, 5)
+    cornerUI.Parent = TextButton
+
+    local uiStroke = Instance.new("UIStroke")
+    uiStroke.Color = Color3.new(0, 0, 0)
+    uiStroke.Thickness = 2
+    uiStroke.Parent = TextButton
+end)
+
+Tab2Section:NewButton("Destroy Toggle Button", "Destroy ToggleUi button", function()
+    local function deleteAllPatrickGui()
+        local coreGui = game.CoreGui
+        for _, child in ipairs(coreGui:GetChildren()) do
+            if child.Name == "tinGui" then
+                child:Destroy()
+                print("Deleted patrickGui:", child.Name)
+            end
+        end
+        print("All instances of patrickGui deleted.")
+    end
+
+    deleteAllPatrickGui()
+end)
