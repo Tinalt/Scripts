@@ -159,6 +159,12 @@ loadstring(game:HttpGet(('https://raw.githubusercontent.com/Tinalt/Scripts/main/
 
 end)
 
+Tab1Section:NewButton("Void Kill (Hero Hunter)","Best The Strongest Battlegrounds Void Kill",function()
+
+loadstring(game:HttpGet(('https://raw.githubusercontent.com/Tinalt/Scripts/main/TSB%20Void%20Kill'),true))()
+
+end)
+
 --
 
 Tab2Section:NewButton("Infinite Yield","OP Admin Commands [FE]",function()
