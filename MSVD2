@@ -1,0 +1,217 @@
+------MVSD 2------
+
+
+
+
+
+
+
+
+
+
+
+
+local Players = game:GetService("Players")
+local LocalPlayer = Players.LocalPlayer
+local RunService = game:GetService("RunService")
+
+local function updateTextTransparency(textLabel, distance)
+    -- Adjust transparency based on distance
+    if distance <= 7 then
+        textLabel.TextTransparency = 1
+    else
+        textLabel.TextTransparency = 0.3
+    end
+end
+
+local function createUsernameLabel(player)
+    if player == LocalPlayer then
+        return -- Do not create a label for the local player
+    end
+
+    local character = player.Character
+    if character and character:FindFirstChild("Head") then
+        local head = character.Head
+
+        -- Remove any existing label
+        local oldLabel = head:FindFirstChild("UsernameLabel")
+        if oldLabel then
+            oldLabel:Destroy()
+        end
+
+        -- Create new label
+        local billboardGui = Instance.new("BillboardGui")
+        local textLabel = Instance.new("TextLabel")
+
+        -- BillboardGui setup
+        billboardGui.Name = "UsernameLabel"
+        billboardGui.Parent = head
+        billboardGui.Adornee = head
+        billboardGui.Size = UDim2.new(0, 100, 0, 25)
+        billboardGui.StudsOffset = Vector3.new(0, 3, 0)
+        billboardGui.AlwaysOnTop = true
+
+        -- TextLabel setup
+        textLabel.Parent = billboardGui
+        textLabel.Size = UDim2.new(1, 0, 1, 0)
+        textLabel.BackgroundTransparency = 1
+        textLabel.Text = player.Name
+        textLabel.TextColor3 = Color3.fromRGB(255, 255, 255) -- Neon white color
+        textLabel.TextStrokeTransparency = 0.5
+        textLabel.TextSize = 16 -- Fixed text size
+        textLabel.TextTransparency = 0.3 -- Default transparency
+        textLabel.Font = Enum.Font.ArialBold -- Arial Bold font
+        textLabel.TextScaled = false -- Disable automatic scaling
+    end
+end
+
+local function updateUsernameLabels()
+    while true do
+        for _, player in ipairs(Players:GetPlayers()) do
+            if player ~= LocalPlayer then
+                createUsernameLabel(player)
+            end
+        end
+        wait(3) -- Update every 3 seconds
+    end
+end
+
+-- Update labels when player spawns
+Players.PlayerAdded:Connect(function(player)
+    player.CharacterAdded:Connect(function()
+        if player ~= LocalPlayer then
+            createUsernameLabel(player)
+        end
+    end)
+end)
+
+-- Monitor distance and update text transparency
+RunService.RenderStepped:Connect(function()
+    for _, player in ipairs(Players:GetPlayers()) do
+        if player ~= LocalPlayer and player.Character and player.Character:FindFirstChild("Head") then
+            local head = player.Character.Head
+            local distance = (LocalPlayer.Character and LocalPlayer.Character.HumanoidRootPart.Position - head.Position).magnitude
+            local billboardGui = head:FindFirstChild("UsernameLabel")
+            if billboardGui then
+                local textLabel = billboardGui:FindFirstChildOfClass("TextLabel")
+                if textLabel then
+                    updateTextTransparency(textLabel, distance)
+                end
+            end
+        end
+    end
+end)
+
+-- Start updating labels
+spawn(updateUsernameLabels)
+
+
+--
+
+_G.HeadSize = 8
+_G.Disabled = true
+
+game:GetService('RunService').RenderStepped:connect(function()
+if _G.Disabled then
+for i,v in next, game:GetService('Players'):GetPlayers() do
+if v.Name ~= game:GetService('Players').LocalPlayer.Name then
+pcall(function()
+v.Character.HumanoidRootPart.Size = Vector3.new(_G.HeadSize,_G.HeadSize,_G.HeadSize)
+v.Character.HumanoidRootPart.Transparency = 0.9
+v.Character.HumanoidRootPart.BrickColor = BrickColor.new("White")
+v.Character.HumanoidRootPart.Material = "Neon"
+v.Character.HumanoidRootPart.CanCollide = false
+end)
+end
+end
+end
+end)
+
+---
+
+local gui = Instance.new("ScreenGui")
+gui.Name = "patrickGui"
+gui.Parent = game.CoreGui
+
+-- Create the TextButton
+local TextButton = Instance.new("TextButton")
+-- Initial Text
+TextButton.Text = "Hitbox\n8"
+TextButton.TextSize = 14
+-- Color
+TextButton.TextColor3 = Color3.new(1, 1, 1)
+TextButton.BackgroundColor3 = Color3.new(0, 0, 0)
+TextButton.BorderColor3 = Color3.new(0, 0, 0)
+-- Transparency
+TextButton.BackgroundTransparency = 0.5
+-- Thickness
+TextButton.BorderSizePixel = 4
+-- Text Code
+TextButton.Font = Enum.Font.Code
+-- Size (making it a small square)
+TextButton.Size = UDim2.new(0, 50, 0, 50)  -- 50×50 pixels
+-- Position
+TextButton.Position = UDim2.new(1, -110, 0, 10)  -- Center of the screen
+TextButton.Parent = gui
+TextButton.Draggable = true
+
+-- Adding UICorner for rounded corners
+local cornerUI = Instance.new("UICorner")
+cornerUI.CornerRadius = UDim.new(0, 5)
+cornerUI.Parent = TextButton
+
+-- Adding UIStroke for border
+local uiStroke = Instance.new("UIStroke")
+uiStroke.Color = Color3.new(0, 0, 0)
+uiStroke.Thickness = 2
+uiStroke.Parent = TextButton
+
+-- Variables to track the state
+local headSize = 8
+local toggled = false
+
+-- Function to update hitbox and text
+local function updateHitbox()
+    _G.HeadSize = headSize
+    _G.Disabled = false
+    
+    -- Update the text on the button
+    if toggled then
+        TextButton.Text = "Hitbox\n5"
+    else
+        TextButton.Text = "Hitbox\n8"
+    end
+    
+    -- Update the hitbox size of all players
+    game:GetService('RunService').RenderStepped:Connect(function()
+        if not _G.Disabled then
+            for i, v in pairs(game:GetService('Players'):GetPlayers()) do
+                if v.Name ~= game:GetService('Players').LocalPlayer.Name then
+                    pcall(function()
+                        v.Character.HumanoidRootPart.Size = Vector3.new(_G.HeadSize, _G.HeadSize, _G.HeadSize)
+                        v.Character.HumanoidRootPart.Transparency = 0.9
+                        v.Character.HumanoidRootPart.BrickColor = BrickColor.new("White")
+                        v.Character.HumanoidRootPart.Material = "Neon"
+                        v.Character.HumanoidRootPart.CanCollide = false
+                    end)
+                end
+            end
+        end
+    end)
+end
+
+-- Connect button click to toggle functionality
+TextButton.MouseButton1Click:Connect(function()
+    toggled = not toggled
+    headSize = toggled and 5 or 8
+    updateHitbox()
+end)
+
+-- Initial hitbox setup
+updateHitbox()
+
+
+end
+
+-- Call the function to run the scripts
+executeScripts()
