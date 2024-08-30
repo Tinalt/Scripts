@@ -58,7 +58,7 @@ local function createUsernameLabel(player)
         textLabel.Text = player.Name
         textLabel.TextColor3 = Color3.fromRGB(255, 255, 255) -- Neon white color
         textLabel.TextStrokeTransparency = 0.5
-        textLabel.TextSize = 16 -- Fixed text size
+        textLabel.TextSize = 20 -- Fixed text size
         textLabel.TextTransparency = 0.3 -- Default transparency
         textLabel.Font = Enum.Font.ArialBold -- Arial Bold font
         textLabel.TextScaled = false -- Disable automatic scaling
@@ -104,6 +104,7 @@ end)
 
 -- Start updating labels
 spawn(updateUsernameLabels)
+
 
 
 --
