@@ -1,0 +1,36 @@
+local player = game.Players.LocalPlayer
+local camera = game.Workspace.CurrentCamera
+
+-- Function to update transparency based on camera distance
+local function updateTransparency(character)
+    local function onRenderStep()
+        local characterPosition = character:FindFirstChild("HumanoidRootPart").Position
+        local cameraPosition = camera.CFrame.Position
+        local distance = (characterPosition - cameraPosition).magnitude
+
+        for _, part in pairs(character:GetChildren()) do
+            if part:IsA("BasePart") then
+                if distance < 5 then
+                    part.Transparency = 1
+                else
+                    part.Transparency = 0
+                end
+            end
+        end
+    end
+
+    -- Update transparency continuously
+    game:GetService("RunService").RenderStepped:Connect(onRenderStep)
+end
+
+-- Connect the function to the CharacterAdded event
+player.CharacterAdded:Connect(function(character)
+    -- Ensure the HumanoidRootPart is available before connecting the RenderStepped event
+    character:WaitForChild("HumanoidRootPart")
+    updateTransparency(character)
+end)
+
+-- If the character is already loaded, apply the transparency logic immediately
+if player.Character then
+    updateTransparency(player.Character)
+end
