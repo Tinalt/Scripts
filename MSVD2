@@ -8,17 +8,14 @@
 
 
 
-
-
-
 local Players = game:GetService("Players")
 local LocalPlayer = Players.LocalPlayer
 local RunService = game:GetService("RunService")
 
 local function updateTextTransparency(textLabel, distance)
     -- Adjust transparency based on distance
-    if distance <= 7 then
-        textLabel.TextTransparency = 1
+    if distance <= 10 then
+        textLabel.TextTransparency = 0.5
     else
         textLabel.TextTransparency = 0.3
     end
@@ -104,6 +101,7 @@ end)
 
 -- Start updating labels
 spawn(updateUsernameLabels)
+
 
 
 
