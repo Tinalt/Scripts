@@ -44,6 +44,6 @@ end
 
 ResetData()
 wait(0.0001)
-HealHealth()
-wait(0.001)
 CritUp()
+wait(0.001)
+HealHealth()
