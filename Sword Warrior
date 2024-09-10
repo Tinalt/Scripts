@@ -1,0 +1,131 @@
+local kavoUi = loadstring(game:HttpGet("https://raw.githubusercontent.com/Toilatin/Insane-elevator/main/Insane2"))()
+local window = kavoUi.CreateLib("Sword Warrior Endless Safe Mode [UPDATE]","BloodTheme")
+
+---Hi
+
+local Tab1 = window:NewTab("NAMEHERE")
+local Tab1Section = Tab1:NewSection("NAMENAME")
+
+local Tab2 = window:NewTab("Endless Mode")
+local Tab2Section = Tab2:NewSection("Teleports")
+
+local Tab3 = window:NewTab("Scripts")
+local Tab3Section = Tab3:NewSection("Scripts")
+
+local Tab4 = window:NewTab("Teleport")
+local Tab4Section = Tab4:NewSection("Teleport")
+
+local Tab5 = window:NewTab("Credits")
+local Tab5Section = Tab5:NewSection("-----Credits-----")
+
+
+
+
+
+-----------------SafeSpots (ENDLESS MODE)-------------------
+
+local SafeSpot = Instance.new("Part", workspace)
+
+SafeSpot.Position = Vector3.new(19.22,6.03,-6545.26)
+
+SafeSpot.Name = "EndlessEnter"
+
+SafeSpot.Size = Vector3.new(0,0.1,0)
+
+SafeSpot.Anchored = true
+
+SafeSpot.CanCollide = false
+
+SafeSpot.Transparency = 1
+
+--
+
+local SafeSpot = Instance.new("Part", workspace)
+
+SafeSpot.Position = Vector3.new(4764.1,42.31,-2257.39)
+
+SafeSpot.Name = "EndlessArea"
+
+SafeSpot.Size = Vector3.new(0,0.1,0)
+
+SafeSpot.Anchored = true
+
+SafeSpot.CanCollide = false
+
+SafeSpot.Transparency = 1
+
+---
+
+local SafeSpot = Instance.new("Part", workspace)
+
+SafeSpot.Position = Vector3.new(4761.73,41,-2256.59)
+
+SafeSpot.Name = "SafeEndless"
+
+SafeSpot.Size = Vector3.new(2050,1,2050)
+
+SafeSpot.Anchored = true
+
+SafeSpot.Transparency = .7
+
+---
+
+local SafeSpot = Instance.new("Part", workspace)
+
+SafeSpot.Position = Vector3.new(4780.71,53.5,-2161.81)
+
+SafeSpot.Name = "OutsideEnd"
+
+SafeSpot.Size = Vector3.new(1,1,1)
+
+SafeSpot.Anchored = true
+
+SafeSpot.CanCollide = false
+
+SafeSpot.Transparency = 1
+
+--------------END ENDLESS MODE---------------
+
+
+
+
+
+Tab2Section:NewButton("Endless Area","Teleport to Endless Area",function()
+
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = workspace.EndlessArea.CFrame * CFrame.new(0,5,0)
+end)
+
+Tab2Section:NewButton("Outside Endless (Cant die by mobs)","Teleport you to Outside Endless (Cant die by mobs)",function()
+
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = workspace.OutsideEnd.CFrame * CFrame.new(0,0,0)
+end)
+
+local Tab2Section = Tab2:NewSection("Enter Endless Mode")
+
+Tab2Section:NewButton("Enter Endless Mode","Enter Endless Mode",function()
+
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = workspace.EndlessEnter.CFrame * CFrame.new(0,5,0)
+end)
+
+
+Tab3Section:NewButton("Infinite Yield","Op FE Admin Commands",function()
+
+loadstring(game:HttpGet('https://raw.githubusercontent.com/EdgeIY/infiniteyield/master/source'))()
+end)
+
+Tab3Section:NewButton("Nameless Admin","[NEW] OP Admin Commands",function()
+
+-- Thanks to 0866 for making the whole ui work, this admin script was actually made in 2019 lol but was modified by qipu
+-- For the commands thanks to IY, Fates Admin, HomeBrew, CMD-X for some of the code and command ideas!
+-- For the people thanks to Digitality, i_db, rouxhaver, spec and the v3rmillion community, if you see your script in the source and want credits please dm qipu#9312
+-- ! Make sure to have an executor that supports firetouchinterest for the tool commands !
+loadstring(game:HttpGet("https://raw.githubusercontent.com/FilteringEnabled/NamelessAdmin/main/Source"))();
+end)
+
+Tab3Section:NewButton("Mobile Tab Glitch","You can tab glitch on mobile",function()
+
+loadstring(game:HttpGet('https://raw.githubusercontent.com/creepstu/fuzzy-octo-giggle/main/Source'))()
+end)
+
+Tab5:NewSection("---Owner---")
+Tab5:NewSection("--Tin782u--")
