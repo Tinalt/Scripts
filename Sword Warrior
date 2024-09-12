@@ -1,10 +1,10 @@
 local kavoUi = loadstring(game:HttpGet("https://raw.githubusercontent.com/Toilatin/Insane-elevator/main/Insane2"))()
-local window = kavoUi.CreateLib("Sword Warrior Endless Safe Mode [UPDATE]","BloodTheme")
+local window = kavoUi.CreateLib("Sword Warrior [UPDATE]","BloodTheme")
 
 ---Hi
 
-local Tab1 = window:NewTab("NAMEHERE")
-local Tab1Section = Tab1:NewSection("NAMENAME")
+local Tab1 = window:NewTab("AutoFarm")
+local Tab1Section = Tab1:NewSection("AutoFarm")
 
 local Tab2 = window:NewTab("Endless Mode")
 local Tab2Section = Tab2:NewSection("Teleports")
@@ -14,9 +14,200 @@ local Tab3Section = Tab3:NewSection("Scripts")
 
 local Tab4 = window:NewTab("Teleport")
 local Tab4Section = Tab4:NewSection("Teleport")
+local Tab4Section = Tab4:NewSection("Coming Soon")
 
-local Tab5 = window:NewTab("Credits")
-local Tab5Section = Tab5:NewSection("-----Credits-----")
+local Tab5 = window:NewTab("Settings")
+local Tab5Section = Tab5:NewSection("Settings")
+
+local Tab6 = window:NewTab("Credits")
+local Tab6Section = Tab6:NewSection("-----Credits-----")
+local Tab6Section = Tab6:NewSection("---Owner---")
+local Tab6Section = Tab6:NewSection("--Tin--")
+
+
+--Toggle Button
+
+local gui = Instance.new("ScreenGui")
+gui.Name = "tinGui"
+gui.Parent = game.CoreGui
+
+local TextButton = Instance.new("TextButton")
+TextButton.Text = "Show\nui"
+TextButton.TextSize = 14
+TextButton.TextColor3 = Color3.new(1, 1, 1)
+TextButton.BackgroundColor3 = Color3.new(0, 0, 0)
+TextButton.BorderColor3 = Color3.new(0, 0, 0)
+TextButton.BackgroundTransparency = 0.5
+TextButton.BorderSizePixel = 4
+TextButton.Font = Enum.Font.Code
+TextButton.Size = UDim2.new(0, 50, 0, 50)
+TextButton.Position = UDim2.new(1, -110, 0, 10)
+
+local isVisible = false
+TextButton.MouseButton1Click:Connect(function()
+    isVisible = not isVisible
+    if isVisible then
+        TextButton.Text = "Hide\nui"
+    else
+        TextButton.Text = "Show\nui"
+    end
+    kavoUi:ToggleUI()
+end)
+TextButton.Parent = gui
+TextButton.Draggable = true
+
+local cornerUI = Instance.new("UICorner")
+cornerUI.CornerRadius = UDim.new(0, 5)
+cornerUI.Parent = TextButton
+
+local uiStroke = Instance.new("UIStroke")
+uiStroke.Color = Color3.new(0, 0, 0)
+uiStroke.Thickness = 2
+uiStroke.Parent = TextButton
+
+
+
+
+
+--- Notification Function ---
+local currentNotification = nil  -- Keeps track of the current notification
+
+local function showNotify(message)
+    -- Remove the existing notification if it exists
+    if currentNotification then
+        currentNotification:Destroy()
+    end
+
+    -- Create a ScreenGui
+    local screenGui = Instance.new("ScreenGui")
+    screenGui.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
+
+    -- Create a TextLabel for the notification
+    local notification = Instance.new("TextLabel")
+    notification.Size = UDim2.new(0.25, 0, 0.13, 0)  -- Width and height of the notification
+    notification.Position = UDim2.new(1, 0, 0.4, 0)  -- Start at the bottom of the screen
+    notification.BackgroundColor3 = Color3.new(0.2, 0.2, 0.2)  -- Dark grey background
+    notification.BackgroundTransparency = 0.3  -- 30% transparent
+    notification.BorderSizePixel = 3.5  -- Outline thickness
+    notification.BorderColor3 = Color3.new(0, 0, 0)  -- Black outline
+    notification.TextColor3 = Color3.new(1, 1, 1)  -- White text
+    notification.TextScaled = true
+    notification.TextWrapped = true
+    notification.Text = message  -- Notification message
+    notification.Font = Enum.Font.ArialBold
+    notification.Parent = screenGui
+
+    -- Add padding to the TextLabel
+    local padding = Instance.new("UIPadding")
+    padding.PaddingTop = UDim.new(0.1, 0)
+    padding.PaddingBottom = UDim.new(0.1, 0)
+    padding.PaddingLeft = UDim.new(0.1, 0)
+    padding.PaddingRight = UDim.new(0.1, 0)
+    padding.Parent = notification
+
+    -- Use TweenService to create the slide animation
+    local TweenService = game:GetService("TweenService")
+
+    -- Shorten the duration for a faster animation
+    local tweenInfo = TweenInfo.new(0.5, Enum.EasingStyle.Quad, Enum.EasingDirection.Out)
+    local targetPosition1 = UDim2.new(0.74, 0, 0.4, 0)  -- Middle of the screen
+    local targetPosition2 = UDim2.new(1, 0, 0.4, 0)  -- Bottom of the screen
+
+    local slideUpTween = TweenService:Create(notification, tweenInfo, {Position = targetPosition1})
+    local slideDownTween = TweenService:Create(notification, tweenInfo, {Position = targetPosition2})
+
+    -- Play the slide up tween
+    slideUpTween:Play()
+
+    -- After the slide up tween completes, wait for 3 seconds and then play the slide down tween
+    slideUpTween.Completed:Connect(function()
+        wait(1.5)
+        slideDownTween:Play()
+    end)
+
+    -- Destroy the screenGui after the slide down tween completes
+    slideDownTween.Completed:Connect(function()
+        screenGui:Destroy()
+    end)
+
+    -- Update the reference to the current notification
+    currentNotification = notification
+end
+
+
+
+--- Notification Function (INTRO) ---
+
+local currentNotification = nil  -- Keeps track of the current notification
+
+local function showNotify(message)
+    -- Remove the existing notification if it exists
+    if currentNotification then
+        currentNotification:Destroy()
+    end
+
+    -- Create a ScreenGui
+    local screenGui = Instance.new("ScreenGui")
+    screenGui.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
+
+    -- Create a TextLabel for the notification
+    local notification = Instance.new("TextLabel")
+    notification.Size = UDim2.new(0.25, 0, 0.13, 0)  -- Width and height of the notification
+    notification.Position = UDim2.new(1, 0, 0.4, 0)  -- Start at the bottom of the screen
+    notification.BackgroundColor3 = Color3.new(0.2, 0.2, 0.2)  -- Dark grey background
+    notification.BackgroundTransparency = 0.3  -- 30% transparent
+    notification.BorderSizePixel = 3.5  -- Outline thickness
+    notification.BorderColor3 = Color3.new(0, 0, 0)  -- Black outline
+    notification.TextColor3 = Color3.new(1, 1, 1)  -- White text
+    notification.TextScaled = true
+    notification.TextWrapped = true
+    notification.Text = message  -- Notification message
+    notification.Font = Enum.Font.ArialBold
+    notification.Parent = screenGui
+
+    -- Add padding to the TextLabel
+    local padding = Instance.new("UIPadding")
+    padding.PaddingTop = UDim.new(0.1, 0)
+    padding.PaddingBottom = UDim.new(0.1, 0)
+    padding.PaddingLeft = UDim.new(0.1, 0)
+    padding.PaddingRight = UDim.new(0.1, 0)
+    padding.Parent = notification
+
+    -- Use TweenService to create the slide animation
+    local TweenService = game:GetService("TweenService")
+
+    -- Shorten the duration for a faster animation
+    local tweenInfo = TweenInfo.new(0.5, Enum.EasingStyle.Quad, Enum.EasingDirection.Out)
+    local targetPosition1 = UDim2.new(0.74, 0, 0.4, 0)  -- Middle of the screen
+    local targetPosition2 = UDim2.new(1, 0, 0.4, 0)  -- Bottom of the screen
+
+    local slideUpTween = TweenService:Create(notification, tweenInfo, {Position = targetPosition1})
+    local slideDownTween = TweenService:Create(notification, tweenInfo, {Position = targetPosition2})
+
+    -- Play the slide up tween
+    slideUpTween:Play()
+
+    -- After the slide up tween completes, wait for 3 seconds and then play the slide down tween
+    slideUpTween.Completed:Connect(function()
+        wait(5)
+        slideDownTween:Play()
+    end)
+
+    -- Destroy the screenGui after the slide down tween completes
+    slideDownTween.Completed:Connect(function()
+        screenGui:Destroy()
+    end)
+
+    -- Update the reference to the current notification
+    currentNotification = notification
+end
+
+
+
+
+showNotify("OP Sword Warrior Script Enjoy! :)")
+
+
 
 
 
@@ -86,6 +277,216 @@ SafeSpot.Transparency = 1
 
 --------------END ENDLESS MODE---------------
 
+-----TAB1-----
+
+
+local Tab1Section = Tab1:NewSection("World8")
+
+
+-- Define the target positions
+local targetPosition1 = Vector3.new(-12965, 4.000007152557373, 19724)
+local targetPosition2 = Vector3.new(-12899.7802734375, 4.000007629394531, 19753.53125)
+local targetPosition3 = Vector3.new(-13150.3828125, 4.00000524520874, 19772.962890625)
+
+-- Get the player's character
+local player = game:GetService("Players").LocalPlayer
+local character = player.Character or player.CharacterAdded:Wait()
+
+-- Variable to control teleportation
+local teleportEnabled = false
+local teleportStopped = false
+
+-- Function to teleport the player with a delay
+local function teleportPlayer(targetPosition)
+    local rootPart = character:WaitForChild("HumanoidRootPart")
+    rootPart.CFrame = CFrame.new(targetPosition)
+end
+
+-- Function to handle the teleportation loop
+local function autoTeleport()
+    while teleportEnabled do
+        if teleportStopped then
+            wait() -- Wait indefinitely until teleportStopped is set to false
+        else
+            -- Teleport to the first position
+            teleportPlayer(targetPosition3)
+            wait(0.1) -- Wait 0.1 seconds
+
+            -- Teleport to the second position
+            teleportPlayer(targetPosition2)
+            wait(0.1) -- Wait 0.1 seconds
+
+            -- Teleport to the second position
+            teleportPlayer(targetPosition1)
+            wait(0.1) -- Wait 0.1 seconds
+
+            -- Wait for 10-20 seconds before repeating
+            local waitTime = math.random(10, 20)
+            wait(waitTime)
+        end
+    end
+end
+
+-- Function to create the SafeSpot part
+local function createSafeSpot()
+    local safeSpot = Instance.new("Part", workspace)
+    safeSpot.Position = Vector3.new(-12900.73, 1, 19683.46)
+    safeSpot.Name = "World10Map1"
+    safeSpot.Size = Vector3.new(20, 3, 20)
+    safeSpot.Anchored = true
+    safeSpot.CanCollide = false
+    safeSpot.Transparency = 0.7
+end
+
+-- Function to create another part
+local function createWorld10Map2()
+    local world10Map2 = Instance.new("Part", workspace)
+    world10Map2.Position = Vector3.new(-12898.89, 2.19, 19547.2)
+    world10Map2.Name = "World10Map2"
+    world10Map2.Size = Vector3.new(20, 3, 20)
+    world10Map2.Anchored = true
+    world10Map2.CanCollide = false
+    world10Map2.Transparency = 0.7
+
+    -- Connect the touched event for World10Map2
+    world10Map2.Touched:Connect(function(hit)
+        if hit.Parent == player.Character then
+            teleportStopped = true
+        end
+    end)
+end
+
+-- Function to create another part
+local function createWorld10Map3()
+    local world10Map3 = Instance.new("Part", workspace)
+    world10Map3.Position = Vector3.new(-12965.24, 1, 19724.5)
+    world10Map3.Name = "World10Map3"
+    world10Map3.Size = Vector3.new(20, 3, 20)
+    world10Map3.Anchored = true
+    world10Map3.CanCollide = false
+    world10Map3.Transparency = 0.7
+
+    -- Connect the touched event for World10Map3
+    world10Map3.Touched:Connect(function(hit)
+        if hit.Parent == player.Character then
+            if teleportStopped then
+                teleportStopped = false -- Resume teleportation
+            end
+        end
+    end)
+end
+
+-- Function to delete the SafeSpot part
+local function deleteSafeSpot()
+    local safeSpot = workspace:FindFirstChild("World10Map1")
+    if safeSpot then
+        safeSpot:Destroy()
+    end
+end
+
+-- Function to delete the World10Map2 part
+local function deleteWorld10Map2()
+    local world10Map2 = workspace:FindFirstChild("World10Map2")
+    if world10Map2 then
+        world10Map2:Destroy()
+    end
+end
+
+-- Function to delete the World10Map3 part
+local function deleteWorld10Map3()
+    local world10Map3 = workspace:FindFirstChild("World10Map3")
+    if world10Map3 then
+        world10Map3:Destroy()
+    end
+end
+
+--BUTTON--
+Tab1Section:NewToggle("AutoFarm", "AutoFarm World 8 (Required Auto Teleport", function(state)
+    teleportEnabled = state
+    if state then
+        createSafeSpot() -- Create the SafeSpot part
+        createWorld10Map2() -- Create the World10Map2 part
+        createWorld10Map3() -- Create the World10Map3 part
+        autoTeleport() -- Start the teleport loop
+    else
+        deleteSafeSpot() -- Delete the SafeSpot part
+        deleteWorld10Map2() -- Delete the World10Map2 part
+        deleteWorld10Map3() -- Delete the World10Map3 part
+    end
+end)
+
+
+
+-- Define the target positions
+local targetPosition1 = Vector3.new(-12965, 4.000007152557373, 19724)
+local targetPosition2 = Vector3.new(-12898.8603515625, 5.1916184425354, 19619.599609375) -- Adjust this if different for World10Map2
+
+-- Get the player's character
+local player = game:GetService("Players").LocalPlayer
+
+-- Function to teleport the player with a delay
+local function teleportPlayer(character, targetPosition)
+    local rootPart = character:WaitForChild("HumanoidRootPart")
+    wait(0.1)  -- Wait for 0.1 seconds
+    rootPart.CFrame = CFrame.new(targetPosition)
+end
+
+-- Function to set up the teleport when the character touches a part
+local function setupTeleport(targetPart, targetPosition)
+    targetPart.Touched:Connect(function(hit)
+        if hit.Parent == player.Character then
+            teleportPlayer(player.Character, targetPosition)
+        end
+    end)
+end
+
+-- Function to handle part creation or re-creation
+local function handlePart(partName, targetPosition)
+    local workspace = game:GetService("Workspace")
+
+    -- Check if the part exists and set up teleport functionality
+    local targetPart = workspace:FindFirstChild(partName)
+    if targetPart then
+        setupTeleport(targetPart, targetPosition)
+    end
+
+    -- Continuously check for the part's re-creation
+    workspace.ChildAdded:Connect(function(child)
+        if child.Name == partName then
+            setupTeleport(child, targetPosition)
+        end
+    end)
+end
+
+-- Function to run the setup and checks periodically
+local function periodicUpdate()
+    while true do
+        handlePart("World10Map1", targetPosition1)
+        handlePart("World10Map2", targetPosition2)
+        wait(25) -- Wait 25 seconds before running again
+    end
+end
+
+-- Toggle button logic
+local isEnabled = false
+
+Tab1Section:NewToggle("Auto Teleport", "Turn this on for AutoFarm to work", function(state)
+    isEnabled = state
+    if state then
+        coroutine.wrap(periodicUpdate)() -- Start the periodic update in a coroutine
+    end
+end)
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -100,12 +501,37 @@ Tab2Section:NewButton("Outside Endless (Cant die by mobs)","Teleport you to Outs
 game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = workspace.OutsideEnd.CFrame * CFrame.new(0,0,0)
 end)
 
+local player = game:GetService("Players").LocalPlayer
+local autoJumpEnabled = false
+
+-- Function to handle auto-jumping
+local function autoJump()
+    local humanoid = player.Character:WaitForChild("Humanoid")
+    while autoJumpEnabled do
+        humanoid.Jump = true
+        wait(0.1) -- Delay between jumps, adjust as needed
+        humanoid.Jump = false
+        wait(0.1) -- Delay to prevent continuous jumping
+    end
+end
+
+-- Toggle button for auto-jumping
+Tab2Section:NewToggle("Anti Afk", "Anti Afk", function(state)
+    autoJumpEnabled = state
+    if state then
+        autoJump() -- Start auto-jumping loop
+    end
+end)
+
 local Tab2Section = Tab2:NewSection("Enter Endless Mode")
 
 Tab2Section:NewButton("Enter Endless Mode","Enter Endless Mode",function()
 
 game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = workspace.EndlessEnter.CFrame * CFrame.new(0,5,0)
 end)
+
+local Tab2Section = Tab2:NewSection("Endless AutoFarm SOON!")
+
 
 
 Tab3Section:NewButton("Infinite Yield","Op FE Admin Commands",function()
@@ -127,5 +553,185 @@ Tab3Section:NewButton("Mobile Tab Glitch","You can tab glitch on mobile",functio
 loadstring(game:HttpGet('https://raw.githubusercontent.com/creepstu/fuzzy-octo-giggle/main/Source'))()
 end)
 
-Tab5:NewSection("---Owner---")
-Tab5:NewSection("--Tin782u--")
+Tab3Section:NewButton("Instant Heal Health Button","Instant Heal",function()
+
+----Instant Heal Health in Sword Warrior-----
+
+
+
+
+
+
+
+
+
+local gui = Instance.new("ScreenGui")
+gui.Name = "healGui"
+gui.Parent = game.CoreGui
+
+-- Create the TextButton
+local TextButton = Instance.new("TextButton")
+-- Text
+TextButton.Text = "Heal\nHealth"
+TextButton.TextSize = 14
+-- Color
+TextButton.TextColor3 = Color3.new(1, 1, 1)
+TextButton.BackgroundColor3 = Color3.new(0, 0, 0)
+TextButton.BorderColor3 = Color3.new(0, 0, 0)
+-- Transparency
+TextButton.BackgroundTransparency = 0.5
+-- Thickness
+TextButton.BorderSizePixel = 4
+-- Text Code
+TextButton.Font = Enum.Font.Code
+-- Size (making it a small square)
+TextButton.Size = UDim2.new(0, 50, 0, 50)  -- 50×50 pixels
+-- Position
+TextButton.Position = UDim2.new(1, -110, 0, 10)  -- Center of the screen
+-- Function
+TextButton.MouseButton1Click:Connect(function()
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/Tinalt/Scripts/main/HealSW", true))()
+end)
+TextButton.Parent = gui
+TextButton.Draggable = true
+
+-- Adding UICorner for rounded corners
+local cornerUI = Instance.new("UICorner")
+cornerUI.CornerRadius = UDim.new(0, 5)
+cornerUI.Parent = TextButton
+
+-- Adding UIStroke for border
+local uiStroke = Instance.new("UIStroke")
+uiStroke.Color = Color3.new(0, 0, 0)
+uiStroke.Thickness = 2
+uiStroke.Parent = TextButton
+
+
+end)
+
+
+
+Tab3Section:NewButton("Instant Heal + Attack Button","Instant Heal",function()
+
+----Instant Heal + Attack in Sword Warrior-----
+
+
+
+
+
+
+
+
+
+local gui = Instance.new("ScreenGui")
+gui.Name = "atkGui"
+gui.Parent = game.CoreGui
+
+-- Create the TextButton
+local TextButton = Instance.new("TextButton")
+-- Text
+TextButton.Text = "Heal\n+\nATK"
+TextButton.TextSize = 14
+-- Color
+TextButton.TextColor3 = Color3.new(1, 1, 1)
+TextButton.BackgroundColor3 = Color3.new(0, 0, 0)
+TextButton.BorderColor3 = Color3.new(0, 0, 0)
+-- Transparency
+TextButton.BackgroundTransparency = 0.5
+-- Thickness
+TextButton.BorderSizePixel = 4
+-- Text Code
+TextButton.Font = Enum.Font.Code
+-- Size (making it a small square)
+TextButton.Size = UDim2.new(0, 50, 0, 50)  -- 50×50 pixels
+-- Position
+TextButton.Position = UDim2.new(1, -110, 0, 10)  -- Center of the screen
+-- Function
+TextButton.MouseButton1Click:Connect(function()
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/Tinalt/Scripts/main/Insteal%20Heal%20%2B%20Attack", true))()
+end)
+TextButton.Parent = gui
+TextButton.Draggable = true
+
+-- Adding UICorner for rounded corners
+local cornerUI = Instance.new("UICorner")
+cornerUI.CornerRadius = UDim.new(0, 5)
+cornerUI.Parent = TextButton
+
+-- Adding UIStroke for border
+local uiStroke = Instance.new("UIStroke")
+uiStroke.Color = Color3.new(0, 0, 0)
+uiStroke.Thickness = 2
+uiStroke.Parent = TextButton
+
+end)
+
+
+
+Tab3Section:NewButton("Tora IsMe Gui (Key)","Gui",function()
+
+loadstring(game:HttpGet("https://raw.githubusercontent.com/ToraScript/Script/main/SwordWar", true))()
+end)
+
+Tab5Section:NewButton("Create Toggle Button", "Create Toggle UI Button", function()
+    local gui = Instance.new("ScreenGui")
+gui.Name = "tinGui"
+gui.Parent = game.CoreGui
+
+local TextButton = Instance.new("TextButton")
+TextButton.Text = "Show\nui"
+TextButton.TextSize = 14
+TextButton.TextColor3 = Color3.new(1, 1, 1)
+TextButton.BackgroundColor3 = Color3.new(0, 0, 0)
+TextButton.BorderColor3 = Color3.new(0, 0, 0)
+TextButton.BackgroundTransparency = 0.5
+TextButton.BorderSizePixel = 4
+TextButton.Font = Enum.Font.Code
+TextButton.Size = UDim2.new(0, 50, 0, 50)
+TextButton.Position = UDim2.new(1, -110, 0, 10)
+
+local isVisible = false
+TextButton.MouseButton1Click:Connect(function()
+    isVisible = not isVisible
+    if isVisible then
+        TextButton.Text = "Hide\nui"
+    else
+        TextButton.Text = "Show\nui"
+    end
+    kavoUi:ToggleUI()
+end)
+TextButton.Parent = gui
+TextButton.Draggable = true
+
+local cornerUI = Instance.new("UICorner")
+cornerUI.CornerRadius = UDim.new(0, 5)
+cornerUI.Parent = TextButton
+
+local uiStroke = Instance.new("UIStroke")
+uiStroke.Color = Color3.new(0, 0, 0)
+uiStroke.Thickness = 2
+uiStroke.Parent = TextButton
+end)
+
+Tab5Section:NewButton("Destroy Toggle Button","Destroy ToggleUi button",function()
+
+-- Function to delete all instances of "patrickGui" from CoreGui
+local function deleteAllPatrickGui()
+    local coreGui = game.CoreGui
+    
+    -- Iterate through each child in CoreGui
+    for _, child in ipairs(coreGui:GetChildren()) do
+        -- Check if the child is named "patrickGui"
+        if child.Name == "tinGui" then
+            -- Delete the patrickGui instance
+            child:Destroy()
+            print("Deleted patrickGui:", child.Name)
+        end
+    end
+    
+    print("All instances of patrickGui deleted.")
+end
+
+-- Call the function to delete all instances of "patrickGui"
+deleteAllPatrickGui()
+end)
