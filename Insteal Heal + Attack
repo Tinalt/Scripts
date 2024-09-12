@@ -1,0 +1,50 @@
+local function ResetData()
+
+local args = {
+    [1] = "ResetPoints"
+}
+
+game:GetService("ReplicatedStorage").CurRemotes.DataChange_Points:FireServer(unpack(args))
+
+end
+
+----
+
+local function CritUp()
+
+local args = {
+    [1] = "ClickPoints",
+    [2] = {
+        ["Points"] = 240,
+        ["Obj"] = "GCriticalHit"
+    }
+}
+
+game:GetService("ReplicatedStorage").CurRemotes.DataChange_Points:FireServer(unpack(args))
+
+end
+
+---
+
+local function Attack()
+
+local args = {
+    [1] = "ClickPoints",
+    [2] = {
+        ["Points"] = 999999,
+        ["Obj"] = "GDamage"
+    }
+}
+
+game:GetService("ReplicatedStorage").CurRemotes.DataChange_Points:FireServer(unpack(args))
+
+
+end
+
+----
+
+ResetData()
+wait(0.0001)
+CritUp()
+wait(0.001)
+Attack()
