@@ -9,19 +9,22 @@ local Tab1Section = Tab1:NewSection("AutoFarm")
 local Tab2 = window:NewTab("Endless Mode")
 local Tab2Section = Tab2:NewSection("Teleports")
 
-local Tab3 = window:NewTab("Scripts")
-local Tab3Section = Tab3:NewSection("Scripts")
+local Tab3 = window:NewTab("Boss Raid")
+local Tab3Section = Tab3:NewSection("Boss Raid")
 
-local Tab4 = window:NewTab("Teleport")
-local Tab4Section = Tab4:NewSection("Teleport")
-local Tab4Section = Tab4:NewSection("Coming Soon")
+local Tab4 = window:NewTab("Scripts")
+local Tab4Section = Tab4:NewSection("Scripts")
 
-local Tab5 = window:NewTab("Settings")
-local Tab5Section = Tab5:NewSection("Settings")
+local Tab5 = window:NewTab("Teleport")
+local Tab5Section = Tab5:NewSection("Teleport")
+local Tab5Section = Tab5:NewSection("Coming Soon")
 
-local Tab6 = window:NewTab("Credits")
-local Tab6Section = Tab6:NewSection("-----Credits-----")
-local Tab6Section = Tab6:NewSection("---Owner---")
+local Tab6 = window:NewTab("Settings")
+local Tab6Section = Tab6:NewSection("Settings")
+
+local Tab7 = window:NewTab("Credits")
+local Tab7Section = Tab7:NewSection("-----Credits-----")
+local Tab7Section = Tab7:NewSection("---Owner---")
 local Tab6Section = Tab6:NewSection("--Tin--")
 
 
@@ -280,6 +283,235 @@ SafeSpot.Transparency = 1
 -----TAB1-----
 
 
+
+
+
+
+
+
+
+
+
+local player = game:GetService("Players").LocalPlayer
+local autoExecuteEnabled = false
+local customTime = 10 -- Default to 10 seconds
+
+-- Function to reset data
+local function ResetData()
+    local args = {
+        [1] = "ResetPoints"
+    }
+    game:GetService("ReplicatedStorage").CurRemotes.DataChange_Points:FireServer(unpack(args))
+end
+
+-- Function to increase critical hit
+local function CritUp()
+    local args = {
+        [1] = "ClickPoints",
+        [2] = {
+            ["Points"] = 240,
+            ["Obj"] = "GCriticalHit"
+        }
+    }
+    game:GetService("ReplicatedStorage").CurRemotes.DataChange_Points:FireServer(unpack(args))
+end
+
+-- Function to heal health
+local function HealHealth()
+    local args = {
+        [1] = "ClickPoints",
+        [2] = {
+            ["Points"] = 999999,
+            ["Obj"] = "GHealth"
+        }
+    }
+    game:GetService("ReplicatedStorage").CurRemotes.DataChange_Points:FireServer(unpack(args))
+end
+
+-- Function to run the three scripts in sequence
+local function executeActions()
+    while autoExecuteEnabled do
+        ResetData()
+        wait(0.0001)
+        CritUp()
+        wait(0.001)
+        HealHealth()
+        wait(customTime) -- Wait for the custom time before running the script again
+    end
+end
+
+-- Toggle button for auto-executing
+Tab1Section:NewToggle("Auto Heal", "Auto Heal Full Health", function(state)
+    autoExecuteEnabled = state
+    if state then
+        -- Run the actions in a new thread to prevent blocking
+        spawn(executeActions)
+    end
+end)
+
+-- Textbox to input custom time
+Tab1Section:NewTextBox("Auto Heal Custom Time", "Enter the time in seconds", function(value)
+    local inputTime = tonumber(value) -- Convert the textbox input to a number
+    if inputTime and inputTime > 0 then
+        customTime = inputTime -- Set customTime to the new value
+        showNotify("Auto Heal time set to " .. inputTime .. "s")
+    else
+        showNotify("Invalid input. Please enter a valid number greater than 0.")
+    end
+end)
+
+
+local player = game:GetService("Players").LocalPlayer
+local autoExecuteEnabled = false
+local customTime = 10 -- Default to 10 seconds
+
+-- Function to reset data
+local function ResetData()
+    local args = {
+        [1] = "ResetPoints"
+    }
+    game:GetService("ReplicatedStorage").CurRemotes.DataChange_Points:FireServer(unpack(args))
+end
+
+-- Function to increase critical hit
+local function CritUp()
+    local args = {
+        [1] = "ClickPoints",
+        [2] = {
+            ["Points"] = 240,
+            ["Obj"] = "GCriticalHit"
+        }
+    }
+    game:GetService("ReplicatedStorage").CurRemotes.DataChange_Points:FireServer(unpack(args))
+end
+
+-- Function to increase attack damage
+local function Attack()
+    local args = {
+        [1] = "ClickPoints",
+        [2] = {
+            ["Points"] = 999999,
+            ["Obj"] = "GDamage"
+        }
+    }
+    game:GetService("ReplicatedStorage").CurRemotes.DataChange_Points:FireServer(unpack(args))
+end
+
+-- Function to run both scripts in sequence
+local function executeActions()
+    while autoExecuteEnabled do
+        ResetData()
+        wait(0.0001)
+        CritUp()
+        wait(0.001)
+        Attack()
+        wait(customTime) -- Wait for the custom time before running the script again
+    end
+end
+
+-- Toggle button for auto-executing both scripts
+Tab1Section:NewToggle("Auto Upgrade Attack", "Auto Upgrade Attack", function(state)
+    autoExecuteEnabled = state
+    if state then
+        -- Run the actions in a new thread to prevent blocking
+        spawn(executeActions)
+    end
+end)
+
+-- Textbox to input custom time
+Tab1Section:NewTextBox("Auto Attack Custom Time", "Enter the time in seconds", function(value)
+    local inputTime = tonumber(value) -- Convert the textbox input to a number
+    if inputTime and inputTime > 0 then
+        customTime = inputTime -- Set customTime to the new value
+        showNotify("Auto Attack time set to " .. inputTime .. "s")
+    else
+        showNotify("Invalid input. Please enter a valid number greater than 0.")
+    end
+end)
+
+
+local runScript = false
+local interval = 10 -- Default interval in seconds
+
+-- Function definitions
+local function ResetData()
+    local args = {
+        [1] = "ResetPoints"
+    }
+    game:GetService("ReplicatedStorage").CurRemotes.DataChange_Points:FireServer(unpack(args))
+end
+
+local function CritUp()
+    local args = {
+        [1] = "ClickPoints",
+        [2] = {
+            ["Points"] = 240,
+            ["Obj"] = "GCriticalHit"
+        }
+    }
+    game:GetService("ReplicatedStorage").CurRemotes.DataChange_Points:FireServer(unpack(args))
+end
+
+local function Attack()
+    local args = {
+        [1] = "ClickPoints",
+        [2] = {
+            ["Points"] = 999999,
+            ["Obj"] = "GDamage"
+        }
+    }
+    game:GetService("ReplicatedStorage").CurRemotes.DataChange_Points:FireServer(unpack(args))
+end
+
+local function HealHealth()
+    local args = {
+        [1] = "ClickPoints",
+        [2] = {
+            ["Points"] = 999999,
+            ["Obj"] = "GHealth"
+        }
+    }
+    game:GetService("ReplicatedStorage").CurRemotes.DataChange_Points:FireServer(unpack(args))
+end
+
+-- Function to execute the script
+local function executeScript()
+    while runScript do
+        ResetData()
+        wait(0.0001)
+        HealHealth()
+        wait(0.001)
+        ResetData()
+        wait(0.001)
+        CritUp()
+        wait(0.001)
+        Attack()
+        wait(interval) -- Wait for the specified interval
+    end
+end
+
+-- Toggle button for enabling/disabling the script
+Tab1Section:NewToggle("Auto Heal + Attack", "Instant Heal + Attack", function(state)
+    runScript = state
+    if state then
+        executeScript() -- Start the script execution
+    end
+end)
+
+-- Textbox for setting the interval
+Tab1Section:NewTextBox("Heal + ATK", "Set the time in seconds", function(value)
+    local num = tonumber(value)
+    if num and num > 0 then
+        interval = num
+        showNotify("Auto Heal + ATK time set to " .. value .. "s")
+    else
+        showNotify("Invalid input. Please enter a valid number greater than 0")
+    end
+end)
+
+
+
+
 local Tab1Section = Tab1:NewSection("World8")
 
 
@@ -533,13 +765,40 @@ end)
 local Tab2Section = Tab2:NewSection("Endless AutoFarm SOON!")
 
 
+local runLoop = false
 
-Tab3Section:NewButton("Infinite Yield","Op FE Admin Commands",function()
+Tab3Section:NewToggle("Auto Damage Boss", "Auto Damage Boss", function(state)
+    runLoop = state
+    if state then
+        spawn(function()
+            while runLoop do
+                wait(0.001)
+                local args = {
+                    [1] = "DamToMonster",
+                    [2] = workspace.ForScript.BossFight.boss1.Monster_.boss1,
+                    [3] = {
+                        ["damtype"] = "normal"
+                    }
+                }
+                game:GetService("ReplicatedStorage").CurRemotes.MonsterEvent:FireServer(unpack(args))
+            end
+        end)
+    end
+end)
+
+
+
+
+
+
+
+
+Tab4Section:NewButton("Infinite Yield","Op FE Admin Commands",function()
 
 loadstring(game:HttpGet('https://raw.githubusercontent.com/EdgeIY/infiniteyield/master/source'))()
 end)
 
-Tab3Section:NewButton("Nameless Admin","[NEW] OP Admin Commands",function()
+Tab4Section:NewButton("Nameless Admin","[NEW] OP Admin Commands",function()
 
 -- Thanks to 0866 for making the whole ui work, this admin script was actually made in 2019 lol but was modified by qipu
 -- For the commands thanks to IY, Fates Admin, HomeBrew, CMD-X for some of the code and command ideas!
@@ -548,12 +807,12 @@ Tab3Section:NewButton("Nameless Admin","[NEW] OP Admin Commands",function()
 loadstring(game:HttpGet("https://raw.githubusercontent.com/FilteringEnabled/NamelessAdmin/main/Source"))();
 end)
 
-Tab3Section:NewButton("Mobile Tab Glitch","You can tab glitch on mobile",function()
+Tab4Section:NewButton("Mobile Tab Glitch","You can tab glitch on mobile",function()
 
 loadstring(game:HttpGet('https://raw.githubusercontent.com/creepstu/fuzzy-octo-giggle/main/Source'))()
 end)
 
-Tab3Section:NewButton("Instant Heal Health Button","Instant Heal",function()
+Tab4Section:NewButton("Instant Heal Health Button","Instant Heal",function()
 
 ----Instant Heal Health in Sword Warrior-----
 
@@ -611,7 +870,7 @@ end)
 
 
 
-Tab3Section:NewButton("Instant Heal + Attack Button","Instant Heal",function()
+Tab4Section:NewButton("Instant Heal + Attack Button","Instant Heal",function()
 
 ----Instant Heal + Attack in Sword Warrior-----
 
@@ -668,12 +927,12 @@ end)
 
 
 
-Tab3Section:NewButton("Tora IsMe Gui (Key)","Gui",function()
+Tab4Section:NewButton("Tora IsMe Gui (Key)","Gui",function()
 
 loadstring(game:HttpGet("https://raw.githubusercontent.com/ToraScript/Script/main/SwordWar", true))()
 end)
 
-Tab5Section:NewButton("Create Toggle Button", "Create Toggle UI Button", function()
+Tab6Section:NewButton("Create Toggle Button", "Create Toggle UI Button", function()
     local gui = Instance.new("ScreenGui")
 gui.Name = "tinGui"
 gui.Parent = game.CoreGui
@@ -713,7 +972,7 @@ uiStroke.Thickness = 2
 uiStroke.Parent = TextButton
 end)
 
-Tab5Section:NewButton("Destroy Toggle Button","Destroy ToggleUi button",function()
+Tab6Section:NewButton("Destroy Toggle Button","Destroy ToggleUi button",function()
 
 -- Function to delete all instances of "patrickGui" from CoreGui
 local function deleteAllPatrickGui()
