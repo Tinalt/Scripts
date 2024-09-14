@@ -15,7 +15,7 @@ local function CritUp()
 local args = {
     [1] = "ClickPoints",
     [2] = {
-        ["Points"] = 240,
+        ["Points"] = 230,
         ["Obj"] = "GCriticalHit"
     }
 }
@@ -41,10 +41,31 @@ game:GetService("ReplicatedStorage").CurRemotes.DataChange_Points:FireServer(unp
 
 end
 
+---
+
+local function HealHealth()
+
+local args = {
+    [1] = "ClickPoints",
+    [2] = {
+        ["Points"] = 9999999,
+        ["Obj"] = "GHealth"
+    }
+}
+
+game:GetService("ReplicatedStorage").CurRemotes.DataChange_Points:FireServer(unpack(args))
+
+end
+
+
 ----
 
 ResetData()
 wait(0.0001)
+HealHealth()
+wait(0.001)
+ResetData()
+wait(0.001)
 CritUp()
 wait(0.001)
 Attack()
