@@ -9,8 +9,9 @@ local Tab1Section = Tab1:NewSection("AutoFarm")
 local Tab2 = window:NewTab("Endless Mode")
 local Tab2Section = Tab2:NewSection("Teleports")
 
-local Tab3 = window:NewTab("Boss Raid")
-local Tab3Section = Tab3:NewSection("Boss Raid")
+local Tab3 = window:NewTab("Auto Drillmaster")
+local Tab3Section = Tab3:NewSection("Auto DrillMaster")
+local Tab3Section = Tab3:NewSection("Coming Soon")
 
 local Tab4 = window:NewTab("Scripts")
 local Tab4Section = Tab4:NewSection("Scripts")
@@ -552,6 +553,234 @@ end)
 
 
 
+
+
+
+
+
+
+
+
+local Tab1Section = Tab1:NewSection("World 12")
+
+
+-- Define the target positions
+
+--targetPosition1 is SafePlace
+--targetPosition2 is attract the monsters
+--targetPosition3 is tp outside the map to avoid losing health when attract the monsters
+--targetPosition3 is attract the monsters (World 12 Bonus)
+
+local targetPosition1 = Vector3.new(-38870, 4.400007724761963, 19732)
+local targetPosition2 = Vector3.new(-38954.453125, 4.500006198883057, 19770.396484375)
+local targetPosition3 = Vector3.new(-38803.5078125, 4.000007629394531, 19797.845703125)
+local targetPosition4 = Vector3.new(-38926.78515625, 4.500007152557373, 19695.060546875)
+
+-- Get the player's character
+local player = game:GetService("Players").LocalPlayer
+local character = player.Character or player.CharacterAdded:Wait()
+
+-- Variable to control teleportation
+local teleportEnabled = false
+local teleportStopped = false
+
+-- Function to teleport the player with a delay
+local function teleportPlayer(targetPosition)
+    local rootPart = character:WaitForChild("HumanoidRootPart")
+    rootPart.CFrame = CFrame.new(targetPosition)
+end
+
+-- Function to handle the teleportation loop
+local function autoTeleport()
+    while teleportEnabled do
+        if teleportStopped then
+            wait() -- Wait indefinitely until teleportStopped is set to false
+        else
+            -- Teleport to the first position
+            teleportPlayer(targetPosition3)
+            wait(0.1) -- Wait 0.1 seconds
+
+            -- Teleport to the second position
+            teleportPlayer(targetPosition2)
+            wait(0.0001) -- Wait 0.1 seconds
+
+            -- Teleport to the second position
+            teleportPlayer(targetPosition4)
+            wait(0.0001) -- Wait 0.1 seconds
+
+
+            -- Teleport to the second position
+            teleportPlayer(targetPosition1)
+            wait(0.1) -- Wait 0.1 seconds
+
+            -- Wait for 10-20 seconds before repeating
+            local waitTime = math.random(10, 20)
+            wait(waitTime)
+        end
+    end
+end
+
+
+local function createWorld12Map1()
+    local world12map1 = Instance.new("Part", workspace)
+    world12map1.Position = Vector3.new(-38926.7,1,19683.88)
+    world12map1.Name = "World12Map1"
+    world12map1.Size = Vector3.new(25, 3, 25)
+    world12map1.Anchored = true
+    world12map1.CanCollide = false
+    world12map1.Transparency = 0.7
+end
+
+-- Function to create another part
+local function createWorld12Map2()
+    local world12Map2 = Instance.new("Part", workspace)
+    world12Map2.Position = Vector3.new(-38934.31,13.45,19524.19)
+    world12Map2.Name = "World12Map2"
+    world12Map2.Size = Vector3.new(27, 3, 27)
+    world12Map2.Anchored = true
+    world12Map2.CanCollide = false
+    world12Map2.Transparency = 0.7
+
+    -- Connect the touched event for World12Map2
+    world12Map2.Touched:Connect(function(hit)
+        if hit.Parent == player.Character then
+            teleportStopped = true
+        end
+    end)
+end
+
+-- Function to create another part
+local function createWorld12Map3()
+    local world12Map3 = Instance.new("Part", workspace)
+    world12Map3.Position = Vector3.new(-38869.78,1,19731.45)
+    world12Map3.Name = "World12Map3"
+    world12Map3.Size = Vector3.new(20, 3, 20)
+    world12Map3.Anchored = true
+    world12Map3.CanCollide = false
+    world12Map3.Transparency = 0.7
+
+    -- Connect the touched event for World12Map3
+    world12Map3.Touched:Connect(function(hit)
+        if hit.Parent == player.Character then
+            if teleportStopped then
+                teleportStopped = false -- Resume teleportation
+            end
+        end
+    end)
+end
+
+-- Function to delete the World12Map1 part
+local function deleteWorld12Map1()
+    local world12map1 = workspace:FindFirstChild("World12Map1")
+    if world12map1 then
+        world12map1:Destroy()
+    end
+end
+
+-- Function to delete the World12Map2 part
+local function deleteWorld12Map2()
+    local world12Map2 = workspace:FindFirstChild("World12Map2")
+    if world12Map2 then
+        world12Map2:Destroy()
+    end
+end
+
+-- Function to delete the World12Map3 part
+local function deleteWorld12Map3()
+    local world12Map3 = workspace:FindFirstChild("World12Map3")
+    if world12Map3 then
+        world12Map3:Destroy()
+    end
+end
+
+--BUTTON--
+Tab1Section:NewToggle("AutoFarm", "AutoFarm World 12 (Required Auto Teleport", function(state)
+    teleportEnabled = state
+    if state then
+        createWorld12Map1() -- Create the SafeSpot part
+        createWorld12Map2() -- Create the World10Map2 part
+        createWorld12Map3() -- Create the World10Map3 part
+        autoTeleport() -- Start the teleport loop
+    else
+        deleteWorld12Map1() -- Delete the SafeSpot part
+        deleteWorld12Map2() -- Delete the World10Map2 part
+        deleteWorld12Map3() -- Delete the World10Map3 part
+    end
+end)
+
+
+
+-- Define the target positions
+local targetPosition1 = Vector3.new(-38870, 4.400005340576172, 19732)
+local targetPosition2 = Vector3.new(-38927.5625, 4.95576286315918, 19618.453125)
+
+-- Get the player's character
+local player = game:GetService("Players").LocalPlayer
+
+-- Function to teleport the player with a delay
+local function teleportPlayer(character, targetPosition)
+    local rootPart = character:WaitForChild("HumanoidRootPart")
+    wait(0.1)  -- Wait for 0.1 seconds
+    rootPart.CFrame = CFrame.new(targetPosition)
+end
+
+-- Function to set up the teleport when the character touches a part
+local function setupTeleport(targetPart, targetPosition)
+    targetPart.Touched:Connect(function(hit)
+        if hit.Parent == player.Character then
+            teleportPlayer(player.Character, targetPosition)
+        end
+    end)
+end
+
+-- Function to handle part creation or re-creation
+local function handlePart(partName, targetPosition)
+    local workspace = game:GetService("Workspace")
+
+    -- Check if the part exists and set up teleport functionality
+    local targetPart = workspace:FindFirstChild(partName)
+    if targetPart then
+        setupTeleport(targetPart, targetPosition)
+    end
+
+    -- Continuously check for the part's re-creation
+    workspace.ChildAdded:Connect(function(child)
+        if child.Name == partName then
+            setupTeleport(child, targetPosition)
+        end
+    end)
+end
+
+-- Function to run the setup and checks periodically
+local function periodicUpdate()
+    while true do
+        handlePart("World12Map1", targetPosition1)
+        handlePart("World12Map2", targetPosition2)
+        wait(25) -- Wait 25 seconds before running again
+    end
+end
+
+-- Toggle button logic
+local isEnabled = false
+
+Tab1Section:NewToggle("Auto Teleport", "Turn this on for AutoFarm to work", function(state)
+    isEnabled = state
+    if state then
+        coroutine.wrap(periodicUpdate)() -- Start the periodic update in a coroutine
+    end
+end)
+
+
+
+
+
+
+
+
+
+
+
+
 local Tab1Section = Tab1:NewSection("World 11")
 
 
@@ -678,7 +907,7 @@ local function deleteWorld11Map3()
 end
 
 --BUTTON--
-Tab1Section:NewToggle("AutoFarm", "AutoFarm World 8 (Required Auto Teleport", function(state)
+Tab1Section:NewToggle("AutoFarm", "AutoFarm World 11 (Required Auto Teleport", function(state)
     teleportEnabled = state
     if state then
         createWorld11Map1() -- Create the SafeSpot part
@@ -890,7 +1119,7 @@ local function deleteWorld10Map3()
 end
 
 --BUTTON--
-Tab1Section:NewToggle("AutoFarm", "AutoFarm World 8 (Required Auto Teleport", function(state)
+Tab1Section:NewToggle("AutoFarm", "AutoFarm World 10 (Required Auto Teleport", function(state)
     teleportEnabled = state
     if state then
         createSafeSpot() -- Create the SafeSpot part
@@ -1022,26 +1251,6 @@ end)
 local Tab2Section = Tab2:NewSection("Endless AutoFarm SOON!")
 
 
-local runLoop = false
-
-Tab3Section:NewToggle("Auto Damage Boss", "Auto Damage Boss", function(state)
-    runLoop = state
-    if state then
-        spawn(function()
-            while runLoop do
-                wait(0.001)
-                local args = {
-                    [1] = "DamToMonster",
-                    [2] = workspace.ForScript.BossFight.boss1.Monster_.boss1,
-                    [3] = {
-                        ["damtype"] = "normal"
-                    }
-                }
-                game:GetService("ReplicatedStorage").CurRemotes.MonsterEvent:FireServer(unpack(args))
-            end
-        end)
-    end
-end)
 
 
 
