@@ -561,6 +561,10 @@ end)
 
 
 
+
+
+
+
 local Tab1Section = Tab1:NewSection("World 12")
 
 
@@ -770,6 +774,45 @@ Tab1Section:NewToggle("Auto Teleport", "Turn this on for AutoFarm to work", func
     end
 end)
 
+
+
+
+
+
+-- Anti-AFK Walk Script Variables
+local player = game.Players.LocalPlayer
+local character = player.Character or player.CharacterAdded:Wait()
+local humanoid = character:WaitForChild("Humanoid")
+local targetPosition = Vector3.new(-38871.03125, 4.00000524520874, 19716.115234375)
+
+local antiAFKEnabled = false
+
+-- Function to handle the Anti-AFK walk
+local function antiAFKWalk()
+    while antiAFKEnabled do
+        wait(600) -- Wait 10 minutes before moving
+
+        -- Check if character is already close to the target position
+        if (character.PrimaryPart.Position - targetPosition).Magnitude > 10 then
+            -- Move the character to the specified position
+            humanoid:MoveTo(targetPosition)
+            
+            -- Wait until the character reaches the target or timeout
+            humanoid.MoveToFinished:Wait(1) -- Wait up to 5 seconds for the move to complete
+        end
+    end
+end
+
+-- Button Toggle Logic
+Tab1Section:NewToggle("Anti Afk (TESTING) (ONLY WORLD 12)", "Enable/Disable Anti-AFK Walk", function(state)
+    antiAFKEnabled = state
+    if state then
+        showNotify("Anti Afk: ON")
+        antiAFKWalk() -- Start the Anti-AFK walk loop
+    else
+        showNotift("Anti Afk: OFF")
+    end
+end)
 
 
 
