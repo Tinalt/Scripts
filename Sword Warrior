@@ -779,40 +779,39 @@ end)
 
 
 
--- Anti-AFK Walk Script Variables
+-- Anti-AFK Simple Walk Script with Toggle (Run to position 5 times every 10 mins)
+
 local player = game.Players.LocalPlayer
 local character = player.Character or player.CharacterAdded:Wait()
 local humanoid = character:WaitForChild("Humanoid")
 local targetPosition = Vector3.new(-38871.03125, 4.00000524520874, 19716.115234375)
 
-local antiAFKEnabled = false
+local teleportEnabled = false -- Variable to track if the teleport is enabled
 
--- Function to handle the Anti-AFK walk
-local function antiAFKWalk()
-    while antiAFKEnabled do
-        wait(600) -- Wait 10 minutes before moving
-
-        -- Check if character is already close to the target position
-        if (character.PrimaryPart.Position - targetPosition).Magnitude > 10 then
-            -- Move the character to the specified position
+-- Function to move the character to the target position 5 times every 10 minutes
+local function autoMove()
+    while teleportEnabled do
+        for i = 1, 5 do
             humanoid:MoveTo(targetPosition)
-            
-            -- Wait until the character reaches the target or timeout
-            humanoid.MoveToFinished:Wait(1) -- Wait up to 5 seconds for the move to complete
+            wait(1) -- Small wait to allow the movement to complete before moving again (adjust as needed)
         end
+        
+        wait(600) -- Wait 10 minutes after running to the position 5 times
     end
 end
 
--- Button Toggle Logic
-Tab1Section:NewToggle("Anti Afk (TESTING) (ONLY WORLD 12)", "Enable/Disable Anti-AFK Walk", function(state)
-    antiAFKEnabled = state
+-- Toggle button functionality
+Tab1Section:NewToggle("Anti Afk (TESTING) (ONLY WORLD 12)", "Anti Afk", function(state)
+    teleportEnabled = state
     if state then
-        showNotify("Anti Afk: ON")
-        antiAFKWalk() -- Start the Anti-AFK walk loop
+        print("Toggle On")
+        -- Start the movement loop in a new thread so it doesn't block other code
+        spawn(autoMove)
     else
-        showNotift("Anti Afk: OFF")
+        print("Toggle Off")
     end
 end)
+
 
 
 
