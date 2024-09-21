@@ -791,7 +791,7 @@ local teleportEnabled = false -- Variable to track if the teleport is enabled
 -- Function to move the character to the target position 5 times every 10 minutes
 local function autoMove()
     while teleportEnabled do
-        for i = 1, 5 do
+        for i = 1, 2 do
             humanoid:MoveTo(targetPosition)
             wait(1) -- Small wait to allow the movement to complete before moving again (adjust as needed)
         end
