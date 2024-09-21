@@ -779,7 +779,15 @@ end)
 
 
 
--- Anti-AFK Simple Walk Script with Toggle (Run to position 5 times every 10 mins)
+
+
+
+
+
+
+
+
+-- Anti-AFK Simple Walk Script with Toggle (Run to position 2 times every 10 mins, with touch logic and timer continuation)
 
 local player = game.Players.LocalPlayer
 local character = player.Character or player.CharacterAdded:Wait()
@@ -787,30 +795,86 @@ local humanoid = character:WaitForChild("Humanoid")
 local targetPosition = Vector3.new(-38871.03125, 4.00000524520874, 19716.115234375)
 
 local teleportEnabled = false -- Variable to track if the teleport is enabled
+local touchDisabled = false -- Variable to track if touching World12Map2 disables teleport
+local remainingTime = 600 -- Start with 10 minutes (600 seconds)
+local lastTime = tick() -- Store the current time when the script starts
 
--- Function to move the character to the target position 5 times every 10 minutes
+-- Function to move the character to the target position 2 times
 local function autoMove()
     while teleportEnabled do
-        for i = 1, 2 do
-            humanoid:MoveTo(targetPosition)
-            wait(1) -- Small wait to allow the movement to complete before moving again (adjust as needed)
+        if not touchDisabled then
+            for i = 1, 2 do
+                humanoid:MoveTo(targetPosition)
+                wait(1) -- Small wait to allow the movement to complete before moving again
+            end
         end
-        
-        wait(600) -- Wait 10 minutes after running to the position 5 times
+
+        -- Check how much time has passed since the last movement and update remainingTime
+        local timeElapsed = tick() - lastTime
+        remainingTime = remainingTime - timeElapsed
+        lastTime = tick() -- Reset the last time
+
+        -- If the remaining time is more than 0, wait for the remaining time
+        if remainingTime > 0 then
+            wait(remainingTime)
+        end
+
+        -- Reset the timer after 10 minutes (600 seconds)
+        remainingTime = 600
     end
 end
 
+-- Function to handle touching World12Map2 and World12Map3 parts
+local function setupTouchListeners()
+    local world12Map2 = game:GetService("Workspace").World12Map2
+    local world12Map3 = game:GetService("Workspace").World12Map3
+
+    -- When the player touches World12Map2, disable movement and stop the timer
+    world12Map2.Touched:Connect(function(hit)
+        if hit.Parent == character then
+            touchDisabled = true
+        end
+    end)
+
+    -- When the player touches World12Map3, re-enable movement and continue the timer
+    world12Map3.Touched:Connect(function(hit)
+        if hit.Parent == character then
+            touchDisabled = false
+            lastTime = tick() -- Update the time when movement is resumed
+        end
+    end)
+end
+
 -- Toggle button functionality
-Tab1Section:NewToggle("Anti Afk (TESTING) (ONLY WORLD 12)", "Anti Afk", function(state)
+Tab1Section:NewToggle("Anti Afk (BETA) (W12) (TURN ON AUTOFARM FIRST)", "Anti Afk", function(state)
     teleportEnabled = state
     if state then
         print("Toggle On")
+        setupTouchListeners() -- Set up the touch detection
+        lastTime = tick() -- Reset the time when toggle is enabled
         -- Start the movement loop in a new thread so it doesn't block other code
         spawn(autoMove)
     else
         print("Toggle Off")
     end
 end)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -1502,7 +1566,6 @@ end
 -- Call the function to delete all instances of "patrickGui"
 deleteAllPatrickGui()
 end)
-
 
 
 
