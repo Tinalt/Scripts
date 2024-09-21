@@ -17,7 +17,6 @@ local Tab4Section = Tab4:NewSection("Scripts")
 
 local Tab5 = window:NewTab("Teleport")
 local Tab5Section = Tab5:NewSection("Teleport")
-local Tab5Section = Tab5:NewSection("Coming Soon")
 
 local Tab6 = window:NewTab("Settings")
 local Tab6Section = Tab6:NewSection("Settings")
@@ -1853,6 +1852,98 @@ end
 -- Call the function to delete all instances of "patrickGui"
 deleteAllPatrickGui()
 end)
+
+
+
+
+-- Tab5 Section for teleportation buttons
+Tab5Section:NewButton("Royal City", "Teleport to Royal City", function()
+    local args = {
+        [1] = "Royal City"
+    }
+    game:GetService("ReplicatedStorage").Remotes.Chuansong:FireServer(unpack(args))
+end)
+
+Tab5Section:NewButton("Outpost", "Teleport to Outpost", function()
+    local args = {
+        [1] = "Outpost"
+    }
+    game:GetService("ReplicatedStorage").Remotes.Chuansong:FireServer(unpack(args))
+end)
+
+Tab5Section:NewButton("Horde Camp", "Teleport to Horde Camp", function()
+    local args = {
+        [1] = "Horde Camp"
+    }
+    game:GetService("ReplicatedStorage").Remotes.Chuansong:FireServer(unpack(args))
+end)
+
+Tab5Section:NewButton("Glacial Chasm", "Teleport to Glacial Chasm", function()
+    local args = {
+        [1] = "Glacial Chasm"
+    }
+    game:GetService("ReplicatedStorage").Remotes.Chuansong:FireServer(unpack(args))
+end)
+
+Tab5Section:NewButton("Dark Castle", "Teleport to Dark Castle", function()
+    local args = {
+        [1] = "Dark Castle"
+    }
+    game:GetService("ReplicatedStorage").Remotes.Chuansong:FireServer(unpack(args))
+end)
+
+Tab5Section:NewButton("Taoyuan Township", "Teleport to Taoyuan Township", function()
+    local args = {
+        [1] = "Taoyuan Township"
+    }
+    game:GetService("ReplicatedStorage").Remotes.Chuansong:FireServer(unpack(args))
+end)
+
+Tab5Section:NewButton("Cemetery", "Teleport to Cemetery", function()
+    local args = {
+        [1] = "Cemetery"
+    }
+    game:GetService("ReplicatedStorage").Remotes.Chuansong:FireServer(unpack(args))
+end)
+
+Tab5Section:NewButton("Hell", "Teleport to Hell", function()
+    local args = {
+        [1] = "Hell"
+    }
+    game:GetService("ReplicatedStorage").Remotes.Chuansong:FireServer(unpack(args))
+end)
+
+Tab5Section:NewButton("Heaven", "Teleport to Heaven", function()
+    local args = {
+        [1] = "Heaven"
+    }
+    game:GetService("ReplicatedStorage").Remotes.Chuansong:FireServer(unpack(args))
+end)
+
+Tab5Section:NewButton("Solm Sand City", "Teleport to Solm Sand City", function()
+    local args = {
+        [1] = "Solm Sand City"
+    }
+    game:GetService("ReplicatedStorage").Remotes.Chuansong:FireServer(unpack(args))
+end)
+
+Tab5Section:NewButton("Wild", "Teleport to Wild", function()
+    local args = {
+        [1] = "Wild"
+    }
+    game:GetService("ReplicatedStorage").Remotes.Chuansong:FireServer(unpack(args))
+end)
+
+Tab5Section:NewButton("Titan Research Institute", "Teleport to Titan Research Institute", function()
+    local args = {
+        [1] = "Titan Research Institute"
+    }
+    game:GetService("ReplicatedStorage").Remotes.Chuansong:FireServer(unpack(args))
+end)
+
+
+
+
 
 
 
