@@ -1372,9 +1372,12 @@ local Tab2Section = Tab2:NewSection("Endless AutoFarm SOON!")
 
 
 
+
+
 -- Variables to hold references to the parts
-local drillMS1, drillMS2, drillMS3
-local canSendRemote = true -- Cooldown flag
+local drillMS1, drillMS2, drillMS3, drillMS4
+local canSendRemoteHP = true -- Cooldown flag for DrillMS3
+local canSendRemoteAttack = true -- Cooldown flag for DrillMS4
 
 -- Function to create parts
 local function createParts()
@@ -1422,7 +1425,35 @@ local function createParts()
 
     -- Run the remote function when touching DrillMS3 with cooldown
     drillMS3.Touched:Connect(function(hit)
-        if canSendRemote then
+        if canSendRemoteHP then
+            local player = game.Players:GetPlayerFromCharacter(hit.Parent)
+            if player then
+                local args = {
+    [1] = "Drillmaster",
+    [2] = "hp"
+}
+
+game:GetService("ReplicatedStorage").CurRemotes.DataChange_Points:FireServer(unpack(args))
+
+                canSendRemoteHP = false -- Set cooldown
+                wait(5) -- Cooldown period
+                canSendRemoteHP = true -- Reset cooldown
+            end
+        end
+    end)
+
+    -- Create the fourth part (DrillMS4)
+    drillMS4 = Instance.new("Part", workspace)
+    drillMS4.Position = Vector3.new(1.55, 31.65, 35.39)
+    drillMS4.Name = "DrillMS4"
+    drillMS4.Size = Vector3.new(30, 2, 30)
+    drillMS4.Anchored = true
+    drillMS4.CanCollide = false
+    drillMS4.Transparency = 0.7
+
+    -- Run the remote function when touching DrillMS4 with cooldown
+    drillMS4.Touched:Connect(function(hit)
+        if canSendRemoteAttack then
             local player = game.Players:GetPlayerFromCharacter(hit.Parent)
             if player then
                 local args = {
@@ -1430,9 +1461,9 @@ local function createParts()
                     [2] = "hp"
                 }
                 game:GetService("ReplicatedStorage").CurRemotes.DataChange_Points:FireServer(unpack(args))
-                canSendRemote = false -- Set cooldown
+                canSendRemoteAttack = false -- Set cooldown
                 wait(5) -- Cooldown period
-                canSendRemote = true -- Reset cooldown
+                canSendRemoteAttack = true -- Reset cooldown
             end
         end
     end)
@@ -1451,6 +1482,10 @@ local function deleteParts()
     if drillMS3 then
         drillMS3:Destroy()
         drillMS3 = nil
+    end
+    if drillMS4 then
+        drillMS4:Destroy()
+        drillMS4 = nil
     end
 end
 
@@ -1461,9 +1496,11 @@ Tab3Section:NewToggle("Auto Health", "Auto Do Drillmaster Health", function(stat
         
         -- Run the remote when toggled on
         local args = {
-            [1] = "Royal City"
-        }
-        game:GetService("ReplicatedStorage").Remotes.Chuansong:FireServer(unpack(args))
+    [1] = "Royal City"
+}
+
+game:GetService("ReplicatedStorage").Remotes.Chuansong:FireServer(unpack(args))
+
     else
         deleteParts()
     end
@@ -1474,9 +1511,12 @@ end)
 
 
 
+
+
 -- Variables to hold references to the parts
-local drillMS1, drillMS2, drillMS3
-local canSendRemote = true -- Cooldown flag
+local drillMS1, drillMS2, drillMS3, drillMS4
+local canSendRemoteHP = true -- Cooldown flag for DrillMS3
+local canSendRemoteAttack = true -- Cooldown flag for DrillMS4
 
 -- Function to create parts
 local function createParts()
@@ -1524,7 +1564,7 @@ local function createParts()
 
     -- Run the remote function when touching DrillMS3 with cooldown
     drillMS3.Touched:Connect(function(hit)
-        if canSendRemote then
+        if canSendRemoteHP then
             local player = game.Players:GetPlayerFromCharacter(hit.Parent)
             if player then
                 local args = {
@@ -1534,9 +1574,35 @@ local function createParts()
 
 game:GetService("ReplicatedStorage").CurRemotes.DataChange_Points:FireServer(unpack(args))
 
-                canSendRemote = false -- Set cooldown
+                canSendRemoteHP = false -- Set cooldown
                 wait(5) -- Cooldown period
-                canSendRemote = true -- Reset cooldown
+                canSendRemoteHP = true -- Reset cooldown
+            end
+        end
+    end)
+
+    -- Create the fourth part (DrillMS4)
+    drillMS4 = Instance.new("Part", workspace)
+    drillMS4.Position = Vector3.new(1.55, 31.65, 35.39)
+    drillMS4.Name = "DrillMS4"
+    drillMS4.Size = Vector3.new(30, 2, 30)
+    drillMS4.Anchored = true
+    drillMS4.CanCollide = false
+    drillMS4.Transparency = 0.7
+
+    -- Run the remote function when touching DrillMS4 with cooldown
+    drillMS4.Touched:Connect(function(hit)
+        if canSendRemoteAttack then
+            local player = game.Players:GetPlayerFromCharacter(hit.Parent)
+            if player then
+                local args = {
+                    [1] = "Drillmaster",
+                    [2] = "attack"
+                }
+                game:GetService("ReplicatedStorage").CurRemotes.DataChange_Points:FireServer(unpack(args))
+                canSendRemoteAttack = false -- Set cooldown
+                wait(5) -- Cooldown period
+                canSendRemoteAttack = true -- Reset cooldown
             end
         end
     end)
@@ -1556,6 +1622,10 @@ local function deleteParts()
         drillMS3:Destroy()
         drillMS3 = nil
     end
+    if drillMS4 then
+        drillMS4:Destroy()
+        drillMS4 = nil
+    end
 end
 
 -- Toggle button functionality
@@ -1565,14 +1635,15 @@ Tab3Section:NewToggle("Auto Attack", "Auto Do Drillmaster Attack", function(stat
         
         -- Run the remote when toggled on
         local args = {
-            [1] = "Royal City"
-        }
-        game:GetService("ReplicatedStorage").Remotes.Chuansong:FireServer(unpack(args))
+    [1] = "Royal City"
+}
+
+game:GetService("ReplicatedStorage").Remotes.Chuansong:FireServer(unpack(args))
+
     else
         deleteParts()
     end
 end)
-
 
 
 
@@ -1782,10 +1853,6 @@ end
 -- Call the function to delete all instances of "patrickGui"
 deleteAllPatrickGui()
 end)
-
-
-
-
 
 
 
