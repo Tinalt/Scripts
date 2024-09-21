@@ -11,7 +11,6 @@ local Tab2Section = Tab2:NewSection("Teleports")
 
 local Tab3 = window:NewTab("Auto Drillmaster")
 local Tab3Section = Tab3:NewSection("Auto DrillMaster")
-local Tab3Section = Tab3:NewSection("Coming Soon")
 
 local Tab4 = window:NewTab("Scripts")
 local Tab4Section = Tab4:NewSection("Scripts")
@@ -280,6 +279,17 @@ SafeSpot.CanCollide = false
 SafeSpot.Transparency = 1
 
 --------------END ENDLESS MODE---------------
+
+
+
+
+
+
+
+
+
+
+
 
 -----TAB1-----
 
@@ -1362,6 +1372,212 @@ local Tab2Section = Tab2:NewSection("Endless AutoFarm SOON!")
 
 
 
+-- Variables to hold references to the parts
+local drillMS1, drillMS2, drillMS3
+local canSendRemote = true -- Cooldown flag
+
+-- Function to create parts
+local function createParts()
+    -- Create the first part (DrillMS1)
+    drillMS1 = Instance.new("Part", workspace)
+    drillMS1.Position = Vector3.new(13.68, 5.31, -840.62)
+    drillMS1.Name = "DrillMS1"
+    drillMS1.Size = Vector3.new(20, 3, 20)
+    drillMS1.Anchored = true
+    drillMS1.CanCollide = false
+    drillMS1.Transparency = 0.7
+
+    -- Teleport functionality when touching DrillMS1
+    drillMS1.Touched:Connect(function(hit)
+        local player = game.Players:GetPlayerFromCharacter(hit.Parent)
+        if player then
+            local character = player.Character
+            if character then
+                local humanoidRootPart = character:FindFirstChild("HumanoidRootPart")
+                if humanoidRootPart then
+                    -- Teleport the player to the specified position
+                    humanoidRootPart.CFrame = CFrame.new(74, 8.312800407409668, -818)
+                end
+            end
+        end
+    end)
+
+    -- Create the second part (DrillMS2)
+    drillMS2 = Instance.new("Part", workspace)
+    drillMS2.Position = Vector3.new(73.89, 5.31, -818.48)
+    drillMS2.Name = "DrillMS2"
+    drillMS2.Size = Vector3.new(15, 3, 15)
+    drillMS2.Anchored = true
+    drillMS2.CanCollide = false
+    drillMS2.Transparency = 0.7
+
+    -- Create the third part (DrillMS3)
+    drillMS3 = Instance.new("Part", workspace)
+    drillMS3.Position = Vector3.new(-0.18, 22.79, 168.24)
+    drillMS3.Name = "DrillMS3"
+    drillMS3.Size = Vector3.new(25, 3, 25)
+    drillMS3.Anchored = true
+    drillMS3.CanCollide = false
+    drillMS3.Transparency = 0.7
+
+    -- Run the remote function when touching DrillMS3 with cooldown
+    drillMS3.Touched:Connect(function(hit)
+        if canSendRemote then
+            local player = game.Players:GetPlayerFromCharacter(hit.Parent)
+            if player then
+                local args = {
+                    [1] = "Drillmaster",
+                    [2] = "hp"
+                }
+                game:GetService("ReplicatedStorage").CurRemotes.DataChange_Points:FireServer(unpack(args))
+                canSendRemote = false -- Set cooldown
+                wait(5) -- Cooldown period
+                canSendRemote = true -- Reset cooldown
+            end
+        end
+    end)
+end
+
+-- Function to delete parts
+local function deleteParts()
+    if drillMS1 then
+        drillMS1:Destroy()
+        drillMS1 = nil
+    end
+    if drillMS2 then
+        drillMS2:Destroy()
+        drillMS2 = nil
+    end
+    if drillMS3 then
+        drillMS3:Destroy()
+        drillMS3 = nil
+    end
+end
+
+-- Toggle button functionality
+Tab3Section:NewToggle("Auto Health", "Auto Do Drillmaster Health", function(state)
+    if state then
+        createParts()
+        
+        -- Run the remote when toggled on
+        local args = {
+            [1] = "Royal City"
+        }
+        game:GetService("ReplicatedStorage").Remotes.Chuansong:FireServer(unpack(args))
+    else
+        deleteParts()
+    end
+end)
+
+
+
+
+
+
+-- Variables to hold references to the parts
+local drillMS1, drillMS2, drillMS3
+local canSendRemote = true -- Cooldown flag
+
+-- Function to create parts
+local function createParts()
+    -- Create the first part (DrillMS1)
+    drillMS1 = Instance.new("Part", workspace)
+    drillMS1.Position = Vector3.new(13.68, 5.31, -840.62)
+    drillMS1.Name = "DrillMS1"
+    drillMS1.Size = Vector3.new(20, 3, 20)
+    drillMS1.Anchored = true
+    drillMS1.CanCollide = false
+    drillMS1.Transparency = 0.7
+
+    -- Teleport functionality when touching DrillMS1
+    drillMS1.Touched:Connect(function(hit)
+        local player = game.Players:GetPlayerFromCharacter(hit.Parent)
+        if player then
+            local character = player.Character
+            if character then
+                local humanoidRootPart = character:FindFirstChild("HumanoidRootPart")
+                if humanoidRootPart then
+                    -- Teleport the player to the specified position
+                    humanoidRootPart.CFrame = CFrame.new(74, 8.312800407409668, -818)
+                end
+            end
+        end
+    end)
+
+    -- Create the second part (DrillMS2)
+    drillMS2 = Instance.new("Part", workspace)
+    drillMS2.Position = Vector3.new(73.89, 5.31, -818.48)
+    drillMS2.Name = "DrillMS2"
+    drillMS2.Size = Vector3.new(15, 3, 15)
+    drillMS2.Anchored = true
+    drillMS2.CanCollide = false
+    drillMS2.Transparency = 0.7
+
+    -- Create the third part (DrillMS3)
+    drillMS3 = Instance.new("Part", workspace)
+    drillMS3.Position = Vector3.new(-0.18, 22.79, 168.24)
+    drillMS3.Name = "DrillMS3"
+    drillMS3.Size = Vector3.new(25, 3, 25)
+    drillMS3.Anchored = true
+    drillMS3.CanCollide = false
+    drillMS3.Transparency = 0.7
+
+    -- Run the remote function when touching DrillMS3 with cooldown
+    drillMS3.Touched:Connect(function(hit)
+        if canSendRemote then
+            local player = game.Players:GetPlayerFromCharacter(hit.Parent)
+            if player then
+                local args = {
+    [1] = "Drillmaster",
+    [2] = "attack"
+}
+
+game:GetService("ReplicatedStorage").CurRemotes.DataChange_Points:FireServer(unpack(args))
+
+                canSendRemote = false -- Set cooldown
+                wait(5) -- Cooldown period
+                canSendRemote = true -- Reset cooldown
+            end
+        end
+    end)
+end
+
+-- Function to delete parts
+local function deleteParts()
+    if drillMS1 then
+        drillMS1:Destroy()
+        drillMS1 = nil
+    end
+    if drillMS2 then
+        drillMS2:Destroy()
+        drillMS2 = nil
+    end
+    if drillMS3 then
+        drillMS3:Destroy()
+        drillMS3 = nil
+    end
+end
+
+-- Toggle button functionality
+Tab3Section:NewToggle("Auto Attack", "Auto Do Drillmaster Attack", function(state)
+    if state then
+        createParts()
+        
+        -- Run the remote when toggled on
+        local args = {
+            [1] = "Royal City"
+        }
+        game:GetService("ReplicatedStorage").Remotes.Chuansong:FireServer(unpack(args))
+    else
+        deleteParts()
+    end
+end)
+
+
+
+
+
+
 
 
 
@@ -1566,15 +1782,6 @@ end
 -- Call the function to delete all instances of "patrickGui"
 deleteAllPatrickGui()
 end)
-
-
-
-
-
-
-
-
-
 
 
 
