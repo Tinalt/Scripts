@@ -2075,6 +2075,7 @@ local function createParts()
         local player = game.Players:GetPlayerFromCharacter(hit.Parent)
         if player and canUseFriend4 then
             canUseFriend4 = false -- Start cooldown
+            wait(1)
             
             local args1 = {
                 [1] = "ResetPoints"
