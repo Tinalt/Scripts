@@ -1954,7 +1954,7 @@ end)
 
 
 -- Variables to hold references to the parts
-local friend1, friend2, friend3, friend4
+local friend1, friend2, friend3, friend4, friend5
 local canUseFriend2 = true -- Cooldown flag for Friend2
 local canUseFriend4 = true -- Cooldown flag for Friend4
 
@@ -2128,150 +2128,18 @@ wait(0.001)
     end)
 end
 
--- Function to delete parts
-local function deleteParts()
-    if friend1 then
-        friend1:Destroy()
-        friend1 = nil
-    end
-    if friend2 then
-        friend2:Destroy()
-        friend2 = nil
-    end
-    if friend3 then
-        friend3:Destroy()
-        friend3 = nil
-    end
-    if friend4 then
-        friend4:Destroy()
-        friend4 = nil
-    end
-end
 
--- Toggle button functionality
-Tab1Section:NewToggle("Create Friends", "Create and Delete Friend Parts", function(state)
-    if state then
-        createParts()
-    else
-        deleteParts()
-    end
-end)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
--- Variables to hold references to the parts
-local friend1, friend2, friend3, friend4, friend5
-
--- Cooldown variables
-local canSendRemote2 = true
-local canSendRemote5 = true
-
--- Function to create parts
-local function createParts()
-    -- Create the first part (Friend1)
-    friend1 = Instance.new("Part", workspace)
-    friend1.Position = Vector3.new(-38934.21, 13.66, 19524.97)
-    friend1.Name = "Friend1"
-    friend1.Size = Vector3.new(20, 2, 20)
-    friend1.Anchored = true
-    friend1.CanCollide = false
-    friend1.Transparency = 0.7
-
-    -- Teleport functionality when touching Friend1
-    friend1.Touched:Connect(function(hit)
-        local player = game.Players:GetPlayerFromCharacter(hit.Parent)
-        if player then
-            local character = player.Character
-            if character then
-                local humanoidRootPart = character:FindFirstChild("HumanoidRootPart")
-                if humanoidRootPart then
-                    humanoidRootPart.CFrame = CFrame.new(-38927.37109375, 4.95576286315918, 19617.8515625)
-                end
-            end
-        end
-    end)
-
-    -- Create the second part (Friend2)
-    friend2 = Instance.new("Part", workspace)
-    friend2.Position = Vector3.new(-38927, 1, 19683.29)
-    friend2.Name = "Friend2"
-    friend2.Size = Vector3.new(20, 1, 20)
-    friend2.Anchored = true
-    friend2.CanCollide = false
-    friend2.Transparency = 0.7
-
-    -- Walk to position functionality with remote call and cooldown when touching Friend2
-friend2.Touched:Connect(function(hit)
-    local player = game.Players:GetPlayerFromCharacter(hit.Parent)
-    if player then
-        local character = player.Character
-        if character then
-            local humanoid = character:FindFirstChild("Humanoid")
-            if humanoid then
-                if canSendRemote2 then
-                    canSendRemote2 = false -- Set cooldown
-
-                    -- First remote call
-                    local args1 = {
-                        [1] = "ResetPoints"
-                    }
-                    game:GetService("ReplicatedStorage").CurRemotes.DataChange_Points:FireServer(unpack(args1))
-
-                    wait(0.001) -- Short wait
-
-                    -- Second remote call
-                    local args2 = {
-                        [1] = "ClickPoints",
-                        [2] = {
-                            ["Points"] = 9999999,
-                            ["Obj"] = "GHealth"
-                        }
-                    }
-                    game:GetService("ReplicatedStorage").CurRemotes.DataChange_Points:FireServer(unpack(args2))
-
-                    -- Walk to position after remote calls
-                    humanoid:MoveTo(Vector3.new(-38926.6953125, 4.000005722045898, 19712.705078125))
-
-                    wait(3) -- Cooldown duration
-                    canSendRemote2 = true -- Reset cooldown
-                end
-            end
-        end
-    end
-end)
-
-
-    -- Create the third part (Friend3)
-    friend3 = Instance.new("Part", workspace)
-    friend3.Position = Vector3.new(-38925.8, 1, 19713.4)
-    friend3.Name = "Friend3"
-    friend3.Size = Vector3.new(17, 1, 10)
-    friend3.Anchored = true
-    friend3.CanCollide = false
-    friend3.Transparency = 0.7
+-- Create the third part (Friend3)
+    friend5 = Instance.new("Part", workspace)
+    friend5.Position = Vector3.new(-38925.8, 1, 19713.4)
+    friend5.Name = "Friend5"
+    friend5.Size = Vector3.new(17, 1, 10)
+    friend5.Anchored = true
+    friend5.CanCollide = false
+    friend5.Transparency = 0.7
 
     -- Delayed walking functionality when touching Friend3
-    friend3.Touched:Connect(function(hit)
+    friend5.Touched:Connect(function(hit)
         local player = game.Players:GetPlayerFromCharacter(hit.Parent)
         if player then
             local character = player.Character
@@ -2285,77 +2153,8 @@ end)
         end
     end)
 
-    -- Create the fourth part (Friend4)
-    friend4 = Instance.new("Part", workspace)
-    friend4.Position = Vector3.new(-38928.21, 1, 19780.66)
-    friend4.Name = "Friend4"
-    friend4.Size = Vector3.new(30, 1, 30)
-    friend4.Anchored = true
-    friend4.CanCollide = false
-    friend4.Transparency = 0.7
 
-    -- Teleport functionality when touching Friend4
-    friend4.Touched:Connect(function(hit)
-        local player = game.Players:GetPlayerFromCharacter(hit.Parent)
-        if player then
-            local character = player.Character
-            if character then
-                local humanoidRootPart = character:FindFirstChild("HumanoidRootPart")
-                if humanoidRootPart then
-                    humanoidRootPart.CFrame = CFrame.new(-38870, 4.000006198883057, 19732)
-                end
-            end
-        end
-    end)
 
-    -- Create the fifth part (Friend5)
-    friend5 = Instance.new("Part", workspace)
-    friend5.Position = Vector3.new(-38869.48, 1, 19731.26)
-    friend5.Name = "Friend5"
-    friend5.Size = Vector3.new(20, 1, 20)
-    friend5.Anchored = true
-    friend5.CanCollide = false
-    friend5.Transparency = 0.7
-
-    -- Run remote calls with cooldown when touching Friend5
-    friend5.Touched:Connect(function(hit)
-        local player = game.Players:GetPlayerFromCharacter(hit.Parent)
-        if player and canSendRemote5 then
-            canSendRemote5 = false -- Set cooldown
-
-            local args1 = { [1] = "ResetPoints" }
-            game:GetService("ReplicatedStorage").CurRemotes.DataChange_Points:FireServer(unpack(args1))
-            wait(0.001)
-
-            local args2 = {
-                [1] = "ClickPoints",
-                [2] = { ["Points"] = 99999999, ["Obj"] = "GHealth" }
-            }
-            game:GetService("ReplicatedStorage").CurRemotes.DataChange_Points:FireServer(unpack(args2))
-            wait(0.001)
-
-            local args3 = { [1] = "ResetPoints" }
-            game:GetService("ReplicatedStorage").CurRemotes.DataChange_Points:FireServer(unpack(args3))
-            wait(0.001)
-
-            local args4 = {
-                [1] = "ClickPoints",
-                [2] = { ["Points"] = 230, ["Obj"] = "GCriticalHit" }
-            }
-            game:GetService("ReplicatedStorage").CurRemotes.DataChange_Points:FireServer(unpack(args4))
-            wait(0.001)
-
-            local args5 = {
-                [1] = "ClickPoints",
-                [2] = { ["Points"] = 9999999, ["Obj"] = "GDamage" }
-            }
-            game:GetService("ReplicatedStorage").CurRemotes.DataChange_Points:FireServer(unpack(args5))
-
-            wait(2) -- Cooldown duration
-            canSendRemote5 = true -- Reset cooldown
-        end
-    end)
-end
 
 -- Function to delete parts
 local function deleteParts()
@@ -2375,18 +2174,21 @@ local function deleteParts()
         friend4:Destroy()
         friend4 = nil
     end
-    if friend5 then
+        if friend5 then
         friend5:Destroy()
         friend5 = nil
     end
 end
 
 -- Toggle button functionality
-Tab1Section:NewToggle("Manage Friends", "Create/Delete Friends Parts", function(state)
+Tab1Section:NewToggle("AutoFarm (Help Friends) (BETA) (W12)", "This will get improve soon!", function(state)
     if state then
         createParts()
     else
         deleteParts()
     end
 end)
+
+
+
 
