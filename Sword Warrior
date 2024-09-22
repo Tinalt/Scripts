@@ -2149,7 +2149,7 @@ local function deleteParts()
 end
 
 -- Toggle button functionality
-Tab1Section:NewToggle("Create Friends", "Create and Delete Friend Parts", function(state)
+Tab1Section:NewToggle("AutoFarm (Help Friends) (BETA) (W12)", "This will get improve soon!", function(state)
     if state then
         createParts()
     else
