@@ -821,61 +821,72 @@ local function createParts()
     end)
 
     -- Create the second part (Friend2)
-    friend2 = Instance.new("Part", workspace)
-    friend2.Position = Vector3.new(-38927, 1, 19683.29)
-    friend2.Name = "Friend2"
-    friend2.Size = Vector3.new(20, 1, 20)
-    friend2.Anchored = true
-    friend2.Transparency = 0.7
+friend2 = Instance.new("Part", workspace)
+friend2.Position = Vector3.new(-38927, 1, 19683.29)
+friend2.Name = "Friend2"
+friend2.Size = Vector3.new(20, 1, 20)
+friend2.Anchored = true
+friend2.Transparency = 0.7
 
-    -- Walking functionality and remote calls when touching Friend2
-    friend2.Touched:Connect(function(hit)
-        local player = game.Players:GetPlayerFromCharacter(hit.Parent)
-        if player then
-            local character = player.Character
-            if character then
-                local humanoid = character:FindFirstChild("Humanoid")
-                local humanoidRootPart = character:FindFirstChild("HumanoidRootPart")
-                if humanoid and humanoidRootPart then
-                    humanoid:MoveTo(Vector3.new(-38926.88671875, 4.000006198883057, 19714.21875))
+local function forceMoveToPosition(humanoid, humanoidRootPart, position, tolerance, maxDistance)
+    humanoid:MoveTo(position)
 
-                    -- Wait until the character reaches the first position
-                    humanoid.MoveToFinished:Wait()
+    -- Continuously check and force movement until reaching the target or being teleported
+    while (humanoidRootPart.Position - position).Magnitude > tolerance do
+        -- Stop if the character is teleported far away
+        if (humanoidRootPart.Position - position).Magnitude > maxDistance then
+            break
+        end
 
-                    if canUseFriend2 then
-                        canUseFriend2 = false -- Start cooldown
+        -- Continuously reissue the MoveTo command
+        humanoid:MoveTo(position)
+        wait(0.05) -- Short interval to quickly recover from interruptions
+    end
+end
 
-                        local args1 = {
-                            [1] = "ResetPoints"
-                        }
-                        game:GetService("ReplicatedStorage").CurRemotes.DataChange_Points:FireServer(unpack(args1))
+-- Walking functionality and remote calls when touching Friend2
+friend2.Touched:Connect(function(hit)
+    local player = game.Players:GetPlayerFromCharacter(hit.Parent)
+    if player then
+        local character = player.Character
+        if character and canUseFriend2 then
+            local humanoid = character:FindFirstChild("Humanoid")
+            local humanoidRootPart = character:FindFirstChild("HumanoidRootPart")
+            if humanoid and humanoidRootPart then
+                canUseFriend2 = false -- Start cooldown
 
-                        wait(0.01) -- Wait before the next remote call
+                -- First move: Force character to the first position
+                forceMoveToPosition(humanoid, humanoidRootPart, Vector3.new(-38926.88671875, 4.000006198883057, 19714.21875), 1, 50)
 
-                        local args2 = {
-                            [1] = "ClickPoints",
-                            [2] = {
-                                ["Points"] = 9999999999,
-                                ["Obj"] = "GHealth"
-                            }
-                        }
-                        game:GetService("ReplicatedStorage").CurRemotes.DataChange_Points:FireServer(unpack(args2))
+                -- Execute the first remote call after reaching the first position
+                local args1 = {
+                    [1] = "ResetPoints"
+                }
+                game:GetService("ReplicatedStorage").CurRemotes.DataChange_Points:FireServer(unpack(args1))
 
-                        wait(0.3) -- Wait for 0.35 seconds
+                wait(0.01)
 
-                        -- Move to the second position
-                        humanoid:MoveTo(Vector3.new(-38927.5859375, 4.499999523162842, 19768.15234375))
+                local args2 = {
+                    [1] = "ClickPoints",
+                    [2] = {
+                        ["Points"] = 9999999999,
+                        ["Obj"] = "GHealth"
+                    }
+                }
+                game:GetService("ReplicatedStorage").CurRemotes.DataChange_Points:FireServer(unpack(args2))
 
-                        -- Wait until the character reaches the second position
-                        humanoid.MoveToFinished:Wait()
+                wait(0.3)
 
-                        wait(3) -- Cooldown period for Friend2
-                        canUseFriend2 = true -- Reset cooldown
-                    end
-                end
+                -- Second move: Force character to the second position
+                forceMoveToPosition(humanoid, humanoidRootPart, Vector3.new(-38927.5859375, 4.499999523162842, 19768.15234375), 1, 50)
+
+                wait(3) -- Cooldown period for Friend2
+                canUseFriend2 = true -- Reset cooldown
             end
         end
-    end)
+    end
+end)
+
 
     -- Create the third part (Friend3)
     friend3 = Instance.new("Part", workspace)
