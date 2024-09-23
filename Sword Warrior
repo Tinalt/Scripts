@@ -992,7 +992,7 @@ local function runSkillRemotes()
         }
         game:GetService("ReplicatedStorage").CurRemotes.SkillEvent:FireServer(unpack(args2))
 
-        wait(0.5) -- Wait 0.5 seconds before running again
+        wait(2) -- Wait 0.5 seconds before running again
     end
     runningLoop = false -- Reset the loop flag when the loop ends
 end
@@ -2215,7 +2215,6 @@ Tab5Section:NewButton("Titan Research Institute", "Teleport to Titan Research In
     }
     game:GetService("ReplicatedStorage").Remotes.Chuansong:FireServer(unpack(args))
 end)
-
 
 
 
