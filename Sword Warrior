@@ -582,12 +582,14 @@ local Tab1Section = Tab1:NewSection("World 12")
 --targetPosition1 is SafePlace
 --targetPosition2 is attract the monsters
 --targetPosition3 is tp outside the map to avoid losing health when attract the monsters
---targetPosition3 is attract the monsters (World 12 Bonus)
+--targetPosition4 is attract the monsters (World 12 Bonus)
+--targetPosition5 is tp outside the map (Bonus W12)
 
 local targetPosition1 = Vector3.new(-38870, 4.400007724761963, 19732)
 local targetPosition2 = Vector3.new(-38954.453125, 4.500006198883057, 19770.396484375)
-local targetPosition3 = Vector3.new(-38803.5078125, 4.000007629394531, 19797.845703125)
+local targetPosition3 = Vector3.new(-38847.56640625, 4.00000524520874, 19669.486328125)
 local targetPosition4 = Vector3.new(-38926.78515625, 4.500007152557373, 19695.060546875)
+local targetPosition5 = Vector3.new(-38803.5078125, 4.000007629394531, 19797.845703125)
 
 -- Get the player's character
 local player = game:GetService("Players").LocalPlayer
@@ -611,6 +613,10 @@ local function autoTeleport()
         else
             -- Teleport to the first position
             teleportPlayer(targetPosition3)
+            wait(1) -- Wait 0.1 seconds
+            
+            -- Teleport to the first position
+            teleportPlayer(targetPosition5)
             wait(0.1) -- Wait 0.1 seconds
 
             -- Teleport to the second position
