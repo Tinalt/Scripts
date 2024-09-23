@@ -980,7 +980,7 @@ local runningLoop = false
 
 -- Function to run the remotes every 0.5s
 local function runSkillRemotes()
-    while touchingFriend5 do
+    while touchingFriend5 and friend5 do -- Ensure the loop stops if Friend5 is deleted
         -- Remote calls
         local args1 = {
             [1] = "CheckSkillQ"
@@ -1020,11 +1020,12 @@ game:GetService("RunService").Stepped:Connect(function()
     local rootPart = character:FindFirstChild("HumanoidRootPart")
     if rootPart then
         local distance = (rootPart.Position - friend5.Position).magnitude
-        if distance > friend5.Size.X / 2 then
-            touchingFriend5 = false -- Stop running remotes if character moves out of range
+        if distance > friend5.Size.X / 2 or not friend5 then -- Check if Friend5 exists
+            touchingFriend5 = false -- Stop running remotes if character moves out of range or Friend5 is deleted
         end
     end
 end)
+
 end
 
 
