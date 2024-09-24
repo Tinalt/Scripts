@@ -1097,7 +1097,7 @@ local targetPosition = Vector3.new(-38871.03125, 4.00000524520874, 19716.1152343
 
 local teleportEnabled = false -- Variable to track if the teleport is enabled
 local touchDisabled = false -- Variable to track if touching World12Map2 disables teleport
-local remainingTime = 600 -- Start with 10 minutes (600 seconds)
+local remainingTime = 180 -- Start with 10 minutes (600 seconds)
 local lastTime = tick() -- Store the current time when the script starts
 
 -- Function to move the character to the target position 2 times
@@ -1121,7 +1121,7 @@ local function autoMove()
         end
 
         -- Reset the timer after 10 minutes (600 seconds)
-        remainingTime = 600
+        remainingTime = 180
     end
 end
 
