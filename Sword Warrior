@@ -319,7 +319,7 @@ local function CritUp()
     local args = {
         [1] = "ClickPoints",
         [2] = {
-            ["Points"] = 240,
+            ["Points"] = 200,
             ["Obj"] = "GCriticalHit"
         }
     }
@@ -388,7 +388,7 @@ local function CritUp()
     local args = {
         [1] = "ClickPoints",
         [2] = {
-            ["Points"] = 240,
+            ["Points"] = 200,
             ["Obj"] = "GCriticalHit"
         }
     }
@@ -455,7 +455,7 @@ local function CritUp()
     local args = {
         [1] = "ClickPoints",
         [2] = {
-            ["Points"] = 240,
+            ["Points"] = 200,
             ["Obj"] = "GCriticalHit"
         }
     }
@@ -566,6 +566,125 @@ end)
 
 
 
+
+
+
+
+
+
+
+local Tab1Section = Tab1:NewSection("Auto Skills")
+
+
+
+
+local isRunning = false
+local toggleCoroutine = nil
+
+Tab1Section:NewToggle("Auto Use All Skills", "Auto use all Skills", function(state)
+    if state then
+        isRunning = true
+        toggleCoroutine = coroutine.create(function()
+            while isRunning do
+                -- Execute CheckSkillE twice
+                for i = 1, 2 do
+                    local argsE = {
+                        [1] = "CheckSkillQ"
+                    }
+                    game:GetService("ReplicatedStorage").CurRemotes.SkillEvent:FireServer(unpack(argsE))
+                end
+
+                -- Execute CheckSkillQ twice
+                for i = 1, 2 do
+                    local argsQ = {
+                        [1] = "CheckSkillE"
+                    }
+                    game:GetService("ReplicatedStorage").CurRemotes.SkillEvent:FireServer(unpack(argsQ))
+                end
+
+                -- Execute CheckSkillF twice
+                for i = 1, 2 do
+                    local argsF = {
+                        [1] = "CheckSkillF"
+                    }
+                    game:GetService("ReplicatedStorage").CurRemotes.SkillEvent:FireServer(unpack(argsF))
+                end
+
+                wait(2) -- Wait for 2 seconds before running again
+            end
+        end)
+
+        -- Resume the coroutine
+        coroutine.resume(toggleCoroutine)
+
+    else
+        isRunning = false -- Stop the coroutine
+        if toggleCoroutine then
+            coroutine.resume(toggleCoroutine) -- Resume the coroutine to break the loop
+        end
+    end
+end)
+
+local skillEToggleRunning = false
+local skillQToggleRunning = false
+local skillFToggleRunning = false
+
+-- Function to handle Skill E
+local function runSkillE()
+    while skillEToggleRunning do
+        local argsE = {
+            [1] = "CheckSkillE"
+        }
+        game:GetService("ReplicatedStorage").CurRemotes.SkillEvent:FireServer(unpack(argsE))
+        wait(2) -- Wait for 2 seconds before running again
+    end
+end
+
+-- Function to handle Skill Q
+local function runSkillQ()
+    while skillQToggleRunning do
+        local argsQ = {
+            [1] = "CheckSkillQ"
+        }
+        game:GetService("ReplicatedStorage").CurRemotes.SkillEvent:FireServer(unpack(argsQ))
+        wait(2) -- Wait for 2 seconds before running again
+    end
+end
+
+-- Function to handle Skill F
+local function runSkillF()
+    while skillFToggleRunning do
+        local argsF = {
+            [1] = "CheckSkillF"
+        }
+        game:GetService("ReplicatedStorage").CurRemotes.SkillEvent:FireServer(unpack(argsF))
+        wait(2) -- Wait for 2 seconds before running again
+    end
+end
+
+-- Toggle for Skill Q
+Tab1Section:NewToggle("Auto Skill Q", "Auto Skill Q", function(state)
+    skillQToggleRunning = state
+    if state then
+        runSkillQ() -- Start running Skill Q
+    end
+end)
+
+-- Toggle for Skill E
+Tab1Section:NewToggle("Auto Skill E", "Toggle Skill E", function(state)
+    skillEToggleRunning = state
+    if state then
+        runSkillE() -- Start running Skill E
+    end
+end)
+
+-- Toggle for Skill F
+Tab1Section:NewToggle("Auto Skill F", "Toggle Skill F", function(state)
+    skillFToggleRunning = state
+    if state then
+        runSkillF() -- Start running Skill F
+    end
+end)
 
 
 
@@ -1146,19 +1265,7 @@ local function setupTouchListeners()
     end)
 end
 
--- Toggle button functionality
-Tab1Section:NewToggle("Anti Afk (BETA) (W12) (TURN ON AUTOFARM FIRST)", "Anti Afk", function(state)
-    teleportEnabled = state
-    if state then
-        print("Toggle On")
-        setupTouchListeners() -- Set up the touch detection
-        lastTime = tick() -- Reset the time when toggle is enabled
-        -- Start the movement loop in a new thread so it doesn't block other code
-        spawn(autoMove)
-    else
-        print("Toggle Off")
-    end
-end)
+
 
 
 
@@ -2232,7 +2339,6 @@ Tab5Section:NewButton("Titan Research Institute", "Teleport to Titan Research In
     }
     game:GetService("ReplicatedStorage").Remotes.Chuansong:FireServer(unpack(args))
 end)
-
 
 
 
