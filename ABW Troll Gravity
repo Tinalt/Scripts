@@ -1,0 +1,144 @@
+local kavoUi = loadstring(game:HttpGet("https://raw.githubusercontent.com/Toilatin/Insane-elevator/main/Insane2", true))()
+local window = kavoUi.CreateLib("Troll Gravity", "BloodTheme")
+
+--- Toggle Button
+local gui = Instance.new("ScreenGui")
+gui.Name = "patrickGui"
+gui.Parent = game.CoreGui
+
+-- Create the TextButton
+local TextButton = Instance.new("TextButton")
+-- Text
+TextButton.Text = "Toggle\nHub"
+TextButton.TextSize = 14
+-- Color
+TextButton.TextColor3 = Color3.new(1, 1, 1)
+TextButton.BackgroundColor3 = Color3.new(0, 0, 0)
+TextButton.BorderColor3 = Color3.new(0, 0, 0)
+-- Transparency
+TextButton.BackgroundTransparency = 0.5
+-- Thickness
+TextButton.BorderSizePixel = 4
+-- Text Code
+TextButton.Font = Enum.Font.Code
+-- Size (making it a small square)
+TextButton.Size = UDim2.new(0, 50, 0, 50)  -- 50×50 pixels
+-- Position
+TextButton.Position = UDim2.new(1, -110, 0, 10)  -- Center of the screen
+-- Function
+TextButton.MouseButton1Click:Connect(function()
+    kavoUi:ToggleUI()
+end)
+TextButton.Parent = gui
+TextButton.Draggable = true
+
+-- Adding UICorner for rounded corners
+local cornerUI = Instance.new("UICorner")
+cornerUI.CornerRadius = UDim.new(0, 5)
+cornerUI.Parent = TextButton
+
+-- Adding UIStroke for border
+local uiStroke = Instance.new("UIStroke")
+uiStroke.Color = Color3.new(0, 0, 0)
+uiStroke.Thickness = 2
+uiStroke.Parent = TextButton
+
+local SafeSpot = Instance.new("Part", workspace)
+
+SafeSpot.Position = Vector3.new(100000,16,81.87)
+
+SafeSpot.Name = "Spot"
+
+SafeSpot.Size = Vector3.new(100000,1,100000)
+
+SafeSpot.Anchored = true
+
+SafeSpot.Transparency = 1
+
+--- Tab and Section Setup
+local Tab1 = window:NewTab("Main")
+local Tab1Section = Tab1:NewSection("Main")
+
+local isEnabled = false  -- State of the toggle
+local playerName = ""  -- To store the entered player name
+
+--- Function to teleport to part, wait, then teleport to player and run remote
+Tab1Section:NewTextBox("Enter Player Name", "Enter part of the name of the player you want to teleport to", function(txt)
+    playerName = txt:lower()
+end)
+
+Tab1Section:NewToggle("Auto Troll", "Turn on/off feature", function(state)
+    isEnabled = state
+    if isEnabled then
+        -- Loop while toggle is enabled
+        while isEnabled do
+            print("Toggle On")
+
+            local targetPlayer = nil
+
+            -- Find player by partial name
+            for _, player in pairs(game.Players:GetPlayers()) do
+                if player.Name:lower():find(playerName) or player.DisplayName:lower():find(playerName) then
+                    targetPlayer = player
+                    break
+                end
+            end
+
+            if targetPlayer and targetPlayer.Character and targetPlayer.Character:FindFirstChild("HumanoidRootPart") then
+                -- First run the ability select remote
+                local args = {
+                    [1] = "Gravity"
+                }
+                game:GetService("ReplicatedStorage"):FindFirstChild("Remote Events").AbilitySelect:FireServer(unpack(args))
+                wait(0.0001)
+
+                -- Teleport to the specified part first
+                local portalPart = game:GetService("Workspace").Portals["Arena Frame"].Portal
+                if portalPart then
+                    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = portalPart.CFrame
+                    print("Teleported to Portal.")
+
+                    -- Wait for 0.00001 seconds
+                    wait(0.00001)
+                    -- Temporary teleportation for some custom coordinates
+                    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(99994.4296875, 19.107959747314453, 73.4140625)
+
+                    -- Wait for 3.5 seconds before teleporting to the player
+                    wait(3.5)
+
+                    -- Teleport to the player's position after waiting
+                    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = targetPlayer.Character.HumanoidRootPart.CFrame
+                    print("Teleported to " .. targetPlayer.Name)
+
+                    -- Wait for 0.2 seconds
+                    wait(0.2)
+
+                    -- Fire the remote event after teleport
+                    local args = {
+                        [1] = 1
+                    }
+                    game:GetService("ReplicatedStorage"):FindFirstChild("Remote Events").AbilityEvent:FireServer(unpack(args))
+                    print("Remote Event Fired.")
+
+                    -- Final teleport and set health to 0 after 0.1s
+                    wait(0.4)
+                    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(99994.4296875, 19.107959747314453, 73.4140625)
+                    wait(0.1)
+                    game.Players.LocalPlayer.Character.Humanoid.Health = 0
+
+                    -- Wait for 5 seconds before repeating
+                    wait(5)
+                else
+                    print("Portal part not found!")
+                end
+            else
+                print("Player not found, or player doesn't have a character.")
+            end
+
+            -- Check if toggle is still enabled for the next loop
+            wait(1)  -- Add a small delay to prevent script freezing
+        end
+    else
+        print("Toggle Off")
+    end
+end)
