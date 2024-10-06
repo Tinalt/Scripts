@@ -2357,4 +2357,246 @@ end)
 
 
 
+local isCurseActive = false
+local W1Curse, W1CurseS
+local runningCoroutine = nil
+
+-- Function to run the remotes continuously
+local function activateCurseLoop()
+    while isCurseActive do
+        -- First remote
+        local args1 = {
+            [1] = "AskCurseTeam",
+            [2] = game:GetService("Players").Thinh_178
+        }
+        game:GetService("ReplicatedStorage").CurRemotes.DataChange_Curse:FireServer(unpack(args1))
+
+        wait(1)
+
+        -- Second remote
+        local args2 = {
+            [1] = "CurseTeam_Ready"
+        }
+        game:GetService("ReplicatedStorage").CurRemotes.DataChange_Curse:FireServer(unpack(args2))
+
+        wait(2) -- Wait for 2 seconds before running again
+    end
+end
+
+-- Create a toggle for the parts and handling the curse activation
+Tab1Section:NewToggle("Auto Ready + Invite", "Auto Ready and Invite the Alt", function(state)
+    if state then
+        -- Create W1Curse
+        W1Curse = Instance.new("Part", workspace)
+        W1Curse.Position = Vector3.new(-0.98, 22.79, 167.79)
+        W1Curse.Name = "W1Curse"
+        W1Curse.Size = Vector3.new(20, 3, 20)
+        W1Curse.Anchored = true
+        W1Curse.CanCollide = false
+        W1Curse.Transparency = 0.7
+
+        -- Create W1CurseS
+        W1CurseS = Instance.new("Part", workspace)
+        W1CurseS.Position = Vector3.new(-1.22, 1, 328.66)
+        W1CurseS.Name = "W1CurseS"
+        W1CurseS.Size = Vector3.new(30, 3, 30)
+        W1CurseS.Anchored = true
+        W1CurseS.CanCollide = false
+        W1CurseS.Transparency = 0.7
+
+        -- Touched event for W1Curse (activate)
+        W1Curse.Touched:Connect(function(hit)
+            local player = game.Players:GetPlayerFromCharacter(hit.Parent)
+            if player and not isCurseActive then
+                isCurseActive = true
+                runningCoroutine = coroutine.create(activateCurseLoop)
+                coroutine.resume(runningCoroutine) -- Start the curse loop
+            end
+        end)
+
+        -- Touched event for W1CurseS (deactivate)
+        W1CurseS.Touched:Connect(function(hit)
+            local player = game.Players:GetPlayerFromCharacter(hit.Parent)
+            if player and isCurseActive then
+                isCurseActive = false -- Stop the loop when W1CurseS is touched
+            end
+        end)
+
+    else
+        -- Delete the parts when the toggle is off
+        if W1Curse then
+            W1Curse:Destroy()
+        end
+        if W1CurseS then
+            W1CurseS:Destroy()
+        end
+        isCurseActive = false -- Stop any ongoing curse loops
+    end
+end)
+
+
+
+
+
+
+
+
+
+
+
+local player = game.Players.LocalPlayer
+local character = player.Character or player.CharacterAdded:Wait()
+local teleportPosition = Vector3.new(-50, 24.173494338989258, 206)
+local teleporting = false
+local teleportConnection
+local remoteActive = false
+local remoteConnection
+
+local args = {
+    [1] = "Asked",
+    [2] = 2486713157,
+    [3] = true
+}
+
+Tab1Section:NewToggle("Accept Invite + Auto TP", "Accept Invite from main + Safeplace", function(state)
+    if state then
+        print("Teleport and Remote On")
+        teleporting = true
+
+        -- Start teleporting
+        teleportConnection = game:GetService("RunService").Heartbeat:Connect(function()
+            if teleporting and character and character:FindFirstChild("HumanoidRootPart") then
+                character.HumanoidRootPart.CFrame = CFrame.new(teleportPosition)
+            end
+        end)
+
+        -- Start sending the remote
+        remoteActive = true
+        while remoteActive do
+            game:GetService("ReplicatedStorage").CurRemotes.DataChange_Curse:FireServer(unpack(args))
+            wait(1.5) -- Wait for 1.5 seconds before sending again
+        end
+    else
+        print("Teleport and Remote Off")
+        teleporting = false
+        remoteActive = false
+
+        -- Disconnect teleport connection
+        if teleportConnection then
+            teleportConnection:Disconnect()
+            teleportConnection = nil
+        end
+
+        -- Stop sending the remote
+        remoteActive = false
+    end
+end)
+
+
+
+local player = game.Players.LocalPlayer
+
+local argsReady = {
+    [1] = "CurseTeam_Ready"
+}
+
+local remoteActive = false -- Declare the variable outside the function
+
+-- Toggle for sending "CurseTeam_Ready" remote every 8s
+Tab1Section:NewToggle("Auto Ready", "Auto Ready", function(state)
+    if state then
+        print("Ready Remote On")
+        remoteActive = true -- Set to true when the toggle is on
+
+        -- Run the remote sending in a separate thread
+        spawn(function()
+            while remoteActive do
+                game:GetService("ReplicatedStorage").CurRemotes.DataChange_Curse:FireServer(unpack(argsReady))
+                wait(8) -- Wait for 8 seconds before sending again
+            end
+        end)
+    else
+        print("Ready Remote Off")
+        remoteActive = false -- Set to false when the toggle is off
+    end
+end)
+
+
+local player = game.Players.LocalPlayer
+
+local argsChangeSet = {
+    [1] = "ChangeSet",
+    [2] = "Curse"
+}
+
+local changeSetActive = false -- Control for the ChangeSet remote
+
+-- Toggle for sending "ChangeSet" remote every 14s
+Tab1Section:NewToggle("Auto Change Curse", "Auto Change Curse", function(state)
+    if state then
+        print("ChangeSet Remote On")
+        changeSetActive = true -- Set to true when the toggle is on
+
+        -- Run the ChangeSet remote sending in a separate thread
+        spawn(function()
+            while changeSetActive do
+                game:GetService("ReplicatedStorage").CurRemotes.DataChange_Curse:FireServer(unpack(argsChangeSet))
+                wait(14) -- Wait for 14 seconds before sending again
+            end
+        end)
+    else
+        print("ChangeSet Remote Off")
+        changeSetActive = false -- Set to false when the toggle is off
+    end
+end)
+
+
+
+
+
+
+
+
+
+local player = game.Players.LocalPlayer
+
+local argsReady = {
+    [1] = "CurseTeam_Ready"
+}
+
+local argsChangeSet = {
+    [1] = "ChangeSet",
+    [2] = "Curse"
+}
+
+local remoteActive = false -- Control for the remotes
+
+-- Toggle for sending "ChangeSet" and "CurseTeam_Ready" remotes
+Tab1Section:NewToggle("Auto Change Curse and Ready", "Toggle Info", function(state)
+    if state then
+        print("Auto Change Curse and Ready On")
+        remoteActive = true -- Set to true when the toggle is on
+
+        -- Run the remote sending in a separate thread
+        spawn(function()
+            while remoteActive do
+                -- Send CC remote
+                game:GetService("ReplicatedStorage").CurRemotes.DataChange_Curse:FireServer(unpack(argsChangeSet))
+                wait(5) -- Wait for 5 seconds before sending again
+
+                -- Wait before sending the Ready remote
+                wait(1.3)
+
+                -- Send Ready remote
+                game:GetService("ReplicatedStorage").CurRemotes.DataChange_Curse:FireServer(unpack(argsReady))
+
+                -- Wait 1 second before the next iteration
+                wait(1)
+            end
+        end)
+    else
+        print("Auto Change Curse and Ready Off")
+        remoteActive = false -- Set to false when the toggle is off
+    end
+end)
 
