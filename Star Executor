@@ -1,0 +1,359 @@
+local function createExecutorGui()
+local undoStack = {}
+local redoStack = {}
+local lastText = ""
+
+    local ScreenGui = Instance.new("ScreenGui")
+    local Frame = Instance.new("Frame")
+    local ExecuteButton = Instance.new("TextButton")
+    local ScriptBox = Instance.new("TextBox")
+    local ClearButton = Instance.new("TextButton")
+    local ScaleButton = Instance.new("TextButton") -- New button for scaling
+    local UICorner = Instance.new("UICorner")
+    local UIStroke = Instance.new("UIStroke")
+    local UndoButton = Instance.new("TextButton")
+    local RedoButton = Instance.new("TextButton")
+
+-- Create the toggle button with a star icon and text
+local function createToggleButton()
+    local ScreenGui = Instance.new("ScreenGui")
+    local ToggleButton = Instance.new("ImageButton")
+    local UICorner = Instance.new("UICorner")
+    local UIStroke = Instance.new("UIStroke")
+    local TextLabel = Instance.new("TextLabel")
+    local UserInputService = game:GetService("UserInputService")
+
+    -- Set up the UI
+    ScreenGui.Parent = game.CoreGui
+
+    -- Toggle Button
+    ToggleButton.Parent = ScreenGui
+    ToggleButton.Size = UDim2.new(0, 50, 0, 50) -- Button size
+    ToggleButton.Position = UDim2.new(0.82, 0, 0.03, 0) -- Initial position
+    ToggleButton.BackgroundColor3 = Color3.new(1, 1, 1) -- White background
+    ToggleButton.Image = "rbxassetid://3926307971" -- Star icon (replace with desired icon ID)
+    ToggleButton.ImageRectOffset = Vector2.new(124, 204)
+    ToggleButton.ImageRectSize = Vector2.new(36, 36)
+
+    -- Rounded corners for the button
+    UICorner.Parent = ToggleButton
+    UICorner.CornerRadius = UDim.new(0, 10)
+
+    -- Black outline for the button
+    UIStroke.Parent = ToggleButton
+    UIStroke.Color = Color3.new(0, 0, 0) -- Black outline
+    UIStroke.Thickness = 2
+
+    -- TextLabel for the button
+    TextLabel.Parent = ToggleButton
+    TextLabel.Size = UDim2.new(1, 0, 1, 0) -- Fill the button
+    TextLabel.Position = UDim2.new(0, 0, -0.05, 0) -- Center it
+    TextLabel.BackgroundTransparency = 1 -- Transparent background
+    TextLabel.Text = "★"
+    TextLabel.TextColor3 = Color3.new(0, 0, 0) -- Black text
+    TextLabel.TextScaled = true -- Scale text to fit
+    TextLabel.TextStrokeTransparency = 0.5 -- Add stroke for visibility
+
+    ToggleButton.MouseButton1Click:Connect(function()
+        Frame.Visible = not Frame.Visible
+    end)
+
+    -- Button drag logic
+    local dragging = false
+    local dragInput, dragStart, startPos
+
+    local function update(input)
+        local delta = input.Position - dragStart
+        ToggleButton.Position = UDim2.new(startPos.X.Scale, startPos.X.Offset + delta.X, startPos.Y.Scale, startPos.Y.Offset + delta.Y)
+    end
+
+    -- Mouse drag logic
+    ToggleButton.InputBegan:Connect(function(input)
+        if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
+            dragging = true
+            dragStart = input.Position
+            startPos = ToggleButton.Position
+
+            input.Changed:Connect(function()
+                if input.UserInputState == Enum.UserInputState.End then
+                    dragging = false
+                end
+            end)
+        end
+    end)
+
+    ToggleButton.InputChanged:Connect(function(input)
+        if input.UserInputType == Enum.UserInputType.MouseMovement or input.UserInputType == Enum.UserInputType.Touch then
+            dragInput = input
+        end
+    end)
+
+    UserInputService.InputChanged:Connect(function(input)
+        if input == dragInput and dragging then
+            update(input)
+        end
+    end)
+end
+
+createToggleButton()
+
+
+
+    -- Set up the UI
+    ScreenGui.Parent = game.CoreGui
+
+    Frame.Parent = ScreenGui
+    Frame.BackgroundColor3 = Color3.new(1, 1, 1) -- White background
+    Frame.Position = UDim2.new(0.5, -150, 0.5, -100)
+    Frame.Size = UDim2.new(0, 320, 0, 255)
+
+    -- Outline for the main frame
+    UIStroke.Parent = Frame
+    UIStroke.Color = Color3.new(0, 0, 0) -- Black outline
+    UIStroke.Thickness = 2.5
+
+    -- Rounded corners for the main frame
+    UICorner.Parent = Frame
+    UICorner.CornerRadius = UDim.new(0, 10)
+
+    -- Script input box
+    ScriptBox.Parent = Frame
+    ScriptBox.Size = UDim2.new(1, -20, 0.42, -20)
+    ScriptBox.Position = UDim2.new(0, 10, 0, 50) -- Moved down to make space for ScaleButton
+    ScriptBox.BackgroundColor3 = Color3.new(1, 1, 1)
+    ScriptBox.Text = " Enter your script here"
+    ScriptBox.TextWrapped = true
+    ScriptBox.TextYAlignment = Enum.TextYAlignment.Top
+    ScriptBox.TextXAlignment = Enum.TextXAlignment.Left
+    ScriptBox.ClearTextOnFocus = false
+    ScriptBox.TextScaled = false
+    ScriptBox.MultiLine = true
+    ScriptBox.TextSize = 14
+    ScriptBox.TextColor3 = Color3.new(0, 0, 0)
+    ScriptBox.BackgroundTransparency = 0.5
+
+-- Update undo stack when text changes
+ScriptBox:GetPropertyChangedSignal("Text"):Connect(function()
+    if ScriptBox.Text ~= lastText then
+        table.insert(undoStack, lastText)  -- Push the last text state
+        lastText = ScriptBox.Text
+        redoStack = {}  -- Clear the redo stack
+    end
+end)
+
+    -- Undo button functionality
+UndoButton.MouseButton1Click:Connect(function()
+    if #undoStack > 0 then
+        table.insert(redoStack, lastText)  -- Push current state to redo stack
+        lastText = undoStack[#undoStack]    -- Get last state from undo stack
+        ScriptBox.Text = lastText             -- Set text to that state
+        table.remove(undoStack, #undoStack)  -- Remove last state from undo stack
+    end
+end)
+
+    -- Redo button functionality
+RedoButton.MouseButton1Click:Connect(function()
+    if #redoStack > 0 then
+        table.insert(undoStack, lastText)    -- Push current state to undo stack
+        lastText = redoStack[#redoStack]      -- Get last state from redo stack
+        ScriptBox.Text = lastText               -- Set text to that state
+        table.remove(redoStack, #redoStack)    -- Remove last state from redo stack
+    end
+end)
+
+    -- Clear button to clear text in the text box
+    ClearButton.Parent = Frame
+    ClearButton.Size = UDim2.new(0.48, -9, 0.2, -9)
+    ClearButton.Position = UDim2.new(0, 10, 0.8, 0)
+    ClearButton.BackgroundColor3 = Color3.new(1, 1, 1)
+    ClearButton.Text = "Clear Text"
+    ClearButton.TextSize = 14.5
+
+    local ClearStroke = Instance.new("UIStroke", ClearButton)
+    ClearStroke.Color = Color3.new(0, 0, 0)
+    ClearStroke.Thickness = 2
+
+    ClearButton.TextColor3 = Color3.new(1, 1, 1)
+    ClearButton.TextStrokeColor3 = Color3.new(0, 0, 0)
+    ClearButton.TextStrokeTransparency = 0
+
+    -- Execute button
+    ExecuteButton.Parent = Frame
+    ExecuteButton.Size = UDim2.new(0.48, -9, 0.2, -7)
+    ExecuteButton.Position = UDim2.new(0.52, 0, 0.8, 0)
+    ExecuteButton.BackgroundColor3 = Color3.new(1, 1, 1)
+    ExecuteButton.Text = "Execute Script"
+    ExecuteButton.TextSize = 14.5
+
+    local ExecuteStroke = Instance.new("UIStroke", ExecuteButton)
+    ExecuteStroke.Color = Color3.new(0, 0, 0)
+    ExecuteStroke.Thickness = 2
+
+    ExecuteButton.TextColor3 = Color3.new(1, 1, 1)
+    ExecuteButton.TextStrokeColor3 = Color3.new(0, 0, 0)
+    ExecuteButton.TextStrokeTransparency = 0
+
+    -- Scale button for resizing the GUI
+    ScaleButton.Parent = Frame
+    ScaleButton.Size = UDim2.new(1, -20, 0.15, -10)
+    ScaleButton.Position = UDim2.new(0, 10, 0, 10) -- Positioned above the script box
+    ScaleButton.BackgroundColor3 = Color3.new(1, 1, 1)
+    ScaleButton.Text = "Scale GUI"
+
+    local ScaleStroke = Instance.new("UIStroke", ScaleButton)
+    ScaleStroke.Color = Color3.new(0, 0, 0)
+    ScaleStroke.Thickness = 2
+
+    ScaleButton.TextColor3 = Color3.new(1, 1, 1)
+    ScaleButton.TextStrokeColor3 = Color3.new(0, 0, 0)
+    ScaleButton.TextStrokeTransparency = 0
+
+-- Undo button
+    UndoButton.Parent = Frame
+    UndoButton.Size = UDim2.new(0.48, -9, 0.2, -9)
+    UndoButton.Position = UDim2.new(0.031, 0, 0.6, 0)
+    UndoButton.BackgroundColor3 = Color3.new(1, 1, 1)
+    UndoButton.Text = "Undo"
+    UndoButton.TextSize = 14.5
+
+    -- Undo button outline
+    local UndoStroke = Instance.new("UIStroke", UndoButton)
+    UndoStroke.Color = Color3.new(0, 0, 0)
+    UndoStroke.Thickness = 2
+
+    -- Undo button text
+    UndoButton.TextColor3 = Color3.new(1, 1, 1)
+    UndoButton.TextStrokeColor3 = Color3.new(0, 0, 0)
+    UndoButton.TextStrokeTransparency = 0
+
+    -- Redo button
+    RedoButton.Parent = Frame
+    RedoButton.Size = UDim2.new(0.48, -9, 0.2, -7)
+    RedoButton.Position = UDim2.new(0.52, 0, 0.6, 0)
+    RedoButton.BackgroundColor3 = Color3.new(1, 1, 1)
+    RedoButton.Text = "Redo"
+    RedoButton.TextSize = 14.5
+
+    -- Redo button outline
+    local RedoStroke = Instance.new("UIStroke", RedoButton)
+    RedoStroke.Color = Color3.new(0, 0, 0)
+    RedoStroke.Thickness = 2
+
+    -- Redo button text
+    RedoButton.TextColor3 = Color3.new(1, 1, 1)
+    RedoButton.TextStrokeColor3 = Color3.new(0, 0, 0)
+    RedoButton.TextStrokeTransparency = 0
+
+    -- Make the UI movable
+    local dragging, dragInput, dragStart, startPos
+
+    local function update(input)
+        local delta = input.Position - dragStart
+        Frame.Position = UDim2.new(startPos.X.Scale, startPos.X.Offset + delta.X, startPos.Y.Scale, startPos.Y.Offset + delta.Y)
+    end
+
+    Frame.InputBegan:Connect(function(input)
+        if input.UserInputType == Enum.UserInputType.Touch or input.UserInputType == Enum.UserInputType.MouseButton1 then
+            dragging = true
+            dragStart = input.Position
+            startPos = Frame.Position
+
+            input.Changed:Connect(function()
+                if input.UserInputState == Enum.UserInputState.End then
+                    dragging = false
+                end
+            end)
+        end
+    end)
+
+    Frame.InputChanged:Connect(function(input)
+        if input.UserInputType == Enum.UserInputType.Touch or input.UserInputType == Enum.UserInputType.MouseMovement then
+            dragInput = input
+        end
+    end)
+
+    game:GetService("UserInputService").InputChanged:Connect(function(input)
+        if input == dragInput and dragging then
+            update(input)
+        end
+    end)
+
+    -- Clear the text in the TextBox when ClearButton is clicked
+    ClearButton.MouseButton1Click:Connect(function()
+        ScriptBox.Text = ""
+    end)
+
+    -- Clear placeholder text on focus
+    ScriptBox.Focused:Connect(function()
+        if ScriptBox.Text == "Enter your script here" then
+            ScriptBox.Text = ""
+        end
+    end)
+
+    -- Restore placeholder text when losing focus if the box is empty
+    ScriptBox.FocusLost:Connect(function()
+        if ScriptBox.Text == "" then
+            ScriptBox.Text = "Enter your script here"
+        end
+    end)
+
+    -- Script execution
+    ExecuteButton.MouseButton1Click:Connect(function()
+        local scriptToExecute = ScriptBox.Text
+        if scriptToExecute and scriptToExecute ~= "" and scriptToExecute ~= "Enter your script here..." then
+            local success, errorMessage = pcall(function()
+                loadstring(scriptToExecute)()
+            end)
+            if not success then
+                print("Error executing script: " .. errorMessage)
+            end
+        else
+            print("No script to execute or invalid input")
+        end
+    end)
+
+    -- Scaling logic
+    local scaled = false
+    ScaleButton.MouseButton1Click:Connect(function()
+        if scaled then
+            -- Shrink the GUI back to original size
+            Frame.Size = UDim2.new(0, 300, 0, 200)
+            ScriptBox.Size = UDim2.new(1, -20, 0.6, -20)
+            ScriptBox.TextSize = 14
+            ExecuteButton.Size = UDim2.new(0.48, -10, 0.2, -10)
+            ClearButton.Size = UDim2.new(0.48, -10, 0.2, -10)
+            scaled = false
+        else
+            -- Scale up the GUI
+            Frame.Size = UDim2.new(0, 450, 0, 300)
+            ScriptBox.Size = UDim2.new(1, -20, 0.6, -30)
+            ScriptBox.TextSize = 15
+            ExecuteButton.Size = UDim2.new(0.48, -10, 0.2, -10)
+            ClearButton.Size = UDim2.new(0.48, -10, 0.2, -10)
+            scaled = true
+        end
+    end)
+
+-- Hook up Undo and Redo buttons
+    UndoButton.MouseButton1Click:Connect(undo)
+    RedoButton.MouseButton1Click:Connect(redo)
+
+    -- Save the current text when editing stops (debounced after 0.5s)
+    local typingConnection
+    ScriptBox.Focused:Connect(function()
+        typingConnection = ScriptBox:GetPropertyChangedSignal("Text"):Connect(function()
+            wait(0.5) -- Debounce for 0.5 seconds
+            saveStateForUndo()
+        end)
+    end)
+
+    -- Disconnect typing signal when focus is lost
+    ScriptBox.FocusLost:Connect(function()
+        if typingConnection then
+            typingConnection:Disconnect()
+            typingConnection = nil
+        end
+    end)
+end
+
+createExecutorGui()
