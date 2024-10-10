@@ -110,7 +110,7 @@ createToggleButton()
     -- Outline for the main frame
     UIStroke.Parent = Frame
     UIStroke.Color = Color3.new(0, 0, 0) -- Black outline
-    UIStroke.Thickness = 2.5
+    UIStroke.Thickness = 2.7
 
     -- Rounded corners for the main frame
     UICorner.Parent = Frame
@@ -163,15 +163,15 @@ end)
 
     -- Clear button to clear text in the text box
     ClearButton.Parent = Frame
-    ClearButton.Size = UDim2.new(0.48, -9, 0.2, -9)
-    ClearButton.Position = UDim2.new(0, 10, 0.8, 0)
+    ClearButton.Size = UDim2.new(0.48, -11.5, 0.195, -9)
+    ClearButton.Position = UDim2.new(0, 12, 0.8, 0)
     ClearButton.BackgroundColor3 = Color3.new(1, 1, 1)
     ClearButton.Text = "Clear Text"
     ClearButton.TextSize = 14.5
 
     local ClearStroke = Instance.new("UIStroke", ClearButton)
     ClearStroke.Color = Color3.new(0, 0, 0)
-    ClearStroke.Thickness = 2
+    ClearStroke.Thickness = 1.8
 
     ClearButton.TextColor3 = Color3.new(1, 1, 1)
     ClearButton.TextStrokeColor3 = Color3.new(0, 0, 0)
@@ -179,7 +179,7 @@ end)
 
     -- Execute button
     ExecuteButton.Parent = Frame
-    ExecuteButton.Size = UDim2.new(0.48, -9, 0.2, -7)
+    ExecuteButton.Size = UDim2.new(0.48, -11.5, 0.195, -9)
     ExecuteButton.Position = UDim2.new(0.52, 0, 0.8, 0)
     ExecuteButton.BackgroundColor3 = Color3.new(1, 1, 1)
     ExecuteButton.Text = "Execute Script"
@@ -187,7 +187,7 @@ end)
 
     local ExecuteStroke = Instance.new("UIStroke", ExecuteButton)
     ExecuteStroke.Color = Color3.new(0, 0, 0)
-    ExecuteStroke.Thickness = 2
+    ExecuteStroke.Thickness = 1.8
 
     ExecuteButton.TextColor3 = Color3.new(1, 1, 1)
     ExecuteButton.TextStrokeColor3 = Color3.new(0, 0, 0)
@@ -198,11 +198,12 @@ end)
     ScaleButton.Size = UDim2.new(1, -20, 0.15, -10)
     ScaleButton.Position = UDim2.new(0, 10, 0, 10) -- Positioned above the script box
     ScaleButton.BackgroundColor3 = Color3.new(1, 1, 1)
-    ScaleButton.Text = "Scale GUI"
+    ScaleButton.Text = "Console"
+    ScaleButton.TextSize = 15
 
     local ScaleStroke = Instance.new("UIStroke", ScaleButton)
     ScaleStroke.Color = Color3.new(0, 0, 0)
-    ScaleStroke.Thickness = 2
+    ScaleStroke.Thickness = 1.8
 
     ScaleButton.TextColor3 = Color3.new(1, 1, 1)
     ScaleButton.TextStrokeColor3 = Color3.new(0, 0, 0)
@@ -210,8 +211,8 @@ end)
 
 -- Undo button
     UndoButton.Parent = Frame
-    UndoButton.Size = UDim2.new(0.48, -9, 0.2, -9)
-    UndoButton.Position = UDim2.new(0.031, 0, 0.6, 0)
+    UndoButton.Size = UDim2.new(0.48, -11.5, 0.195, -9)
+    UndoButton.Position = UDim2.new(0.039, 0, 0.6, 0)
     UndoButton.BackgroundColor3 = Color3.new(1, 1, 1)
     UndoButton.Text = "Undo"
     UndoButton.TextSize = 14.5
@@ -219,7 +220,7 @@ end)
     -- Undo button outline
     local UndoStroke = Instance.new("UIStroke", UndoButton)
     UndoStroke.Color = Color3.new(0, 0, 0)
-    UndoStroke.Thickness = 2
+    UndoStroke.Thickness = 1.8
 
     -- Undo button text
     UndoButton.TextColor3 = Color3.new(1, 1, 1)
@@ -228,7 +229,7 @@ end)
 
     -- Redo button
     RedoButton.Parent = Frame
-    RedoButton.Size = UDim2.new(0.48, -9, 0.2, -7)
+    RedoButton.Size = UDim2.new(0.48, -11.5, 0.195, -9)
     RedoButton.Position = UDim2.new(0.52, 0, 0.6, 0)
     RedoButton.BackgroundColor3 = Color3.new(1, 1, 1)
     RedoButton.Text = "Redo"
@@ -237,7 +238,7 @@ end)
     -- Redo button outline
     local RedoStroke = Instance.new("UIStroke", RedoButton)
     RedoStroke.Color = Color3.new(0, 0, 0)
-    RedoStroke.Thickness = 2
+    RedoStroke.Thickness = 1.8
 
     -- Redo button text
     RedoButton.TextColor3 = Color3.new(1, 1, 1)
@@ -312,26 +313,11 @@ end)
         end
     end)
 
-    -- Scaling logic
-    local scaled = false
+    -- Console Button
     ScaleButton.MouseButton1Click:Connect(function()
-        if scaled then
-            -- Shrink the GUI back to original size
-            Frame.Size = UDim2.new(0, 300, 0, 200)
-            ScriptBox.Size = UDim2.new(1, -20, 0.6, -20)
-            ScriptBox.TextSize = 14
-            ExecuteButton.Size = UDim2.new(0.48, -10, 0.2, -10)
-            ClearButton.Size = UDim2.new(0.48, -10, 0.2, -10)
-            scaled = false
-        else
-            -- Scale up the GUI
-            Frame.Size = UDim2.new(0, 450, 0, 300)
-            ScriptBox.Size = UDim2.new(1, -20, 0.6, -30)
-            ScriptBox.TextSize = 15
-            ExecuteButton.Size = UDim2.new(0.48, -10, 0.2, -10)
-            ClearButton.Size = UDim2.new(0.48, -10, 0.2, -10)
-            scaled = true
-        end
+    keypress(0x78) -- F9 key is 0x78
+    wait(0.1)      -- Wait to ensure the keypress is registered
+    keyrelease(0x78)
     end)
 
 -- Hook up Undo and Redo buttons
