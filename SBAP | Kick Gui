@@ -1,0 +1,238 @@
+local function createExecutorGui()
+    local ScreenGui = Instance.new("ScreenGui")
+    local Frame = Instance.new("Frame")
+    local UICorner = Instance.new("UICorner")
+    local UIStroke = Instance.new("UIStroke")
+    local KickPlayerButton = Instance.new("TextButton")
+    local ViewPlayerButton = Instance.new("TextButton")
+    local KickGuiLabel = Instance.new("TextLabel") -- Label for "Kick Gui"
+    local KickGuiStroke = Instance.new("UIStroke") -- UIStroke for Kick Gui
+    local PlayerTextBox = Instance.new("TextBox") -- New TextBox for player input
+
+    -- Set up the UI
+    ScreenGui.Parent = game.CoreGui
+
+    -- Main Frame
+    Frame.Parent = ScreenGui
+    Frame.BackgroundColor3 = Color3.fromRGB(60, 60, 60) -- Dark grey background
+    Frame.Position = UDim2.new(0.5, -320, 0.75, -100)
+    Frame.Size = UDim2.new(0, 175, 0, 185)
+
+    -- Outline for the main frame
+    UIStroke.Parent = Frame
+    UIStroke.Color = Color3.new(0, 0, 0) -- Black outline
+    UIStroke.Thickness = 2.7
+
+    -- Rounded corners for the main frame
+    UICorner.Parent = Frame
+    UICorner.CornerRadius = UDim.new(0, 10)
+
+    -- Kick Gui label
+    KickGuiLabel.Parent = Frame
+    KickGuiLabel.Size = UDim2.new(1, 0, 0.1, 0)
+    KickGuiLabel.Position = UDim2.new(0, 0, 0.05, 0)
+    KickGuiLabel.BackgroundTransparency = 1
+    KickGuiLabel.Text = "Kick Gui"
+    KickGuiLabel.TextSize = 18
+    KickGuiLabel.Font = Enum.Font.FredokaOne
+    KickGuiLabel.TextColor3 = Color3.new(1, 1, 1)
+
+    -- Black outline for the Kick Gui label
+    KickGuiStroke.Parent = KickGuiLabel
+    KickGuiStroke.Color = Color3.new(0, 0, 0)
+    KickGuiStroke.Thickness = 2
+
+    -- Player input TextBox
+    PlayerTextBox.Parent = Frame
+    PlayerTextBox.Size = UDim2.new(0.885, -5, 0.4, -9)
+    PlayerTextBox.Position = UDim2.new(0, 12, 0.2, 0)
+    PlayerTextBox.BackgroundColor3 = Color3.fromRGB(40, 40, 40)
+    PlayerTextBox.PlaceholderText = "Enter player name"
+    PlayerTextBox.Text = ""
+    PlayerTextBox.TextSize = 16
+    PlayerTextBox.Font = Enum.Font.FredokaOne
+    PlayerTextBox.TextColor3 = Color3.new(1, 1, 1)
+    PlayerTextBox.TextStrokeColor3 = Color3.new(0, 0, 0)
+    PlayerTextBox.TextStrokeTransparency = 0
+
+    -- Black outline for the TextBox
+    local TextBoxStroke = Instance.new("UIStroke", PlayerTextBox)
+    TextBoxStroke.Color = Color3.new(0, 0, 0)
+    TextBoxStroke.Thickness = 2
+
+    -- Rounded corners for the TextBox
+    local TextBoxCorner = Instance.new("UICorner")
+    TextBoxCorner.Parent = PlayerTextBox
+    TextBoxCorner.CornerRadius = UDim.new(0, 10)
+
+    -- Kick Player button
+    KickPlayerButton.Parent = Frame
+    KickPlayerButton.Size = UDim2.new(0.885, -5, 0.2, -9)
+    KickPlayerButton.Position = UDim2.new(0, 12, 0.6, 0) -- Adjusted position
+    KickPlayerButton.BackgroundColor3 = Color3.fromRGB(40, 40, 40)
+    KickPlayerButton.Text = "Kick Player"
+    KickPlayerButton.TextSize = 19
+    KickPlayerButton.Font = Enum.Font.FredokaOne
+
+    -- Black outline for the Kick Player button
+    local ButtonStroke = Instance.new("UIStroke", KickPlayerButton)
+    ButtonStroke.Color = Color3.new(0, 0, 0)
+    ButtonStroke.Thickness = 2
+
+    -- Rounded corners for the Kick Player button
+    local ButtonCorner = Instance.new("UICorner")
+    ButtonCorner.Parent = KickPlayerButton
+    ButtonCorner.CornerRadius = UDim.new(0, 10)
+
+    KickPlayerButton.TextColor3 = Color3.new(1, 1, 1)
+    KickPlayerButton.TextStrokeColor3 = Color3.new(0, 0, 0)
+    KickPlayerButton.TextStrokeTransparency = 0
+
+    -- Kick Player button click event
+    KickPlayerButton.MouseButton1Click:Connect(function()
+        local playerName = PlayerTextBox.Text
+        if playerName ~= "" then
+            print("Kicking player: " .. playerName)
+        else
+            print("No player name entered.")
+        end
+    end)
+
+    -- View Player button
+    ViewPlayerButton.Parent = Frame
+    ViewPlayerButton.Size = UDim2.new(0.885, -5, 0.19, -9)
+    ViewPlayerButton.Position = UDim2.new(0, 12, 0.8, 0)
+    ViewPlayerButton.BackgroundColor3 = Color3.fromRGB(40, 40, 40)
+    ViewPlayerButton.Text = "View Player"
+    ViewPlayerButton.TextSize = 19
+    ViewPlayerButton.Font = Enum.Font.FredokaOne
+
+    local ButtonStroke1 = Instance.new("UIStroke", ViewPlayerButton)
+    ButtonStroke1.Color = Color3.new(0, 0, 0)
+    ButtonStroke1.Thickness = 2
+
+    local ButtonCorner1 = Instance.new("UICorner")
+    ButtonCorner1.Parent = ViewPlayerButton
+    ButtonCorner1.CornerRadius = UDim.new(0, 10)
+
+    ViewPlayerButton.TextColor3 = Color3.new(1, 1, 1)
+    ViewPlayerButton.TextStrokeColor3 = Color3.new(0, 0, 0)
+    ViewPlayerButton.TextStrokeTransparency = 0
+
+    local Players = game:GetService("Players")
+local Workspace = game:GetService("Workspace")
+
+local playerButton = ViewPlayerButton -- Assume this is your button reference
+local PlayerTextBox = PlayerTextBox -- Assume this is your TextBox reference
+local isViewingSelf = true -- Start by viewing self
+local currentViewingPlayer = nil
+local viewDied, viewChanged
+
+local function getPlayer(inputName)
+    local players = {}
+    inputName = string.lower(inputName) -- Convert input to lower case for case-insensitive matching
+    for _, player in pairs(Players:GetPlayers()) do
+        -- Check if inputName is a substring of the player's name or display name
+        if string.find(string.lower(player.Name), inputName) or string.find(string.lower(player.DisplayName), inputName) then
+            table.insert(players, player)
+        end
+    end
+    return players
+end
+
+local function updateButtonColor()
+    if isViewingSelf then
+        playerButton.BackgroundColor3 = Color3.fromRGB(40, 40, 40) -- Original color
+    else
+        playerButton.BackgroundColor3 = Color3.fromRGB(0, 255, 0) -- Green when viewing another player
+    end
+end
+
+playerButton.MouseButton1Click:Connect(function()
+    local playerName = PlayerTextBox.Text
+
+    if isViewingSelf then
+        -- Switch to viewing another player
+        local players = getPlayer(playerName)
+        if #players > 0 then
+            -- Disconnect any previous connections
+            if viewDied then viewDied:Disconnect() end
+            if viewChanged then viewChanged:Disconnect() end
+
+            currentViewingPlayer = players[1] -- Use the first match
+
+            Workspace.CurrentCamera.CameraSubject = currentViewingPlayer.Character:FindFirstChild("Humanoid") or currentViewingPlayer.Character
+
+            -- Notify player of the action (you can use a GUI notification instead)
+
+
+            -- Set up functions for respawn and camera changes
+            viewDied = currentViewingPlayer.CharacterAdded:Connect(function()
+                Workspace.CurrentCamera.CameraSubject = currentViewingPlayer.Character
+            end)
+
+            viewChanged = Workspace.CurrentCamera:GetPropertyChangedSignal("CameraSubject"):Connect(function()
+                Workspace.CurrentCamera.CameraSubject = currentViewingPlayer.Character
+            end)
+
+            isViewingSelf = false -- Now viewing another player
+        else
+            print("Player not found.") -- Replace with GUI notification if needed
+        end
+    else
+        -- Switch back to viewing self
+        currentViewingPlayer = Players.LocalPlayer
+        Workspace.CurrentCamera.CameraSubject = currentViewingPlayer.Character:FindFirstChild("Humanoid") or currentViewingPlayer.Character
+
+        isViewingSelf = true -- Now viewing self
+    end
+
+    -- Update button color based on the viewing state
+    updateButtonColor()
+end)
+
+-- Initial button color setup
+updateButtonColor()
+
+
+    -- Dragging functionality
+    local dragging, dragInput, dragStart, startPos
+
+    local function update(input)
+        local delta = input.Position - dragStart
+        Frame.Position = UDim2.new(
+            startPos.X.Scale,
+            startPos.X.Offset + delta.X,
+            startPos.Y.Scale,
+            startPos.Y.Offset + delta.Y
+        )
+    end
+
+    Frame.InputBegan:Connect(function(input)
+        if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
+            dragging = true
+            dragStart = input.Position
+            startPos = Frame.Position
+
+            input.Changed:Connect(function()
+                if input.UserInputState == Enum.UserInputState.End then
+                    dragging = false
+                end
+            end)
+        end
+    end)
+
+    Frame.InputChanged:Connect(function(input)
+        if input.UserInputType == Enum.UserInputType.MouseMovement or input.UserInputType == Enum.UserInputType.Touch then
+            dragInput = input
+        end
+    end)
+
+    game:GetService("UserInputService").InputChanged:Connect(function(input)
+        if dragging and input == dragInput then
+            update(input)
+        end
+    end)
+end
+
+createExecutorGui()
