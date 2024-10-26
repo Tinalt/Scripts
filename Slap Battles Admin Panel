@@ -115,7 +115,7 @@ local function createToggleButton()
     InstantCrash.Size = UDim2.new(0.885, -5, 0.05, -9)
     InstantCrash.Position = UDim2.new(0, 12, 0.058, 0) -- Adjust position
     InstantCrash.BackgroundColor3 = Color3.fromRGB(40, 40, 40)
-    InstantCrash.Text = "Instant Crash"
+    InstantCrash.Text = "???"
     InstantCrash.TextSize = 19 -- Set text size to 19
     InstantCrash.Font = Enum.Font.FredokaOne -- Set the font to FredokaOne
 
