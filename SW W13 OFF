@@ -1,0 +1,8 @@
+local partNames = {"Frien1", "Frien2", "Frien3", "Frien4", "Frien5"}
+
+for _, partName in ipairs(partNames) do
+    local part = workspace:FindFirstChild(partName)
+    if part then
+        part:Destroy()
+    end
+end
