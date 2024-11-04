@@ -6,6 +6,7 @@ local window = kavoUi.CreateLib("Sword Warrior [UPDATE]","BloodTheme")
 local Tab1 = window:NewTab("AutoFarm")
 local Tab1Section = Tab1:NewSection("AutoFarm")
 
+
 local Tab2 = window:NewTab("Endless Mode")
 local Tab2Section = Tab2:NewSection("Teleports")
 
@@ -23,7 +24,6 @@ local Tab6Section = Tab6:NewSection("Settings")
 
 local Tab7 = window:NewTab("Credits")
 local Tab7Section = Tab7:NewSection("-----Credits-----")
-local Tab7Section = Tab7:NewSection("---Owner---")
 local Tab7Section = Tab7:NewSection("--Tin--")
 
 
@@ -578,6 +578,7 @@ local Tab1Section = Tab1:NewSection("Auto Skills")
 
 
 
+
 local isRunning = false
 local toggleCoroutine = nil
 
@@ -688,12 +689,36 @@ end)
 
 
 
+local Tab1Section = Tab1:NewSection("World 13")
+
+Tab1Section:NewToggle("AutoFarm (Coming Soon)", "Coming Very Soon", function(state)
+print("Coming Soon")
+end)
+
+Tab1Section:NewToggle("Auto Teleport (Coming Soon)", "Coming Very Soon", function(state)
+print("Coming Soon")
+end)
+
+local autoFarmEnabled = false
+
+Tab1Section:NewToggle("AutoFarm (Help Friends) (BETA) (W13)", "This will get improve soon!", function(state)
+    autoFarmEnabled = state
+
+    if autoFarmEnabled then
+        -- Run the auto farm script when toggled on
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/Tinalt/Scripts/refs/heads/main/SW%20W13%20AUTOFARM1%20ON"))()
+    else
+        -- Run the off script when toggled off
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/Tinalt/Scripts/refs/heads/main/SW%20W13%20OFF"))()
+    end
+end)
 
 
 
 
 
 local Tab1Section = Tab1:NewSection("World 12")
+
 
 
 -- Define the target positions
@@ -1512,202 +1537,7 @@ end)
 
 
 
-local Tab1Section = Tab1:NewSection("World 10")
 
-
--- Define the target positions
-local targetPosition1 = Vector3.new(-12965, 4.000007152557373, 19724)
-local targetPosition2 = Vector3.new(-12899.7802734375, 4.000007629394531, 19753.53125)
-local targetPosition3 = Vector3.new(-13150.3828125, 4.00000524520874, 19772.962890625)
-
--- Get the player's character
-local player = game:GetService("Players").LocalPlayer
-local character = player.Character or player.CharacterAdded:Wait()
-
--- Variable to control teleportation
-local teleportEnabled = false
-local teleportStopped = false
-
--- Function to teleport the player with a delay
-local function teleportPlayer(targetPosition)
-    local rootPart = character:WaitForChild("HumanoidRootPart")
-    rootPart.CFrame = CFrame.new(targetPosition)
-end
-
--- Function to handle the teleportation loop
-local function autoTeleport()
-    while teleportEnabled do
-        if teleportStopped then
-            wait() -- Wait indefinitely until teleportStopped is set to false
-        else
-            -- Teleport to the first position
-            teleportPlayer(targetPosition3)
-            wait(0.1) -- Wait 0.1 seconds
-
-            -- Teleport to the second position
-            teleportPlayer(targetPosition2)
-            wait(0.1) -- Wait 0.1 seconds
-
-            -- Teleport to the second position
-            teleportPlayer(targetPosition1)
-            wait(0.1) -- Wait 0.1 seconds
-
-            -- Wait for 10-20 seconds before repeating
-            local waitTime = math.random(10, 20)
-            wait(waitTime)
-        end
-    end
-end
-
--- Function to create the SafeSpot part
-local function createSafeSpot()
-    local safeSpot = Instance.new("Part", workspace)
-    safeSpot.Position = Vector3.new(-12900.73, 1, 19683.46)
-    safeSpot.Name = "World10Map1"
-    safeSpot.Size = Vector3.new(20, 3, 20)
-    safeSpot.Anchored = true
-    safeSpot.CanCollide = false
-    safeSpot.Transparency = 0.7
-end
-
--- Function to create another part
-local function createWorld10Map2()
-    local world10Map2 = Instance.new("Part", workspace)
-    world10Map2.Position = Vector3.new(-12898.89, 2.19, 19547.2)
-    world10Map2.Name = "World10Map2"
-    world10Map2.Size = Vector3.new(20, 3, 20)
-    world10Map2.Anchored = true
-    world10Map2.CanCollide = false
-    world10Map2.Transparency = 0.7
-
-    -- Connect the touched event for World10Map2
-    world10Map2.Touched:Connect(function(hit)
-        if hit.Parent == player.Character then
-            teleportStopped = true
-        end
-    end)
-end
-
--- Function to create another part
-local function createWorld10Map3()
-    local world10Map3 = Instance.new("Part", workspace)
-    world10Map3.Position = Vector3.new(-12965.24, 1, 19724.5)
-    world10Map3.Name = "World10Map3"
-    world10Map3.Size = Vector3.new(20, 3, 20)
-    world10Map3.Anchored = true
-    world10Map3.CanCollide = false
-    world10Map3.Transparency = 0.7
-
-    -- Connect the touched event for World10Map3
-    world10Map3.Touched:Connect(function(hit)
-        if hit.Parent == player.Character then
-            if teleportStopped then
-                teleportStopped = false -- Resume teleportation
-            end
-        end
-    end)
-end
-
--- Function to delete the SafeSpot part
-local function deleteSafeSpot()
-    local safeSpot = workspace:FindFirstChild("World10Map1")
-    if safeSpot then
-        safeSpot:Destroy()
-    end
-end
-
--- Function to delete the World10Map2 part
-local function deleteWorld10Map2()
-    local world10Map2 = workspace:FindFirstChild("World10Map2")
-    if world10Map2 then
-        world10Map2:Destroy()
-    end
-end
-
--- Function to delete the World10Map3 part
-local function deleteWorld10Map3()
-    local world10Map3 = workspace:FindFirstChild("World10Map3")
-    if world10Map3 then
-        world10Map3:Destroy()
-    end
-end
-
---BUTTON--
-Tab1Section:NewToggle("AutoFarm", "AutoFarm World 10 (Required Auto Teleport", function(state)
-    teleportEnabled = state
-    if state then
-        createSafeSpot() -- Create the SafeSpot part
-        createWorld10Map2() -- Create the World10Map2 part
-        createWorld10Map3() -- Create the World10Map3 part
-        autoTeleport() -- Start the teleport loop
-    else
-        deleteSafeSpot() -- Delete the SafeSpot part
-        deleteWorld10Map2() -- Delete the World10Map2 part
-        deleteWorld10Map3() -- Delete the World10Map3 part
-    end
-end)
-
-
-
--- Define the target positions
-local targetPosition1 = Vector3.new(-12965, 4.000007152557373, 19724)
-local targetPosition2 = Vector3.new(-12898.8603515625, 5.1916184425354, 19619.599609375) -- Adjust this if different for World10Map2
-
--- Get the player's character
-local player = game:GetService("Players").LocalPlayer
-
--- Function to teleport the player with a delay
-local function teleportPlayer(character, targetPosition)
-    local rootPart = character:WaitForChild("HumanoidRootPart")
-    wait(0.1)  -- Wait for 0.1 seconds
-    rootPart.CFrame = CFrame.new(targetPosition)
-end
-
--- Function to set up the teleport when the character touches a part
-local function setupTeleport(targetPart, targetPosition)
-    targetPart.Touched:Connect(function(hit)
-        if hit.Parent == player.Character then
-            teleportPlayer(player.Character, targetPosition)
-        end
-    end)
-end
-
--- Function to handle part creation or re-creation
-local function handlePart(partName, targetPosition)
-    local workspace = game:GetService("Workspace")
-
-    -- Check if the part exists and set up teleport functionality
-    local targetPart = workspace:FindFirstChild(partName)
-    if targetPart then
-        setupTeleport(targetPart, targetPosition)
-    end
-
-    -- Continuously check for the part's re-creation
-    workspace.ChildAdded:Connect(function(child)
-        if child.Name == partName then
-            setupTeleport(child, targetPosition)
-        end
-    end)
-end
-
--- Function to run the setup and checks periodically
-local function periodicUpdate()
-    while true do
-        handlePart("World10Map1", targetPosition1)
-        handlePart("World10Map2", targetPosition2)
-        wait(25) -- Wait 25 seconds before running again
-    end
-end
-
--- Toggle button logic
-local isEnabled = false
-
-Tab1Section:NewToggle("Auto Teleport", "Turn this on for AutoFarm to work", function(state)
-    isEnabled = state
-    if state then
-        coroutine.wrap(periodicUpdate)() -- Start the periodic update in a coroutine
-    end
-end)
 
 
 
@@ -1733,27 +1563,7 @@ Tab2Section:NewButton("Outside Endless (Cant die by mobs)","Teleport you to Outs
 game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = workspace.OutsideEnd.CFrame * CFrame.new(0,0,0)
 end)
 
-local player = game:GetService("Players").LocalPlayer
-local autoJumpEnabled = false
 
--- Function to handle auto-jumping
-local function autoJump()
-    local humanoid = player.Character:WaitForChild("Humanoid")
-    while autoJumpEnabled do
-        humanoid.Jump = true
-        wait(0.1) -- Delay between jumps, adjust as needed
-        humanoid.Jump = false
-        wait(0.1) -- Delay to prevent continuous jumping
-    end
-end
-
--- Toggle button for auto-jumping
-Tab2Section:NewToggle("Anti Afk", "Anti Afk", function(state)
-    autoJumpEnabled = state
-    if state then
-        autoJump() -- Start auto-jumping loop
-    end
-end)
 
 local Tab2Section = Tab2:NewSection("Enter Endless Mode")
 
@@ -2340,6 +2150,14 @@ Tab5Section:NewButton("Titan Research Institute", "Teleport to Titan Research In
     game:GetService("ReplicatedStorage").Remotes.Chuansong:FireServer(unpack(args))
 end)
 
+Tab5Section:NewButton("The Backrooms (@?#$??)", "Teleport to The Backrooms (@?#$??)", function()
+    local args = {
+    [1] = "@?#$??"
+}
+
+game:GetService("ReplicatedStorage").Remotes.Chuansong:FireServer(unpack(args))
+
+end)
 
 
 
@@ -2355,6 +2173,7 @@ end)
 
 
 
+local Tab1Section = Tab1:NewSection("Curse World (BETA)")
 
 
 local isCurseActive = false
@@ -2599,4 +2418,3 @@ Tab1Section:NewToggle("Auto Change Curse and Ready", "Toggle Info", function(sta
         remoteActive = false -- Set to false when the toggle is off
     end
 end)
-
