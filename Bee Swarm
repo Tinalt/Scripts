@@ -1,0 +1,13 @@
+local AkaliNotif = loadstring(game:HttpGet("https://raw.githubusercontent.com/Kinlei/Dynissimo/main/Scripts/AkaliNotif.lua"))();
+local Notify = AkaliNotif.Notify;
+Notify({
+Description = "Đức Quốc Xã";
+Title = "Nam Ngu Oc Cho UwU";
+Duration = 4;
+});
+
+if game.PlaceId ~= 1537690962 then
+    return
+end
+
+loadstring(game:HttpGet("https://raw.githubusercontent.com/Chris12089/atlasbss/main/script.lua"))()
