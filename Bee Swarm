@@ -3,7 +3,7 @@ local Notify = AkaliNotif.Notify;
 Notify({
 Description = "Đức Quốc Xã";
 Title = "Nam Ngu Oc Cho UwU";
-Duration = 4;
+Duration = 7;
 });
 
 if game.PlaceId ~= 1537690962 then
