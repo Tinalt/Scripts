@@ -2,7 +2,7 @@ local AkaliNotif = loadstring(game:HttpGet("https://raw.githubusercontent.com/Ki
 local Notify = AkaliNotif.Notify;
 Notify({
 Description = "Đức Quốc Xã";
-Title = "Nam Ngu Oc Cho UwU";
+Title = "Tran HN Cute :3";
 Duration = 7;
 });
 
