@@ -1,0 +1,96 @@
+if game.PlaceId ~= 17625359962 then return end
+
+local Players = game:GetService("Players")
+local UIS = game:GetService("UserInputService")
+local RS = game:GetService("ReplicatedStorage")
+
+local running = false
+local targetName = "robeo008"
+
+local gui = Instance.new("ScreenGui")
+gui.ResetOnSpawn = false
+gui.Parent = game.CoreGui
+
+local btn = Instance.new("TextButton")
+btn.Size = UDim2.fromOffset(60, 60)
+btn.Position = UDim2.fromScale(0.5, 0.6)
+btn.Text = "OFF"
+btn.TextScaled = true
+btn.BackgroundColor3 = Color3.new(0,0,0)
+btn.TextColor3 = Color3.new(1,1,1)
+btn.Parent = gui
+
+local corner = Instance.new("UICorner")
+corner.CornerRadius = UDim.new(0, 10)
+corner.Parent = btn
+
+local stroke = Instance.new("UIStroke")
+stroke.Color = Color3.new(1,1,1)
+stroke.Transparency = 0.4
+stroke.Thickness = 2
+stroke.Parent = btn
+
+local dragging, dragStart, startPos
+
+btn.InputBegan:Connect(function(input)
+    if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
+        dragging = true
+        dragStart = input.Position
+        startPos = btn.Position
+        input.Changed:Connect(function()
+            if input.UserInputState == Enum.UserInputState.End then
+                dragging = false
+            end
+        end)
+    end
+end)
+
+UIS.InputChanged:Connect(function(input)
+    if dragging and (input.UserInputType == Enum.UserInputType.MouseMovement or input.UserInputType == Enum.UserInputType.Touch) then
+        local delta = input.Position - dragStart
+        btn.Position = UDim2.new(
+            startPos.X.Scale,
+            startPos.X.Offset + delta.X,
+            startPos.Y.Scale,
+            startPos.Y.Offset + delta.Y
+        )
+    end
+end)
+
+task.spawn(function()
+    while task.wait(1) do
+        if running then
+            RS.Remotes.Misc.SendChallengeRequest:FireServer(Players:WaitForChild(targetName))
+            RS.Remotes.Duels.Vote:FireServer("Arena")
+
+            local success = pcall(function()
+                RS.Remotes.Duels.Rematch:FireServer()
+            end)
+
+            if not success then
+                RS.Remotes.Duels.LeaveDuel:FireServer()
+            end
+        end
+    end
+end)
+
+task.spawn(function()
+    while task.wait(0.1) do
+        if running then
+            local lp = Players.LocalPlayer
+            local target = Players:FindFirstChild(targetName)
+            if lp.Character and target and target.Character then
+                local hrp = lp.Character:FindFirstChild("HumanoidRootPart")
+                local thrp = target.Character:FindFirstChild("HumanoidRootPart")
+                if hrp and thrp then
+                    hrp.CFrame = thrp.CFrame * CFrame.new(0, 0, -3)
+                end
+            end
+        end
+    end
+end)
+
+btn.MouseButton1Click:Connect(function()
+    running = not running
+    btn.Text = running and "ON" or "OFF"
+end)
