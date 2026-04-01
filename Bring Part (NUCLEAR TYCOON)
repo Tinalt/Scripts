@@ -1,0 +1,15 @@
+local function khoagay()
+
+local Players = game:GetService("Players")
+local player = Players.LocalPlayer
+local char = player.Character or player.CharacterAdded:Wait()
+local hrp = char:WaitForChild("HumanoidRootPart")
+
+local part = game:GetService("Workspace"):WaitForChild("Point1"):WaitForChild("Point")
+
+if part and part:IsA("BasePart") then
+    part.CFrame = hrp.CFrame + Vector3.new(0, 0, -3)
+end
+end
+
+khoagay()
